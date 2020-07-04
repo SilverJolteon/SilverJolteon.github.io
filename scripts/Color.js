@@ -150,7 +150,7 @@ function gen_hair(color_id) {
 		var color = getColor(color_id, 0);
 		hair.jscolor.fromString(pad(color.hair.toString(16), 6, '0'));	
 		shine.jscolor.fromString(pad(color.shine.toString(16), 6, '0'));	
-		if((color_id+1) % 2 == 1) document.getElementById('hair_colors0').appendChild(p0);
+		if(color_id < 8) document.getElementById('hair_colors0').appendChild(p0);
 		else document.getElementById('hair_colors1').appendChild(p0);
 }
 
