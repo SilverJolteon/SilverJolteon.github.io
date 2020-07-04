@@ -178,6 +178,8 @@ function save_hair(){
 		edit_hair(color_ids[id], hair, shine);
 	}
 	saveByteArray([CharaMakeHairColorParam], 'CharaMakeHairColorParam.bcsv');
+	var location = document.getElementById("hair_location");
+	location.innerHTML = 'Save to <font color="#34ADCA">/atmosphere/contents/01006F8002326000/romfs/Bcsv/</font><font color="#017A97">CharaMakeHairColorParam.bcsv</font>';
 }
 
 function save_eye(){
@@ -188,4 +190,6 @@ function save_eye(){
 		edit_eye(id, eye);
 	}
 	saveByteArray([CharaMakeEyeColorParam], 'CharaMakeEyeColorParam.bcsv');
+	var location = document.getElementById("eye_location");
+	location.innerHTML = 'Save to <font color="#34ADCA">/atmosphere/contents/01006F8002326000/romfs/Bcsv/</font><font color="#017A97">CharaMakeEyeColorParam.bcsv</font>';
 }
