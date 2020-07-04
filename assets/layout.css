@@ -1,0 +1,131 @@
+@font-face {
+    font-family:'FOT-Seurat';
+    src: url('FOT-Seurat_Pro_B.otf');
+}    
+
+body {
+  font-family: 'FOT-Seurat';
+  margin: 0;
+  color: #736956;
+  background-color: #F7F6C9;
+}
+
+h1 {
+  padding: 0px;
+  text-align: center;
+  color: #736956;
+  font-family: 'FOT-Seurat';
+  font-size: 3em;
+}
+
+.vl {
+	border-left: 3px solid #736956;
+	height: 320px;
+}
+
+.header {
+  padding: 0px;
+  text-align: center;
+  color: #736956;
+  font-family: 'FOT-Seurat';
+  font-size: 2em;
+}
+
+.button {
+	margin: 1px;
+	color: #FFFFFF;
+	background-color: #1FD9B5;
+	padding: 10px;
+	border-radius: 200px;
+	background-size: 0% 0%;
+	background-position: 50% 50%;
+	background-repeat: no-repeat;
+	font-family: 'FOT-Seurat';
+	font-size: 16px;
+	border-width: 5px;
+	border-style: solid;
+	border-color: #F7F6C9;
+	width: 200px;
+}
+
+.button:hover {
+	background-color: #12C7A5;
+	border-width: 5px;
+	border-style: solid;
+	border-color: #5AF0D4;
+	cursor: pointer;
+}
+
+.button:visited{
+	outline: none;
+}
+
+button::-moz-focus-inner {
+  border: 0;
+}
+
+
+
+input{
+	border-style: none;
+	color: #736956;
+	background-color: #F8F9E9;
+	font-family: 'FOT-Seurat';
+	font-size: 12px;
+	margin: 1px 0;
+	box-sizing: border-box;
+}
+
+.pop {
+	color: #F8F9E9;
+	text-shadow: 2px 0 0 #34ADCA, -2px 0 0 #34ADCA, 0 2px 0 #34ADCA, 0 -2px 0 #34ADCA, 1px 1px #34ADCA, -1px -1px 0 #34ADCA, 1px -1px 0 #34ADCA, -1px 1px 0 #34ADCA;
+	padding: 20px;
+	font-size: 2em;
+	font-family: 'FOT-Seurat';
+    animation: pop 0.58s infinite;
+    -webkit-animation: pop 2.58s infinite;
+	position: absolute;
+	left: 10%;
+	right: 10%;
+	top: -70px;
+}
+
+.version {
+	color: #F8F9E9;
+	text-shadow: 2px 0 0 #34ADCA, -2px 0 0 #34ADCA, 0 2px 0 #34ADCA, 0 -2px 0 #34ADCA, 1px 1px #34ADCA, -1px -1px 0 #34ADCA, 1px -1px 0 #34ADCA, -1px 1px 0 #34ADCA;
+	padding: 20px;
+	font-size: 12px;
+	font-family: 'FOT-Seurat';
+	position: absolute;
+	left: 10%;
+	right: 10%;
+	top: -20px;
+}
+
+@keyframes pop {
+    from {
+        transform:scale(0.95)
+    }
+    50% {
+        transform:scale(1)
+    }
+    to {
+        transform:scale(0.95)
+    }
+}
+@-webkit-keyframes pop {
+    from {
+        -webkit-transform:scale(0.95)
+    }
+    50% {
+        -webkit-transform:scale(1)
+    }
+    to {
+        -webkit-transform:scale(0.95)
+    }
+}
+.tilt {
+    -ms-transform: rotate(-3deg);
+    -webkit-transform: rotate(-3deg);
+    transform: rotate(-3deg);
+}
