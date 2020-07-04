@@ -134,14 +134,17 @@ window.onload = function(){
 }
 
 function gen_hair(color_id) {
+		var isChrome = navigator.userAgent.indexOf("Chrome") != -1
+		var size = 6;
+		if(isChrome) size = 9;
 		var p0 = document.createElement('center');
 		var p1 = document.createElement('tr');
 		p0.appendChild(p1);
 		var hair = document.createElement('INPUT');
-		hair.size = 6;
+		hair.size = size;
 		hair.id = "hair-color-" + color_ids[color_id];
 		var shine = document.createElement('INPUT');
-		shine.size = 6;
+		shine.size = size;
 		shine.id = "shine-color-" + color_ids[color_id];
 		p1.appendChild(hair);
 		p1.appendChild(shine);
@@ -155,11 +158,14 @@ function gen_hair(color_id) {
 }
 
 function gen_eye(color_id) {
+		var isChrome = navigator.userAgent.indexOf("Chrome") != -1
+		var size = 6;
+		if(isChrome) size = 9;
 		var p0 = document.createElement('center');
 		var p1 = document.createElement('tr');
 		p0.appendChild(p1);
 		var eye = document.createElement('INPUT');
-		eye.size = 6;
+		eye.size = size;
 		eye.id = "eye-color-" + color_id;
 		p1.appendChild(eye);
 		new JSColor(eye, {hash:true});
