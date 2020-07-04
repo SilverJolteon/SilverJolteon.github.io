@@ -125,3 +125,67 @@ var saveByteArray = (function () {
         window.URL.revokeObjectURL(url);
     };
 }());
+
+jscolor.trigger('input');
+
+window.onload = function(){
+	for(var id = 0; id < 16; id++) gen_hair(id);
+	for(var id = 0; id < 6; id++) gen_eye(id);
+}
+
+function gen_hair(color_id) {
+		var p0 = document.createElement('center');
+		var p1 = document.createElement('tr');
+		p0.appendChild(p1);
+		var hair = document.createElement('INPUT');
+		hair.size = 6;
+		hair.id = "hair-color-" + color_ids[color_id];
+		var shine = document.createElement('INPUT');
+		shine.size = 6;
+		shine.id = "shine-color-" + color_ids[color_id];
+		p1.appendChild(hair);
+		p1.appendChild(shine);
+		new JSColor(hair, {hash:true});
+		new JSColor(shine, {hash:true});
+		var color = getColor(color_id, 0);
+		hair.jscolor.fromString(pad(color.hair.toString(16), 6, '0'));	
+		shine.jscolor.fromString(pad(color.shine.toString(16), 6, '0'));	
+		if((color_id+1) % 2 == 1) document.getElementById('hair_colors0').appendChild(p0);
+		else document.getElementById('hair_colors1').appendChild(p0);
+}
+
+function gen_eye(color_id) {
+		var p0 = document.createElement('center');
+		var p1 = document.createElement('tr');
+		p0.appendChild(p1);
+		var eye = document.createElement('INPUT');
+		eye.size = 6;
+		eye.id = "eye-color-" + color_id;
+		p1.appendChild(eye);
+		new JSColor(eye, {hash:true});
+		var color = getColor(color_id, 1);
+		eye.jscolor.fromString(pad(color.eye.toString(16), 6, '0'));		
+		document.getElementById('eye_colors').appendChild(p0);
+}
+
+function save_hair(){
+	for(var id = 0; id < 16; id++){
+		var hair = document.getElementById("hair-color-" + color_ids[id]);
+		hair = parseInt(hair.value.substring(1, 7), 16);
+		
+		var shine = document.getElementById("shine-color-" + color_ids[id]);
+		shine = parseInt(shine.value.substring(1, 7), 16);
+		edit_hair(color_ids[id], hair, shine);
+	}
+	saveByteArray([CharaMakeHairColorParam], 'CharaMakeHairColorParam.bcsv');
+}
+
+function save_eye(){
+	for(var id = 0; id < 6; id++){
+		var eye = document.getElementById("eye-color-" + id);
+		eye = parseInt(eye.value.substring(1, 7), 16);
+	
+		edit_eye(id, eye);
+	}
+	saveByteArray([CharaMakeEyeColorParam], 'CharaMakeEyeColorParam.bcsv');
+}
