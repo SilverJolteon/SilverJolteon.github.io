@@ -55,6 +55,22 @@ h1 {
 	outline: none;
 }
 
+.reset {
+	color: #FFFFFF;
+	background-color: #EC5E5E;
+	border-radius: 0px;
+	background-size: 0% 0%;
+	background-position: 50% 50%;
+	background-repeat: no-repeat;
+	font-family: 'FOT-Seurat';
+	font-size: 12px;
+	border: none;
+}
+
+.reset:hover{
+	cursor: pointer;
+}
+
 button::-moz-focus-inner {
   border: 0;
 }
@@ -69,6 +85,7 @@ input{
 	font-size: 12px;
 	margin: 1px 0;
 	box-sizing: border-box;
+	cursor: pointer;
 }
 
 .pop {

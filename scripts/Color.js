@@ -152,7 +152,15 @@ function gen_hair(color_id) {
 		new JSColor(shine, {hash:true});
 		var color = getColor(color_id, 0);
 		hair.jscolor.fromString(pad(color.hair.toString(16), 6, '0'));	
-		shine.jscolor.fromString(pad(color.shine.toString(16), 6, '0'));	
+		shine.jscolor.fromString(pad(color.shine.toString(16), 6, '0'));
+		var rst = document.createElement('button');
+		rst.innerHTML = '&#x21bb;';
+		rst.className = "reset";
+		rst.onclick = function(){
+			hair.jscolor.fromString(pad(color.hair.toString(16), 6, '0'));
+			shine.jscolor.fromString(pad(color.shine.toString(16), 6, '0'));
+		}
+		p1.appendChild(rst);
 		if(color_id < 8) document.getElementById('hair_colors0').appendChild(p0);
 		else document.getElementById('hair_colors1').appendChild(p0);
 }
@@ -170,7 +178,12 @@ function gen_eye(color_id) {
 		p1.appendChild(eye);
 		new JSColor(eye, {hash:true});
 		var color = getColor(color_id, 1);
-		eye.jscolor.fromString(pad(color.eye.toString(16), 6, '0'));		
+		eye.jscolor.fromString(pad(color.eye.toString(16), 6, '0'));	
+		var rst = document.createElement('button');
+		rst.innerHTML = '&#x21bb;';
+		rst.className = "reset";
+		rst.onclick = function(){eye.jscolor.fromString(pad(color.eye.toString(16), 6, '0'));}
+		p1.appendChild(rst);		
 		document.getElementById('eye_colors').appendChild(p0);
 }
 
