@@ -76,7 +76,6 @@ button::-moz-focus-inner {
 }
 
 
-
 input{
 	border-style: none;
 	color: #736956;
@@ -140,4 +139,37 @@ input{
     -ms-transform: rotate(-3deg);
     -webkit-transform: rotate(-3deg);
     transform: rotate(-3deg);
+}
+
+label.upload input[type="file"] {
+	position: absolute;
+	top: -1000px;
+}
+
+.settings{
+	margin: 1px;
+	color: #736956;
+	background-color: #F9EEA2;
+	padding: 10px;
+	border-radius: 200px;
+	background-size: 0% 0%;
+	background-position: 50% 50%;
+	background-repeat: no-repeat;
+	font-family: 'FOT-Seurat';
+	font-size: 14px;
+	border-width: 5px;
+	border-style: solid;
+	border-color: #F7F6C9;
+	width: 150px;
+	position: absolute;
+	left: 0;
+	right: 0;
+	margin-left: auto; 
+	margin-right: auto; 
+	top: 715px;
+}
+
+.presets:hover{
+	background: url("presets-bg.png") no-repeat;
+	cursor: pointer;
 }
