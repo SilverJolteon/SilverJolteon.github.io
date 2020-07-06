@@ -1,6 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
 <head><meta charset="UTF-8">
+
+<script>
+window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+ga('create', 'UA-171511969-1', 'auto');
+ga('require', 'eventTracker');
+ga('send', 'pageview');
+</script>
+<script async src="https://www.google-analytics.com/analytics.js"></script>
+<script async src="scripts/autotrack.js"></script>
+
 <title>ACNH Hair & Eye Color Editor</title>
 <link rel="icon" type="image/png" href="assets/favicon.png">
 <link rel="stylesheet" type="text/css" href="assets/layout.css"/>
@@ -43,9 +53,9 @@
 		<td></td>
 	</tr>
 	<tr>
-		<td style="text-align:center" colspan="3"><button class="button" onclick="save_hair()">Save Hair Colors.</button></td>
+		<td style="text-align:center" colspan="3"><button class="button" ga-on="click" ga-event-category="Hair" ga-event-action="Save" onclick="save_hair()">Save Hair Colors.</button></td>
 		<td></td>
-		<td style="text-align:center"><button class="button" onclick="save_eye()">Save Eye Colors.</button></td>
+		<td style="text-align:center"><button class="button" ga-on="click" ga-event-category="Eye" ga-event-action="Save" onclick="save_eye()">Save Eye Colors.</button></td>
 		<td></td>
 	</tr>
 </table>
