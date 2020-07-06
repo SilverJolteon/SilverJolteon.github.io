@@ -44,11 +44,23 @@ h1 {
 }
 
 .button:hover {
-	background-color: #12C7A5;
+	background: url("save-bg.png");
+	background-repeat: repeat;
+	animation: marquee 30s infinite linear;
 	border-width: 5px;
 	border-style: solid;
 	border-color: #5AF0D4;
 	cursor: pointer;
+}
+
+@keyframes marquee{
+	0% {
+		background-position: 0;
+	}
+	
+	100% {
+		background-position: 1000px;
+	}
 }
 
 .button:visited{
