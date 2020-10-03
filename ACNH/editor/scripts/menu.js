@@ -6,7 +6,7 @@ window.onload = function(){
 	}
 	
 	for(var id = 0; id < 16; id++) gen_hair(id);
-	for(var id = 0; id < 6; id++) gen_eye(id);
+	for(var id = 0; id < 12; id++) gen_eye(id);
 }
 
 var saveByteArray = (function () {
@@ -38,7 +38,7 @@ function save_hair(){
 }
 
 function save_eye(){
-	for(var id = 0; id < 6; id++){
+	for(var id = 0; id < 12; id++){
 		var eye = document.getElementById("eye-color-" + id);
 		eye = parseInt(eye.value.substring(1, 7), 16);
 	
@@ -58,7 +58,7 @@ function save_settings(){
 		data.push("\n"+hair.value);
 		data.push(shine.value);
 	}
-	for(var i = 0; i < 6; i++){
+	for(var i = 0; i < 12; i++){
 		var eye = document.getElementById("eye-color-" + i);
 		if(i == 0) data.push("\n\n"+eye.value);
 		else data.push("\n"+eye.value);
@@ -79,7 +79,7 @@ var loadSettings = function(event){
 			hair.jscolor.fromString(data[i*2 + 1]);	
 			shine.jscolor.fromString(data[i*2 + 2]);
 			}
-			for(var i = 0; i < 6; i++){
+			for(var i = 0; i < 12; i++){
 				var eye = document.getElementById("eye-color-" + i);
 				eye.jscolor.fromString(data[33 + i]);
 			}

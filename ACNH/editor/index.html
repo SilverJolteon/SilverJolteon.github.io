@@ -23,7 +23,7 @@
 <a href="index.html">
 <img src="assets/logo.png" width="300px">
 <div class="tilt"><div class="pop">Hair & Eye Color Editor</div></div>
-<div class="tilt"><div class="version">v1.3.2</div></div>
+<div class="tilt"><div class="version">v1.3.3</div></div>
 </a>
 <h3>by SilverJolteon</h3>
 </div>
@@ -37,22 +37,21 @@
 	<tr>
 		<th colspan="3"><div class="header">Hair Colors</div></th>
 		<th width="32px"></th>
-		<th><div class="header">Eye Colors</div></th>
-		<th width="152px"></th>
+		<th colspan="3"><div class="header">Eye Colors</div></th>
+		<th width="90px"></th>
 	</tr>
 	<tr>
 		<td style="vertical-align:top"><center><p id="hair_colors0">Hair&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Shine</p></center></td>
 		<td width="3px"></th>
 		<td style="vertical-align:top"><center><p id="hair_colors1">Hair&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Shine</p></center></td>
-		<td></th>
-		<td style="vertical-align:center"><p id="eye_colors"></p></td>
 		<td></td>
+		<td style="vertical-align:center"><p id="eye_colors0"></p></td>
+		<td style="vertical-align:center"><p id="eye_colors1"></p></td>
 	</tr>
 	<tr>
 		<td style="text-align:center" colspan="3"><button class="button" ga-on="click" ga-event-category="Hair" ga-event-action="Save" onclick="save_hair()">Save Hair Colors.</button></td>
 		<td></td>
-		<td style="text-align:center"><button class="button" ga-on="click" ga-event-category="Eye" ga-event-action="Save" onclick="save_eye()">Save Eye Colors.</button></td>
-		<td></td>
+		<td style="text-align:center" colspan="3"><button class="button" ga-on="click" ga-event-category="Eye" ga-event-action="Save" onclick="save_eye()">Save Eye Colors.</button></td>
 	</tr>
 </table>
 <div id="hair_location"></div>

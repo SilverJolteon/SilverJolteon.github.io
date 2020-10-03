@@ -165,6 +165,7 @@ function gen_eye(color_id) {
 		rst.className = "reset";
 		rst.onclick = function(){eye.jscolor.fromString(pad(color.eye.toString(16), 6, '0'));}
 		p1.appendChild(rst);		
-		document.getElementById('eye_colors').appendChild(p0);
+		if(color_id < 6) document.getElementById('eye_colors0').appendChild(p0);
+		else document.getElementById('eye_colors1').appendChild(p0);
 }
 
