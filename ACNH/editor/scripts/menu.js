@@ -3,6 +3,14 @@ window.onload = function(){
 	if(isChrome){
 		var settings = document.getElementById("settings");
 		settings.style["right"] = "10px";
+		var body0 = document.getElementById("body0");
+		body0.style = "margin: 0px auto; border: 0px; width: 420px;";
+		
+		var body1 = document.getElementById("body1");
+		body1.style = "margin: 0px auto; border: 0px; width: 500px;";
+		
+		var body2 = document.getElementById("body2");
+		body2.style = "margin: 0px auto; border: 0px; width: 280px;";
 	}
 	for(var id = 0; id < 12; id++) gen_skin(id);
 	for(var id = 0; id < 16; id++) gen_hair(id);
