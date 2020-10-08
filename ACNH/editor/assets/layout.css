@@ -174,14 +174,32 @@ label.upload input[type="file"] {
 	border-color: #F7F6C9;
 	width: 150px;
 	position: absolute;
-	left: 0;
-	right: 0;
+	left: 0px;
+	right: 0px;
 	margin-left: auto; 
 	margin-right: auto; 
-	top: 715px;
+	top: -5px;
+	left: -400px;
 }
 
 .presets:hover{
 	background: url("presets-bg.png") no-repeat;
 	cursor: pointer;
+}
+
+.menu{
+	position: relative;
+	width: 195px;
+	left: 100px;
+}
+
+.label{
+	color: #DFAE0B;
+	background-color: #ECF18D;
+	border-radius: 18px;
+	font-family: 'FOT-Seurat';
+	font-size: 14px;
+	border-width: 0px;
+	height: 27px;
+	position: absolute;
 }

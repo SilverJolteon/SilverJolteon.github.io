@@ -15,6 +15,7 @@
 <script src="scripts/jscolor.js"></script>
 <script src="scripts/menu.js"></script>
 <script src="scripts/color.js"></script>
+<script src="scripts/skin-color.js"></script>
 <script src="scripts/hair-color.js"></script>
 <script src="scripts/eye-color.js"></script>
 
@@ -22,40 +23,65 @@
 <div class="logo">
 <a href="index.html">
 <img src="assets/logo.png" width="300px">
-<div class="tilt"><div class="pop">Hair & Eye Color Editor</div></div>
-<div class="tilt"><div class="version">v1.3.3</div></div>
+<div class="tilt"><div class="pop">Custom Color Editor</div></div>
+<div class="tilt"><div class="version">v1.4.0</div></div>
 </a>
 <h3>by SilverJolteon</h3>
 </div>
 
-<div id="settings" class="settings">
-<label class="upload"><input type="file" onchange="loadSettings(event)"/><span class="presets">Load Presets.</span></label>
-<span class="presets" onclick="save_settings()"></br>Save Presets.</span>
+<div class="menu">
+	<div id="menu0" class="label" style="width: 108px; top: -19px; left: -16px; display: none;">Skin Tone</div>
+	<div class="label" style="color: #FF0000; background-color: transparent; 0px; width: 48px; top: 45px; left: 13px;">Beta</div>
+	<div id="menu1" class="label" style="width: 108px; top: -19px; left: 43px; display: none;">Hairstyle</div>
+	<div id="menu2" class="label" style="width: 56px; top: -19px; left: 129px; display: none;">Eyes</div>
+	<img id="map" src="assets/menu-bg-1.png" usemap="#menu">
+	<map name="menu">
+		<area class="skin-tone" style="cursor: pointer;" onclick="select_menu(0)" shape="rect" coords="5, 5, 55, 55">
+		<area class="skin-tone" style="cursor: pointer;" onclick="select_menu(1)" shape="rect" coords="65, 5, 115, 55">
+		<area class="skin-tone" style="cursor: pointer;" onclick="select_menu(2)" shape="rect" coords="125, 5, 175, 55">
+	</map>
+	
+	
+	<div id="settings" class="settings">
+	<label class="upload"><input type="file" onchange="loadSettings(event)"/><span class="presets">Load Presets.</span></label>
+	<span class="presets" onclick="save_settings()"></br>Save Presets.</span>
+	</div>
 </div>
 
-<table>
+<table id="body0" style="display: none;">
 	<tr>
-		<th colspan="3"><div class="header">Hair Colors</div></th>
-		<th width="32px"></th>
-		<th colspan="3"><div class="header">Eye Colors</div></th>
-		<th width="90px"></th>
+		<td style="vertical-align:center"><p id="skin_colors0"></p></td>
+		<td style="vertical-align:center"><p id="skin_colors1"></p></td>
+		<td style="vertical-align:center"><p id="skin_colors2"></p></td>
 	</tr>
 	<tr>
+		<td style="text-align:center" colspan="3"><button class="button" ga-on="click" ga-event-category="Skin" ga-event-action="Save" onclick="save_skin()">Save Skin Colors.</button></td>
+	</tr>
+</table>
+
+<table id="body1" style="display: none;">
+	<tr>
 		<td style="vertical-align:top"><center><p id="hair_colors0">Hair&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Shine</p></center></td>
-		<td width="3px"></th>
 		<td style="vertical-align:top"><center><p id="hair_colors1">Hair&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Shine</p></center></td>
-		<td></td>
+	</tr>
+	<tr>
+		<td style="text-align:center" colspan="2"><button class="button" ga-on="click" ga-event-category="Hair" ga-event-action="Save" onclick="save_hair()">Save Hair Colors.</button></td>
+	</tr>
+</table>
+
+<table id="body2" style="display: none;">
+	<tr>
 		<td style="vertical-align:center"><p id="eye_colors0"></p></td>
 		<td style="vertical-align:center"><p id="eye_colors1"></p></td>
 	</tr>
 	<tr>
-		<td style="text-align:center" colspan="3"><button class="button" ga-on="click" ga-event-category="Hair" ga-event-action="Save" onclick="save_hair()">Save Hair Colors.</button></td>
-		<td></td>
-		<td style="text-align:center" colspan="3"><button class="button" ga-on="click" ga-event-category="Eye" ga-event-action="Save" onclick="save_eye()">Save Eye Colors.</button></td>
+		<td style="text-align:center" colspan="2"><button class="button" ga-on="click" ga-event-category="Eye" ga-event-action="Save" onclick="save_eye()">Save Eye Colors.</button></td>
 	</tr>
 </table>
+<div id="skin_location"></div>
 <div id="hair_location"></div>
 <div id="eye_location"></div>
+
 </center>
 
 </body>
