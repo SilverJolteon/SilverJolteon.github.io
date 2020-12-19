@@ -1,0 +1,59 @@
+@font-face {
+    font-family:'FOT-Seurat';
+    src: url('FOT-Seurat_Pro_B.otf');
+}    
+
+body{
+	font-family: 'FOT-Seurat';
+	color: #644937;
+	background-color: #febfc7;
+}
+
+.colors{
+	position: relative;
+	width: 984px;
+	margin: 0 auto;
+}
+
+.hue{
+	position: absolute;
+	left: 133px;
+	top: 26px;
+	font-size: 36px;
+}
+
+.vividness{
+	position: absolute;
+	left: 133px;
+	top: 108px;
+	font-size: 36px;
+}
+
+.brightness{
+	position: absolute;
+	left: 133px;
+	top: 186px;
+	font-size: 36px;
+}
+
+.hex{
+	position: absolute;
+	left: 492px;
+	top: 300px;
+}
+
+.hue_cursor{
+	position: absolute;
+	left: 350px;
+	top:0px;
+}
+.vividness_cursor{
+	position: absolute;
+	left: 358px;
+	top:82px;
+}
+.brightness_cursor{
+	position: absolute;
+	left: 358px;
+	top: 160px;
+}
