@@ -9,12 +9,6 @@ body{
 	background-color: #febfc7;
 }
 
-.colors{
-	position: relative;
-	width: 984px;
-	margin: 0 auto;
-}
-
 .hue{
 	position: absolute;
 	left: 133px;
