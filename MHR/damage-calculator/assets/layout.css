@@ -9,10 +9,9 @@ body{
 }
 
 .header {
-	paint-order: stroke fill;
+	text-shadow: 2px 0 0 #000000, -2px 0 0 #000000, 0 2px 0 #000000, 0 -2px 0 #000000, 1px 1px #000000, -1px -1px 0 #000000, 1px -1px 0 #000000, -1px 1px 0 #000000;
 	margin: 0px 5px;
 	color: #C0FFFF;
-	-webkit-text-stroke: 3px black;
 	font-family: 'Rodin';
 	font-size: 24px;
 	padding: 2px;
@@ -69,21 +68,19 @@ td:hover{
 }
 
 .dropdown{
-	paint-order: stroke fill;
-	margin: 0px 5px;
 	color: #FFFFFF;
-	-webkit-text-stroke: 3px black;
+	text-shadow: 2px 0 0 #000000, -2px 0 0 #000000, 0 2px 0 #000000, 0 -2px 0 #000000, 1px 1px #000000, -1px -1px 0 #000000, 1px -1px 0 #000000, -1px 1px 0 #000000;
+	margin: 0px 5px;
 	font-family: 'Rodin';
 	font-size: 12px;
 	padding: 2px;
 }
 
 .dropdown-content{
-	paint-order: stroke fill;
+	text-shadow: 2px 0 0 #000000, -2px 0 0 #000000, 0 2px 0 #000000, 0 -2px 0 #000000, 1px 1px #000000, -1px -1px 0 #000000, 1px -1px 0 #000000, -1px 1px 0 #000000;
 	margin: 1px;
 	color: #FFFFFF;
 	background-color: #3A3A3A;
-	-webkit-text-stroke: 3px black;
 	font-family: 'Rodin';
 	font-size: 12px;
 	border-width: 0px;
