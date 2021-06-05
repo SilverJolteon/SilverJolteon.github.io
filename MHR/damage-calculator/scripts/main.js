@@ -116,4 +116,3 @@ window.onload = function(){
 	
 	document.getElementById("effective_raw_0").value = 200;
 }
-
