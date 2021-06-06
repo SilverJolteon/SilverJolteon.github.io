@@ -80,13 +80,17 @@ function calculate(){
 	var weakness_exploit_0 = c_weakness_exploit(parseInt(document.getElementById("weakness_exploit_0").value));
 	var maximum_might_0 = parseInt(document.getElementById("maximum_might_0").value);
 	
-	var bludgeoner_0 = c_bludgeoner(sharpness_0, parseInt(document.getElementById("bludgeoner_0").value));
-	var dragonheart_0 = parseFloat(document.getElementById("dragonheart_0").value);
+	var normal_rapid_up_0 = parseFloat(document.getElementById("normal_rapid_up_0").value);
 	var pierce_up_0 = parseFloat(document.getElementById("pierce_up_0").value);
+	var spread_up_0 = parseFloat(document.getElementById("spread_up_0").value);
 	var rapid_fire_up_0 = parseFloat(document.getElementById("rapid_fire_up_0").value);
 	
+	var bludgeoner_0 = c_bludgeoner(sharpness_0, parseInt(document.getElementById("bludgeoner_0").value));
+	var dragonheart_0 = parseFloat(document.getElementById("dragonheart_0").value);
+	
 	var total_affinity_0 = base_affinity_0 + critical_eye_0 + maximum_might_0 + weakness_exploit_0;
-	var effective_raw_0 = calcDmg(base_attack_0 + peak_performance_0 + resentment_0 + resuscitate_0, attack_boost_0, agitator_0, total_affinity_0, critical_boost_0, sharpness_0*bludgeoner_0*dragonheart_0*pierce_up_0*rapid_fire_up_0) + petalace_0 + powercharm_0 + powertalon_0;
+	var total_multiplier_0 = sharpness_0*Math.max(normal_rapid_up_0, pierce_up_0, spread_up_0)*rapid_fire_up_0*bludgeoner_0*dragonheart_0;
+	var effective_raw_0 = calcDmg(base_attack_0 + peak_performance_0 + resentment_0 + resuscitate_0, attack_boost_0, agitator_0, total_affinity_0, critical_boost_0, total_multiplier_0) + petalace_0 + powercharm_0 + powertalon_0;
 	document.getElementById("effective_raw_0").value = effective_raw_0;
 }
 
@@ -109,10 +113,13 @@ window.onload = function(){
 	document.getElementById("weakness_exploit_0").selectedIndex = 0;
 	document.getElementById("maximum_might_0").selectedIndex = 0;
 	
+	document.getElementById("normal_rapid_up_0").selectedIndex = 0;
+	document.getElementById("pierce_up_0").selectedIndex = 0;
+	document.getElementById("spread_up_0").selectedIndex = 0;
+	document.getElementById("rapid_fire_up_0").selectedIndex = 0;
+	
 	document.getElementById("bludgeoner_0").selectedIndex = 0;
 	document.getElementById("dragonheart_0").selectedIndex = 0;
-	document.getElementById("pierce_up_0").selectedIndex = 0;
-	document.getElementById("rapid_fire_up_0").selectedIndex = 0;
 	
 	document.getElementById("effective_raw_0").value = 200;
 }
