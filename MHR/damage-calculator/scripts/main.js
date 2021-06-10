@@ -115,10 +115,12 @@ function calculate(){
 	}
 	if(total_affinity_0 > 100) total_affinity_0 = 100;
 	if(total_affinity_0 < 0) critical_boost = 0.75;
-	total_element_0 = calcCrit(total_element_0, Math.abs(total_affinity_0)/100, critical_element_0);
+	var effective_element_0 = calcCrit(total_element_0, Math.abs(total_affinity_0)/100, critical_element_0);
 	var total_multiplier_0 = sharpness_0*Math.max(normal_rapid_up_0, pierce_up_0, spread_up_0)*rapid_fire_up_0*bludgeoner_0*dragonheart_0;
-	var effective_raw_0 = calcDmg(base_attack_0 + peak_performance_0 + resentment_0 + resuscitate_0, attack_boost_0, agitator_0, total_affinity_0, critical_boost_0, total_multiplier_0) + total_element_0;
+	var effective_raw_0 = calcDmg(base_attack_0 + peak_performance_0 + resentment_0 + resuscitate_0, attack_boost_0, agitator_0, total_affinity_0, critical_boost_0, total_multiplier_0);
 	document.getElementById("effective_raw_0").value = Math.floor(effective_raw_0);
+	document.getElementById("effective_element_0").value = Math.floor(effective_element_0);
+	document.getElementById("effective_total_0").value = Math.floor(effective_raw_0+effective_element_0);
 }
 
 window.onload = function(){
@@ -151,4 +153,6 @@ window.onload = function(){
 	document.getElementById("dragonheart_0").selectedIndex = 0;
 	
 	document.getElementById("effective_raw_0").value = 200;
+	document.getElementById("effective_element_0").value = 0;
+	document.getElementById("effective_total_0").value = 200;
 }
