@@ -11,6 +11,28 @@ function c_attack_boost(base, lvl){
 	return base;
 }
 
+function c_element_attack(base, lvl){
+	switch(lvl){
+		case 1:	return base * 1.00 +  2;
+		case 2:	return base * 1.00 +  3;
+		case 3:	return base * 1.05 +  4;
+		case 4:	return base * 1.10 +  4;
+		case 5:	return base * 1.20 +  4;
+	}
+	return base;
+}
+
+function c_element_sharpness(lvl){
+	switch(lvl){
+		case 0.50: return 0.25;
+		case 0.75: return 0.50;
+		case 1.00: return 0.75;
+		case 1.05: return 1.00;
+		case 1.20: return 1.0625;
+		case 1.32: return 1.15;
+	}
+}
+
 function c_critical_eye(lvl){
 	switch(lvl){
 		case 1: return 5;
@@ -48,26 +70,19 @@ function calcCrit(base, aff, boost){
 }
 
 function calcDmg(base, atk, agi, aff, boost, modifier){
-	switch(agi){
-		case 1: base +=  4; aff +=  3; break;
-		case 2: base +=  8; aff +=  5; break;
-		case 3: base += 12; aff +=  7; break;
-		case 4: base += 16; aff += 10; break;
-		case 5: base += 20; aff += 15; break;
-	}
-	if(aff > 100) aff = 100;
-	if(aff < 0) boost = 0.75;
+	
 	var dmg = modifier * c_attack_boost(base, atk);
-	return Math.floor(calcCrit(dmg, Math.abs(aff)/100, boost));
+	return calcCrit(dmg, Math.abs(aff)/100, boost);
 }
 
 function calculate(){
 	var base_attack_0 = parseInt(document.getElementById("base_attack_0").value);
 	var base_affinity_0 = parseInt(document.getElementById("base_affinity_0").value);
 	var sharpness_0 = parseFloat(document.getElementById("sharpness_0").value);
-	var petalace_0 = parseInt(document.getElementById("petalace_0").value);
-	var powercharm_0 = document.getElementById("powercharm_0").checked ? 6 : 0;
-	var powertalon_0 = document.getElementById("powertalon_0").checked ? 9 : 0;
+	var element_1_0 = parseInt(document.getElementById("element_1_0").value);
+	var element_2_0 = parseInt(document.getElementById("element_2_0").value);
+	var element_1_attack_0 = parseInt(document.getElementById("element_1_attack_0").value);
+	var element_2_attack_0 = parseInt(document.getElementById("element_2_attack_0").value);
 	
 	var attack_boost_0 = c_attack_boost(parseInt(document.getElementById("attack_boost_0").value));
 	var agitator_0 = parseInt(document.getElementById("agitator_0").value);
@@ -79,6 +94,7 @@ function calculate(){
 	var critical_boost_0 = parseFloat(document.getElementById("critical_boost_0").value);
 	var weakness_exploit_0 = c_weakness_exploit(parseInt(document.getElementById("weakness_exploit_0").value));
 	var maximum_might_0 = parseInt(document.getElementById("maximum_might_0").value);
+	var critical_element_0 = parseFloat(document.getElementById("critical_element_0").value);
 	
 	var normal_rapid_up_0 = parseFloat(document.getElementById("normal_rapid_up_0").value);
 	var pierce_up_0 = parseFloat(document.getElementById("pierce_up_0").value);
@@ -88,19 +104,31 @@ function calculate(){
 	var bludgeoner_0 = c_bludgeoner(sharpness_0, parseInt(document.getElementById("bludgeoner_0").value));
 	var dragonheart_0 = parseFloat(document.getElementById("dragonheart_0").value);
 	
+	var total_element_0 = c_element_sharpness(sharpness_0)*(c_element_attack(element_1_0, element_1_attack_0) + c_element_attack(element_2_0, element_2_attack_0));
 	var total_affinity_0 = base_affinity_0 + critical_eye_0 + maximum_might_0 + weakness_exploit_0;
+	switch(agitator_0){
+		case 1: base_attack_0 +=  4; total_affinity_0 +=  3; break;
+		case 2: base_attack_0 +=  8; total_affinity_0 +=  5; break;
+		case 3: base_attack_0 += 12; total_affinity_0 +=  7; break;
+		case 4: base_attack_0 += 16; total_affinity_0 += 10; break;
+		case 5: base_attack_0 += 20; total_affinity_0 += 15; break;
+	}
+	if(total_affinity_0 > 100) total_affinity_0 = 100;
+	if(total_affinity_0 < 0) critical_boost = 0.75;
+	total_element_0 = calcCrit(total_element_0, Math.abs(total_affinity_0)/100, critical_element_0);
 	var total_multiplier_0 = sharpness_0*Math.max(normal_rapid_up_0, pierce_up_0, spread_up_0)*rapid_fire_up_0*bludgeoner_0*dragonheart_0;
-	var effective_raw_0 = calcDmg(base_attack_0 + peak_performance_0 + resentment_0 + resuscitate_0, attack_boost_0, agitator_0, total_affinity_0, critical_boost_0, total_multiplier_0) + petalace_0 + powercharm_0 + powertalon_0;
-	document.getElementById("effective_raw_0").value = effective_raw_0;
+	var effective_raw_0 = calcDmg(base_attack_0 + peak_performance_0 + resentment_0 + resuscitate_0, attack_boost_0, agitator_0, total_affinity_0, critical_boost_0, total_multiplier_0) + total_element_0;
+	document.getElementById("effective_raw_0").value = Math.floor(effective_raw_0);
 }
 
 window.onload = function(){
 	document.getElementById("base_attack_0").value = 200;
 	document.getElementById("base_affinity_0").value = 0;
 	document.getElementById("sharpness_0").selectedIndex = 0;
-	document.getElementById("petalace_0").value = 0;
-	document.getElementById("powercharm_0").checked = 0;
-	document.getElementById("powertalon_0").checked = 0;
+	document.getElementById("element_1_0").value = 0;
+	document.getElementById("element_2_0").value = 0;
+	document.getElementById("element_1_attack_0").selectedIndex = 0;
+	document.getElementById("element_2_attack_0").selectedIndex = 0;
 	
 	document.getElementById("attack_boost_0").selectedIndex = 0;
 	document.getElementById("agitator_0").selectedIndex = 0;
@@ -112,6 +140,7 @@ window.onload = function(){
 	document.getElementById("critical_boost_0").selectedIndex = 0;
 	document.getElementById("weakness_exploit_0").selectedIndex = 0;
 	document.getElementById("maximum_might_0").selectedIndex = 0;
+	document.getElementById("critical_element_0").selectedIndex = 0;
 	
 	document.getElementById("normal_rapid_up_0").selectedIndex = 0;
 	document.getElementById("pierce_up_0").selectedIndex = 0;
