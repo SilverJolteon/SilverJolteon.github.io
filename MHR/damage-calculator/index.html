@@ -39,18 +39,35 @@
 </div></td>
 
 <td><div class = "dropdown">
-	<label class="skillname">Petalace: </label>
-	<input onChange="calculate()" class = "dropdown-content" type="number" id="petalace_0" min="0" max="20" size="5" value="0">
+	<label class="skillname">Element 1: </label>
+	<input onChange="calculate()" class = "dropdown-content" type="number" id="element_1_0" min="0" size="5" value="0">
+	</br>
+	<label class="skillname">Element 2: </label>
+	<input onChange="calculate()" class = "dropdown-content" type="number" id="element_2_0" min="0" size="5" value="0">
 </div></td>
 
 <td><div class = "dropdown">
-	<label class="skillname">Powercharm: </label>
-	<input onChange="calculate()" type="checkbox" id = "powercharm_0">
+	<label class="skillname">Element 1 Atk.: </label>
+	<select onChange="calculate()" class = "dropdown-content" id = "element_1_attack_0">
+		<option value = "0" selected>---</option>
+		<option value = "1">1</option>
+		<option value = "2">2</option>
+		<option value = "3">3</option>
+		<option value = "4">4</option>
+		<option value = "5">5</option>
+	</select>
 
 </br>
 
-	<label class="skillname">Powertalon: </label>
-	<input onChange="calculate()" type="checkbox" id = "powertalon_0">
+	<label class="skillname">Element 2 Atk.: </label>
+	<select onChange="calculate()" class = "dropdown-content" id = "element_2_attack_0">
+		<option value = "0" selected>---</option>
+		<option value = "1">1</option>
+		<option value = "2">2</option>
+		<option value = "3">3</option>
+		<option value = "4">4</option>
+		<option value = "5">5</option>
+	</select>
 </div></td>
 
 </tr><tr>
@@ -155,6 +172,16 @@
 		<option value = "10">1</option>
 		<option value = "20">2</option>
 		<option value = "30">3</option>
+	</select>
+</div></td>
+
+<td><div class = "dropdown">
+	<label class="skillname">Critical Element</label>
+	<select onChange="calculate()" class = "dropdown-content" id = "critical_element_0">
+		<option value = "1.00" selected>---</option>
+		<option value = "1.05">1</option>
+		<option value = "1.10">2</option>
+		<option value = "1.15">3</option>
 	</select>
 </div></td>
 
