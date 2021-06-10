@@ -24,6 +24,7 @@ function c_element_attack(base, lvl){
 
 function c_element_sharpness(lvl){
 	switch(lvl){
+		case 0.00: return 1.00;
 		case 0.50: return 0.25;
 		case 0.75: return 0.50;
 		case 1.00: return 0.75;
@@ -114,8 +115,12 @@ function calculate(){
 		case 5: base_attack_0 += 20; total_affinity_0 += 15; break;
 	}
 	if(total_affinity_0 > 100) total_affinity_0 = 100;
-	if(total_affinity_0 < 0) critical_boost = 0.75;
+	if(total_affinity_0 < 0){
+		critical_boost_0 = 0.75;
+		critical_element_0 = 1;
+	}
 	var effective_element_0 = calcCrit(total_element_0, Math.abs(total_affinity_0)/100, critical_element_0);
+	if(sharpness_0 == 0.00) sharpness_0 = 1.00;
 	var total_multiplier_0 = sharpness_0*Math.max(normal_rapid_up_0, pierce_up_0, spread_up_0)*rapid_fire_up_0*bludgeoner_0*dragonheart_0;
 	var effective_raw_0 = calcDmg(base_attack_0 + peak_performance_0 + resentment_0 + resuscitate_0, attack_boost_0, agitator_0, total_affinity_0, critical_boost_0, total_multiplier_0);
 	document.getElementById("effective_raw_0").value = Math.floor(effective_raw_0);
