@@ -101,6 +101,7 @@ function calculate(){
 	var pierce_up_0 = parseFloat(document.getElementById("pierce_up_0").value);
 	var spread_up_0 = parseFloat(document.getElementById("spread_up_0").value);
 	var rapid_fire_up_0 = parseFloat(document.getElementById("rapid_fire_up_0").value);
+	var offensive_guard_0 = parseFloat(document.getElementById("offensive_guard_0").value);
 	
 	var bludgeoner_0 = c_bludgeoner(sharpness_0, parseInt(document.getElementById("bludgeoner_0").value));
 	var dragonheart_0 = parseFloat(document.getElementById("dragonheart_0").value);
@@ -121,7 +122,7 @@ function calculate(){
 	}
 	var effective_element_0 = calcCrit(total_element_0, Math.abs(total_affinity_0)/100, critical_element_0);
 	if(sharpness_0 == 0.00) sharpness_0 = 1.00;
-	var total_multiplier_0 = sharpness_0*Math.max(normal_rapid_up_0, pierce_up_0, spread_up_0)*rapid_fire_up_0*bludgeoner_0*dragonheart_0;
+	var total_multiplier_0 = sharpness_0*Math.max(normal_rapid_up_0, pierce_up_0, spread_up_0)*rapid_fire_up_0*offensive_guard_0*bludgeoner_0*dragonheart_0;
 	var effective_raw_0 = calcDmg(base_attack_0 + peak_performance_0 + resentment_0 + resuscitate_0, attack_boost_0, agitator_0, total_affinity_0, critical_boost_0, total_multiplier_0);
 	document.getElementById("effective_raw_0").value = Math.floor(effective_raw_0);
 	document.getElementById("effective_element_0").value = Math.floor(effective_element_0);
@@ -129,7 +130,7 @@ function calculate(){
 }
 
 window.onload = function(){
-	document.getElementById("base_attack_0").value = 200;
+	document.getElementById("base_attack_0").value = 300;
 	document.getElementById("base_affinity_0").value = 0;
 	document.getElementById("sharpness_0").selectedIndex = 0;
 	document.getElementById("element_1_0").value = 0;
@@ -153,11 +154,12 @@ window.onload = function(){
 	document.getElementById("pierce_up_0").selectedIndex = 0;
 	document.getElementById("spread_up_0").selectedIndex = 0;
 	document.getElementById("rapid_fire_up_0").selectedIndex = 0;
+	document.getElementById("offensive_guard_0").selectedIndex = 0;
 	
 	document.getElementById("bludgeoner_0").selectedIndex = 0;
 	document.getElementById("dragonheart_0").selectedIndex = 0;
 	
-	document.getElementById("effective_raw_0").value = 200;
+	document.getElementById("effective_raw_0").value = 300;
 	document.getElementById("effective_element_0").value = 0;
-	document.getElementById("effective_total_0").value = 200;
+	document.getElementById("effective_total_0").value = 300;
 }
