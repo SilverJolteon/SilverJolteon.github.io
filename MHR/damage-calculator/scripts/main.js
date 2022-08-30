@@ -71,34 +71,34 @@ function c_chain_crit(type, lvl){
 	if(lvl == -1) return 0;
 	if(type == 0){
 		switch(lvl){
-			case 00: return 10;
-			case 01: return 12;
-			case 02: return 15;
-			case 10: return 8;
-			case 11: return 9;
-			case 12: return 10;
-			case 20: return 8;
-			case 21: return 9;
-			case 22: return 10;
-			case 30: return 10;
-			case 31: return 12;
-			case 32: return 15;
+			case 00: return 5 + 10;
+			case 01: return 5 + 12;
+			case 02: return 5 + 15;
+			case 10: return 5 + 8;
+			case 11: return 5 + 9;
+			case 12: return 5 + 10;
+			case 20: return 5 + 8;
+			case 21: return 5 + 9;
+			case 22: return 5 + 10;
+			case 30: return 5 + 10;
+			case 31: return 5 + 12;
+			case 32: return 5 + 15;
 		}
 	}
 	else{
 		switch(lvl){
-			case 00: return 6;
-			case 01: return 8;
-			case 02: return 12;
-			case 10: return 6;
-			case 11: return 8;
-			case 12: return 12;
-			case 20: return 0;
-			case 21: return 0;
-			case 22: return 0;
-			case 30: return 8;
-			case 31: return 10;
-			case 32: return 15;
+			case 00: return 5 + 6;
+			case 01: return 5 + 8;
+			case 02: return 5 + 12;
+			case 10: return 5 + 6;
+			case 11: return 5 + 8;
+			case 12: return 5 + 12;
+			case 20: return 5 + 0;
+			case 21: return 5 + 0;
+			case 22: return 5 + 0;
+			case 30: return 5 + 8;
+			case 31: return 5 + 10;
+			case 32: return 5 + 15;
 		}
 	}
 	return 0;
