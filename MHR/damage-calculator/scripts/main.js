@@ -67,7 +67,7 @@ function c_bludgeoner(sharpness, lvl){
 	return mod;
 }
 
-function c_chain_crit(type, lvl){
+function c_burst(type, lvl){
 	if(lvl == -1) return 0;
 	if(type == 0){
 		switch(lvl){
@@ -144,11 +144,11 @@ function calculate(){
 	
 	var bludgeoner_0 = c_bludgeoner(sharpness_0, parseInt(document.getElementById("bludgeoner_0").value));
 	var dragonheart_0 = parseFloat(document.getElementById("dragonheart_0").value);
-	var chain_crit_raw_0 = c_chain_crit(0, parseInt(document.getElementById("chain_crit_0").value));
-	var chain_crit_ele_0 = c_chain_crit(1, parseInt(document.getElementById("chain_crit_0").value));
+	var burst_raw_0 = c_burst(0, parseInt(document.getElementById("burst_0").value));
+	var burst_ele_0 = c_burst(1, parseInt(document.getElementById("burst_0").value));
 	var adrenaline_rush_0 = parseFloat(document.getElementById("adrenaline_rush_0").value);
 	
-	var total_element_0 = c_element_sharpness(sharpness_0)*(c_element_attack(element_1_0, element_1_attack_0) + c_element_attack(element_2_0, element_2_attack_0) + chain_crit_ele_0);
+	var total_element_0 = c_element_sharpness(sharpness_0)*(c_element_attack(element_1_0, element_1_attack_0) + c_element_attack(element_2_0, element_2_attack_0) + burst_ele_0);
 	var total_affinity_0 = base_affinity_0 + critical_eye_0 + maximum_might_0 + weakness_exploit_0;
 	switch(agitator_0){
 		case 1: base_attack_0 +=  4; total_affinity_0 +=  3; break;
@@ -165,7 +165,7 @@ function calculate(){
 	var effective_element_0 = calcCrit(total_element_0, Math.abs(total_affinity_0)/100, critical_element_0);
 	if(sharpness_0 == 0.00) sharpness_0 = 1.00;
 	var total_multiplier_0 = sharpness_0*Math.max(normal_rapid_up_0, pierce_up_0, spread_up_0)*rapid_fire_up_0*offensive_guard_0*bludgeoner_0*dragonheart_0;
-	var effective_raw_0 = calcDmg(base_attack_0 + peak_performance_0 + resentment_0 + resuscitate_0 + chain_crit_raw_0 + adrenaline_rush_0, attack_boost_0, agitator_0, total_affinity_0, critical_boost_0, total_multiplier_0);
+	var effective_raw_0 = calcDmg(base_attack_0 + peak_performance_0 + resentment_0 + resuscitate_0 + burst_raw_0 + adrenaline_rush_0, attack_boost_0, agitator_0, total_affinity_0, critical_boost_0, total_multiplier_0);
 	document.getElementById("effective_raw_0").value = Math.floor(effective_raw_0);
 	document.getElementById("effective_element_0").value = Math.floor(effective_element_0);
 	document.getElementById("effective_total_0").value = Math.floor(effective_raw_0+effective_element_0);
@@ -200,7 +200,7 @@ window.onload = function(){
 	
 	document.getElementById("bludgeoner_0").selectedIndex = 0;
 	document.getElementById("dragonheart_0").selectedIndex = 0;
-	document.getElementById("chain_crit_0").selectedIndex = 0;
+	document.getElementById("burst_0").selectedIndex = 0;
 	document.getElementById("adrenaline_rush_0").selectedIndex = 0;
 	
 	document.getElementById("effective_raw_0").value = 300;
