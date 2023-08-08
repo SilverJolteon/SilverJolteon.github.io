@@ -33,9 +33,9 @@ function calculate(){
 	var element_atk_up_0 = parseInt(document.getElementById("element_atk_up_0").value);
 	var element_attack_0 = parseInt(document.getElementById("element_attack_0").value);
 	
-	var normal_rapid_up_0 = parseInt(document.getElementById("normal_rapid_up_0").value);
-	var pierce_pierce_up_0 = parseInt(document.getElementById("pierce_pierce_up_0").value);
-	var pellet_spread_up_0 = parseInt(document.getElementById("pellet_spread_up_0").value);
+	var normal_rapid_up_0 = parseFloat(document.getElementById("normal_rapid_up_0").value);
+	var pierce_pierce_up_0 = parseFloat(document.getElementById("pierce_pierce_up_0").value);
+	var pellet_spread_up_0 = parseFloat(document.getElementById("pellet_spread_up_0").value);
 	
 	var effective_element_0 = c_element_sharpness(sharpness_0)*(element_0 + element_atk_up_0 + element_attack_0);
 	var total_affinity_0 = base_affinity_0 + critical_eye_0 + weakness_exploit_0;
