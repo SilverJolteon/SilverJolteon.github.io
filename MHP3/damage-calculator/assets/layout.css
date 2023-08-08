@@ -1,0 +1,91 @@
+@font-face {
+    font-family: 'Rodin';
+    src: url('SCE-PS3 Rodin LATIN Regular.otf');
+}    
+
+body{
+	font-family: 'Rodin';
+	background-color: #121212;
+}
+
+.header {
+	text-shadow: 2px 0 0 #000000, -2px 0 0 #000000, 0 2px 0 #000000, 0 -2px 0 #000000, 1px 1px #000000, -1px -1px 0 #000000, 1px -1px 0 #000000, -1px 1px 0 #000000;
+	margin: 0px 5px;
+	color: #EBC20A;
+	font-family: 'Rodin';
+	font-size: 24px;
+	padding: 2px;
+	position: absolute;
+	top: 210px;
+	left: 10%;
+	right: 10%;
+}
+
+.skillname{
+	text-align: center;
+	width: 100px;
+	display: inline-block;
+}
+
+input[type="number"]{
+	width: 50px;
+}
+
+.textbox{
+	-webkit-appearance: none;
+	margin: 0;
+	-moz-appearance: textfield;
+}
+
+.button{
+	text-align: center;
+}
+
+.button:hover{
+	cursor: pointer;
+}
+
+.button:visited{
+	outline: none;
+}
+
+table{
+	border-spacing: 4px;
+}
+
+td{
+	background-color: #3A3A3A;
+	height: 50px;
+	border-radius: 15px;
+}
+
+td:hover{
+	background-color: #4A4A4A;
+}
+
+.empty{
+	background-color: #121212;
+}
+
+.empty:hover{
+	background-color: #121212;
+}
+
+.dropdown{
+	color: #FFFFFF;
+	text-shadow: 2px 0 0 #000000, -2px 0 0 #000000, 0 2px 0 #000000, 0 -2px 0 #000000, 1px 1px #000000, -1px -1px 0 #000000, 1px -1px 0 #000000, -1px 1px 0 #000000;
+	margin: 0px 5px;
+	font-family: 'Rodin';
+	font-size: 12px;
+	padding: 2px;
+}
+
+.dropdown-content{
+	text-shadow: 2px 0 0 #000000, -2px 0 0 #000000, 0 2px 0 #000000, 0 -2px 0 #000000, 1px 1px #000000, -1px -1px 0 #000000, 1px -1px 0 #000000, -1px 1px 0 #000000;
+	margin: 1px;
+	color: #FFFFFF;
+	background-color: #3A3A3A;
+	font-family: 'Rodin';
+	font-size: 12px;
+	border-width: 0px;
+}
