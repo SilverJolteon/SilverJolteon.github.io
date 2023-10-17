@@ -9,7 +9,7 @@
 <body>
 <script src="scripts/main.js"></script>
 <center>
-<img src="assets/logo.png" width="512px">
+<img src="assets/logo.png" width="420px">
 <div class="header">Damage Calculator</div>
 <table>
 <tr>
@@ -43,6 +43,14 @@
 	<input onChange="calculate()" class = "dropdown-content" type="number" id="element_0" min="0" size="5" value="0">
 </div></td>
 
+<td><div class = "dropdown">
+	<label class="skillname">Powercharm</label>
+	<input onChange="calculate()" type="checkbox" class="checkbox-content" id="powercharm_0" checked>
+	</br>
+	<label class="skillname">Powertalon</label>
+	<input onChange="calculate()" type="checkbox" class="checkbox-content" id="powertalon_0" checked>
+</div></td>
+
 </tr><tr>
 
 <td><div class = "dropdown">
@@ -70,6 +78,7 @@
 	<select onChange="calculate()" class = "dropdown-content" id = "weakness_exploit_0">
 		<option value = "0" selected>---</option>
 		<option value = "50">✓</option>
+		<option value = "25">½</option>
 	</select>
 </div></td>
 
@@ -118,6 +127,34 @@
 	</select>
 </div></td>
 
+<td><div class = "dropdown">
+	<label class="skillname">Adrenaline</label>
+	<select onChange="calculate()" class = "dropdown-content" id = "adrenaline_0">
+		<option value = "1.00" selected>---</option>
+		<option value = "1.30">+2</option>
+	</select>
+</div></td>
+
+</tr><tr>
+
+<td><div class = "dropdown">
+	<label class="skillname">Felyne Atk Up</label>
+	<select onChange="calculate()" class = "dropdown-content" id = "felyne_atk_up_0">
+		<option value = "0" selected>---</option>
+		<option value = "3">(Sm)</option>
+		<option value = "5">(Med)</option>
+		<option value = "7">(Lg)</option>
+	</select>
+</div></td>
+
+<td><div class = "dropdown">
+	<label class="skillname">Felyne Booster<label>
+	<select onChange="calculate()" class = "dropdown-content" id = "felyne_booster_0">
+		<option value = "0" selected>---</option>
+		<option value = "3">✓</option>
+	</select>
+</div></td>
+
 </tr><tr>
 
 <tr><td class="empty"></td></tr>
@@ -128,13 +165,14 @@
 </div></td>
 
 <td><div class = "dropdown">
-	<label class="skillname">Eff. Element: </label>
-	<input class = "dropdown-content textbox" type="number" id="effective_element_0" min="0" size="4" value="" readonly>
+	<label class="skillname">Total Affinity: </label>
+	<input class = "dropdown-content textbox" type="number" id="total_affinity_0" min="-100" max="100" size="5" value="0" readonly>
+	<label>%</label>
 </div></td>
 
 <td><div class = "dropdown">
-	<label class="skillname">Eff. Total: </label>
-	<input class = "dropdown-content textbox" type="number" id="effective_total_0" min="0" size="4" value="" readonly>
+	<label class="skillname">Eff. Element: </label>
+	<input class = "dropdown-content textbox" type="number" id="effective_element_0" min="0" size="4" value="" readonly>
 </div></td>
 
 <td class="empty"></td>
