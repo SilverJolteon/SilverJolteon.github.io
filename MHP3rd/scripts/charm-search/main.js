@@ -89,7 +89,7 @@ function search(){
 			case "2": n_slots = "OO-"; break;
 			case "3": n_slots = "OOO"; break;
 		};
-		var res = '<img src="assets/talismans/' + result[i]["Charm Name"] + '.png">' + " Table " + result[i]["Table No."] + " [" + result[i]["Skill 1"] + ", " + result[i]["Skill 2"] + " " + n_slots + "]";
+		var res = '<img src="assets/talismans/' + result[i]["Charm Name"] + '.png" style="position: relative; top: 2px;">' + " Table " + result[i]["Table No."] + " [" + result[i]["Skill 1"] + ", " + result[i]["Skill 2"] + " " + n_slots + "]";
 		
 		document.getElementById("results").innerHTML+=res+"<br>";
 	}
