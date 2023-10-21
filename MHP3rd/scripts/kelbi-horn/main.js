@@ -10,12 +10,10 @@ function populate_dropdown(ID, array){
 	var dropdown = document.getElementById(ID);
 	dropdown.size = array.length + 1;
 	for(var i = 0; i < array.length; i++){
-		if(array[i] != "---"){
-			var option = document.createElement("option");
-			option.textContent = array[i];
-			option.value = array[i];
-			dropdown.appendChild(option);
-		}
+		var option = document.createElement("option");
+		option.textContent = array[i];
+		option.value = array[i];
+		dropdown.appendChild(option);
 	}
 }
 
@@ -102,7 +100,7 @@ function update(){
 		icon.style.left = x + "px";
 		icon.style.top = y + "px";
 		icon.id = "icon_" + i;
-		icon.src = "assets/rewards/Empty.png";
+		icon.src = "assets/rewards/Any.png";
 		document.getElementById("reward-table").appendChild(icon);
 		
 		var num = document.createElement("div");
@@ -124,8 +122,14 @@ function update(){
 		list.appendChild(default_option);
 		list.onchange = function(){
 			var id = this.id;
-			document.getElementById("icon_" + id.split("_")[1]).src = "assets/rewards/" + getItem(this.value)[0] + ".png";
-			document.getElementById("reward_num_" + id.split("_")[1]).textContent = getItem(this.value)[1];
+			if(this.value === "Any"){
+				document.getElementById("icon_" + id.split("_")[1]).src = "assets/rewards/Any.png";
+				document.getElementById("reward_num_" + id.split("_")[1]).textContent = 0;
+			}
+			else{
+				document.getElementById("icon_" + id.split("_")[1]).src = "assets/rewards/" + getItem(this.value)[0] + ".png";
+				document.getElementById("reward_num_" + id.split("_")[1]).textContent = getItem(this.value)[1];
+			}
 			hide_list(id);
 			search();
 		};
