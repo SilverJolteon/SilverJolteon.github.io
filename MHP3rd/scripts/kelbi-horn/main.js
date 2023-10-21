@@ -22,16 +22,16 @@ function populate_dropdown(ID, array){
 function get_data(){
 	var slot_rewards = [];
 
-	for(var i = 0; i < 12; i++) slot_rewards.push([]);
+	for(var i = 0; i < 10; i++) slot_rewards.push([]);
 
 	for(var i = 0; i < data.length; i++){
-		for(var j = 0; j < 12; j++){
+		for(var j = 0; j < 10; j++){
 			var slot = data[i]["Reward " + (j + 1)];
 			if(!slot_rewards[j].includes(slot)) slot_rewards[j].push(slot);
 		}
 	}
 
-	for(var j = 0; j < 12; j++){
+	for(var j = 0; j < 10; j++){
 		slot_rewards[j].sort();
 		populate_dropdown("slot_" + j, slot_rewards[j]);
 	}
@@ -39,7 +39,7 @@ function get_data(){
 
 function search(){
 	var rewards = [];
-	for(var i = 0; i < 12; i++) rewards[i] = document.getElementById("slot_" + i).value;
+	for(var i = 0; i < 10; i++) rewards[i] = document.getElementById("slot_" + i).value;
 	var result = data.filter(item => 
 		(rewards[0] === "Any" || item["Reward 1"] === rewards[0]) &&
 		(rewards[1] === "Any" || item["Reward 2"] === rewards[1]) &&
@@ -50,9 +50,7 @@ function search(){
 		(rewards[6] === "Any" || item["Reward 7"] === rewards[6]) &&
 		(rewards[7] === "Any" || item["Reward 8"] === rewards[7]) &&
 		(rewards[8] === "Any" || item["Reward 9"] === rewards[8]) &&
-		(rewards[9] === "Any" || item["Reward 10"] === rewards[9]) &&
-		(rewards[10] === "Any" || item["Reward 11"] === rewards[10]) &&
-		(rewards[11] === "Any" || item["Reward 12"] === rewards[11])
+		(rewards[9] === "Any" || item["Reward 10"] === rewards[9])
 	);
 	document.getElementById("results").innerHTML = "";
 	if(result.length == 0) document.getElementById("results").innerHTML = "No results found";
@@ -91,7 +89,7 @@ document.addEventListener("click", function (event) {
 
 function update(){
 	var x = 0, y = 0;
-	for(var i = 0; i < 12; i++){
+	for(var i = 0; i < 10; i++){
 		x = 104 * ((i < 8) ? i : (i-8)) + 84;
 		y = (i < 8) ? 48 : 128;
 		var icon = document.createElement("img");

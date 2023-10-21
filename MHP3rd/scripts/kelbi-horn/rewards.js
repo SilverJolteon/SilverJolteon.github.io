@@ -1,4 +1,4 @@
- data = [
+const data = [
   {
     "Table": "1",
      "Reward 1": "Kelbi Horn x1",
@@ -10,24 +10,20 @@
      "Reward 7": "---",
      "Reward 8": "---",
      "Reward 9": "---",
-     "Reward 10": "---",
-     "Reward 11": "---",
-     "Reward 12": "---"
+     "Reward 10": "---"
   },
   {
     "Table": "1",
      "Reward 1": "Raw Meat x1",
-     "Reward 2": "Field Horn x1",
-     "Reward 3": "Field Horn x1",
+     "Reward 2": "Health Horn x1",
+     "Reward 3": "Health Horn x1",
      "Reward 4": "Kelbi Horn x1",
      "Reward 5": "Kelbi Horn x1",
      "Reward 6": "Warm Pelt x2",
      "Reward 7": "---",
      "Reward 8": "---",
      "Reward 9": "---",
-     "Reward 10": "---",
-     "Reward 11": "---",
-     "Reward 12": "---"
+     "Reward 10": "---"
   },
   {
     "Table": "1",
@@ -40,54 +36,7 @@
      "Reward 7": "Warm Pelt x2",
      "Reward 8": "---",
      "Reward 9": "---",
-     "Reward 10": "---",
-     "Reward 11": "---",
-     "Reward 12": "---"
-  },
-  {
-    "Table": "1",
-     "Reward 1": "Raw Meat x1",
-     "Reward 2": "Raw Meat x1",
-     "Reward 3": "Nulberry x3",
-     "Reward 4": "Kelbi Horn x1",
-     "Reward 5": "Warm Pelt x2",
-     "Reward 6": "---",
-     "Reward 7": "---",
-     "Reward 8": "---",
-     "Reward 9": "---",
-     "Reward 10": "---",
-     "Reward 11": "---",
-     "Reward 12": "---"
-  },
-  {
-    "Table": "1",
-     "Reward 1": "Raw Meat x1",
-     "Reward 2": "Raw Meat x1",
-     "Reward 3": "Nulberry x3",
-     "Reward 4": "Kelbi Horn x1",
-     "Reward 5": "Kelbi Horn x1",
-     "Reward 6": "Warm Pelt x2",
-     "Reward 7": "---",
-     "Reward 8": "---",
-     "Reward 9": "---",
-     "Reward 10": "---",
-     "Reward 11": "---",
-     "Reward 12": "---"
-  },
-  {
-    "Table": "1",
-     "Reward 1": "Raw Meat x1",
-     "Reward 2": "Raw Meat x1",
-     "Reward 3": "Field Horn x1",
-     "Reward 4": "Nulberry x3",
-     "Reward 5": "Warm Pelt x1",
-     "Reward 6": "Warm Pelt x2",
-     "Reward 7": "Warm Pelt x2",
-     "Reward 8": "Warm Pelt x2",
-     "Reward 9": "---",
-     "Reward 10": "---",
-     "Reward 11": "---",
-     "Reward 12": "---"
+     "Reward 10": "---"
   },
   {
     "Table": "1",
@@ -100,24 +49,46 @@
      "Reward 7": "Warm Pelt x2",
      "Reward 8": "---",
      "Reward 9": "---",
-     "Reward 10": "---",
-     "Reward 11": "---",
-     "Reward 12": "---"
+     "Reward 10": "---"
   },
   {
     "Table": "1",
      "Reward 1": "Raw Meat x1",
      "Reward 2": "Raw Meat x1",
-     "Reward 3": "Raw Meat x1",
-     "Reward 4": "Raw Meat x1",
-     "Reward 5": "Field Horn x1",
-     "Reward 6": "Nulberry x3",
-     "Reward 7": "Kelbi Horn x1",
-     "Reward 8": "Kelbi Horn x1",
-     "Reward 9": "Warm Pelt x2",
-     "Reward 10": "Warm Pelt x2",
-     "Reward 11": "---",
-     "Reward 12": "---"
+     "Reward 3": "Field Horn x1",
+     "Reward 4": "Nulberry x3",
+     "Reward 5": "Warm Pelt x1",
+     "Reward 6": "Warm Pelt x2",
+     "Reward 7": "Warm Pelt x2",
+     "Reward 8": "Warm Pelt x2",
+     "Reward 9": "---",
+     "Reward 10": "---"
+  },
+  {
+    "Table": "1",
+     "Reward 1": "Raw Meat x1",
+     "Reward 2": "Raw Meat x1",
+     "Reward 3": "Nulberry x3",
+     "Reward 4": "Kelbi Horn x1",
+     "Reward 5": "Kelbi Horn x1",
+     "Reward 6": "Warm Pelt x2",
+     "Reward 7": "---",
+     "Reward 8": "---",
+     "Reward 9": "---",
+     "Reward 10": "---"
+  },
+  {
+    "Table": "1",
+     "Reward 1": "Raw Meat x1",
+     "Reward 2": "Raw Meat x1",
+     "Reward 3": "Nulberry x3",
+     "Reward 4": "Kelbi Horn x1",
+     "Reward 5": "Warm Pelt x2",
+     "Reward 6": "---",
+     "Reward 7": "---",
+     "Reward 8": "---",
+     "Reward 9": "---",
+     "Reward 10": "---"
   },
   {
     "Table": "1",
@@ -130,24 +101,20 @@
      "Reward 7": "Nulberry x3",
      "Reward 8": "Warm Pelt x2",
      "Reward 9": "---",
-     "Reward 10": "---",
-     "Reward 11": "---",
-     "Reward 12": "---"
+     "Reward 10": "---"
   },
   {
-    "Table": "2",
+    "Table": "1",
      "Reward 1": "Raw Meat x1",
-     "Reward 2": "Nulberry x3",
-     "Reward 3": "Warm Pelt x1",
-     "Reward 4": "Warm Pelt x2",
-     "Reward 5": "---",
-     "Reward 6": "---",
-     "Reward 7": "---",
-     "Reward 8": "---",
-     "Reward 9": "---",
-     "Reward 10": "---",
-     "Reward 11": "---",
-     "Reward 12": "---"
+     "Reward 2": "Raw Meat x1",
+     "Reward 3": "Raw Meat x1",
+     "Reward 4": "Raw Meat x1",
+     "Reward 5": "Health Horn x1",
+     "Reward 6": "Nulberry x3",
+     "Reward 7": "Kelbi Horn x1",
+     "Reward 8": "Kelbi Horn x1",
+     "Reward 9": "Warm Pelt x2",
+     "Reward 10": "Warm Pelt x2"
   },
   {
     "Table": "2",
@@ -160,9 +127,7 @@
      "Reward 7": "---",
      "Reward 8": "---",
      "Reward 9": "---",
-     "Reward 10": "---",
-     "Reward 11": "---",
-     "Reward 12": "---"
+     "Reward 10": "---"
   },
   {
     "Table": "2",
@@ -175,9 +140,20 @@
      "Reward 7": "---",
      "Reward 8": "---",
      "Reward 9": "---",
-     "Reward 10": "---",
-     "Reward 11": "---",
-     "Reward 12": "---"
+     "Reward 10": "---"
+  },
+  {
+    "Table": "2",
+     "Reward 1": "Raw Meat x1",
+     "Reward 2": "Nulberry x3",
+     "Reward 3": "Warm Pelt x1",
+     "Reward 4": "Warm Pelt x2",
+     "Reward 5": "---",
+     "Reward 6": "---",
+     "Reward 7": "---",
+     "Reward 8": "---",
+     "Reward 9": "---",
+     "Reward 10": "---"
   },
   {
     "Table": "2",
@@ -190,9 +166,7 @@
      "Reward 7": "---",
      "Reward 8": "---",
      "Reward 9": "---",
-     "Reward 10": "---",
-     "Reward 11": "---",
-     "Reward 12": "---"
+     "Reward 10": "---"
   },
   {
     "Table": "3",
@@ -205,39 +179,7 @@
      "Reward 7": "Kelbi Horn x1",
      "Reward 8": "Kelbi Horn x1",
      "Reward 9": "Warm Pelt x2",
-     "Reward 10": "Warm Pelt x2",
-     "Reward 11": "---",
-     "Reward 12": "---"
-  },
-  {
-    "Table": "3",
-     "Reward 1": "Raw Meat x1",
-     "Reward 2": "Raw Meat x1",
-     "Reward 3": "Field Horn x1",
-     "Reward 4": "Warm Pelt x2",
-     "Reward 5": "Warm Pelt x2",
-     "Reward 6": "---",
-     "Reward 7": "---",
-     "Reward 8": "---",
-     "Reward 9": "---",
-     "Reward 10": "---",
-     "Reward 11": "---",
-     "Reward 12": "---"
-  },
-  {
-    "Table": "3",
-     "Reward 1": "Raw Meat x1",
-     "Reward 2": "Raw Meat x1",
-     "Reward 3": "Field Horn x1",
-     "Reward 4": "Nulberry x3",
-     "Reward 5": "Kelbi Horn x1",
-     "Reward 6": "Warm Pelt x1",
-     "Reward 7": "Warm Pelt x2",
-     "Reward 8": "Warm Pelt x2",
-     "Reward 9": "---",
-     "Reward 10": "---",
-     "Reward 11": "---",
-     "Reward 12": "---"
+     "Reward 10": "Warm Pelt x2"
   },
   {
     "Table": "3",
@@ -250,9 +192,33 @@
      "Reward 7": "Kelbi Horn x1",
      "Reward 8": "Warm Pelt x1",
      "Reward 9": "Warm Pelt x2",
-     "Reward 10": "Warm Pelt x2",
-     "Reward 11": "Warm Pelt x2",
-     "Reward 12": "---"
+     "Reward 10": "Warm Pelt x2"
+  },
+  {
+    "Table": "3",
+     "Reward 1": "Raw Meat x1",
+     "Reward 2": "Raw Meat x1",
+     "Reward 3": "Field Horn x1",
+     "Reward 4": "Warm Pelt x2",
+     "Reward 5": "Warm Pelt x2",
+     "Reward 6": "---",
+     "Reward 7": "---",
+     "Reward 8": "---",
+     "Reward 9": "---",
+     "Reward 10": "---"
+  },
+  {
+    "Table": "3",
+     "Reward 1": "Raw Meat x1",
+     "Reward 2": "Raw Meat x1",
+     "Reward 3": "Health Horn x1",
+     "Reward 4": "Nulberry x3",
+     "Reward 5": "Kelbi Horn x1",
+     "Reward 6": "Warm Pelt x1",
+     "Reward 7": "Warm Pelt x2",
+     "Reward 8": "Warm Pelt x2",
+     "Reward 9": "---",
+     "Reward 10": "---"
   },
   {
     "Table": "4",
@@ -261,28 +227,11 @@
      "Reward 3": "Warm Pelt x1",
      "Reward 4": "Warm Pelt x2",
      "Reward 5": "Warm Pelt x2",
-     "Reward 6": "Warm Pelt x2",
+     "Reward 6": "---",
      "Reward 7": "---",
      "Reward 8": "---",
      "Reward 9": "---",
-     "Reward 10": "---",
-     "Reward 11": "---",
-     "Reward 12": "---"
-  },
-  {
-    "Table": "4",
-     "Reward 1": "Raw Meat x1",
-     "Reward 2": "Raw Meat x1",
-     "Reward 3": "Nulberry x3",
-     "Reward 4": "Nulberry x3",
-     "Reward 5": "Warm Pelt x2",
-     "Reward 6": "Warm Pelt x2",
-     "Reward 7": "Warm Pelt x2",
-     "Reward 8": "---",
-     "Reward 9": "---",
-     "Reward 10": "---",
-     "Reward 11": "---",
-     "Reward 12": "---"
+     "Reward 10": "---"
   },
   {
     "Table": "4",
@@ -295,9 +244,20 @@
      "Reward 7": "Warm Pelt x1",
      "Reward 8": "Warm Pelt x2",
      "Reward 9": "Warm Pelt x2",
-     "Reward 10": "Warm Pelt x2",
-     "Reward 11": "---",
-     "Reward 12": "---"
+     "Reward 10": "Warm Pelt x2"
+  },
+  {
+    "Table": "4",
+     "Reward 1": "Raw Meat x1",
+     "Reward 2": "Raw Meat x1",
+     "Reward 3": "Nulberry x3",
+     "Reward 4": "Nulberry x3",
+     "Reward 5": "Warm Pelt x2",
+     "Reward 6": "---",
+     "Reward 7": "---",
+     "Reward 8": "---",
+     "Reward 9": "---",
+     "Reward 10": "---"
   },
   {
     "Table": "4",
@@ -310,39 +270,33 @@
      "Reward 7": "Warm Pelt x1",
      "Reward 8": "Warm Pelt x1",
      "Reward 9": "Warm Pelt x1",
-     "Reward 10": "Warm Pelt x2",
-     "Reward 11": "---",
-     "Reward 12": "---"
-  },
-  {
-    "Table": "5",
-     "Reward 1": "Field Horn x1",
-     "Reward 2": "Nulberry x3",
-     "Reward 3": "Nulberry x3",
-     "Reward 4": "Kelbi Horn x1",
-     "Reward 5": "Warm Pelt x2",
-     "Reward 6": "Warm Pelt x2",
-     "Reward 7": "Warm Pelt x2",
-     "Reward 8": "---",
-     "Reward 9": "---",
-     "Reward 10": "---",
-     "Reward 11": "---",
-     "Reward 12": "---"
+     "Reward 10": "Warm Pelt x2"
   },
   {
     "Table": "5",
      "Reward 1": "Field Horn x1",
      "Reward 2": "Field Horn x1",
      "Reward 3": "Field Horn x1",
-     "Reward 4": "Field Horn x1",
+     "Reward 4": "Health Horn x1",
      "Reward 5": "Kelbi Horn x1",
      "Reward 6": "Kelbi Horn x1",
      "Reward 7": "Kelbi Horn x1",
      "Reward 8": "Warm Pelt x1",
      "Reward 9": "Warm Pelt x1",
-     "Reward 10": "Warm Pelt x2",
-     "Reward 11": "---",
-     "Reward 12": "---"
+     "Reward 10": "Warm Pelt x2"
+  },
+  {
+    "Table": "5",
+     "Reward 1": "Health Horn x1",
+     "Reward 2": "Nulberry x3",
+     "Reward 3": "Nulberry x3",
+     "Reward 4": "Kelbi Horn x1",
+     "Reward 5": "Warm Pelt x2",
+     "Reward 6": "---",
+     "Reward 7": "---",
+     "Reward 8": "---",
+     "Reward 9": "---",
+     "Reward 10": "---"
   },
   {
     "Table": "5",
@@ -355,9 +309,7 @@
      "Reward 7": "---",
      "Reward 8": "---",
      "Reward 9": "---",
-     "Reward 10": "---",
-     "Reward 11": "---",
-     "Reward 12": "---"
+     "Reward 10": "---"
   },
   {
     "Table": "5",
@@ -370,39 +322,7 @@
      "Reward 7": "---",
      "Reward 8": "---",
      "Reward 9": "---",
-     "Reward 10": "---",
-     "Reward 11": "---",
-     "Reward 12": "---"
-  },
-  {
-    "Table": "6",
-     "Reward 1": "Raw Meat x1",
-     "Reward 2": "Nulberry x3",
-     "Reward 3": "Nulberry x3",
-     "Reward 4": "Warm Pelt x2",
-     "Reward 5": "Warm Pelt x2",
-     "Reward 6": "---",
-     "Reward 7": "---",
-     "Reward 8": "---",
-     "Reward 9": "---",
-     "Reward 10": "---",
-     "Reward 11": "---",
-     "Reward 12": "---"
-  },
-  {
-    "Table": "6",
-     "Reward 1": "Raw Meat x1",
-     "Reward 2": "Nulberry x3",
-     "Reward 3": "Kelbi Horn x1",
-     "Reward 4": "Warm Pelt x1",
-     "Reward 5": "Warm Pelt x2",
-     "Reward 6": "---",
-     "Reward 7": "---",
-     "Reward 8": "---",
-     "Reward 9": "---",
-     "Reward 10": "---",
-     "Reward 11": "---",
-     "Reward 12": "---"
+     "Reward 10": "---"
   },
   {
     "Table": "6",
@@ -415,39 +335,33 @@
      "Reward 7": "---",
      "Reward 8": "---",
      "Reward 9": "---",
-     "Reward 10": "---",
-     "Reward 11": "---",
-     "Reward 12": "---"
+     "Reward 10": "---"
   },
   {
     "Table": "6",
      "Reward 1": "Raw Meat x1",
-     "Reward 2": "Raw Meat x1",
-     "Reward 3": "Nulberry x3",
-     "Reward 4": "Nulberry x3",
-     "Reward 5": "Kelbi Horn x1",
-     "Reward 6": "Kelbi Horn x1",
-     "Reward 7": "Kelbi Horn x1",
-     "Reward 8": "Warm Pelt x2",
-     "Reward 9": "---",
-     "Reward 10": "---",
-     "Reward 11": "---",
-     "Reward 12": "---"
-  },
-  {
-    "Table": "6",
-     "Reward 1": "Raw Meat x1",
-     "Reward 2": "Raw Meat x1",
-     "Reward 3": "Field Horn x1",
-     "Reward 4": "Kelbi Horn x1",
+     "Reward 2": "Nulberry x3",
+     "Reward 3": "Kelbi Horn x1",
+     "Reward 4": "Warm Pelt x1",
      "Reward 5": "Warm Pelt x2",
-     "Reward 6": "Warm Pelt x2",
+     "Reward 6": "---",
      "Reward 7": "---",
      "Reward 8": "---",
      "Reward 9": "---",
-     "Reward 10": "---",
-     "Reward 11": "---",
-     "Reward 12": "---"
+     "Reward 10": "---"
+  },
+  {
+    "Table": "6",
+     "Reward 1": "Raw Meat x1",
+     "Reward 2": "Nulberry x3",
+     "Reward 3": "Nulberry x3",
+     "Reward 4": "Warm Pelt x2",
+     "Reward 5": "Warm Pelt x2",
+     "Reward 6": "---",
+     "Reward 7": "---",
+     "Reward 8": "---",
+     "Reward 9": "---",
+     "Reward 10": "---"
   },
   {
     "Table": "6",
@@ -460,9 +374,33 @@
      "Reward 7": "Warm Pelt x1",
      "Reward 8": "Warm Pelt x2",
      "Reward 9": "---",
-     "Reward 10": "---",
-     "Reward 11": "---",
-     "Reward 12": "---"
+     "Reward 10": "---"
+  },
+  {
+    "Table": "6",
+     "Reward 1": "Raw Meat x1",
+     "Reward 2": "Raw Meat x1",
+     "Reward 3": "Health Horn x1",
+     "Reward 4": "Kelbi Horn x1",
+     "Reward 5": "Warm Pelt x2",
+     "Reward 6": "Warm Pelt x2",
+     "Reward 7": "---",
+     "Reward 8": "---",
+     "Reward 9": "---",
+     "Reward 10": "---"
+  },
+  {
+    "Table": "6",
+     "Reward 1": "Raw Meat x1",
+     "Reward 2": "Raw Meat x1",
+     "Reward 3": "Nulberry x3",
+     "Reward 4": "Nulberry x3",
+     "Reward 5": "Kelbi Horn x1",
+     "Reward 6": "Kelbi Horn x1",
+     "Reward 7": "Kelbi Horn x1",
+     "Reward 8": "Warm Pelt x2",
+     "Reward 9": "---",
+     "Reward 10": "---"
   },
   {
     "Table": "6",
@@ -471,28 +409,11 @@
      "Reward 3": "Raw Meat x1",
      "Reward 4": "Kelbi Horn x1",
      "Reward 5": "Warm Pelt x2",
-     "Reward 6": "Warm Pelt x2",
+     "Reward 6": "---",
      "Reward 7": "---",
      "Reward 8": "---",
      "Reward 9": "---",
-     "Reward 10": "---",
-     "Reward 11": "---",
-     "Reward 12": "---"
-  },
-  {
-    "Table": "7",
-     "Reward 1": "Nulberry x3",
-     "Reward 2": "Nulberry x3",
-     "Reward 3": "Kelbi Horn x1",
-     "Reward 4": "Kelbi Horn x1",
-     "Reward 5": "Warm Pelt x2",
-     "Reward 6": "Warm Pelt x2",
-     "Reward 7": "Warm Pelt x2",
-     "Reward 8": "---",
-     "Reward 9": "---",
-     "Reward 10": "---",
-     "Reward 11": "---",
-     "Reward 12": "---"
+     "Reward 10": "---"
   },
   {
     "Table": "7",
@@ -501,13 +422,11 @@
      "Reward 3": "Nulberry x3",
      "Reward 4": "Kelbi Horn x1",
      "Reward 5": "Warm Pelt x2",
-     "Reward 6": "Warm Pelt x2",
-     "Reward 7": "Warm Pelt x2",
+     "Reward 6": "---",
+     "Reward 7": "---",
      "Reward 8": "---",
      "Reward 9": "---",
-     "Reward 10": "---",
-     "Reward 11": "---",
-     "Reward 12": "---"
+     "Reward 10": "---"
   },
   {
     "Table": "7",
@@ -520,39 +439,20 @@
      "Reward 7": "---",
      "Reward 8": "---",
      "Reward 9": "---",
-     "Reward 10": "---",
-     "Reward 11": "---",
-     "Reward 12": "---"
+     "Reward 10": "---"
   },
   {
     "Table": "7",
-     "Reward 1": "Raw Meat x1",
-     "Reward 2": "Raw Meat x1",
-     "Reward 3": "Field Horn x1",
+     "Reward 1": "Nulberry x3",
+     "Reward 2": "Nulberry x3",
+     "Reward 3": "Kelbi Horn x1",
      "Reward 4": "Kelbi Horn x1",
      "Reward 5": "Warm Pelt x2",
      "Reward 6": "---",
      "Reward 7": "---",
      "Reward 8": "---",
      "Reward 9": "---",
-     "Reward 10": "---",
-     "Reward 11": "---",
-     "Reward 12": "---"
-  },
-  {
-    "Table": "7",
-     "Reward 1": "Raw Meat x1",
-     "Reward 2": "Raw Meat x1",
-     "Reward 3": "Field Horn x1",
-     "Reward 4": "Kelbi Horn x1",
-     "Reward 5": "Warm Pelt x1",
-     "Reward 6": "Warm Pelt x1",
-     "Reward 7": "Warm Pelt x2",
-     "Reward 8": "---",
-     "Reward 9": "---",
-     "Reward 10": "---",
-     "Reward 11": "---",
-     "Reward 12": "---"
+     "Reward 10": "---"
   },
   {
     "Table": "7",
@@ -565,9 +465,46 @@
      "Reward 7": "Kelbi Horn x1",
      "Reward 8": "Kelbi Horn x1",
      "Reward 9": "Warm Pelt x1",
-     "Reward 10": "Warm Pelt x2",
-     "Reward 11": "Warm Pelt x2",
-     "Reward 12": "Warm Pelt x2"
+     "Reward 10": "Warm Pelt x2"
+  },
+  {
+    "Table": "7",
+     "Reward 1": "Raw Meat x1",
+     "Reward 2": "Raw Meat x1",
+     "Reward 3": "Field Horn x1",
+     "Reward 4": "Kelbi Horn x1",
+     "Reward 5": "Warm Pelt x2",
+     "Reward 6": "---",
+     "Reward 7": "---",
+     "Reward 8": "---",
+     "Reward 9": "---",
+     "Reward 10": "---"
+  },
+  {
+    "Table": "7",
+     "Reward 1": "Raw Meat x1",
+     "Reward 2": "Raw Meat x1",
+     "Reward 3": "Health Horn x1",
+     "Reward 4": "Kelbi Horn x1",
+     "Reward 5": "Warm Pelt x1",
+     "Reward 6": "Warm Pelt x1",
+     "Reward 7": "Warm Pelt x2",
+     "Reward 8": "---",
+     "Reward 9": "---",
+     "Reward 10": "---"
+  },
+  {
+    "Table": "7",
+     "Reward 1": "Raw Meat x1",
+     "Reward 2": "Raw Meat x1",
+     "Reward 3": "Raw Meat x1",
+     "Reward 4": "Field Horn x1",
+     "Reward 5": "Kelbi Horn x1",
+     "Reward 6": "Warm Pelt x2",
+     "Reward 7": "---",
+     "Reward 8": "---",
+     "Reward 9": "---",
+     "Reward 10": "---"
   },
   {
     "Table": "7",
@@ -580,24 +517,7 @@
      "Reward 7": "Warm Pelt x2",
      "Reward 8": "---",
      "Reward 9": "---",
-     "Reward 10": "---",
-     "Reward 11": "---",
-     "Reward 12": "---"
-  },
-  {
-    "Table": "7",
-     "Reward 1": "Raw Meat x1",
-     "Reward 2": "Raw Meat x1",
-     "Reward 3": "Raw Meat x1",
-     "Reward 4": "Field Horn x1",
-     "Reward 5": "Kelbi Horn x1",
-     "Reward 6": "Warm Pelt x2",
-     "Reward 7": "Warm Pelt x2",
-     "Reward 8": "Warm Pelt x2",
-     "Reward 9": "---",
-     "Reward 10": "---",
-     "Reward 11": "---",
-     "Reward 12": "---"
+     "Reward 10": "---"
   },
   {
     "Table": "7",
@@ -608,11 +528,9 @@
      "Reward 5": "Nulberry x3",
      "Reward 6": "Kelbi Horn x1",
      "Reward 7": "Warm Pelt x2",
-     "Reward 8": "Warm Pelt x2",
-     "Reward 9": "Warm Pelt x2",
-     "Reward 10": "---",
-     "Reward 11": "---",
-     "Reward 12": "---"
+     "Reward 8": "---",
+     "Reward 9": "---",
+     "Reward 10": "---"
   },
   {
     "Table": "8",
@@ -622,12 +540,10 @@
      "Reward 4": "Warm Pelt x1",
      "Reward 5": "Warm Pelt x2",
      "Reward 6": "Warm Pelt x2",
-     "Reward 7": "Warm Pelt x2",
+     "Reward 7": "---",
      "Reward 8": "---",
      "Reward 9": "---",
-     "Reward 10": "---",
-     "Reward 11": "---",
-     "Reward 12": "---"
+     "Reward 10": "---"
   },
   {
     "Table": "8",
@@ -640,9 +556,7 @@
      "Reward 7": "---",
      "Reward 8": "---",
      "Reward 9": "---",
-     "Reward 10": "---",
-     "Reward 11": "---",
-     "Reward 12": "---"
+     "Reward 10": "---"
   },
   {
     "Table": "8",
@@ -655,9 +569,7 @@
      "Reward 7": "Warm Pelt x1",
      "Reward 8": "Warm Pelt x1",
      "Reward 9": "Warm Pelt x2",
-     "Reward 10": "Warm Pelt x2",
-     "Reward 11": "---",
-     "Reward 12": "---"
+     "Reward 10": "Warm Pelt x2"
   },
   {
     "Table": "8",
@@ -670,9 +582,7 @@
      "Reward 7": "---",
      "Reward 8": "---",
      "Reward 9": "---",
-     "Reward 10": "---",
-     "Reward 11": "---",
-     "Reward 12": "---"
+     "Reward 10": "---"
   },
   {
     "Table": "8",
@@ -685,24 +595,7 @@
      "Reward 7": "Warm Pelt x2",
      "Reward 8": "---",
      "Reward 9": "---",
-     "Reward 10": "---",
-     "Reward 11": "---",
-     "Reward 12": "---"
-  },
-  {
-    "Table": "9",
-     "Reward 1": "Field Horn x1",
-     "Reward 2": "Nulberry x3",
-     "Reward 3": "Nulberry x3",
-     "Reward 4": "Kelbi Horn x1",
-     "Reward 5": "Warm Pelt x2",
-     "Reward 6": "---",
-     "Reward 7": "---",
-     "Reward 8": "---",
-     "Reward 9": "---",
-     "Reward 10": "---",
-     "Reward 11": "---",
-     "Reward 12": "---"
+     "Reward 10": "---"
   },
   {
     "Table": "9",
@@ -715,9 +608,20 @@
      "Reward 7": "Warm Pelt x1",
      "Reward 8": "Warm Pelt x1",
      "Reward 9": "Warm Pelt x1",
-     "Reward 10": "Warm Pelt x2",
-     "Reward 11": "Warm Pelt x2",
-     "Reward 12": "Warm Pelt x2"
+     "Reward 10": "Warm Pelt x2"
+  },
+  {
+    "Table": "9",
+     "Reward 1": "Field Horn x1",
+     "Reward 2": "Nulberry x3",
+     "Reward 3": "Nulberry x3",
+     "Reward 4": "Kelbi Horn x1",
+     "Reward 5": "Warm Pelt x2",
+     "Reward 6": "---",
+     "Reward 7": "---",
+     "Reward 8": "---",
+     "Reward 9": "---",
+     "Reward 10": "---"
   },
   {
     "Table": "9",
@@ -730,9 +634,7 @@
      "Reward 7": "Warm Pelt x2",
      "Reward 8": "Warm Pelt x2",
      "Reward 9": "---",
-     "Reward 10": "---",
-     "Reward 11": "---",
-     "Reward 12": "---"
+     "Reward 10": "---"
   },
   {
     "Table": "10",
@@ -745,9 +647,7 @@
      "Reward 7": "Warm Pelt x2",
      "Reward 8": "---",
      "Reward 9": "---",
-     "Reward 10": "---",
-     "Reward 11": "---",
-     "Reward 12": "---"
+     "Reward 10": "---"
   },
   {
     "Table": "10",
@@ -760,9 +660,7 @@
      "Reward 7": "Warm Pelt x2",
      "Reward 8": "---",
      "Reward 9": "---",
-     "Reward 10": "---",
-     "Reward 11": "---",
-     "Reward 12": "---"
+     "Reward 10": "---"
   },
   {
     "Table": "10",
@@ -775,9 +673,7 @@
      "Reward 7": "---",
      "Reward 8": "---",
      "Reward 9": "---",
-     "Reward 10": "---",
-     "Reward 11": "---",
-     "Reward 12": "---"
+     "Reward 10": "---"
   },
   {
     "Table": "10",
@@ -790,9 +686,7 @@
      "Reward 7": "Kelbi Horn x1",
      "Reward 8": "Kelbi Horn x1",
      "Reward 9": "Warm Pelt x1",
-     "Reward 10": "Warm Pelt x2",
-     "Reward 11": "---",
-     "Reward 12": "---"
+     "Reward 10": "Warm Pelt x2"
   },
   {
     "Table": "10",
@@ -805,9 +699,20 @@
      "Reward 7": "Nulberry x3",
      "Reward 8": "Nulberry x3",
      "Reward 9": "Warm Pelt x2",
-     "Reward 10": "Warm Pelt x2",
-     "Reward 11": "---",
-     "Reward 12": "---"
+     "Reward 10": "Warm Pelt x2"
+  },
+  {
+    "Table": "11",
+     "Reward 1": "Raw Meat x1",
+     "Reward 2": "Field Horn x1",
+     "Reward 3": "Health Horn x1",
+     "Reward 4": "Nulberry x3",
+     "Reward 5": "Nulberry x3",
+     "Reward 6": "Warm Pelt x1",
+     "Reward 7": "Warm Pelt x2",
+     "Reward 8": "---",
+     "Reward 9": "---",
+     "Reward 10": "---"
   },
   {
     "Table": "11",
@@ -820,24 +725,7 @@
      "Reward 7": "Warm Pelt x1",
      "Reward 8": "Warm Pelt x1",
      "Reward 9": "Warm Pelt x2",
-     "Reward 10": "Warm Pelt x2",
-     "Reward 11": "---",
-     "Reward 12": "---"
-  },
-  {
-    "Table": "11",
-     "Reward 1": "Raw Meat x1",
-     "Reward 2": "Field Horn x1",
-     "Reward 3": "Field Horn x1",
-     "Reward 4": "Nulberry x3",
-     "Reward 5": "Nulberry x3",
-     "Reward 6": "Warm Pelt x1",
-     "Reward 7": "Warm Pelt x2",
-     "Reward 8": "---",
-     "Reward 9": "---",
-     "Reward 10": "---",
-     "Reward 11": "---",
-     "Reward 12": "---"
+     "Reward 10": "Warm Pelt x2"
   },
   {
     "Table": "11",
@@ -850,9 +738,7 @@
      "Reward 7": "Warm Pelt x1",
      "Reward 8": "Warm Pelt x1",
      "Reward 9": "Warm Pelt x2",
-     "Reward 10": "Warm Pelt x2",
-     "Reward 11": "Warm Pelt x2",
-     "Reward 12": "---"
+     "Reward 10": "Warm Pelt x2"
   },
   {
     "Table": "12",
@@ -865,9 +751,7 @@
      "Reward 7": "Kelbi Horn x1",
      "Reward 8": "Warm Pelt x1",
      "Reward 9": "Warm Pelt x1",
-     "Reward 10": "Warm Pelt x2",
-     "Reward 11": "---",
-     "Reward 12": "---"
+     "Reward 10": "Warm Pelt x2"
   },
   {
     "Table": "12",
@@ -880,8 +764,6 @@
      "Reward 7": "Warm Pelt x2",
      "Reward 8": "---",
      "Reward 9": "---",
-     "Reward 10": "---",
-     "Reward 11": "---",
-     "Reward 12": "---"
+     "Reward 10": "---"
   }
 ];
