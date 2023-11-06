@@ -6,6 +6,7 @@
 body{
 	font-family: 'Rodin';
 	background-color: #121212;
+	margin-top: 50px;
 }
 
 .header {
@@ -19,6 +20,47 @@ body{
 	top: 230px;
 	left: 10%;
 	right: 10%;
+}
+
+.navmenu{
+	height: 50px;
+	width: 100%;
+	position: fixed;
+	top: 0;
+	left: 0;
+	z-index: 1;
+}
+
+.navmenu ul{
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+	background-color: #2A2A2A;
+	text-align: center;
+}
+
+.navmenu li{
+	display: inline-block;
+	vertical-align: top;
+}
+
+.navmenu li a{
+	display: block;
+	color: #FFFFFF;
+	text-shadow: 2px 0 0 #000000, -2px 0 0 #000000, 0 2px 0 #000000, 0 -2px 0 #000000, 1px 1px #000000, -1px -1px 0 #000000, 1px -1px 0 #000000, -1px 1px 0 #000000;
+	font-family: 'Rodin';
+	text-align: center;
+	padding: 14px 16px;
+	text-decoration: none;
+}
+
+.navmenu li a:hover:not(.navmenu-active){
+	background-color: #4A4A4A;
+}
+
+.navmenu-active{
+	background-color: #3A3A3A;
 }
 
 .skillname{
