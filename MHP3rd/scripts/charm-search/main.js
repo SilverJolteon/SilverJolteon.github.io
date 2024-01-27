@@ -70,17 +70,17 @@ function search(){
 	
 	
 	var result = data.filter(item => 
-	    (skill_1_name === "Any" || item["Skill 1"] === skill_1_name) &&
-	    (skill_2_name === "Any" || item["Skill 2"] === skill_2_name) &&
-	    (slots === "Any" || item["Charm Slot"] === slots) &&
-	    (table === "Any" || item["Table No."] === table) &&
-	    (item["Skill 1"] !== item["Skill 2"] || (item["Skill 1"] === 'Any' && item["Skill 2"] === 'Any'))
+		(skill_1_name === "Any" || item["Skill 1"] === skill_1) &&
+		(skill_2_name === "Any" || item["Skill 2"] === skill_2) &&
+		(slots === "Any" || item["Charm Slot"] === slots) &&
+		(table === "Any" || item["Table No."] === table) &&
+	     (getSkill(item["Skill 1"])[0] !== getSkill(item["Skill 2"])[0])
 	);
 
 
 	document.getElementById("results").innerHTML = "";
 	if(result.length == 0) document.getElementById("results").innerHTML = "No results found";
-	for(var i = 0; i < max_results; i++){
+	for(var i = 0; i < Math.min(result.length, max_results); i++){
 		var n_slots = "---";
 		switch(result[i]["Charm Slot"]){
 			case "0": n_slots = "---"; break;
