@@ -50,6 +50,13 @@ document.head.appendChild(script);
 	<select class="dropdown-content" id="skill_1_name" onchange="clear_skill_1_num()">
 		<option value="Any">Any</option>
 	</select>
+	<select class="dropdown-content" id="skill_1_eq">
+		<option value="l"><</option>
+		<option value="le">≤</option>
+		<option value="e" selected>=</option>
+		<option value="ge">≥</option>
+		<option value="g">></option>
+	</select>
 	<input class="dropdown-content" type="number" size="3" maxlength="3" value="0" id="skill_1_num">
 </div></td>
 
@@ -66,6 +73,13 @@ document.head.appendChild(script);
 	<label class="skillname">Skill 2:</label>
 	<select class="dropdown-content" id="skill_2_name" onchange="clear_skill_2_num()">
 		<option value="Any">Any</option>
+	</select>
+	<select class="dropdown-content" id="skill_2_eq">
+		<option value="l"><</option>
+		<option value="le">≤</option>
+		<option value="e" selected>=</option>
+		<option value="ge">≥</option>
+		<option value="g">></option>
 	</select>
 	<input class="dropdown-content" type="number" size="3" maxlength="3" value="0" id="skill_2_num">
 </div></td>
