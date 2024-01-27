@@ -136,7 +136,6 @@ td:hover{
 }
 
 .footer{
-	position: fixed;
 	color: #6A6A6A;
 	text-shadow: 2px 0 0 #000000, -2px 0 0 #000000, 0 2px 0 #000000, 0 -2px 0 #000000, 1px 1px #000000, -1px -1px 0 #000000, 1px -1px 0 #000000, -1px 1px 0 #000000;
 	font-family: 'Rodin';

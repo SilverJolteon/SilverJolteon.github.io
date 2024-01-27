@@ -48,6 +48,7 @@ function get_data(){
 }
 
 function search(){
+	var max_results = document.getElementById("max_results").value;
 	var skill_1_name = document.getElementById("skill_1_name").value;
 	var skill_1_num = document.getElementById("skill_1_num").value;
 	var skill_2_name = document.getElementById("skill_2_name").value;
@@ -66,22 +67,20 @@ function search(){
 		case "OOO": slots = "3"; break;
 	}
 	
-	var flags = 0;
-	if(skill_1_name == "Any") flags++;
-	if(skill_2_name == "Any") flags++;
-	if(slots == "Any") flags++;
-	if(table == "Any") flags++;
-	if(flags >= 4) return 0;
+	
 	
 	var result = data.filter(item => 
-		(skill_1_name === "Any" || item["Skill 1"] === skill_1) &&
-		(skill_2_name === "Any" || item["Skill 2"] === skill_2) &&
-		(slots === "Any" || item["Charm Slot"] === slots) &&
-		(table === "Any" || item["Table No."] === table)
+	    (skill_1_name === "Any" || item["Skill 1"] === skill_1_name) &&
+	    (skill_2_name === "Any" || item["Skill 2"] === skill_2_name) &&
+	    (slots === "Any" || item["Charm Slot"] === slots) &&
+	    (table === "Any" || item["Table No."] === table) &&
+	    (item["Skill 1"] !== item["Skill 2"] || (item["Skill 1"] === 'Any' && item["Skill 2"] === 'Any'))
 	);
+
+
 	document.getElementById("results").innerHTML = "";
 	if(result.length == 0) document.getElementById("results").innerHTML = "No results found";
-	for(var i = 0; i < result.length; i++){
+	for(var i = 0; i < max_results; i++){
 		var n_slots = "---";
 		switch(result[i]["Charm Slot"]){
 			case "0": n_slots = "---"; break;
@@ -97,6 +96,7 @@ function search(){
 }
 
 function reset_inputs(){
+	document.getElementById("max_results").value = "100";
 	document.getElementById("skill_1_name").value = "Any";
 	document.getElementById("skill_1_num").value = "0";
 	document.getElementById("skill_2_name").value = "Any";

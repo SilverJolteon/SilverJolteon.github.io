@@ -40,6 +40,8 @@ document.head.appendChild(script);
 <div class="header">Charm Table Search</div>
 <div class="dropdown" id="loading">Loading charm data...</div>
 <div id="content" style="display: none;">
+
+</br><div class="dropdown">Max Results: <input class="dropdown-content" type="number" size="3" maxlength="3" value="100" id="max_results"></div>
 <table>
 <tr>
 
@@ -81,6 +83,7 @@ document.head.appendChild(script);
 <td onclick="reset_inputs()"><div class="dropdown button">Reset</div></td>
 
 </tr><tr>
+
 <td colspan="2" id="results-block" class="hidden"><div class="dropdown">
 	<div style="float: left; position: relative; left: 50%;">
 		<div id="results" style="margin: 10px auto; float: left; position: relative; left: -50%;"></div>
