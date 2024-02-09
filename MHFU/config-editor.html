@@ -81,7 +81,7 @@ code {
 pre{
     background-color: #31343f;
     border-radius: 15px;
-    width: 500px;
+    
 }
 
 li{
@@ -314,7 +314,7 @@ button:hover{
         }
     }
     
-    function reload(){
+    function init(){
         CONFIG_VERSION = "1.4.0"
         CONFIG_SIZE = 0x40;
         CONFIG_DATA = new Int8Array([
@@ -349,11 +349,11 @@ button:hover{
     }
     
     window.onload = function(){
-        reload();
+        init();
     }
     
 </script>
-<img class="header" src="https://raw.githubusercontent.com/SilverJolteon/SilverJolteon.github.io/master/MHFU/logo.png" onclick="reload()">
+<img class="header" src="https://raw.githubusercontent.com/SilverJolteon/SilverJolteon.github.io/master/MHFU/logo.png" onclick="init()">
 <center>
 
 
