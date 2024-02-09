@@ -1,24 +1,44 @@
 <html>
 <head>
-<title>FUC Online Config Editor</title>
-<link rel="icon" type="image/png" href="https://raw.githubusercontent.com/FUComplete/FUCTool/main/icon.ico">
+    <title>FUC Online Config Editor</title>
+    <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/FUComplete/FUCTool/main/icon.ico">
 </head>
 <body>
 <style>
+html {
+  overflow-y: scroll;
+}   
+
+.header{
+	width: 500px;
+	cursor: pointer;
+	padding: 10px; 
+	display: block;
+	margin-left: auto; 
+	margin-right: auto;
+}
+
 body{
-	background-color: #121212;
+	background-color: #27262b;
 	color: #FFFFFF;
 }
 
 h1{
-	font-family: -apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji";
+	font-family: system-ui, -apple-system, blinkmacsystemfont, "Segoe UI", roboto, "Helvetica Neue", arial, sans-serif, "Segoe UI Emoji";     
 	font-size: 20px;
 	line-height: 1.5;
 	word-wrap: break-word;
 }
 
+h3{
+	font-family: system-ui, -apple-system, blinkmacsystemfont, "Segoe UI", roboto, "Helvetica Neue", arial, sans-serif, "Segoe UI Emoji";
+	font-size: 18px;
+	line-height: 1.5;
+	word-wrap: break-word;
+}
+
 p{
-	font-family: -apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji";
+	font-family: system-ui, -apple-system, blinkmacsystemfont, "Segoe UI", roboto, "Helvetica Neue", arial, sans-serif, "Segoe UI Emoji";
 	font-size: 16px;
 	line-height: 1.5;
 	word-wrap: break-word;
@@ -29,23 +49,29 @@ a{
 	color: #2f81f7;
 }
 
-code{
-	padding: 0.2em 0.4em;
-	margin: 0;
-	font-size: 85%;
-	white-space: break-spaces;
-	background-color: #2A2A2A;
-	border-radius: 6px;
+code {
+	padding: 0.2em 0.15em;
+	font-weight: 400;
+	background-color: #31343f;
+	border: 1px solid #44434d;
+	border-radius: 4px;
+	font-family: "SFMono-Regular", menlo, consolas, monospace;
+	font-size: 0.75em;
+	line-height: 1.4;
+	box-sizing: border-box;
+	list-style: none;
+	color: #e6e1e8;
+	overflow-wrap: break-word;
 }
 
 pre{
-	background-color: #2A2A2A;
+	background-color: #31343f;
 	border-radius: 15px;
 	width: 500px;
 }
 
 li{
-	font-family: -apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji";
+	font-family: system-ui, -apple-system, blinkmacsystemfont, "Segoe UI", roboto, "Helvetica Neue", arial, sans-serif, "Segoe UI Emoji";
 	font-size: 16px;
 	line-height: 1.5;
 	word-wrap: break-word;
@@ -57,73 +83,295 @@ table{
 
 td{
 	max-width: 1012px;
-	background-color: #3A3A3A;
+	background-color: #4c4a54;
 	padding: 16px;
 	border-radius: 15px;
 }
 
 td:hover{
-	background-color: #4A4A4A;
+	background-color: #5a5863;
 }
 
+button{
+	padding: 10px;
+	padding-top:5px;
+	font-family: system-ui, -apple-system, blinkmacsystemfont, "Segoe UI", roboto, "Helvetica Neue", arial, sans-serif, "Segoe UI Emoji";
+}
+
+button:hover{
+	cursor: pointer;
+}
+
+.footer{
+	color: #959396;
+	font-family: 'Rodin';
+	font-size: 12px;
+	text-align: center;
+	bottom: 12px;
+	left: 50%;
+	transform: translateX(-50%);
+	text-decoration: none;
+}
 </style>
 <script>
-const CONFIG_SIZE = 0x20;
+	var CONFIG_VERSION = "1.4.0";
+	var CONFIG_SIZE = 0x40;
+	var CONFIG_DATA = new Int8Array([
+		0x31, 0x2E, 0x34, 0x2E, 0x30, 0x20, 0x45, 0x4E, 0x47, 0x20, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 
+		0x00, 0x01, 0x00, 0x00, 0x5F, 0x3F, 0x03, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 
+		0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 
+		0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
+	]);
+	var pre_1_4_0 = 0;
+	var enable_debug = 0;
 
-const CONFIG_DATA = new Int8Array([
-	0x84, 0x0A, 0x00, 0x00, 0x00, 0x01, 0x00, 0x00,
-	0x5F, 0x3F, 0x03, 0x00, 0x00, 0x00, 0x00, 0x00, 
-	0x31, 0x2E, 0x33, 0x2E, 0x31, 0x20, 0x00, 0x00, 
-	0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
-]);
+	function checkFile(data, offset_start, offset_end, version) {
+		return version === String.fromCharCode.apply(null, data.slice(offset_start, offset_end+1));
+	}
 
-var saveByteArray = (function () {
-    var a = document.createElement("a");
-    document.body.appendChild(a);
-    a.style = "display: none";
-    return function (data, name) {
-        var blob = new Blob(data, {type: "octet/stream"}),
-            url = window.URL.createObjectURL(blob);
-        a.href = url;
-        a.download = name;
-        a.click();
-        window.URL.revokeObjectURL(url);
-    };
-}());
+	function readConfig(event){
+		var file = event.target.files[0];
+		var reader = new FileReader();
+		
+		reader.onload = function(e){
+			var data = new Uint8Array(e.target.result);
+			
+			if(data.length === 0x20 && checkFile(data, 0x10, 0x15, "1.3.1 ")){
+				pre_1_4_0 = 1;
+				CONFIG_VERSION = "1.3.1";
+				CONFIG_size = 0x20;
+				CONFIG_DATA = data;
+				showSettings();
+			}
+			else if(data.length === 0x40 && checkFile(data, 0x00, 0x01, "1.")){
+				CONFIG_VERSION = String.fromCharCode.apply(null, data.slice(0x00, 0x05));;
+				CONFIG_SIZE = 0x40;
+				CONFIG_DATA = data;
+				showSettings();
+			}
+			else if(data.length === 0x40 && checkFile(data, 0x00, 0x05, "DEBUG ")){
+				enable_debug = 1;
+				CONFIG_VERSION = String.fromCharCode.apply(null, data.slice(0x00, 0x05));;
+				CONFIG_SIZE = 0x40;
+				CONFIG_DATA = data;
+				showSettings();
+			}
+			else document.getElementById("error").style.display = "block";
+		};
 
-function saveConfig(){
-	saveByteArray([CONFIG_DATA], 'config.bin');
-}
+		reader.readAsArrayBuffer(file);
+        
+	}
 
-function updateConfig(){
-	CONFIG_DATA[0x04] = parseInt(document.getElementById("file_replacer_path").value);
-	CONFIG_DATA[0x05] = parseInt(document.getElementById("save_region").value);
-	CONFIG_DATA[0x06] = parseInt(document.getElementById("true_raw").value);
-	CONFIG_DATA[0x07] = parseInt(document.getElementById("dos_audio").value);
-	CONFIG_DATA[0x08] = parseInt(document.getElementById("field_of_view").value);
-	CONFIG_DATA[0x0A] = parseInt(document.getElementById("starting_camera").value);
-	CONFIG_DATA[0x0B] = parseInt(document.getElementById("minimap_size").value);
-	CONFIG_DATA[0x0C] = parseInt(document.getElementById("hunting_horn").value);
-	CONFIG_DATA[0x0D] = parseInt(document.getElementById("early_kill").value);
-}
+	function loadConfig(){
+		document.getElementById("loadConfig").click();
+	}
 
-window.onload = function(){
-	document.getElementById("file_replacer_path").value = 0;
-	document.getElementById("save_region").value = 1;
-	document.getElementById("true_raw").value = 0;
-	document.getElementById("dos_audio").value = 0;
-	document.getElementById("field_of_view").value = 95;
-	document.getElementById("starting_camera").value = 3;
-	document.getElementById("minimap_size").value = 0;
-	document.getElementById("hunting_horn").value = 0;
-	document.getElementById("early_kill").value = 0;
-}
+	function generateConfig(){
+		showSettings();
+	}
+	
+	function toggleHidden(){
+		var old_settings = document.querySelectorAll(".old_settings")
+		var new_settings = document.querySelectorAll(".new_settings")
+		if(pre_1_4_0){
+			for(var i = 0; i < old_settings.length; i++) old_settings[i].style.display = "table-cell";
+			for(var i = 0; i < new_settings.length; i++) new_settings[i].style.display = "none";
+		}
+		else{
+			for(var i = 0; i < old_settings.length; i++) old_settings[i].style.display = "none";
+			for(var i = 0; i < new_settings.length; i++) new_settings[i].style.display = "table-cell";
+		}
+	}
+
+	function showSettings(){
+		document.getElementById("error").style.display = "none";
+		if(pre_1_4_0){
+			document.getElementById("config_version").value = CONFIG_VERSION.toString();
+			document.getElementById("file_replacer_path").value = CONFIG_DATA[0x04].toString();
+			document.getElementById("save_region").value = CONFIG_DATA[0x05].toString();
+			document.getElementById("true_raw").value = CONFIG_DATA[0x06].toString();
+			document.getElementById("dos_audio").value = CONFIG_DATA[0x07].toString();
+			document.getElementById("field_of_view").value = CONFIG_DATA[0x08].toString();
+			document.getElementById("starting_camera").value = CONFIG_DATA[0x0A].toString();
+			document.getElementById("minimap_size").value = CONFIG_DATA[0x0B].toString();
+			document.getElementById("hunting_horn").value = CONFIG_DATA[0x0C].toString();
+			document.getElementById("early_kill").value = CONFIG_DATA[0x0D].toString();
+			document.getElementById("full_chest_guildhall").value = "1";
+			document.getElementById("guildhall_drink_buff").value = "1";
+			toggleHidden();
+		}
+		else{
+			if(enable_debug){
+				var dropdown = document.getElementById("config_version");
+				var option = document.createElement("option");
+				option.textContent = "DEBUG";
+				option.value = "DEBUG";
+				dropdown.appendChild(option);
+			}
+			document.getElementById("config_version").value = CONFIG_VERSION.toString();
+			document.getElementById("file_replacer_path").value = CONFIG_DATA[0x10].toString();
+			document.getElementById("save_region").value = CONFIG_DATA[0x11].toString();
+			document.getElementById("true_raw").value = CONFIG_DATA[0x12].toString();
+			document.getElementById("dos_audio").value = CONFIG_DATA[0x13].toString();
+			document.getElementById("field_of_view").value = CONFIG_DATA[0x14].toString();
+			document.getElementById("starting_camera").value = CONFIG_DATA[0x16].toString();
+			document.getElementById("minimap_size").value = CONFIG_DATA[0x17].toString();
+			document.getElementById("hunting_horn").value = CONFIG_DATA[0x18].toString();
+			document.getElementById("early_kill").value = CONFIG_DATA[0x19].toString();
+			document.getElementById("full_chest_guildhall").value = CONFIG_DATA[0x1A].toString();
+			document.getElementById("guildhall_drink_buff").value = CONFIG_DATA[0x1B].toString();
+			toggleHidden();
+		}
+		document.getElementById("buttons").style.display = "none";
+		document.getElementById("settings").style.display = "block";
+	}
+	
+	var saveByteArray = (function (){
+	    var a = document.createElement("a");
+	    document.body.appendChild(a);
+	    a.style = "display: none";
+	    return function (data, name){
+		   var blob = new Blob(data, {type: "octet/stream"}),
+			  url = window.URL.createObjectURL(blob);
+		   a.href = url;
+		   a.download = name;
+		   a.click();
+		   window.URL.revokeObjectURL(url);
+	    };
+	}());
+	
+	function saveConfig(){
+		if(pre_1_4_0) saveByteArray([CONFIG_DATA], "config.bin");
+		else saveByteArray([CONFIG_DATA], "CONFIG.BIN");
+	}
+	
+	function str2bytes(text){
+		return text.split('').map(char => char.charCodeAt(0));
+	}
+	
+	function updateConfig(){
+		CONFIG_VERSION = document.getElementById("config_version").value;
+		if(CONFIG_VERSION === "1.3.1"){
+			pre_1_4_0 = 1;
+			CONFIG_DATA = new Int8Array([
+				0x84, 0x0A, 0x00, 0x00, 0x00, 0x01, 0x00, 0x00,
+				0x5F, 0x3F, 0x03, 0x00, 0x00, 0x00, 0x00, 0x00, 
+				0x31, 0x2E, 0x33, 0x2E, 0x31, 0x20, 0x00, 0x00, 
+				0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
+			]);
+			toggleHidden();
+		}
+		else{
+			pre_1_4_0 = 0;
+			CONFIG_DATA = new Int8Array([
+				0x31, 0x2E, 0x34, 0x2E, 0x30, 0x20, 0x45, 0x4E, 0x47, 0x20, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 
+				0x00, 0x01, 0x00, 0x00, 0x5F, 0x3F, 0x03, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 
+				0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 
+				0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
+			]);
+			toggleHidden();
+		}
+		if(pre_1_4_0){
+			CONFIG_DATA[0x04] = parseInt(document.getElementById("file_replacer_path").value);
+			CONFIG_DATA[0x05] = parseInt(document.getElementById("save_region").value);
+			CONFIG_DATA[0x06] = parseInt(document.getElementById("true_raw").value);
+			CONFIG_DATA[0x07] = parseInt(document.getElementById("dos_audio").value);
+			CONFIG_DATA[0x08] = parseInt(document.getElementById("field_of_view").value);
+			CONFIG_DATA[0x0A] = parseInt(document.getElementById("starting_camera").value);
+			CONFIG_DATA[0x0B] = parseInt(document.getElementById("minimap_size").value);
+			CONFIG_DATA[0x0C] = parseInt(document.getElementById("hunting_horn").value);
+			CONFIG_DATA[0x0D] = parseInt(document.getElementById("early_kill").value);
+		}
+		else{
+			var version_data = str2bytes(CONFIG_VERSION);
+			for(var i = 0; i < version_data.length; i++) CONFIG_DATA[i] = version_data[i];
+			CONFIG_DATA[0x10] = parseInt(document.getElementById("file_replacer_path").value);
+			CONFIG_DATA[0x11] = parseInt(document.getElementById("save_region").value);
+			CONFIG_DATA[0x12] = parseInt(document.getElementById("true_raw").value);
+			CONFIG_DATA[0x13] = parseInt(document.getElementById("dos_audio").value);
+			CONFIG_DATA[0x14] = parseInt(document.getElementById("field_of_view").value);
+			CONFIG_DATA[0x16] = parseInt(document.getElementById("starting_camera").value);
+			CONFIG_DATA[0x17] = parseInt(document.getElementById("minimap_size").value);
+			CONFIG_DATA[0x18] = parseInt(document.getElementById("hunting_horn").value);
+			CONFIG_DATA[0x19] = parseInt(document.getElementById("early_kill").value);
+			CONFIG_DATA[0x1A] = parseInt(document.getElementById("full_chest_guildhall").value);
+			CONFIG_DATA[0x1B] = parseInt(document.getElementById("guildhall_drink_buff").value);
+		}
+	}
+	
+	function reload(){
+		CONFIG_VERSION = "1.4.0"
+		CONFIG_SIZE = 0x40;
+		CONFIG_DATA = new Int8Array([
+			0x31, 0x2E, 0x34, 0x2E, 0x30, 0x20, 0x45, 0x4E, 0x47, 0x20, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 
+			0x00, 0x01, 0x00, 0x00, 0x5F, 0x3F, 0x03, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 
+			0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 
+			0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
+		]);
+		pre_1_4_0 = 0;
+		enable_debug = 0;
+		var dropdown = document.getElementById("config_version");
+		for(var i = 0; i < dropdown.length;  i++){
+			if (dropdown.options[i].value == "DEBUG"){
+				dropdown.remove(i);
+			}
+		}
+		document.getElementById("config_version").remove(3);
+		document.getElementById("config_version").value = 140;
+		document.getElementById("file_replacer_path").value = 0;
+		document.getElementById("save_region").value = 1;
+		document.getElementById("true_raw").value = 0;
+		document.getElementById("dos_audio").value = 0;
+		document.getElementById("field_of_view").value = 95;
+		document.getElementById("starting_camera").value = 3;
+		document.getElementById("minimap_size").value = 0;
+		document.getElementById("hunting_horn").value = 0;
+		document.getElementById("early_kill").value = 0;
+		document.getElementById("full_chest_guildhall").value = 0;
+		document.getElementById("guildhall_drink_buff").value = 0;
+		document.getElementById("buttons").style.display = "block";
+		document.getElementById("settings").style.display = "none";
+	}
+	
+	window.onload = function(){
+		reload();
+	}
+	
 </script>
+<img class="header" src="https://raw.githubusercontent.com/SilverJolteon/SilverJolteon.github.io/master/MHFU/logo.png" onclick="reload()">
 <center>
+
+
+
+<div id="buttons">
+<table><tr><td>
+<button onclick="loadConfig()" style="height: 32px;"><b>Load CONFIG.BIN</b></button>
+<button onclick="generateConfig()" style="height: 32px;"><b>Generate new CONFIG.BIN</b></button>
+</td></tr></table>
+
+<input type="file" id="loadConfig" accept=".BIN" style="display:none;" onchange="readConfig(event)">
+</div>
+
+<div id="error" style="display:none;"><h3 style='color: red'>Not a valid CONFIG.BIN!</h3></div>
+
+<div id="settings" style="display:none;">
 
 <table><tr>
 
 <td>
+	<h1>Version</h1>
+</td>
+<td><center>
+	<select onchange="updateConfig()" id="config_version">
+		<option value="1.3.1">1.3.1</option>
+		<option value="1.4.0" selected>1.4.0</option>
+	</select>
+</center></td>
+
+</tr><tr>
+
+<td class="old_settings">
 	<h1>File Replacer Path</h1>
 	<p>Sets where <code>nativePSP</code> should be read from, either <code>DISC0</code> or <code>MS0</code>.</p>
 	<p>When set to <code>DISC0</code>, it loads <code>nativePSP</code> from the ISO. Currently the only files internally are Dos battle themes. When set to <code>MS0</code>, it loads <code>nativePSP</code> from the <code>ms0:/FUC/</code> directory.</p>
@@ -146,6 +394,12 @@ window.onload = function(){
 	│
 	└───PSP_GAME
 	</pre>
+	<p>For more information on how to use this feature fully, please see the <a target="_blank" href="https://github.com/FUComplete/FUCTool#file-replacer">File Replacer</a> section.</p>
+</td>
+<td class="new_settings">
+	<h1>File Replacer Path</h1>
+	<p>Sets where <code>nativePSP</code> should be read from, either <code>DISC0</code> or <code>MS0</code>.</p>
+	<p>When set to <code>DISC0</code>, it loads <code>nativePSP</code> from the ISO. When set to <code>MS0</code>, it loads <code>nativePSP</code> from the </br><code>ms0:/PSP/SAVEDATA/FUCDAT/</code> directory.</p>
 	<p>For more information on how to use this feature fully, please see the <a target="_blank" href="https://github.com/FUComplete/FUCTool#file-replacer">File Replacer</a> section.</p>
 </td>
 <td><center>
@@ -398,10 +652,49 @@ window.onload = function(){
 
 </tr><tr>
 
-<tr><td colspan="2"><center><button onclick="saveConfig()" style="width: 100px; height: 32px;">Save</button></center></td></tr>
+<td class="new_settings">
+	<h1>Guildhall Full Chest (Offline)</h1>
+	<p>When enabled, allows changing equipment in the Guildhall item chest.</p>
+	<p style="color: red"><strong>Note:</strong> This only works <strong>OFFLINE</strong>.</p>
+	<p><strong>Default is <code>Disable</code></strong></p>
+</td>
+
+<td class="new_settings"><center>
+	<select onchange="updateConfig()" id="full_chest_guildhall">
+		<option value="0" selected>Disable</option>
+		<option value="1">Enable</option>
+	</select>
+</center></td>
+
+</tr><tr>
+
+<td class="new_settings">
+	<h1>Guildhall Drink Buff</h1>
+	<p>When enabled, can get a quick Health and Stamina boost without leaving the Gathering Hall, based on how many Felyne Chefs you have working in your kitchen.</p>
+	<ul dir="auto">
+		<li>For each active chef in your kitchen:<br>Receive +10 max HP (max +50 at 5 chefs).</li>
+		<li>For 1-4 active chefs in your kitchen:<br>Receive +25 max Stamina (max +50 at 5 chefs).</li>
+	</ul>
+	<p>Press Circle to activate while sitting at the table.</p>
+	<p><strong>Default is <code>Disable</code></strong></p>
+</td>
+
+<td class="new_settings"><center>
+	<select onchange="updateConfig()" id="guildhall_drink_buff">
+		<option value="0" selected>Disable</option>
+		<option value="1">Enable</option>
+	</select>
+</center></td>
+</div>
+
+</tr><tr>
+
+<tr><td colspan="2"><center><button onclick="saveConfig()" style="width: 100px; height: 32px;"><b>Save</b></button></center></td></tr>
 
 </tr></table>
 
+</div>
+<a class="footer">&copy; </a><a class="footer" target="_blank" href="https://twitter.com/SilverJolteon">SilverJolteon</a><a class="footer">, </a><a class="footer" target="_blank" href="https://github.com/IncognitoMan"> IncognitoMan</a>
 </center>
 </body>
 </html>
