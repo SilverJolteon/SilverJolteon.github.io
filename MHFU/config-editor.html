@@ -1,7 +1,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=0.6">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>FUC Online Config Editor</title>
 <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/FUComplete/FUCTool/main/icon.ico">
 </head>
@@ -12,12 +12,12 @@ html {
 }   
 
 .header{
-    width: 500px;
-    cursor: pointer;
-    padding: 10px; 
-    display: block;
-    margin-left: auto; 
-    margin-right: auto;
+	max-width: 90%;
+	cursor: pointer;
+	padding: 10px;
+	display: block;
+	margin-left: auto; 
+	margin-right: auto;
 }
 
 body{
@@ -29,11 +29,12 @@ body{
     color: #FFFFFF;
 }
 
-h1{
+label{
     font-family: system-ui, -apple-system, blinkmacsystemfont, "Segoe UI", roboto, "Helvetica Neue", arial, sans-serif, "Segoe UI Emoji";     
     font-size: 20px;
     line-height: 1.5;
     word-wrap: break-word;
+    font-weight: bold;
 }
 
 h3{
@@ -50,12 +51,17 @@ p{
     word-wrap: break-word;
 }
 
+select{
+	float: right;
+	position: relative;
+}
+
 .outline{
-    text-shadow:
-    -1px -1px 0 #700000,
-    1px -1px 0 #700000,
-    -1px 1px 0 #700000,
-    1px 1px 0 #700000; 
+	color: #ffa8a8;
+	text-shadow: 0px 0px 2px black;
+	background-color: #27262b;
+	padding: 2px;
+	border-radius: 2px;
 }
 
 a{
@@ -81,7 +87,7 @@ code {
 pre{
     background-color: #31343f;
     border-radius: 15px;
-    
+    font-size: 10px;
 }
 
 li{
@@ -356,12 +362,10 @@ button:hover{
 <img class="header" src="https://raw.githubusercontent.com/SilverJolteon/SilverJolteon.github.io/master/MHFU/logo.png" onclick="init()">
 <center>
 
-
-
 <div id="buttons">
 <table><tr><td>
 <button onclick="loadConfig()" style="height: 32px;"><b>Load CONFIG.BIN</b></button>
-<button onclick="generateConfig()" style="height: 32px;"><b>Generate new CONFIG.BIN</b></button>
+<button onclick="generateConfig()" style="height: 32px;"><b>New CONFIG.BIN</b></button>
 </td></tr></table>
 
 <input type="file" id="loadConfig" accept=".BIN" style="display:none;" onchange="readConfig(event)">
@@ -374,19 +378,21 @@ button:hover{
 <table><tr>
 
 <td>
-    <h1>Version</h1>
-</td>
-<td><center>
+    <label>Version</label>
     <select onchange="updateConfig()" id="config_version">
         <option value="1.3.1">1.3.1</option>
         <option value="1.4.0" selected>1.4.0</option>
     </select>
-</center></td>
+</td>
 
 </tr><tr>
 
 <td class="old_settings">
-    <h1>File Replacer Path</h1>
+    <label>File Replacer Path</label>
+    <select onchange="updateConfig()" id="file_replacer_path">
+        <option value="0" selected>DISC0</option>
+        <option value="1">MS0</option>
+    </select>
     <p>Sets where <code>nativePSP</code> should be read from, either <code>DISC0</code> or <code>MS0</code>.</p>
     <p>When set to <code>DISC0</code>, it loads <code>nativePSP</code> from the ISO. Currently the only files internally are Dos battle themes. When set to <code>MS0</code>, it loads <code>nativePSP</code> from the <code>ms0:/FUC/</code> directory.</p>
     <p><strong>Note:</strong> if you set it to <code>MS0</code>, please extract the numbered files from the ISO and place them in the <code>ms0:/FUC/nativePSP</code> directory.</p>
@@ -411,28 +417,25 @@ button:hover{
     <p>For more information on how to use this feature fully, please see the <a target="_blank" href="https://github.com/FUComplete/FUCTool#file-replacer">File Replacer</a> section.</p>
 </td>
 <td class="new_settings">
-    <h1>File Replacer</h1>
-    <p>Allows loading of modded files from <code>NATIVEPSP</code>.</p>
-    <p>This is also toggleable in-game from Main Menu under Options.</p>
-    <p>For more information on how to use this feature fully, please see the <a target="_blank" href="https://github.com/FUComplete/FUCTool#file-replacer">File Replacer</a> section.</p>
-</td>
-<td class="old_settings"><center>
-    <select onchange="updateConfig()" id="file_replacer_path">
-        <option value="0" selected>DISC0</option>
-        <option value="1">MS0</option>
-    </select>
-</center></td>
-<td class="new_settings"><center>
+    <label>File Replacer</label>
     <select onchange="updateConfig()" id="file_replacer_path">
         <option value="0" selected>Disable</option>
         <option value="1">Enable</option>
     </select>
-</center></td>
-
+    <p>Allows loading of modded files from <code>NATIVEPSP</code>.</p>
+    <p>This is also toggleable in-game from Main Menu under Options.</p>
+    <p>For more information on how to use this feature fully, please see the <a target="_blank" href="https://github.com/FUComplete/FUCTool#file-replacer">File Replacer</a> section.</p>
+</td>
+    
 </tr><tr>
 
 <td>
-    <h1>Save Region</h1>
+    <label>Save Region</label>
+    <select onchange="updateConfig()" id="save_region">
+        <option value="0">ULJM05500</option>
+        <option value="1" selected>ULUS10391</option>
+        <option value="2">ULES01213</option>
+    </select>
     <p>Sets what region save should be loaded, so you can continue using your existing save with the patch.</p>
     <ul dir="auto">
         <li><code>ULJM05500</code> - Monster Hunter Portable 2nd G (JP) save</li>
@@ -442,26 +445,22 @@ button:hover{
     <p><strong>Default is <code>ULUS10391</code></strong></p>
 </td>
 
-<td><center>
-    <select onchange="updateConfig()" id="save_region">
-        <option value="0">ULJM05500</option>
-        <option value="1" selected>ULUS10391</option>
-        <option value="2">ULES01213</option>
-    </select>
-</center></td>
-
 </tr><tr>
 
 <td>
-    <h1>True Raw/Ele/Status Display</h1>
+    <label>True Raw/Ele/Status Display</label>
+    <select onchange="updateConfig()" id="true_raw">
+        <option value="0" selected>Disable</option>
+        <option value="1">Enable</option>
+    </select>
     <p>"Debloats" the modifiers on weapons to display their true raw, element and status values.</p>
     <table style="border-spacing: 0;">
         <tr>
-            <th align="center" width="300px">
+            <th align="center" width="50%">
                 <a target="_blank" href="https://user-images.githubusercontent.com/5410031/222886750-84076286-73e1-4345-85f2-74ca51c48129.png">
                     <img src="https://user-images.githubusercontent.com/5410031/222886750-84076286-73e1-4345-85f2-74ca51c48129.png" width="95%">
                 </a></th>
-            <th align="center" width="300px">
+            <th align="center" width="50%">
                 <a target="_blank" href="https://user-images.githubusercontent.com/5410031/222886753-37f37ed4-e0b8-4cb0-b3f6-be4db872f57e.png">
                     <img src="https://user-images.githubusercontent.com/5410031/222886753-37f37ed4-e0b8-4cb0-b3f6-be4db872f57e.png" width="95%">
                 </a></th>
@@ -475,17 +474,14 @@ button:hover{
     <p><strong>Default is <code>Disable</code></strong></p>
 </td>
 
-<td><center>
-    <select onchange="updateConfig()" id="true_raw">
+</tr><tr>    
+
+<td>
+    <label>Dos Audio</label>
+    <select onchange="updateConfig()" id="dos_audio">
         <option value="0" selected>Disable</option>
         <option value="1">Enable</option>
     </select>
-</center></td>
-
-</tr><tr>
-
-<td>
-    <h1>Dos Audio</h1>
     <p>Replaces various battle themes with their Dos counterparts. These themes are:</p>
     <ul>
         <li><a target="_blank" href="https://youtu.be/wP1Tiq74gWs" rel="nofollow">Jungle</a></li>
@@ -498,40 +494,40 @@ button:hover{
     <p><strong>Default is <code>Disable</code></strong></p>
 </td>
 
-<td><center>
-    <select onchange="updateConfig()" id="dos_audio">
-        <option value="0" selected>Disable</option>
-        <option value="1">Enable</option>
-    </select>
-</center></td>
-
 </tr><tr>
 
 <td>
-    <h1>Field of View</h1>
+    <label>Field of View</label>
+    <select onchange="updateConfig()" id="field_of_view">
+        <option value="95" selected>Default</option>
+        <option value="111">Minor</option>
+        <option value="127">Moderate</option>
+        <option value="143">Extreme</option>
+    </select>
     <p>Allows adjusting how much of the games "world" you can see.</p>
     <table style="border-spacing: 0;">
         <tr>
-            <th align="center" width="150px">
+            <th align="center" width="50%">
                 <a target="_blank" href="https://user-images.githubusercontent.com/5410031/222886598-b0b1aa84-ba61-4a57-a19c-e567869e0065.png">
                     <img src="https://user-images.githubusercontent.com/5410031/222886598-b0b1aa84-ba61-4a57-a19c-e567869e0065.png" width="95%">
                 </a></th>
-            <th align="center" width="150px">
+            <th align="center" width="50%">
                 <a target="_blank" href="https://user-images.githubusercontent.com/5410031/222886632-1df51f5c-d92f-46fb-a5d4-9dbf831d753f.png">
                     <img src="https://user-images.githubusercontent.com/5410031/222886632-1df51f5c-d92f-46fb-a5d4-9dbf831d753f.png" width="95%">
                 </a></th>
-            <th align="center" width="150px">
+		  </tr><tr>
+		  <th align="center">Default</th>
+            <th align="center">Minor</th>
+		  </tr><tr>
+            <th align="center" width="50%">
                 <a target="_blank" href="https://user-images.githubusercontent.com/5410031/222886645-173cdf74-96b3-4b53-87f0-05cfabef1105.png">
                     <img src="https://user-images.githubusercontent.com/5410031/222886645-173cdf74-96b3-4b53-87f0-05cfabef1105.png" width="95%">
                 </a></th>
-            <th align="center" width="150px">
+            <th align="center" width="50%">
                 <a target="_blank" href="https://user-images.githubusercontent.com/5410031/222886655-d1dbcd29-0991-49b8-b208-ed79b6f83804.png">
                     <img src="https://user-images.githubusercontent.com/5410031/222886655-d1dbcd29-0991-49b8-b208-ed79b6f83804.png" width="95%">
                 </a></th>
-        </tr>
-        <tr>
-            <th align="center">Default</th>
-            <th align="center">Minor</th>
+        </tr><tr>
             <th align="center">Moderate</th>
             <th align="center">Extreme</th>
         </tr>
@@ -539,55 +535,10 @@ button:hover{
     <p><strong>Default is <code>Default</code></strong></p>
 </td>
 
-<td><center>
-    <select onchange="updateConfig()" id="field_of_view">
-        <option value="95" selected>Default</option>
-        <option value="111">Minor</option>
-        <option value="127">Moderate</option>
-        <option value="143">Extreme</option>
-    </select>
-</center></td>
-
 </tr><tr>
 
 <td>
-    <h1>Starting Vertical Camera Position</h1>
-    <p>Sets the starting vertical camera position when you embark on a quest.</p>
-    <table style="border-spacing: 0;">
-        <tr>
-            <th align="center" width="120px">
-                <a target="_blank" href="https://user-images.githubusercontent.com/5410031/222885440-e3673dfd-638f-4466-96b9-454848f9b5ec.png">
-                    <img src="https://user-images.githubusercontent.com/5410031/222885440-e3673dfd-638f-4466-96b9-454848f9b5ec.png" width="95%">
-                </a></th>
-            <th align="center" width="120px">
-                <a target="_blank" href="https://user-images.githubusercontent.com/5410031/222885447-0d2cb33d-6b9c-48f4-9b1e-fffc57a07581.png">
-                    <img src="https://user-images.githubusercontent.com/5410031/222885447-0d2cb33d-6b9c-48f4-9b1e-fffc57a07581.png" width="95%">
-                </a></th>
-            <th align="center" width="120px">
-                <a target="_blank" href="https://user-images.githubusercontent.com/5410031/222885451-08607fa6-8e17-40ca-b2dd-1e878aac45e6.png">
-                    <img src="https://user-images.githubusercontent.com/5410031/222885451-08607fa6-8e17-40ca-b2dd-1e878aac45e6.png" width="95%">
-                </a></th>
-            <th align="center" width="120px">
-                <a target="_blank" href="https://user-images.githubusercontent.com/5410031/222885457-bd514106-25be-4fe7-8c94-5954f68a0b51.png">
-                    <img src="https://user-images.githubusercontent.com/5410031/222885457-bd514106-25be-4fe7-8c94-5954f68a0b51.png" width="95%">
-                </a></th>
-            <th align="center" width="120px">
-                <a target="_blank" href="https://user-images.githubusercontent.com/5410031/222885461-9147372c-ceb6-43ce-a327-babc7d65c777.png">
-                    <img src="https://user-images.githubusercontent.com/5410031/222885461-9147372c-ceb6-43ce-a327-babc7d65c777.png" width="95%">
-                </a></th>
-        </tr>
-        <tr>
-            <th align="center">1</th>
-            <th align="center">2</th>
-            <th align="center">3</th>
-            <th align="center">4</th>
-            <th align="center">5</th>
-        </tr>
-    </table>
-    <p><strong>Default is <code>4 (Default)</code></strong></p>
-</td>
-
-<td><center>
+    <label>Starting Vertical Camera Position</label>
     <select onchange="updateConfig()" id="starting_camera">
         <option value="0">1 (Lowest)</option>
         <option value="1">2</option>
@@ -595,24 +546,65 @@ button:hover{
         <option value="3" selected>4 (Default)</option>
         <option value="4">5 (Highest)</option>
     </select>
-</center></td>
+    <p>Sets the starting vertical camera position when you embark on a quest.</p>
+    <table style="border-spacing: 0;">
+        <tr>
+            <th align="center" width="50%">
+                <a target="_blank" href="https://user-images.githubusercontent.com/5410031/222885440-e3673dfd-638f-4466-96b9-454848f9b5ec.png">
+                    <img src="https://user-images.githubusercontent.com/5410031/222885440-e3673dfd-638f-4466-96b9-454848f9b5ec.png" width="95%">
+                </a></th>
+            <th align="center" width="50%">
+                <a target="_blank" href="https://user-images.githubusercontent.com/5410031/222885447-0d2cb33d-6b9c-48f4-9b1e-fffc57a07581.png">
+                    <img src="https://user-images.githubusercontent.com/5410031/222885447-0d2cb33d-6b9c-48f4-9b1e-fffc57a07581.png" width="95%">
+                </a></th>
+		  </tr><tr>
+		  <th align="center">1</th>
+            <th align="center">2</th>
+		  </tr><tr>
+            <th align="center" width="50%">
+                <a target="_blank" href="https://user-images.githubusercontent.com/5410031/222885451-08607fa6-8e17-40ca-b2dd-1e878aac45e6.png">
+                    <img src="https://user-images.githubusercontent.com/5410031/222885451-08607fa6-8e17-40ca-b2dd-1e878aac45e6.png" width="95%">
+                </a></th>
+            <th align="center" width="50%">
+                <a target="_blank" href="https://user-images.githubusercontent.com/5410031/222885457-bd514106-25be-4fe7-8c94-5954f68a0b51.png">
+                    <img src="https://user-images.githubusercontent.com/5410031/222885457-bd514106-25be-4fe7-8c94-5954f68a0b51.png" width="95%">
+                </a></th>
+		  </tr><tr>
+		  <th align="center">3</th>
+            <th align="center">4</th>
+		  </tr><tr>
+            <th align="center" width="50%">
+                <a target="_blank" href="https://user-images.githubusercontent.com/5410031/222885461-9147372c-ceb6-43ce-a327-babc7d65c777.png">
+                    <img src="https://user-images.githubusercontent.com/5410031/222885461-9147372c-ceb6-43ce-a327-babc7d65c777.png" width="95%">
+                </a></th>
+        </tr><tr>
+            <th align="center">5</th>
+        </tr>
+    </table>
+    <p><strong>Default is <code>4 (Default)</code></strong></p>
+</td>
 
 </tr><tr>
 
 <td>
-    <h1>Minimap Size</h1>
+    <label>Minimap Size</label>
+    <select onchange="updateConfig()" id="minimap_size">
+        <option value="0" selected>Default</option>
+        <option value="1">75%</option>
+        <option value="2">50%</option>
+    </select>
     <p>Sets a scaling modifier for minimap size. If either <code>75%</code> or <code>50%</code> are selected the loading screen map is also scaled down.</p>
     <table style="border-spacing: 0;">
         <tr>
-            <th align="center" width="200px">
+            <th align="center" width="33%">
                 <a target="_blank" href="https://user-images.githubusercontent.com/5410031/222886134-5a1496b0-3dfc-422d-958d-fc8696caff16.png">
                     <img src="https://user-images.githubusercontent.com/5410031/222886134-5a1496b0-3dfc-422d-958d-fc8696caff16.png" width="95%">
                 </a></th>
-            <th align="center" width="200px">
+            <th align="center" width="33%">
                 <a target="_blank" href="https://user-images.githubusercontent.com/5410031/222886139-a050a54c-ba83-4d91-bd13-9ac3b74ccd90.png">
                     <img src="https://user-images.githubusercontent.com/5410031/222886139-a050a54c-ba83-4d91-bd13-9ac3b74ccd90.png" width="95%">
                 </a></th>
-            <th align="center" width="200px">
+            <th align="center" width="33%">
                 <a target="_blank" href="https://user-images.githubusercontent.com/5410031/222886143-4abfa86e-673b-4876-8214-03382a696f37.png">
                     <img src="https://user-images.githubusercontent.com/5410031/222886143-4abfa86e-673b-4876-8214-03382a696f37.png" width="95%">
                 </a></th>
@@ -626,18 +618,14 @@ button:hover{
     <p><strong>Default is <code>Default</code></strong></p>
 </td>
 
-<td><center>
-    <select onchange="updateConfig()" id="minimap_size">
-        <option value="0" selected>Default</option>
-        <option value="1">75%</option>
-        <option value="2">50%</option>
-    </select>
-</center></td>
-
 </tr><tr>
 
 <td>
-    <h1>Hunting Horn Tweak</h1>
+    <label>Hunting Horn Tweak</label>
+    <select onchange="updateConfig()" id="hunting_horn">
+        <option value="0" selected>Disable</option>
+        <option value="1">Enable</option>
+    </select>
     <p>Enable/Disable modified Hunting Horn mechanics. When disabled, you have vanilla hunting horn values/mechanics however when enabled you have:</p>
     <ul>
         <li>Note mechanics work similar to Frontier, where notes only clear if you sheath your weapon or have a forced sheathed interaction.</li>
@@ -647,49 +635,40 @@ button:hover{
     <p><strong>Default is <code>Disable</code></strong></p>
 </td>
 
-<td><center>
-    <select onchange="updateConfig()" id="hunting_horn">
-        <option value="0" selected>Disable</option>
-        <option value="1">Enable</option>
-    </select>
-</center></td>
-
 </tr><tr>
 
 <td>
-    <h1>Early Kill Lao/Shen (Fortress)</h1>
-    <p>When enabled, Lao-Shan Lung, Ash Lao-Shan Lung, or Shen Gaoren on Fortress have their HP thresholds removed, allowing for a pre-area 5 kill.</p>
-    <p class="outline" style="color: red"><strong>Note:</strong> If you play with unpatched players and want the early kill, make sure you or another patched player are the first to enter the area. This is because area host is in control of HP mechanics.</p>
-    <p><strong>Default is <code>Disable</code></strong></p>
-</td>
-
-<td><center>
+    <label>Early Kill Lao/Shen (Fortress)</label>
     <select onchange="updateConfig()" id="early_kill">
         <option value="0" selected>Disable</option>
         <option value="1">Enable</option>
     </select>
-</center></td>
+    <p>When enabled, Lao-Shan Lung, Ash Lao-Shan Lung, or Shen Gaoren on Fortress have their HP thresholds removed, allowing for a pre-area 5 kill.</p>
+    <p class="outline"><strong>Note:</strong> If you play with unpatched players and want the early kill, make sure you or another patched player are the first to enter the area. This is because area host is in control of HP mechanics.</p>
+    <p><strong>Default is <code>Disable</code></strong></p>
+</td>
 
 </tr><tr>
 
 <td class="new_settings">
-    <h1>Guildhall Full Chest (Offline)</h1>
-    <p>When enabled, allows changing equipment in the Guildhall item chest.</p>
-    <p class="outline" style="color: red"><strong>Note:</strong> This only works <strong>OFFLINE</strong>.</p>
-    <p><strong>Default is <code>Disable</code></strong></p>
-</td>
-
-<td class="new_settings"><center>
+    <label>Guildhall Full Chest (Offline)</label>
     <select onchange="updateConfig()" id="full_chest_guildhall">
         <option value="0" selected>Disable</option>
         <option value="1">Enable</option>
     </select>
-</center></td>
+    <p>When enabled, allows changing equipment in the Guildhall item chest.</p>
+    <p class="outline"><strong>Note:</strong> This only works <strong>OFFLINE</strong>.</p>
+    <p><strong>Default is <code>Disable</code></strong></p>
+</td>
 
 </tr><tr>
 
 <td class="new_settings">
-    <h1>Guildhall Drink Buff</h1>
+    <label>Guildhall Drink Buff</label>
+    <select onchange="updateConfig()" id="guildhall_drink_buff">
+        <option value="0" selected>Disable</option>
+        <option value="1">Enable</option>
+    </select>
     <p>When enabled, can get a quick Health and Stamina boost without leaving the Gathering Hall, based on how many Felyne Chefs you have working in your kitchen.</p>
     <ul dir="auto">
         <li>For each active chef in your kitchen:<br>Receive +10 max HP (max +50 at 5 chefs).</li>
@@ -699,17 +678,9 @@ button:hover{
     <p><strong>Default is <code>Disable</code></strong></p>
 </td>
 
-<td class="new_settings"><center>
-    <select onchange="updateConfig()" id="guildhall_drink_buff">
-        <option value="0" selected>Disable</option>
-        <option value="1">Enable</option>
-    </select>
-</center></td>
-</div>
-
 </tr><tr>
 
-<tr><td colspan="2"><center><button onclick="saveConfig()" style="width: 100px; height: 32px;"><b>Save</b></button></center></td></tr>
+<td><center><button onclick="saveConfig()" style="width: 100px; height: 32px;"><b>Save</b></button></center></td>
 
 </tr></table>
 
