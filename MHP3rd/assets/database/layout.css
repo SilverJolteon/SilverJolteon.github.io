@@ -1,0 +1,185 @@
+@font-face {
+    font-family: 'Rodin';
+    src: url('../SCE-PS3 Rodin LATIN Regular.otf');
+}
+
+body {
+    font-family: 'Rodin';
+    color: #ffffff;
+    background-color: #121212;
+    margin: 50px auto 200px;
+    text-align: center;
+    text-shadow: 2px 0 0 #000000, -2px 0 0 #000000, 0 2px 0 #000000, 0 -2px 0 #000000, 1px 1px #000000, -1px -1px 0 #000000, 1px -1px 0 #000000, -1px 1px 0 #000000;
+}
+
+.navmenu {
+    height: 50px;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    text-align: center;
+    background-color: #2A2A2A;
+}
+
+.navmenu ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+.navmenu li {
+    display: inline-block;
+}
+
+.navmenu li a {
+    display: block;
+    color: #FFFFFF;
+    text-decoration: none;
+    padding: 14px 16px;
+}
+
+.navmenu li a:hover:not(.navmenu-active) {
+    background-color: #4A4A4A;
+}
+
+.navmenu-active {
+    background-color: #3A3A3A;
+}
+
+.sharpness-bar-container {
+    display: flex;
+    margin-bottom: 2px;
+    background-color: #000000;
+    border: 2px solid #101a2e;
+    outline: 1px solid #534b17; 
+    position: relative;
+    width: 89px;
+}
+
+.sharpness-bar {
+    height: 5px;
+}
+
+.sharpness-1{
+	text-shadow: none;
+	color: #25ff25;
+	font-size: 11px;
+	width: 11px
+	height: 11px;
+	position: relative;
+	margin-top: 9px;
+	font-weight: normal;
+}
+
+.footer {
+    position: absolute;
+    color: #6A6A6A;
+    text-shadow: 2px 0 0 #000000, -2px 0 0 #000000, 0 2px 0 #000000, 0 -2px 0 #000000, 1px 1px #000000, -1px -1px 0 #000000, 1px -1px 0 #000000, -1px 1px 0 #000000;
+    font-family: 'Rodin';
+    font-size: 12px;
+    text-align: center;
+    bottom: 12px;
+    left: 50%;
+    transform: translateX(-50%);
+    text-decoration: none;
+}
+
+
+.weapon-table-container{
+	max-height: calc(100vh - 310px);
+	overflow: auto;
+}
+.weapon-table{
+    border-collapse: collapse;
+    margin: 0 auto;
+}
+
+.weapon-table th, .weapon-table td{
+    text-align: center;
+    padding: 8px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.weapon-table th{
+    background-color: #202020;
+    position: sticky;
+    top: 0;
+    height: 40px;
+    z-index: 2;
+}
+
+.weapon-table tr{
+    background-color: #3A3A3A;
+}
+
+.weapon-table tr.active-row{
+    background-color: #346495;
+}
+
+.weapon-table tr.active-row:hover {
+    background-color: #346495;
+}
+
+.weapon-table tr:hover {
+    background-color: #4A4A4A;
+	cursor: pointer;
+}
+
+.materials-table-container {
+    position: fixed;
+    bottom: 55px;
+    left: 50%;
+    transform: translateX(-50%);
+    height: 170px;
+    background-color: #3A3A3A;
+}
+
+.materials-table-container th{
+	height: 20px;
+	background-color: #202020;
+}
+
+.materials-table-container td{
+	vertical-align: top;
+	font-size: 10px;
+	height: 138px;
+}
+
+.materials-table-container td, .materials-table-container th{
+	width: 300px;
+	text-align: center;
+}
+
+.materials-table-container td, .materials-table-container th{
+	border: 1px solid #dcdcdc;
+	text-align: center;
+}
+
+.materials-table{
+	max-height: 138px;
+	overflow-y: auto;
+}
+
+.materials-table th{
+	background-color: #707070;
+	top: 3px;
+	position: sticky;
+}
+
+.materials-table tr{
+	background-color: #3A3A3A;
+}
+
+.materials-table tr:hover{
+	background-color: #4A4A4A;
+}
+
+.materials-table td{
+	width: 50%;
+	height: 100%;
+}

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Monster Hunter Portable 3rd Hunting Horn Database</title>
+<link rel="icon" type="image/png" href="assets/favicon.ico">
+<link rel="stylesheet" type="text/css" href="assets/database/layout.css"/>
+</head>
+<body>
+<div class="navmenu">
+<ul>
+    <li><a href="damage-calculator.html">Damage Calculator</a></li>
+    <li><a class="navmenu-active" href="database.html">Hunting Horn Database</a></li>
+    <li><a href="charm-search.html">Charm Table Search</a></li>
+    <li><a href="kelbi-horn.html">Kelbi Horn Reward Tables</a></li>
+</ul>
+</div>
+<div class="weapon-table-container">
+<table id="data-table" class="weapon-table">
+<thead>
+    <tr>
+		<th onClick="sortTable(0)">#</th>
+		<th onClick="sortTable(1)">Name</th>
+		<th onClick="sortTable(2)">Rarity</th>
+		<th onClick="sortTable(3)">Attack<br>(Upgrade)</th>
+		<th onClick="sortTable(4)">Elem/Sts</th>
+		<th onClick="sortTable(5)">Affinity</th>
+		<th onClick="sortTable(6)">Defense Bonus</th>
+		<th onClick="sortTable(7)">Slots</th>
+		<th onClick="sortTable(8)">Notes</th>
+		<th onClick="sortTable(9)">Sharpness</th>
+		<th onClick="sortTable(10)">Crafting Price</th>
+		<th onClick="sortTable(11)">Upgrade Price</th>
+    </tr>
+</thead>
+<tbody id="weapon_info"></tbody>
+</table>
+</div>
+<div class="materials-table-container">
+<table id="materials_info">
+<thead>
+    <tr>
+        <th>Craft</th>
+        <th>Upgrade</th>
+	   <th>Horn Melodies</th>
+    </tr>
+</thead>
+<tbody>
+	<tr>
+		<td id="crafting_materials"><div class="materials-table"><table><thead><tr style="background-color: #707070"><th>Item</th><th>Qty</th></tr></thead></table></td>
+		<td id="upgrade_materials"><div class="materials-table"><table><thead><tr style="background-color: #707070"><th>Item</th><th>Qty</th></tr></thead></table></td>
+		<td id="horn_melodies" width="600px"><div class="materials-table"><table><thead><tr style="background-color: #707070"><th>Notes</th><th>Effect</th></tr></thead></table></td>
+	</tr>
+</tbody>
+</table>
+</div>
+<script src="scripts/database/songlist.js"></script>
+<script src="scripts/database/HH_data.js"></script>
+<script src="scripts/database/database.js"></script>
+<a class="footer" href="https://twitter.com/SilverJolteon">© SilverJolteon</a>
+</body>
+</html>
