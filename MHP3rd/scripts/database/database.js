@@ -41,6 +41,18 @@ function getSonglist(notes){
     return null;
 }
 
+function getWeaponTree(currentName, tree = []){
+	tree.push(currentName);
+	for(var name in data){
+		var weapon = data[name];
+		if(weapon["UpgradesTo"] != null && weapon["UpgradesTo"].includes(currentName)){
+			getWeaponTree(name, tree);
+			break;
+		}
+	}
+	return tree;
+}
+
 function showMoreInfo(event){
     active_row = event.currentTarget;
     var rows = weapon_info.getElementsByTagName("tr");
@@ -55,23 +67,29 @@ function showMoreInfo(event){
     
     
     var table = `<div class="materials-table"><table><thead><tr style="background-color: #707070"><th>Item</th><th>Qty</th></tr></thead><tbody>`;
-    var table_0 = table;
+    var table_0 = `<div class="weapon-tree"><table>`;
     var table_1 = table;
-    var table_2 = `<div class="materials-table"><table><thead><tr style="background-color: #707070"><th>Notes</th><th>Effect</th></tr></thead><tbody>`;
-    for(var material in crafting_materials) if(material != "z") table_0 += `<tr><td>${material}</td><td>${crafting_materials[material]}</td></tr>`;
-    for(var material in upgrade_materials) if(material != "z") table_1 += `<tr><td>${material}</td><td>${upgrade_materials[material]}</td></tr>`;
+    var table_2 = table;
+    var table_3 = `<div class="materials-table"><table><thead><tr style="background-color: #707070"><th>Notes</th><th>Effect</th></tr></thead><tbody>`;
+    for(var material in crafting_materials) if(material != "z") table_1 += `<tr><td>${material}</td><td>${crafting_materials[material]}</td></tr>`;
+    for(var material in upgrade_materials) if(material != "z") table_2 += `<tr><td>${material}</td><td>${upgrade_materials[material]}</td></tr>`;
     var songs = getSonglist(notes);
     for(var e in songs){
 		var song = "";
 		for(var i = 0; i < e.length; i++) song += `<img src="assets/database/notes/note_${e[i]}.png">`
-		table_2 += `<tr><td><span style="display: inline-block; text-align: left; width:44px; border: 1px;">${song}</span></td></div><td>${songs[e]}</td></tr>`;
+		table_3 += `<tr><td><span style="display: inline-block; text-align: left; width:44px; border: 1px;">${song}</span></td></div><td>${songs[e]}</td></tr>`;
     }
-    table_0 += "</tbody></table></div>";
+    var tree = getWeaponTree(active_row.id).reverse();
+    for(var i = 0; i < tree.length; i++) table_0 += `<tr><td><span style="float: left">${(i+1)}</span><span style="display: inline-block; text-align: left; width: 150px;">${tree[i]}</span></td></tr>`;
+    table_0 += "</table></div>";
     table_1 += "</tbody></table></div>";
     table_2 += "</tbody></table></div>";
-    document.getElementById("crafting_materials").innerHTML = table_0;
-    document.getElementById("upgrade_materials").innerHTML = table_1;
-    document.getElementById("horn_melodies").innerHTML = table_2;
+    table_3 += "</tbody></table></div>";
+   
+    document.getElementById("weapon_tree").innerHTML = table_0;
+    document.getElementById("crafting_materials").innerHTML = table_1;
+    document.getElementById("upgrade_materials").innerHTML = table_2;
+    document.getElementById("horn_melodies").innerHTML = table_3;
 }
 function loadData() {
     var id = 1;

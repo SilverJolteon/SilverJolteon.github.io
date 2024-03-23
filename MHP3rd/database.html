@@ -2,12 +2,159 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>Monster Hunter Portable 3rd Hunting Horn Database</title>
 <link rel="icon" type="image/png" href="assets/favicon.ico">
-<link rel="stylesheet" type="text/css" href="assets/database/layout.css"/>
+<link rel="stylesheet" type="text/css" href="assets/layout.css"/>
 </head>
 <body>
+<style>
+body{
+	color: #ffffff;
+}
+
+.footer{
+	position: absolute;
+}
+table{
+	border-spacing: 0px;
+}
+
+td{
+	background-color: transparent;
+	height: 32px;
+	border-radius: 0;
+}
+
+td:hover{
+	background-color: transparent;
+}
+
+.sharpness-bar-container {
+    display: flex;
+    margin-bottom: 2px;
+    background-color: #000000;
+    border: 2px solid #101a2e;
+    outline: 1px solid #534b17; 
+    position: relative;
+    width: 89px;
+}
+
+.sharpness-bar {
+    height: 5px;
+}
+
+.sharpness-1{
+	text-shadow: none;
+	color: #25ff25;
+	font-size: 11px;
+	width: 11px
+	height: 11px;
+	position: relative;
+	margin-top: 9px;
+	font-weight: normal;
+}
+
+.weapon-table-container{
+	max-height: calc(100vh - 360px);
+	overflow: auto;
+}
+.weapon-table{
+    border-collapse: collapse;
+    margin: 0 auto;
+}
+
+.weapon-table th, .weapon-table td{
+    text-align: center;
+    padding: 8px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.weapon-table th{
+    background-color: #202020;
+    position: sticky;
+    top: 0;
+    height: 40px;
+    z-index: 2;
+}
+
+.weapon-table tr{
+    background-color: #3A3A3A;
+}
+
+.weapon-table tr.active-row{
+    background-color: #346495;
+}
+
+.weapon-table tr.active-row:hover {
+    background-color: #346495;
+}
+
+.weapon-table tr:hover {
+    background-color: #4A4A4A;
+	cursor: pointer;
+}
+
+.materials-table-container {
+    position: fixed;
+    bottom: 55px;
+    left: 50%;
+    transform: translateX(-50%);
+    height: 170px;
+    background-color: #3A3A3A;
+}
+
+.materials-table-container th{
+	height: 20px;
+	background-color: #202020;
+}
+
+.materials-table-container td{
+	vertical-align: top;
+	font-size: 10px;
+	height: 138px;
+}
+
+.materials-table-container td, .materials-table-container th{
+	width: 300px;
+	text-align: center;
+}
+
+.materials-table-container td, .materials-table-container th{
+	border: 1px solid #dcdcdc;
+	text-align: center;
+}
+
+.materials-table{
+	max-height: 138px;
+	overflow-y: auto;
+}
+
+.materials-table th{
+	background-color: #707070;
+	top: 3px;
+	position: sticky;
+}
+
+.materials-table tr{
+	background-color: #3A3A3A;
+}
+
+.materials-table tr:hover{
+	background-color: #4A4A4A;
+}
+
+.materials-table td{
+	width: 50%;
+	height: 100%;
+}
+
+.weapon-tree td{
+	height: 100%;
+}
+</style>
 <div class="navmenu">
 <ul>
     <li><a href="damage-calculator.html">Damage Calculator</a></li>
@@ -41,6 +188,7 @@
 <table id="materials_info">
 <thead>
     <tr>
+	   <th>Weapon Tree</th>
         <th>Craft</th>
         <th>Upgrade</th>
 	   <th>Horn Melodies</th>
@@ -48,6 +196,7 @@
 </thead>
 <tbody>
 	<tr>
+		<td id="weapon_tree"></td>
 		<td id="crafting_materials"><div class="materials-table"><table><thead><tr style="background-color: #707070"><th>Item</th><th>Qty</th></tr></thead></table></td>
 		<td id="upgrade_materials"><div class="materials-table"><table><thead><tr style="background-color: #707070"><th>Item</th><th>Qty</th></tr></thead></table></td>
 		<td id="horn_melodies" width="600px"><div class="materials-table"><table><thead><tr style="background-color: #707070"><th>Notes</th><th>Effect</th></tr></thead></table></td>
