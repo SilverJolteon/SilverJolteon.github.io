@@ -3,6 +3,7 @@ var sorting = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
 var filters = [[], []]; // Fully Upgraded, Elem/Sts, Notes
 var weapon_info = document.getElementById("weapon_info");
 var materials_info = document.getElementById("materials_info");
+var rows_list = [];
 var active_row = null;
 
 function createSharpnessBar(sharpness_0, sharpness_1){
@@ -55,7 +56,9 @@ function getWeaponTree(currentName, tree = []){
 }
 
 function showMoreInfo(event){
-    active_row = event.currentTarget;
+    var id = event.currentTarget.id;
+
+    for(var i = 0; i < rows_list.length; i++) if(rows_list[i].id == id) active_row = rows_list[i];
     var rows = weapon_info.getElementsByTagName("tr");
     for(var i = 0; i < rows.length; i++) {
         rows[i].classList.remove("active-row");
@@ -68,7 +71,7 @@ function showMoreInfo(event){
     
     
     var table = `<div class="materials-table"><table><thead><tr style="background-color: #707070"><th>Item</th><th>Qty</th></tr></thead><tbody>`;
-    var table_0 = `<div class="weapon-tree"><table>`;
+    var table_0 = document.createElement("table");
     var table_1 = table;
     var table_2 = table;
     var table_3 = `<div class="materials-table"><table><thead><tr style="background-color: #707070"><th>Notes</th><th>Effect</th></tr></thead><tbody>`;
@@ -81,33 +84,41 @@ function showMoreInfo(event){
 		table_3 += `<tr><td><span style="display: inline-block; text-align: left; width:44px; border: 1px;">${song}</span></td></div><td>${songs[e]}</td></tr>`;
     }
     var tree = getWeaponTree(active_row.id).reverse();
-    for(var i = 0; i < tree.length; i++){
-	    if(tree[i] == active_row.id){
-		    table_0 += `<tr style="background-color: #346495"><td>`;
-	    }
-	    else table_0 += `<tr><td>`;
+    var weapon_tree = document.getElementById("weapon_tree");
+    while(weapon_tree.firstChild) weapon_tree.removeChild(weapon_tree.firstChild);
+    for(var i = 0; i < tree.length; i++){	
+	    var row_0 = table_0.insertRow();
+	    row_0.id = tree[i];
+	    row_0.addEventListener("click", function (event) {
+			showMoreInfo(event, data);
+	    });
+	    if(tree[i] == active_row.id) row_0.classList.add("active-row");
+	    else row_0.classList.remove("active-row");
+	    var cell_0 = row_0.insertCell();
+	    cell_0.innerHTML = "";
 	    if(data[tree[i]]["Craft"]){
-		    table_0 += `<span style="float: right">Craftable</span>`;
+		    cell_0.innerHTML += `<span style="float: right">Craftable</span>`;
 	    }
 	    else{
-			table_0 += `<span style="float: right">
+			cell_0.innerHTML += `<span style="float: right">
 				&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
 			</span>`;
 	    }
-	    table_0 += `<span style="float: left">${(i+1)}</span><span style="display: inline-block; text-align: left; width: 150px;">${tree[i]}</span></td></tr>`;
+	    
+	    cell_0.innerHTML += `<span style="float: left">${(i+1)}</span><span style="display: inline-block; text-align: left; width: 150px;">${tree[i]}</span>`;
 	    
     }
-    table_0 += "</table></div>";
     table_1 += "</tbody></table></div>";
     table_2 += "</tbody></table></div>";
     table_3 += "</tbody></table></div>";
-   
-    document.getElementById("weapon_tree").innerHTML = table_0;
+    weapon_tree.appendChild(table_0);
     document.getElementById("crafting_materials").innerHTML = table_1;
     document.getElementById("upgrade_materials").innerHTML = table_2;
     document.getElementById("horn_melodies").innerHTML = table_3;
 }
+
 function loadData() {
+	rows_list = [];
 	var id = 1;
 	var sorting_header = [];
 	for(var name in data){
@@ -194,10 +205,12 @@ function loadData() {
 			row.addEventListener("click", function (event) {
 				showMoreInfo(event, data);
 			});
+			rows_list.push(row);
 			weapon_info.appendChild(row);
 			sorting_header.push(headers[header_index]);
 		  }
 		  else{
+			rows_list.push(row);
 			var r = weapon_info.insertRow(index);
 			r.id = name;
 			r.innerHTML = row.innerHTML;

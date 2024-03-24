@@ -2,7 +2,6 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-
 <title>Monster Hunter Portable 3rd Hunting Horn Database</title>
 <link rel="icon" type="image/png" href="assets/favicon.ico">
 <link rel="stylesheet" type="text/css" href="assets/layout.css"/>
@@ -11,7 +10,8 @@
 <style>
 body{
 	text-shadow: 2px 0 0 #000000, -2px 0 0 #000000, 0 2px 0 #000000, 0 -2px 0 #000000, 1px 1px #000000, -1px -1px 0 #000000, 1px -1px 0 #000000, -1px 1px 0 #000000;
-	margin: 50px 0;
+	margin: 0;
+	padding: 0;
 	color: #ffffff;
 }
 
@@ -20,14 +20,14 @@ body{
 	bottom: 0;
 	left: 0;
 	width: 100%;
-	height: 30px;
+	height: 2.78vh;
 }
 .footer{
-	position: absolute;
+	position: relative;
 	left: 50%;
 	transform: translateX(-50%);
 	font-size: 12px;
-	top: 8px;
+	top: 0;
 }
 
 .footer a{
@@ -75,12 +75,21 @@ td:hover{
 }
 
 .weapon-table-container{
-	max-height: calc(100vh - 310px);
-	overflow: auto;
+	position: fixed;
+	top: 50px;
+	left: 0;
+	width: 100%;
+	height: 65vh;
 }
 .weapon-table{
-    border-collapse: collapse;
-    margin: 0 auto;
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 50%;
+	transform: translateX(-50%);
+	height: 100%;
+	overflow-y: auto;
+	scrollbar-gutter: stable;
 }
 
 .weapon-table th, .weapon-table td{
@@ -117,31 +126,19 @@ td:hover{
 }
 
 @media screen and (max-width: 1025px){
-	.weapon-table-container{
-		max-height: calc(100vh - 460px);
-		overflow: auto;
+	.weapon-table{
+		width: 100%;
 	}
-	.materials-table-block {
-		position: fixed;
-		bottom: 55px;
-		height: 170px;
-		left: 50%;
-		transform: translateX(-50%);
-		height: 170px;
-	}
-
-	.materials-table-container {
-		position: absolute;
-		height: 100%;
-		width: 90vw;
+	.materials-table-container{
+		width: 90%;
 	}
 }
 
 .materials-table-block {
 	position: absolute;
-	bottom: 55px;
+	top: 75.93vh;
 	width: 100%;
-	height: 170px;
+	height: 21.29vh;
 }
 
 .materials-table-container {
@@ -163,7 +160,7 @@ td:hover{
 .materials-table-container td{
 	vertical-align: top;
 	font-size: 10px;
-	height: 138px;
+	height: 12.78vh;
 	
 }
 
@@ -178,7 +175,7 @@ td:hover{
 }
 
 .materials-table{
-	max-height: 138px;
+	max-height: 12.78vh;
 	overflow-y: auto;
 }
 
@@ -203,6 +200,19 @@ td:hover{
 
 .weapon-tree td{
 	height: 100%;
+	cursor: pointer;
+}
+
+.weapon-tree tr:hover{
+	background-color: #4A4A4A;
+}
+
+.weapon-tree tr.active-row{
+    background-color: #346495;
+}
+
+.weapon-tree tr.active-row:hover{
+    background-color: #346495;
 }
 
 .filters label{
@@ -243,79 +253,83 @@ td:hover{
     <li><a href="kelbi-horn.html">Kelbi Horn Reward Tables</a></li>
 </ul>
 </div>
+
 <div class="weapon-table-container">
-<table id="data-table" class="weapon-table">
-<thead>
-    <tr>
-		<th onClick="sortTable(0)">#</th>
-		<th onClick="sortTable(1)">Name</th>
-		<th onClick="sortTable(2)">Rarity</th>
-		<th onClick="sortTable(3)">Attack<br>(Upgrade)</th>
-		<th onClick="sortTable(4)">Elem/Sts</th>
-		<th onClick="sortTable(5)">Affinity</th>
-		<th onClick="sortTable(6)">Defense Bonus</th>
-		<th onClick="sortTable(7)">Slots</th>
-		<th onClick="sortTable(8)">Notes</th>
-		<th onClick="sortTable(9)">Sharpness</th>
-		<th onClick="sortTable(10)">Crafting Price</th>
-		<th onClick="sortTable(11)">Upgrade Price</th>
-    </tr>
-</thead>
-<tbody id="weapon_info"></tbody>
-</table>
+	<div class="weapon-table">
+	<table id="data-table">
+	<thead>
+	    <tr>
+			<th onClick="sortTable(0)">#</th>
+			<th onClick="sortTable(1)">Name</th>
+			<th onClick="sortTable(2)">Rarity</th>
+			<th onClick="sortTable(3)">Attack<br>(Upgrade)</th>
+			<th onClick="sortTable(4)">Elem/Sts</th>
+			<th onClick="sortTable(5)">Affinity</th>
+			<th onClick="sortTable(6)">Defense Bonus</th>
+			<th onClick="sortTable(7)">Slots</th>
+			<th onClick="sortTable(8)">Notes</th>
+			<th onClick="sortTable(9)">Sharpness</th>
+			<th onClick="sortTable(10)">Crafting Price</th>
+			<th onClick="sortTable(11)">Upgrade Price</th>
+	    </tr>
+	</thead>
+	<tbody id="weapon_info"></tbody>
+	</table>
+	</div>
 </div>
+
 <div class="materials-table-block">
-<div class="materials-table-container">
-<table id="materials_info">
-<thead>
-	<tr>
-	<th colspan=4>
-		<div class="filters">
-		<label>Filters</label>
-		<ul id="filters">
-			<li style="background-color: transparent; color: #c0c0c0; font-size: 12px; width: 150px; cursor: default">
-				<input type="checkbox" id="fully_upgraded" onChange="filterTable()">Fully Upgraded
-			</li>
-			<li onClick="filterTable('Fire')" style="color: #c0c0c0; font-size: 12px; height: 100%; width: auto; padding: 0 4px;">Fire</li>
-			<li onClick="filterTable('Water')" style="color: #c0c0c0; font-size: 12px; height: 100%; width: auto; padding: 0 4px;">Water</li>
-			<li onClick="filterTable('Thunder')" style="color: #c0c0c0; font-size: 12px; height: 100%; width: auto; padding: 0 4px;">Thunder</li>
-			<li onClick="filterTable('Ice')" style="color: #c0c0c0; font-size: 12px; height: 100%; width: auto; padding: 0 4px;">Ice</li>
-			<li onClick="filterTable('Dragon')" style="color: #c0c0c0; font-size: 12px; height: 100%; width: auto; padding: 0 4px;">Dragon</li>
-			<li onClick="filterTable('Poison')" style="color: #c0c0c0; font-size: 12px; height: 100%; width: auto; padding: 0 4px;">Poison</li>
-			<li onClick="filterTable('Paralyze')" style="color: #c0c0c0; font-size: 12px; height: 100%; width: auto; padding: 0 4px;">Paralyze</li>
-			<li onClick="filterTable('None')" style="color: #c0c0c0; font-size: 12px; height: 100%; width: auto; padding: 0 4px;">None</li>
-			<li></li>
-			<li onClick="filterTable('W')"><img src="assets/database/notes/note_W.png"></li>
-			<li onClick="filterTable('P')"><img src="assets/database/notes/note_P.png"></li>
-			<li onClick="filterTable('R')"><img src="assets/database/notes/note_R.png"></li>
-			<li onClick="filterTable('B')"><img src="assets/database/notes/note_B.png"></li>
-			<li onClick="filterTable('G')"><img src="assets/database/notes/note_G.png"></li>
-			<li onClick="filterTable('C')"><img src="assets/database/notes/note_C.png"></li>
-			<li onClick="filterTable('Y')"><img src="assets/database/notes/note_Y.png"></li>
-			<li onClick="filterTable('O')"><img src="assets/database/notes/note_O.png"></li>
-			
-			<li onClick="filterTable('Clear')" style="float: right; right: 5px;">&times;</li>
-		</ul>
-		</div>
-	</th>
-	</tr>
-	<tr>
-	<th>Weapon Tree</th>
-	<th>Crafting Materials</th>
-	<th>Upgrade Materials</th>
-	<th>Horn Melodies</th>
-	</tr>
-</thead>
-<tbody>
-	<tr>
-		<td id="weapon_tree"></td>
-		<td id="crafting_materials"><div class="materials-table"><table><thead><tr style="background-color: #707070"><th>Item</th><th>Qty</th></tr></thead></table></td>
-		<td id="upgrade_materials"><div class="materials-table"><table><thead><tr style="background-color: #707070"><th>Item</th><th>Qty</th></tr></thead></table></td>
-		<td id="horn_melodies" width="600px"><div class="materials-table"><table><thead><tr style="background-color: #707070"><th>Notes</th><th>Effect</th></tr></thead></table></td>
-	</tr>
-</tbody>
-</table>
-</div>
+	<div class="materials-table-container">
+	<table id="materials_info">
+	<thead>
+		<tr>
+		<th colspan=4>
+			<div class="filters">
+			<label>Filters</label>
+			<ul id="filters">
+				<li style="background-color: transparent; color: #c0c0c0; font-size: 12px; width: 150px; cursor: default">
+					<input type="checkbox" id="fully_upgraded" onChange="filterTable()">Fully Upgraded
+				</li>
+				<li onClick="filterTable('Fire')" style="color: #c0c0c0; font-size: 12px; height: 100%; width: auto; padding: 0 4px;">Fire</li>
+				<li onClick="filterTable('Water')" style="color: #c0c0c0; font-size: 12px; height: 100%; width: auto; padding: 0 4px;">Water</li>
+				<li onClick="filterTable('Thunder')" style="color: #c0c0c0; font-size: 12px; height: 100%; width: auto; padding: 0 4px;">Thunder</li>
+				<li onClick="filterTable('Ice')" style="color: #c0c0c0; font-size: 12px; height: 100%; width: auto; padding: 0 4px;">Ice</li>
+				<li onClick="filterTable('Dragon')" style="color: #c0c0c0; font-size: 12px; height: 100%; width: auto; padding: 0 4px;">Dragon</li>
+				<li onClick="filterTable('Poison')" style="color: #c0c0c0; font-size: 12px; height: 100%; width: auto; padding: 0 4px;">Poison</li>
+				<li onClick="filterTable('Paralyze')" style="color: #c0c0c0; font-size: 12px; height: 100%; width: auto; padding: 0 4px;">Paralyze</li>
+				<li onClick="filterTable('None')" style="color: #c0c0c0; font-size: 12px; height: 100%; width: auto; padding: 0 4px;">None</li>
+				<li></li>
+				<li onClick="filterTable('W')"><img src="assets/database/notes/note_W.png"></li>
+				<li onClick="filterTable('P')"><img src="assets/database/notes/note_P.png"></li>
+				<li onClick="filterTable('R')"><img src="assets/database/notes/note_R.png"></li>
+				<li onClick="filterTable('B')"><img src="assets/database/notes/note_B.png"></li>
+				<li onClick="filterTable('G')"><img src="assets/database/notes/note_G.png"></li>
+				<li onClick="filterTable('C')"><img src="assets/database/notes/note_C.png"></li>
+				<li onClick="filterTable('Y')"><img src="assets/database/notes/note_Y.png"></li>
+				<li onClick="filterTable('O')"><img src="assets/database/notes/note_O.png"></li>
+				
+				<li onClick="filterTable('Clear')" style="position: absolute; float: right; right: 0px; top: -19px; padding: 4px; color: #c0c0c0; font-size: 12px; width: auto; z-index: -1">Clear</li>
+			</ul>
+			</div>
+		</th>
+		</tr>
+		<tr>
+		<th>Weapon Tree</th>
+		<th>Crafting Materials</th>
+		<th>Upgrade Materials</th>
+		<th>Horn Melodies</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td><div id="weapon_tree" class="weapon-tree"></div></td>
+			<td id="crafting_materials"><div class="materials-table"><table><thead><tr style="background-color: #707070"><th>Item</th><th>Qty</th></tr></thead></table></td>
+			<td id="upgrade_materials"><div class="materials-table"><table><thead><tr style="background-color: #707070"><th>Item</th><th>Qty</th></tr></thead></table></td>
+			<td id="horn_melodies" width="600px"><div class="materials-table"><table><thead><tr style="background-color: #707070"><th>Notes</th><th>Effect</th></tr></thead></table></td>
+		</tr>
+	</tbody>
+	</table>
+	</div>
 </div>
 <script src="scripts/database/songlist.js"></script>
 <script src="scripts/database/HH_data.js"></script>
