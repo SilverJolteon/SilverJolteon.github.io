@@ -97,13 +97,35 @@ td:hover{
 	cursor: pointer;
 }
 
+@media screen and (max-width: 1025px){
+	.materials-table-block {
+		position: fixed;
+		bottom: 55px;
+		height: 170px;
+		left: 50%;
+		transform: translateX(-50%);
+		height: 170px;
+	}
+
+	.materials-table-container {
+		position: absolute;
+		height: 100%;
+		width: 90vw;
+	}
+}
+
+.materials-table-block {
+	position: fixed;
+	bottom: 55px;
+	width: 100%;
+	height: 170px;
+}
+
 .materials-table-container {
-    position: fixed;
-    bottom: 55px;
-    left: 50%;
-    transform: translateX(-50%);
-    height: 170px;
-    background-color: #3A3A3A;
+	position: absolute;
+	left: 50%;
+	transform: translateX(-50%);
+	height: 100%;
 }
 
 .materials-table-container th{
@@ -111,10 +133,15 @@ td:hover{
 	background-color: #202020;
 }
 
+.materials-table-container tr{
+	background-color: #3A3A3A;
+}
+
 .materials-table-container td{
 	vertical-align: top;
 	font-size: 10px;
 	height: 138px;
+	
 }
 
 .materials-table-container td, .materials-table-container th{
@@ -134,7 +161,7 @@ td:hover{
 
 .materials-table th{
 	background-color: #707070;
-	top: 3px;
+	top: 0;
 	position: sticky;
 }
 
@@ -153,6 +180,36 @@ td:hover{
 
 .weapon-tree td{
 	height: 100%;
+}
+
+.filters label{
+	color: #c0c0c0;
+	font-size: 12px;
+	position: absolute;
+	top: -15px;
+	left: 50%;
+	transform: translateX(-50%);
+}
+
+.filters ul{
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+}
+
+.filters li{
+	display: inline-block;
+	cursor: pointer;
+	width: 20px;
+	height: 20px;
+}
+
+.filters li:hover{
+	background-color: #4A4A4A;
+}
+
+.filters li.active-filter{
+    background-color: #346495;
 }
 </style>
 <div class="navmenu">
@@ -184,15 +241,47 @@ td:hover{
 <tbody id="weapon_info"></tbody>
 </table>
 </div>
+<div class="materials-table-block">
 <div class="materials-table-container">
 <table id="materials_info">
 <thead>
-    <tr>
-	   <th>Weapon Tree</th>
-        <th>Craft</th>
-        <th>Upgrade</th>
-	   <th>Horn Melodies</th>
-    </tr>
+	<tr>
+	<th colspan=4>
+		<div class="filters">
+		<label>Filters</label>
+		<ul id="filters">
+			<li style="background-color: transparent; color: #c0c0c0; font-size: 12px; width: 150px; cursor: default">
+				<input type="checkbox" id="fully_upgraded" onChange="filterTable()">Fully Upgraded
+			</li>
+			<li onClick="filterTable('Fire')" style="color: #c0c0c0; font-size: 12px; height: 100%; width: auto; padding: 0 4px;">Fire</li>
+			<li onClick="filterTable('Water')" style="color: #c0c0c0; font-size: 12px; height: 100%; width: auto; padding: 0 4px;">Water</li>
+			<li onClick="filterTable('Thunder')" style="color: #c0c0c0; font-size: 12px; height: 100%; width: auto; padding: 0 4px;">Thunder</li>
+			<li onClick="filterTable('Ice')" style="color: #c0c0c0; font-size: 12px; height: 100%; width: auto; padding: 0 4px;">Ice</li>
+			<li onClick="filterTable('Dragon')" style="color: #c0c0c0; font-size: 12px; height: 100%; width: auto; padding: 0 4px;">Dragon</li>
+			<li onClick="filterTable('Poison')" style="color: #c0c0c0; font-size: 12px; height: 100%; width: auto; padding: 0 4px;">Poison</li>
+			<li onClick="filterTable('Paralyze')" style="color: #c0c0c0; font-size: 12px; height: 100%; width: auto; padding: 0 4px;">Paralyze</li>
+			<li onClick="filterTable('None')" style="color: #c0c0c0; font-size: 12px; height: 100%; width: auto; padding: 0 4px;">None</li>
+			<li></li>
+			<li onClick="filterTable('W')"><img src="assets/database/notes/note_W.png"></li>
+			<li onClick="filterTable('P')"><img src="assets/database/notes/note_P.png"></li>
+			<li onClick="filterTable('R')"><img src="assets/database/notes/note_R.png"></li>
+			<li onClick="filterTable('B')"><img src="assets/database/notes/note_B.png"></li>
+			<li onClick="filterTable('G')"><img src="assets/database/notes/note_G.png"></li>
+			<li onClick="filterTable('C')"><img src="assets/database/notes/note_C.png"></li>
+			<li onClick="filterTable('Y')"><img src="assets/database/notes/note_Y.png"></li>
+			<li onClick="filterTable('O')"><img src="assets/database/notes/note_O.png"></li>
+			
+			<li onClick="filterTable('Clear')" style="float: right; right: 5px;">&times;</li>
+		</ul>
+		</div>
+	</th>
+	</tr>
+	<tr>
+	<th>Weapon Tree</th>
+	<th>Crafting Materials</th>
+	<th>Upgrade Materials</th>
+	<th>Horn Melodies</th>
+	</tr>
 </thead>
 <tbody>
 	<tr>
@@ -203,6 +292,7 @@ td:hover{
 	</tr>
 </tbody>
 </table>
+</div>
 </div>
 <script src="scripts/database/songlist.js"></script>
 <script src="scripts/database/HH_data.js"></script>
