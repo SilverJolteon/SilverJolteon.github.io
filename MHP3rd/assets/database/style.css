@@ -1,6 +1,6 @@
 @font-face {
     font-family: 'Rodin';
-    src: url('assets/SCE-PS3 Rodin LATIN Regular.otf');
+    src: url('../SCE-PS3 Rodin LATIN Regular.otf');
 }    
 
 body{
@@ -313,7 +313,7 @@ body{
 }
 
 .footer a{
-	color: #707070;
+	color: #6A6A6A;
 	text-decoration: none;
 	font-size: 12px;
 }
