@@ -213,7 +213,6 @@ body{
 .materials-table{
 	overflow-y: auto;
 	scrollbar-gutter: stable;
-	border: solid 1px #505050;
 	position: relative;
 	bottom: 0;
 	z-index: 4;
@@ -223,6 +222,7 @@ body{
 .materials-table table{
 	border-spacing: 0px;
 	width: 100%;
+	border: 1px solid #c0c0c0;
 }
 
 .materials-table tr{
@@ -285,10 +285,12 @@ body{
 
 .info-block{
 	position: absolute;
-	bottom: 0;
-	width: 50%;
-	left: 25%;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	width: auto;
 	z-index: 999;
+	cursor: default;
 }
 
 .overlay {
@@ -319,8 +321,15 @@ body{
 }
 
 @media only screen and (max-width: 600px){
-	.main, .materials-table table, .info-block{
+	.main{
 		width: 100%;
-		left: 0;
+		left: 0;	
+	}
+	.info-block{
+		top: unset;
+		left: unset;
+		transform: unset;
+		width: 100%;
+		bottom: 0;
 	}
 }
