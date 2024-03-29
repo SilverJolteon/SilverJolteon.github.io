@@ -1,4 +1,5 @@
-var data = HH_data;
+var WEAPON_TYPE = "HH";
+var data = null;
 var sorting = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]; 
 var filters = [[], []];
 var fully_upgraded = 0;
@@ -7,10 +8,25 @@ var materials_info = document.getElementById("materials_info");
 var rows_list = [];
 var active_row = null;
 
-function toggleNavbar(){
-	document.getElementById("navbar-menu").classList.toggle("navbar-show");
-	
-	
+function changeWeapon(type){
+	filterTable("Clear");
+	//----------------------------------------------------------------------------------------------------
+	//-----WEAPON TYPE------------------------------------------------------------------------------------
+	//----------------------------------------------------------------------------------------------------
+	switch(WEAPON_TYPE){
+		case "GL":
+			GL_terminate();
+			break;
+		case "HH":
+			HH_terminate();
+			break;
+		case "SA":
+			SA_terminate();
+			break;
+	}
+	WEAPON_TYPE = type;
+	init();
+	document.getElementById("sidenav").style.width = "0";
 }
 
 function createSharpnessBar(sharpness_0, sharpness_1){
@@ -27,27 +43,6 @@ function createSharpnessBar(sharpness_0, sharpness_1){
     if(sharpness_bar_1_exist) bar += `<div class="sharpness-bar-container">${sharpness_bar_1}</div></td><td style="padding: 1px 1px;"><div class="sharpness-1">+1</div>`;
     bar += `</td></tr></table>`;
     return bar;
-}
-
-function notesMatch(notes_0, notes_1){
-	n0 = notes_0.toString();
-	n1 = notes_1.toString();
-	
-	n0 = n0.split("").sort().join("");
-	n1 =n1.split("").sort().join("");
-		
-	for(var i = 0; i < 3; i++) if(n0[i] != n1[i]) return false;
-	return true;
-}
-
-function getSonglist(notes){
-    for(var e in songlist) {
-        var music = songlist[e];
-        if(notesMatch(e, notes)){
-            return music;
-        }
-    }
-    return null;
 }
 
 function getWeaponTree(currentName, tree = []){
@@ -74,22 +69,15 @@ function showMoreInfo(event){
     var weapon = data[active_row.id];
     var crafting_materials = weapon["Craft"];
     var upgrade_materials = weapon["Upgrade"];
-    var notes = weapon["Notes"];
-    
     
     var table = `<table><thead><tr><th>Item</th><th>Qty</th></tr></thead><tbody>`;
     var table_0 = document.createElement("table");
     var table_1 = table;
     var table_2 = table;
-    var table_3 = `<table><thead><tr><th>Notes</th><th>Effect</th></tr></thead><tbody>`;
+    
     for(var material in crafting_materials) if(material != "z") table_1 += `<tr><td>${material}</td><td>${crafting_materials[material]}</td></tr>`;
     for(var material in upgrade_materials) if(material != "z") table_2 += `<tr><td>${material}</td><td>${upgrade_materials[material]}</td></tr>`;
-    var songs = getSonglist(notes);
-    for(var e in songs){
-		var song = "";
-		for(var i = 0; i < e.length; i++) song += `<img src="assets/database/notes/note_${e[i]}.png">`
-		table_3 += `<tr><td><span style="display: inline-block; text-align: left; width:44px; border: 1px;">${song}</span></td></div><td>${songs[e]}</td></tr>`;
-    }
+    
     var tree = getWeaponTree(active_row.id).reverse();
     var weapon_tree = document.getElementById("weapon_tree");
     while(weapon_tree.firstChild) weapon_tree.removeChild(weapon_tree.firstChild);
@@ -117,14 +105,23 @@ function showMoreInfo(event){
     }
     table_1 += "</tbody></table>";
     table_2 += "</tbody></table>";
-    table_3 += "</tbody></table>";
+    
     weapon_tree.appendChild(table_0);
     document.getElementById("materials-table").style.display = "";
     document.getElementById("overlay").style.display = "block";
     document.getElementById("crafting_materials").innerHTML = table_1;
     document.getElementById("upgrade_materials").innerHTML = table_2;
-    document.getElementById("horn_melodies").innerHTML = table_3;
-    
+    //----------------------------------------------------------------------------------------------------
+    //-----WEAPON TYPE------------------------------------------------------------------------------------
+    //----------------------------------------------------------------------------------------------------
+    switch(WEAPON_TYPE){
+	     case "GL":
+			GL_showMoreInfo(event);
+			break;
+		case "HH":
+			HH_showMoreInfo(event);
+			break;
+    }
     document.getElementById("weapon_tree").scrollIntoView({behavior: "smooth"});
 }
 
@@ -148,10 +145,23 @@ function loadData() {
 		}
 		if(filters[0].length == 0 || include_1 > 0) include_1 = 1;
 		else include_1 = 0;
+		
 		var include_2 = 1;
-		for(var i = 0; i < filters[1].length; i++){
-			if(!weapon["Notes"].includes(filters[1][i])) include_2 = 0;
+		//----------------------------------------------------------------------------------------------------
+		//-----WEAPON TYPE------------------------------------------------------------------------------------
+		//----------------------------------------------------------------------------------------------------
+		switch(WEAPON_TYPE){
+			case "GL":
+				include_2 = GL_filterShells(weapon);
+				break;
+			case "HH":
+				include_2 = HH_filterNotes(weapon);
+				break;
+			case "SA":
+				include_2 = SA_filterPhials(weapon);
+				break;
 		}
+		
 		if(!include_0 || !include_1 || !include_2){
 			id++;
 			continue;
@@ -162,7 +172,19 @@ function loadData() {
             var special = (weapon["Special"] == null) ? "-" : weapon["Special"];
             var defense = (weapon["Defense"] == null) ? "-" : "+" + weapon["Defense"];
             var slots = (weapon["Slots"] == 1) ? "O--" : (weapon["Slots"] == 2) ? "OO-" : (weapon["Slots"] == 3) ? "OOO" : "---";
-            var notes = (weapon["Notes"]) ? `<img src="assets/database/notes/note_${weapon["Notes"][0]}.png"><img src="assets/database/notes/note_${weapon["Notes"][1]}.png"><img src="assets/database/notes/note_${weapon["Notes"][2]}.png">` : "---";
+		  var unique = "";
+		  //----------------------------------------------------------------------------------------------------
+		  //-----WEAPON TYPE------------------------------------------------------------------------------------
+		  //----------------------------------------------------------------------------------------------------
+		  switch(WEAPON_TYPE){
+			  case "HH":
+				unique = (weapon["Notes"]) ? `<img src="assets/database/notes/note_${weapon["Notes"][0]}.png"><img src="assets/database/notes/note_${weapon["Notes"][1]}.png"><img src="assets/database/notes/note_${weapon["Notes"][2]}.png">` : "---";
+				break;
+			  case "SA":
+				unique = weapon["Phial"];
+				break;
+		  }
+            
             var sharpness = createSharpnessBar(weapon["Sharpness"]["+0"], weapon["Sharpness"]["+1"]);
             var crafting_cost = (weapon["Craft"] && weapon["Craft"]["z"]) ? weapon["Craft"]["z"].toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + "z" : "---";
             var upgrade_cost = (weapon["Upgrade"] && weapon["Upgrade"]["z"]) ? weapon["Upgrade"]["z"].toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + "z" : "---";
@@ -176,7 +198,17 @@ function loadData() {
                 <td>${weapon["Affinity"]}%</td>
                 <td>${defense}</td>
                 <td>${slots}</td>
-                <td>${notes}</td>
+		 `;
+		 //----------------------------------------------------------------------------------------------------
+		 //-----WEAPON TYPE------------------------------------------------------------------------------------
+		 //----------------------------------------------------------------------------------------------------
+		 switch(WEAPON_TYPE){
+			 case "GL":
+			 case "HH":
+			 case "SA":
+				row.innerHTML += `<td>${unique}</td>`;
+		 }
+            row.innerHTML += `    
                 <td>${sharpness}</td>
                 <td>${crafting_cost}</td>
                 <td>${upgrade_cost}</td>
@@ -196,7 +228,7 @@ function loadData() {
 			weapon["Affinity"], 
 			(weapon["Defense"] == null) ? 0 : weapon["Defense"], 
 			slots, 
-			notes, 
+			unique, 
 			sharp, 
 			(weapon["Craft"] && weapon["Craft"]["z"]) ? weapon["Craft"]["z"] : 0, 
 			(weapon["Upgrade"] && weapon["Upgrade"]["z"]) ? weapon["Upgrade"]["z"] : 0
@@ -218,30 +250,38 @@ function loadData() {
             }
 		  row.id = name;
 		  if(index == -1){
-			
 			row.addEventListener("click", function (event) {
 				showMoreInfo(event, data);
 			});
 			rows_list.push(row);
 			weapon_info.appendChild(row);
 			sorting_header.push(headers[header_index]);
+			weapon_info.firstChild.scrollIntoView({
+			    behavior: 'smooth',
+			    block: 'center'
+			});
 		  }
 		  else{
-			rows_list.push(row);
 			var r = weapon_info.insertRow(index);
 			r.id = name;
 			r.innerHTML = row.innerHTML;
 			r.addEventListener("click", function (event) {
 				showMoreInfo(event, data);
 			});
+			rows_list.push(r);
 			sorting_header.splice(index, 0, headers[header_index]);
+			weapon_info.firstChild.scrollIntoView({
+			    behavior: 'smooth',
+			    block: 'center'
+			});
 		  }
-        })(weapon); // Pass weapon data to the closure
+        })(weapon);
 	   id++;
     }
 }
 
 function sortTable(col){
+	active_row = null;
 	while(weapon_info.firstChild) weapon_info.removeChild(weapon_info.firstChild);
 	if(col == null){
 		loadData();
@@ -251,7 +291,7 @@ function sortTable(col){
 		sorting[col] ^= 1;
 		for(var i = 0; i < sorting.length; i++) if(i != col && sorting[i] > 0) sorting[col] = 0;
 	}
-	else if(col == 1 || col == 2){
+	else if(col == 1 || col == 2 || col == 8){
 		if(sorting[col] > 0) sorting[col]--;
 		else if(sorting[col] == 0) sorting[col] = 2;
 	}
@@ -286,12 +326,23 @@ function filterTable(filter){
 	document.getElementById("weapon_tree").innerHTML = "";
 	document.getElementById("crafting_materials").innerHTML = "";
 	document.getElementById("upgrade_materials").innerHTML = "";
-	document.getElementById("horn_melodies").innerHTML = "";
+	
 	if(filter == null){
 		sortTable();
 		return;
 	}
-	var filter_headers = ["", "None", "Fire" ,"Water", "Thunder", "Clear", "Ice", "Dragon", "Poison", "Paralyze", "W", "P", "R", "B", "G", "C", "Y", "O"];
+	var filter_headers = ["", "None", "Fire" ,"Water", "Thunder", "Clear", "Ice", "Dragon", "Poison", "Paralyze"];
+	//----------------------------------------------------------------------------------------------------
+     //-----WEAPON TYPE------------------------------------------------------------------------------------
+     //----------------------------------------------------------------------------------------------------
+	switch(WEAPON_TYPE){
+		case "HH": 
+			filter_headers = ["", "None", "Fire" ,"Water", "Thunder", "Clear", "Ice", "Dragon", "Poison", "Paralyze", "W", "P", "R", "B", "G", "C", "Y", "O"];
+			break;
+		case "SA": 
+			filter_headers = ["", "None", "Fire" ,"Water", "Thunder", "Clear", "Ice", "Dragon", "Poison", "Paralyze", "Power Phial", "Elemental Phial", "Exhaust Phial", "Poison Phial", "Paralysis Phial", "Dragon Phial"];
+			break;
+	}
 	
 	if(filter != "Clear" & filter_headers.includes(filter)){
 		switch(filter_headers.indexOf(filter) < 10){
@@ -328,4 +379,26 @@ function filterTable(filter){
 	else filter_elements[0].classList.remove("active-filter");
 	sortTable();
 }
-filterTable();
+
+function init(){
+	sorting = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]; 
+	fully_upgraded = 0;
+	rows_list = [];
+	active_row = null;
+	//----------------------------------------------------------------------------------------------------
+	//-----WEAPON TYPE------------------------------------------------------------------------------------
+	//----------------------------------------------------------------------------------------------------
+	switch(WEAPON_TYPE){
+		case "HH":
+			HH_init();
+			break;
+			
+		case "SA":
+			SA_init();
+			break;
+	}
+	filterTable();
+}
+
+displayNavmenu("database");
+init();

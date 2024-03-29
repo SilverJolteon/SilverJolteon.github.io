@@ -1,8 +1,12 @@
+<!DOCTYPE html>
 <html>
 <head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Monster Hunter Portable 3rd Kelbi Horn Reward Tables</title>
 <link rel="icon" type="image/png" href="assets/favicon.ico">
 <link rel="stylesheet" type="text/css" href="assets/layout.css"/>
+<link rel="stylesheet" href="assets/navmenu.css">
 </head>
 <body>
 <style>
@@ -73,34 +77,18 @@ td:hover{
 	color: #FFFFFF;
 	cursor: pointer;
 }
-
+@media only screen and (max-width: 600px){
+	.main{
+		overflow-x: scroll;
+	}
+}
 </style>
-<script src="scripts/kelbi-horn/rewards.js"></script>
-<script src="scripts/kelbi-horn/main.js"></script>
-<script>
-function show_results(){
-	document.getElementById("results-block").style.display = "table-cell";
-}
-
-function hide_results(){
-	document.getElementById("results-block").style.display = "none";
-}
-</script>
-
+<div id="sidenav" class="sidenav"></div>
+<div id="navbar" class="navbar"></div>
 <center>
-<div class="navmenu">
-<ul>
-    <li><a href="damage-calculator.html">Damage Calculator</a></li>
-    <li><a href="database.html">Hunting Horn Database</a></li>
-    <li><a href="charm-search.html">Charm Table Search</a></li>
-    <li><a class="navmenu-active" href="kelbi-horn.html">Kelbi Horn Reward Tables</a></li>
-</ul>
-</div>
-<img src="assets/logo.png" width="420px">
-<div class="header">Kelbi Horn Reward Tables</div>
-
+<div class="main">
 <div id="reward-table"></div>
-
+</div>
 <table><tr>
 <td id="results-block" class="hidden"><div class="dropdown">
 	<div style="float: left; position: relative; left: 50%;">
@@ -109,7 +97,21 @@ function hide_results(){
 </td>
 </tr></table>
 
-<a class="footer" href="https://twitter.com/SilverJolteon">© SilverJolteon</a>
-</center>   
+</center>  
+<a id="footer" class="footer-block"></div>
+
+<script src="scripts/navmenu.js"></script>
+<script src="scripts/kelbi-horn/rewards.js"></script>
+<script src="scripts/kelbi-horn/main.js"></script>
+<script>
+displayNavmenu("kelbi-horn");
+function show_results(){
+	document.getElementById("results-block").style.display = "table-cell";
+}
+
+function hide_results(){
+	document.getElementById("results-block").style.display = "none";
+}
+</script> 
 </body>
 </html>

@@ -3,31 +3,20 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Monster Hunter Portable 3rd Hunting Horn Database</title>
+<title>Monster Hunter Portable 3rd Weapon Database</title>
 <link rel="icon" type="image/png" href="assets/favicon.ico">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="stylesheet" href="assets/database/style.css">
-<title>MHP3rd HH DB</title>
+<link rel="stylesheet" href="assets/navmenu.css">
 </head>
 <body>
+<div id="sidenav" class="sidenav"></div>
+<div id="navbar" class="navbar"></div>
 <div id="overlay" class="overlay"></div>
 <div id="root">
-	<div class="navbar">
-	<button type="button" onClick="toggleNavbar()">
-		<svg width="24" height="24">
-			<path fill="currentColor" d="M4 18h16c.55 0 1-.45 1-1s-.45-1-1-1H4c-.55 0-1 .45-1 1s.45 1 1 1zm0-5h16c.55 0 1-.45 1-1s-.45-1-1-1H4c-.55 0-1 .45-1 1s.45 1 1 1zM3 7c0 .55.45 1 1 1h16c.55 0 1-.45 1-1s-.45-1-1-1H4c-.55 0-1 .45-1 1z"></path>
-		</svg>
-	</button>
-	<div id="navbar-menu" class="navbar-content">
-		<a href="damage-calculator.html">Damage Calculator</a>
-		<a href="charm-search.html">Charm Table Search</a>
-		<a href="kelbi-horn.html">Kelbi Horn Reward Tables</a>
-	</div>
-	<a href="database.html">Hunting Horn Database</a>
-	</div>
 	<div class="main">
 		<div class="filters">
-		<table class="filters-table">
+		<table id="filters-table" class="filters-table">
 		<thead>
 			<tr><th colspan="6">Filters</th></tr>
 		</thead>
@@ -46,17 +35,7 @@
 				<td onClick="filterTable('Ice')" style="color: #c0c0c0; font-size: 12px; height: 100%; width: auto;">Ice</td>
 				<td onClick="filterTable('Dragon')" style="color: #c0c0c0; font-size: 12px; height: 100%; width: auto;">Dragon</td>
 				<td onClick="filterTable('Poison')" style="color: #c0c0c0; font-size: 12px; height: 100%; width: auto;">Poison</td>
-				<td onClick="filterTable('Paralyze')" style="color: #c0c0c0; font-size: 12px; height: 100%; width: auto;">Paralyze</td>
-			</tr><tr>
-				<td onClick="filterTable('W')"><img src="assets/database/notes/note_W.png"></td>
-				<td onClick="filterTable('P')"><img src="assets/database/notes/note_P.png"></td>
-				<td onClick="filterTable('R')"><img src="assets/database/notes/note_R.png"></td>
-				<td onClick="filterTable('B')"><img src="assets/database/notes/note_B.png"></td>			
-			</tr><tr>
-				<td onClick="filterTable('G')"><img src="assets/database/notes/note_G.png"></td>
-				<td onClick="filterTable('C')"><img src="assets/database/notes/note_C.png"></td>
-				<td onClick="filterTable('Y')"><img src="assets/database/notes/note_Y.png"></td>
-				<td onClick="filterTable('O')"><img src="assets/database/notes/note_O.png"></td>
+				<td onClick="filterTable('Paralyze')" style="color: #c0c0c0; font-size: 12px; height: 100%; width: auto;">Paralyze</td>				
 			</tr>
 
 		</tbody>
@@ -72,9 +51,9 @@
 					<th onClick="sortTable(3)">Attack<br>(Upgrade)</th>
 					<th onClick="sortTable(4)">Elem/Sts</th>
 					<th onClick="sortTable(5)">Affinity</th>
-					<th onClick="sortTable(6)">Defense Bonus</th>
+					<th onClick="sortTable(6)">Defense</br>Bonus</th>
 					<th onClick="sortTable(7)">Slots</th>
-					<th onClick="sortTable(8)">Notes</th>
+					<th onClick="sortTable(8)" id="unique-header" style="display: none">-</th>
 					<th onClick="sortTable(9)">Sharpness</th>
 					<th onClick="sortTable(10)">Crafting Price</th>
 					<th onClick="sortTable(11)">Upgrade Price</th>
@@ -101,11 +80,6 @@
 					<td id="upgrade_materials" class="info-table"></td>
 				</tr>
 				<tr>
-					<th colspan="2">Horn Melodies</th>
-				</tr><tr>
-					<td colspan="2" id="horn_melodies" width="600px" class="info-table"><table><thead><tr style="background-color: #707070"><th>Notes</th><th>Effect</th></tr></thead></table></td>
-				</tr>
-				<tr>
 					<th colspan="2">Weapon Tree</th>
 				</tr>
 				<tr>
@@ -115,12 +89,14 @@
 		</div>
 		</div>
 	</div>
-	<div class="footer-block">
-		<div class="footer"><a href="https://twitter.com/SilverJolteon">© SilverJolteon</a></div>
-	</div>
+	<a id="footer" class="footer-block"></div>
 </div>
+<script src="scripts/navmenu.js"></script>
 <script src="scripts/database/songlist.js"></script>
 <script src="scripts/database/HH_data.js"></script>
+<script src="scripts/database/HH_scripts.js"></script>
+<script src="scripts/database/SA_data.js"></script>
+<script src="scripts/database/SA_scripts.js"></script>
 <script src="scripts/database/database.js"></script>
 </body>
 </html>
