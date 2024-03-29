@@ -23,8 +23,6 @@ function displayNavmenu(page){
 	`;
 	if(page != "damage-calculator") sidenav.innerHTML += `<a href="damage-calculator.html">Damage Calculator</a>`;
 	else navbar.innerHTML += `<span>Damage Calculator</span>`;
-
-	if(page != "database") sidenav.innerHTML += `<a href="database.html">Weapon Database</a>`;
 	
 	if(page != "charm-search") sidenav.innerHTML += `<a href="charm-search.html">Charm Table Search</a>`;
 	else navbar.innerHTML += `<span>Charm Table Search</span>`;
@@ -38,7 +36,15 @@ function displayNavmenu(page){
 			<a href="javascript:void(0)" onClick="changeWeapon('HH')">Hunting Horn Database</a>
 			<a href="javascript:void(0)" onClick="changeWeapon('SA')">Switch Axe Database</a>
 		`;
-		navbar.innerHTML += `<span id="navbar-title">Damage Calculator</span>`;
+		navbar.innerHTML += `<span id="navbar-title"></span>`;
+	}
+	else{
+		sidenav.innerHTML += `
+			</br>
+			<a href="database.html#HH" onClick="changeWeapon('HH')">Hunting Horn Database</a>
+			<a href="database.html#SA" onClick="changeWeapon('SA')">Switch Axe Database</a>
+		`;
+		navbar.innerHTML += `<span id="navbar-title"></span>`;
 	}
 	document.getElementById("footer").innerHTML = `
 		<div class="footer"><a href="https://twitter.com/SilverJolteon">© SilverJolteon</a></div>

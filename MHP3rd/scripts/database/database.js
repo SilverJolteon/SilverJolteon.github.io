@@ -402,3 +402,11 @@ function init(){
 
 displayNavmenu("database");
 init();
+switch(window.location.hash.substring(1)){
+	case "HH":
+		changeWeapon("HH");
+		break;
+	case "SA":
+		changeWeapon("SA");
+		break;
+}
