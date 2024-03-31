@@ -350,7 +350,7 @@ function filterTable(filter){
      //----------------------------------------------------------------------------------------------------
 	switch(WEAPON_TYPE){
 		case "GL": 
-			filter_headers = ["", "None", "Fire" ,"Water", "Thunder", "Clear", "Ice", "Dragon", "Poison", "Paralyze", "Normal", "Wide", "Long"];
+			filter_headers = ["", "None", "Fire" ,"Water", "Thunder", "Clear", "Ice", "Dragon", "Poison", "Paralyze", "Normal", "Long", "Wide"];
 			break;
 		case "HH": 
 			filter_headers = ["", "None", "Fire" ,"Water", "Thunder", "Clear", "Ice", "Dragon", "Poison", "Paralyze", "W", "P", "R", "B", "G", "C", "Y", "O"];

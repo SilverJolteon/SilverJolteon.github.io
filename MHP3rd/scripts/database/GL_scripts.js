@@ -19,8 +19,8 @@ function GL_init(){
 	var filter_row = filters.insertRow();
 	filter_row.innerHTML = `
 		<td onClick="filterTable('Normal')" style="color: #c0c0c0; font-size: 10px; height: 100%; width: auto;">Normal</br>Shelling</td>
-		<td onClick="filterTable('Wide')" style="color: #c0c0c0; font-size: 10px; height: 100%; width: auto;">Wide</br>Shelling</td>
 		<td onClick="filterTable('Long')" style="color: #c0c0c0; font-size: 10px; height: 100%; width: auto;">Long</br>Shelling</td>
+		<td onClick="filterTable('Wide')" style="color: #c0c0c0; font-size: 10px; height: 100%; width: auto;">Wide</br>Shelling</td>		
 	`;
 	filter_row.id = "filter_row";
 }
