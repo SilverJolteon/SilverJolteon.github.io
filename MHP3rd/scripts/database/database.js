@@ -70,7 +70,7 @@ function showMoreInfo(event){
     var crafting_materials = weapon["Craft"];
     var upgrade_materials = weapon["Upgrade"];
     
-    var table = `<table><thead><tr><th>Item</th><th>Qty</th></tr></thead><tbody>`;
+    var table = `<div class="mat-box"><table><thead><tr><th>Item</th><th>Qty</th></tr></thead><tbody>`;
     var table_0 = document.createElement("table");
     var table_1 = table;
     var table_2 = table;
@@ -103,8 +103,8 @@ function showMoreInfo(event){
 	    cell_0.innerHTML += `<span style="float: left">${(i+1)}</span><span style="display: inline-block; text-align: left; width: 150px;">${tree[i]}</span>`;
 	    
     }
-    table_1 += "</tbody></table>";
-    table_2 += "</tbody></table>";
+    table_1 += "</tbody></table></div>";
+    table_2 += "</tbody></table></div>";
     
     weapon_tree.appendChild(table_0);
     document.getElementById("materials-table").style.display = "";
@@ -115,9 +115,6 @@ function showMoreInfo(event){
     //-----WEAPON TYPE------------------------------------------------------------------------------------
     //----------------------------------------------------------------------------------------------------
     switch(WEAPON_TYPE){
-	     case "GL":
-			GL_showMoreInfo(event);
-			break;
 		case "HH":
 			HH_showMoreInfo(event);
 			break;
@@ -177,6 +174,9 @@ function loadData() {
 		  //-----WEAPON TYPE------------------------------------------------------------------------------------
 		  //----------------------------------------------------------------------------------------------------
 		  switch(WEAPON_TYPE){
+			  case "GL":
+				unique = weapon["Shelling"];
+				break;
 			  case "HH":
 				unique = (weapon["Notes"]) ? `<img src="assets/database/notes/note_${weapon["Notes"][0]}.png"><img src="assets/database/notes/note_${weapon["Notes"][1]}.png"><img src="assets/database/notes/note_${weapon["Notes"][2]}.png">` : "---";
 				break;
@@ -196,8 +196,8 @@ function loadData() {
                 <td>${weapon["Attack"]}<div style="color: #42e6ee;">(${parseInt(weapon["Attack"]) + 15})</div></td>
                 <td>${special}</td>
                 <td>${weapon["Affinity"]}%</td>
-                <td>${defense}</td>
-                <td>${slots}</td>
+			 <td>${slots}</td>
+                <td>${defense}</td>       
 		 `;
 		 //----------------------------------------------------------------------------------------------------
 		 //-----WEAPON TYPE------------------------------------------------------------------------------------
@@ -209,7 +209,7 @@ function loadData() {
 				row.innerHTML += `<td>${unique}</td>`;
 		 }
             row.innerHTML += `    
-                <td>${sharpness}</td>
+                <td style="width: 112px">${sharpness}</td>
                 <td>${crafting_cost}</td>
                 <td>${upgrade_cost}</td>
             `;
@@ -225,9 +225,9 @@ function loadData() {
 			weapon["Rarity"], 
 			weapon["Attack"], 
 			special, 
-			weapon["Affinity"], 
-			(weapon["Defense"] == null) ? 0 : weapon["Defense"], 
+			weapon["Affinity"],  
 			slots, 
+			(weapon["Defense"] == null) ? 0 : weapon["Defense"],
 			unique, 
 			sharp, 
 			(weapon["Craft"] && weapon["Craft"]["z"]) ? weapon["Craft"]["z"] : 0, 
@@ -283,39 +283,52 @@ function loadData() {
 function sortTable(col){
 	active_row = null;
 	while(weapon_info.firstChild) weapon_info.removeChild(weapon_info.firstChild);
-	if(col == null){
-		loadData();
-		return;
-	}
-	if(col == 0){
-		sorting[col] ^= 1;
-		for(var i = 0; i < sorting.length; i++) if(i != col && sorting[i] > 0) sorting[col] = 0;
-	}
-	else if(col == 1 || col == 2 || col == 8){
-		if(sorting[col] > 0) sorting[col]--;
-		else if(sorting[col] == 0) sorting[col] = 2;
-	}
-	else{
-		if(sorting[col] < 2) sorting[col]++;		else if(sorting[col] == 2) sorting[col] = 0;
-	}
-	
-	for(var i = 0; i < sorting.length; i++) if(i != col) sorting[i] = 0;
 	var headers = document.getElementById("data-table").getElementsByTagName("th");
+	for(var i = 0; i < headers.length; i++) headers[i].style.backgroundColor = "#202020";
+	if(col != null){
+		var unique_sort = (WEAPON_TYPE == "GL");
+		if(col == 0){
+			sorting[col] ^= 1;
+			for(var i = 0; i < sorting.length; i++) if(i != col && sorting[i] > 0) sorting[col] = 0;
+		}
+		else if(col == 1 || col == 2 || (col == 8 && !unique_sort)){
+			if(sorting[col] > 0) sorting[col]--;
+			else if(sorting[col] == 0) sorting[col] = 2;
+		}
+		else{
+			if(sorting[col] < 2) sorting[col]++;			else if(sorting[col] == 2) sorting[col] = 0;
+		}
+		
+		for(var i = 0; i < sorting.length; i++) if(i != col) sorting[i] = 0;
+	}
 	for(var i = 0; i < headers.length; i++){
-	   if(i == col){
-		switch(sorting[col]){
+		switch(sorting[i]){
 			case 0: 
-				headers[i].style.backgroundColor = "#202020";
+				if(headers[i].children[0] != null){
+					headers[i].children[0].classList.remove("fa-sort-desc");
+					headers[i].children[0].classList.remove("fa-sort-asc");
+					headers[i].style.backgroundColor = "#202020";
+				}
 				break;
 			case 1:
-				headers[i].style.backgroundColor = "#403030";
+				headers[i].children[0].classList.add("fa-sort-desc");
+				headers[i].children[0].classList.remove("fa-sort-asc");
+				headers[i].style.backgroundColor = "#303030";
+				if(i == 8 && WEAPON_TYPE == "HH"){
+					headers[i].children[0].classList.add("fa-sort-asc");
+					headers[i].children[0].classList.remove("fa-sort-desc");
+				}
 				break;
 			case 2:
-				headers[i].style.backgroundColor = "#303040";
+				headers[i].children[0].classList.add("fa-sort-asc");
+				headers[i].children[0].classList.remove("fa-sort-desc");
+				headers[i].style.backgroundColor = "#303030";
+				if(i == 8 && WEAPON_TYPE == "HH"){
+					headers[i].children[0].classList.add("fa-sort-desc");
+					headers[i].children[0].classList.remove("fa-sort-asc");
+				}
 				break;
 		}
-	   }
-	   else headers[i].style.backgroundColor = "#202020";
 	}
 	
 	loadData();
@@ -336,6 +349,9 @@ function filterTable(filter){
      //-----WEAPON TYPE------------------------------------------------------------------------------------
      //----------------------------------------------------------------------------------------------------
 	switch(WEAPON_TYPE){
+		case "GL": 
+			filter_headers = ["", "None", "Fire" ,"Water", "Thunder", "Clear", "Ice", "Dragon", "Poison", "Paralyze", "Normal", "Wide", "Long"];
+			break;
 		case "HH": 
 			filter_headers = ["", "None", "Fire" ,"Water", "Thunder", "Clear", "Ice", "Dragon", "Poison", "Paralyze", "W", "P", "R", "B", "G", "C", "Y", "O"];
 			break;
@@ -389,6 +405,9 @@ function init(){
 	//-----WEAPON TYPE------------------------------------------------------------------------------------
 	//----------------------------------------------------------------------------------------------------
 	switch(WEAPON_TYPE){
+		case "GL":
+			GL_init();
+			break;
 		case "HH":
 			HH_init();
 			break;
@@ -403,6 +422,9 @@ function init(){
 displayNavmenu("database");
 init();
 switch(window.location.hash.substring(1)){
+	case "GL":
+		changeWeapon("GL");
+		break;
 	case "HH":
 		changeWeapon("HH");
 		break;

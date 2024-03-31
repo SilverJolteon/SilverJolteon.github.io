@@ -6,6 +6,7 @@
 <title>Monster Hunter Portable 3rd Weapon Database</title>
 <link rel="icon" type="image/png" href="assets/favicon.ico">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css">
 <link rel="stylesheet" href="assets/database/style.css">
 <link rel="stylesheet" href="assets/navmenu.css">
 </head>
@@ -45,18 +46,18 @@
 			<table id="data-table">
 			<thead>
 			    <tr>
-					<th onClick="sortTable(0)">#</th>
-					<th onClick="sortTable(1)">Name</th>
-					<th onClick="sortTable(2)">Rarity</th>
-					<th onClick="sortTable(3)">Attack<br>(Upgrade)</th>
-					<th onClick="sortTable(4)">Elem/Sts</th>
-					<th onClick="sortTable(5)">Affinity</th>
-					<th onClick="sortTable(6)">Defense</br>Bonus</th>
-					<th onClick="sortTable(7)">Slots</th>
+					<th onClick="sortTable(0)"># <i class="fa fa-fw fa-sort"></i></th>
+					<th onClick="sortTable(1)">Name <i class="fa fa-fw fa-sort"></i></th>
+					<th onClick="sortTable(2)">Rarity <i class="fa fa-fw fa-sort"></i></th>
+					<th onClick="sortTable(3)">Attack <i class="fa fa-fw fa-sort"></i></th>
+					<th onClick="sortTable(4)">Elem/Sts <i class="fa fa-fw fa-sort"></i></th>
+					<th onClick="sortTable(5)">Affinity <i class="fa fa-fw fa-sort"></i></th>
+					<th onClick="sortTable(6)">Slots <i class="fa fa-fw fa-sort"></i></th>
+					<th onClick="sortTable(7)">Defense <i class="fa fa-fw fa-sort"></i></th>
 					<th onClick="sortTable(8)" id="unique-header" style="display: none">-</th>
-					<th onClick="sortTable(9)">Sharpness</th>
-					<th onClick="sortTable(10)">Crafting Price</th>
-					<th onClick="sortTable(11)">Upgrade Price</th>
+					<th onClick="sortTable(9)">Sharpness <i class="fa fa-fw fa-sort"></i></th>
+					<th onClick="sortTable(10)">Crafting Price <i class="fa fa-fw fa-sort"></i></th>
+					<th onClick="sortTable(11)">Upgrade Price <i class="fa fa-fw fa-sort"></i></th>
 			    </tr>
 			</thead>
 			<tbody id="weapon_info"></tbody>
@@ -93,6 +94,8 @@
 </div>
 <script src="scripts/navmenu.js"></script>
 <script src="scripts/database/songlist.js"></script>
+<script src="scripts/database/GL_data.js"></script>
+<script src="scripts/database/GL_scripts.js"></script>
 <script src="scripts/database/HH_data.js"></script>
 <script src="scripts/database/HH_scripts.js"></script>
 <script src="scripts/database/SA_data.js"></script>

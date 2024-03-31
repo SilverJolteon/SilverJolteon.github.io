@@ -172,8 +172,8 @@ var HH_data = {
     "Rarity": 1,
     "Attack": 80,
     "Affinity": 0,
-    "Defense": 10,
     "Slots": 1,
+    "Defense": 10,
     "Notes": "WCR",
     "Sharpness": {
       "+0": [5, 5, 22],
@@ -198,8 +198,8 @@ var HH_data = {
     "Rarity": 2,
     "Attack": 110,
     "Affinity": 0,
-    "Defense": 12,
     "Slots": 1,
+    "Defense": 12,
     "Notes": "WCR",
     "Sharpness": {
       "+0": [5, 5, 34],
@@ -221,8 +221,8 @@ var HH_data = {
     "Rarity": 2,
     "Attack": 140,
     "Affinity": 0,
-    "Defense": 15,
     "Slots": 1,
+    "Defense": 15,
     "Notes": "WCR",
     "Sharpness": {
       "+0": [5, 5, 38, 7],
@@ -243,8 +243,8 @@ var HH_data = {
     "Rarity": 3,
     "Attack": 170,
     "Affinity": -5,
-    "Defense": 20,
     "Slots": 1,
+    "Defense": 20,
     "Notes": "WCR",
     "Sharpness": {
       "+0": [10, 7, 29, 9],
@@ -272,8 +272,8 @@ var HH_data = {
     "Rarity": 4,
     "Attack": 180,
     "Affinity": -5,
-    "Defense": 25,
     "Slots": 1,
+    "Defense": 25,
     "Notes": "PCR",
     "Sharpness": {
       "+0": [10, 16, 18, 11],
@@ -294,8 +294,8 @@ var HH_data = {
     "Rarity": 5,
     "Attack": 200,
     "Affinity": -5,
-    "Defense": 25,
     "Slots": 1,
+    "Defense": 25,
     "Notes": "PCR",
     "Sharpness": {
       "+0": [32, 5, 18, 20, 2],
@@ -487,8 +487,8 @@ var HH_data = {
     "Attack": 140,
     "Special": "Water 20",
     "Affinity": 0,
-    "Defense": 16,
     "Slots": 0,
+    "Defense": 16,
     "Notes": "WBC",
     "Sharpness": {
       "+0": [17, 9, 24, 5],
@@ -510,8 +510,8 @@ var HH_data = {
     "Attack": 190,
     "Special": "Water 22",
     "Affinity": 0,
-    "Defense": 18,
     "Slots": 0,
+    "Defense": 18,
     "Notes": "PBC",
     "Sharpness": {
       "+0": [19, 9, 25, 13],
@@ -532,8 +532,8 @@ var HH_data = {
     "Attack": 210,
     "Special": "Water 30",
     "Affinity": 0,
-    "Defense": 22,
     "Slots": 0,
+    "Defense": 22,
     "Notes": "PBC",
     "Sharpness": {
       "+0": [39, 5, 13, 16, 4],
@@ -953,8 +953,8 @@ var HH_data = {
     "Rarity": 3,
     "Attack": 170,
     "Affinity": 0,
-    "Defense": 30,
     "Slots": 0,
+    "Defense": 30,
     "Notes": "WRB",
     "Sharpness": {
       "+0": [5, 14, 36],
@@ -982,8 +982,8 @@ var HH_data = {
     "Rarity": 4,
     "Attack": 190,
     "Affinity": 0,
-    "Defense": 35,
     "Slots": 0,
+    "Defense": 35,
     "Notes": "PRB",
     "Sharpness": {
       "+0": [5, 5, 38, 7],
@@ -1004,8 +1004,8 @@ var HH_data = {
     "Rarity": 6,
     "Attack": 210,
     "Affinity": 0,
-    "Defense": 40,
     "Slots": 0,
+    "Defense": 40,
     "Notes": "PRB",
     "Sharpness": {
       "+0": [5, 14, 36, 11],
@@ -1024,8 +1024,8 @@ var HH_data = {
     "Attack": 200,
     "Special": "Fire 15",
     "Affinity": 0,
-    "Defense": 20,
     "Slots": 1,
+    "Defense": 20,
     "Notes": "PBG",
     "Sharpness": {
       "+0": [10, 7, 29, 9],
@@ -1046,8 +1046,8 @@ var HH_data = {
     "Attack": 220,
     "Special": "Fire 20",
     "Affinity": 0,
-    "Defense": 30,
     "Slots": 1,
+    "Defense": 30,
     "Notes": "PBO",
     "Sharpness": {
       "+0": [19, 9, 25, 13],
@@ -1459,8 +1459,8 @@ var HH_data = {
     "Attack": 180,
     "Special": "Dragon 35",
     "Affinity": 0,
-    "Defense": 15,
     "Slots": 0,
+    "Defense": 15,
     "Notes": "PRO",
     "Sharpness": {
       "+0": [12, 11, 25, 20, 9],
@@ -1735,8 +1735,8 @@ var HH_data = {
     "Attack": 250,
     "Special": "Ice 16",
     "Affinity": -20,
-    "Defense": 15,
     "Slots": 0,
+    "Defense": 15,
     "Notes": "PYO",
     "Sharpness": {
       "+0": [12, 7, 22, 14],

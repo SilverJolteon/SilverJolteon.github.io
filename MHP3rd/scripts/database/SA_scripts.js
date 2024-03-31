@@ -11,7 +11,7 @@ function SA_init(){
 	data = SA_data;
 	document.getElementById("navbar-title").innerHTML = "Switch Axe Database";
 	var header = document.getElementById("unique-header");
-	header.innerHTML = "Phials";
+	header.innerHTML = `Phials <i class="fa fa-fw fa-sort"></i>`;
 	header.style.display = "";
 	
 	

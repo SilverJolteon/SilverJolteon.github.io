@@ -22,27 +22,29 @@ function displayNavmenu(page){
 		<img class="logo" src="assets/logo.png">
 	`;
 	if(page != "damage-calculator") sidenav.innerHTML += `<a href="damage-calculator.html">Damage Calculator</a>`;
-	else navbar.innerHTML += `<span>Damage Calculator</span>`;
+	else navbar.innerHTML += `<span onClick="openSidenav()" style="cursor: pointer">Damage Calculator</span>`;
 	
 	if(page != "charm-search") sidenav.innerHTML += `<a href="charm-search.html">Charm Table Search</a>`;
-	else navbar.innerHTML += `<span>Charm Table Search</span>`;
+	else navbar.innerHTML += `<span onClick="openSidenav()" style="cursor: pointer">Charm Table Search</span>`;
 	
 	if(page != "kelbi-horn") sidenav.innerHTML += `<a href="kelbi-horn.html">Kelbi Horn Reward Tables</a>`;
-	else navbar.innerHTML += `<span>Kelbi Horn Reward Tables</span>`;
+	else navbar.innerHTML += `<span onClick="openSidenav()" style="cursor: pointer">Kelbi Horn Reward Tables</span>`;
 	
 	if(page == "database"){
 		sidenav.innerHTML += `
 			</br>
-			<a href="javascript:void(0)" onClick="changeWeapon('HH')">Hunting Horn Database</a>
-			<a href="javascript:void(0)" onClick="changeWeapon('SA')">Switch Axe Database</a>
+			<a href="database.html#GL" onClick="changeWeapon('GL')">Gunlance Database</a>
+			<a href="database.html#HH" onClick="changeWeapon('HH')">Hunting Horn Database</a>
+			<a href="database.html#SA" onClick="changeWeapon('SA')">Switch Axe Database</a>
 		`;
-		navbar.innerHTML += `<span id="navbar-title"></span>`;
+		navbar.innerHTML += `<span id="navbar-title" onClick="openSidenav()" style="cursor: pointer"></span>`;
 	}
 	else{
 		sidenav.innerHTML += `
 			</br>
-			<a href="database.html#HH" onClick="changeWeapon('HH')">Hunting Horn Database</a>
-			<a href="database.html#SA" onClick="changeWeapon('SA')">Switch Axe Database</a>
+			<a href="database.html#GL">Gunlance Database</a>
+			<a href="database.html#HH">Hunting Horn Database</a>
+			<a href="database.html#SA">Switch Axe Database</a>
 		`;
 		navbar.innerHTML += `<span id="navbar-title"></span>`;
 	}

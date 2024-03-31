@@ -1112,8 +1112,8 @@ var SA_data ={
     "Attack": 150,
     "Special": "Water 20",
     "Affinity": 5,
-    "Defense": 8,
     "Slots": 0,
+    "Defense": 8,
     "Phial": "Elemental Phial",
     "Sharpness": {
       "+0": [14, 7, 9, 36],
@@ -1134,8 +1134,8 @@ var SA_data ={
     "Attack": 170,
     "Special": "Water 24",
     "Affinity": 10,
-    "Defense": 12,
     "Slots": 0,
+    "Defense": 12,
     "Phial": "Elemental Phial",
     "Sharpness": {
       "+0": [8, 9, 20, 38, 2],
@@ -1157,8 +1157,8 @@ var SA_data ={
     "Attack": 190,
     "Special": "Water 26",
     "Affinity": 15,
-    "Defense": 16,
     "Slots": 1,
+    "Defense": 16,
     "Phial": "Elemental Phial",
     "Sharpness": {
       "+0": [26, 4, 9, 20, 18],
