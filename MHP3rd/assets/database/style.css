@@ -182,6 +182,7 @@ body{
 	background-color: transparent;
 	border-radius: 0;
 	vertical-align: top;
+	height: 16px;
 }
 
 .materials-table th.close{
@@ -219,6 +220,7 @@ body{
 
 .mat-box th, .mat-box td{
 	cursor: default;
+	vertical-align: center;
 }
 
 .overlay {
