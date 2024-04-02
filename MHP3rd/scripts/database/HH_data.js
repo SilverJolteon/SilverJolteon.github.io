@@ -162,7 +162,7 @@ var HH_data = {
     },
     "Upgrade": {
       "G.Rathian Scale+": 6,
-      "G.Rathian Carapace": 4,
+      "G.Rath Carapace": 4,
       "Rathian Ruby": 1,
       "Small Goldenfish": 20,
       "z": 75000
