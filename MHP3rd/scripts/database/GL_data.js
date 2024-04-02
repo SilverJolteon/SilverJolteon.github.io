@@ -977,7 +977,7 @@ var GL_data = {
     },
     "Upgrade": {
       "G.Agnak Tail": 1,
-      "G. Agnak Beak": 1,
+      "G.Agnak Beak": 1,
 	 "G.Agnak Carapace": 6,
       "z": 50000
     },

@@ -57,6 +57,23 @@ function getWeaponTree(currentName, tree = []){
 	return tree;
 }
 
+function getSprite(material){
+	for(var key in sprite_data){
+		var pal = sprite_data[key];
+		for(var coord in pal){
+			var item = pal[coord];
+			if(item.includes(material)){				
+				var coords = coord.split(", ");
+				var x = -1 * parseInt(coords[0]);
+				var y = -1 * parseInt(coords[1]);
+				var img = `<span style="width: 16px; height: 16px; display: flex; background-position: ${x}px ${y}px; background-image: url('assets/database/spritesheets/${key}.png')"></span>`;
+				return img;
+			}
+		}
+	}
+	return "";
+}
+
 function showMoreInfo(event){
     var id = event.currentTarget.id;
     for(var i = 0; i < rows_list.length; i++) if(rows_list[i].id == id) active_row = rows_list[i];
@@ -70,13 +87,35 @@ function showMoreInfo(event){
     var crafting_materials = weapon["Craft"];
     var upgrade_materials = weapon["Upgrade"];
     
-    var table = `<div class="mat-box"><table><thead><tr><th>Item</th><th>Qty</th></tr></thead><tbody>`;
+    var table = `<div class="mat-box"><table><thead><tr><th></th><th>Item</th><th>Qty</th></tr></thead><tbody>`;
     var table_0 = document.createElement("table");
     var table_1 = table;
     var table_2 = table;
     
-    for(var material in crafting_materials) if(material != "z") table_1 += `<tr><td>${material}</td><td>${crafting_materials[material]}</td></tr>`;
-    for(var material in upgrade_materials) if(material != "z") table_2 += `<tr><td>${material}</td><td>${upgrade_materials[material]}</td></tr>`;
+    for(var material in crafting_materials){
+	  if(material != "z"){
+		  var sprite = getSprite(material);
+		  table_1 += `
+			<tr>
+				<td>${sprite}</td>
+				<td>${material}</td>
+				<td>${crafting_materials[material]}</td>
+			</tr>
+		 `; 
+	  }		  
+    } 
+    for(var material in upgrade_materials){
+	    if(material != "z"){
+		  var sprite = getSprite(material);
+		  table_2 += `
+			<tr>
+				<td>${sprite}</td>
+				<td>${material}</td>
+				<td>${upgrade_materials[material]}</td>
+			</tr>
+		 `; 
+	  }		
+    } 
     
     var tree = getWeaponTree(active_row.id).reverse();
     var weapon_tree = document.getElementById("weapon_tree");

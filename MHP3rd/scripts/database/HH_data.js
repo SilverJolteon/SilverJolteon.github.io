@@ -823,10 +823,10 @@ var HH_data = {
       "+1": [12, 7, 22, 23, 22, 3]
     },
     "Upgrade": {
-      "TigrexScale": 8,
-      "TigrexScalp": 2,
-      "DiablosFang": 8,
-      "CarbaliteOre": 5,
+      "Tigrex Scale": 8,
+      "Tigrex Scalp": 2,
+      "Diablos Fang": 8,
+      "Carbalite Ore": 5,
       "z": 40000
     },
     "UpgradesTo": [
@@ -1666,7 +1666,7 @@ var HH_data = {
     "Craft": {
       "Zinogre Horn": 1,
       "Zinogre Shell": 4,
-      "Zino Electrofur": 3,
+      "Zin Electrofur": 3,
       "Zinogre Claw": 2,
       "z": 24000
     },
@@ -1688,7 +1688,7 @@ var HH_data = {
     "Upgrade": {
       "Zinogre Horn+": 2,
       "Zinogre Carapace": 4,
-      "Zino Electrofur+": 4,
+      "Zin Electrofur+": 4,
       "Zinogre Jasper": 1,
       "z": 80000
     }

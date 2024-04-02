@@ -782,7 +782,7 @@ var SA_data ={
     "Upgrade": {
       "Bullfango Pelt": 3,
       "Bone": 5,
-      "Iron ore": 2,
+      "Iron Ore": 2,
       "z": 1900
     },
     "UpgradesTo": [
