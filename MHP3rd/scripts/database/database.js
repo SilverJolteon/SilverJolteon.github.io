@@ -261,12 +261,13 @@ function loadData() {
 		  for(var i = 0; i < (sharpness_bar_1_exist ? weapon["Sharpness"]["+1"] : weapon["Sharpness"]["+0"]).length; i++){
 			sharp += (sharpness_bar_1_exist ? weapon["Sharpness"]["+1"] : weapon["Sharpness"]["+0"])[i] * modifiers[i];
 		  }
+
 		  var headers = [
 			id, 
 			name, 
 			weapon["Rarity"], 
 			weapon["Attack"], 
-			special, 
+			(weapon["Special"] == null) ? 0 : parseInt(special.split(" ")[1]), 
 			weapon["Affinity"],  
 			slots, 
 			(weapon["Defense"] == null) ? 0 : weapon["Defense"],
@@ -338,7 +339,8 @@ function sortTable(col){
 			else if(sorting[col] == 0) sorting[col] = 2;
 		}
 		else{
-			if(sorting[col] < 2) sorting[col]++;			else if(sorting[col] == 2) sorting[col] = 0;
+			if(sorting[col] < 2) sorting[col]++;
+			else if(sorting[col] == 2) sorting[col] = 0;
 		}
 		
 		for(var i = 0; i < sorting.length; i++) if(i != col) sorting[i] = 0;
