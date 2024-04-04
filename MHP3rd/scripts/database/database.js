@@ -23,6 +23,9 @@ function changeWeapon(type){
 		case "SA":
 			SA_terminate();
 			break;
+		case "SnS":
+			SnS_terminate();
+			break;
 	}
 	WEAPON_TYPE = type;
 	init();
@@ -98,7 +101,7 @@ function showMoreInfo(event){
 		  table_1 += `
 			<tr>
 				<td>${sprite}</td>
-				<td>${material}</td>
+				<td style="text-align: left;">${material}</td>
 				<td>${crafting_materials[material]}</td>
 			</tr>
 		 `; 
@@ -110,7 +113,7 @@ function showMoreInfo(event){
 		  table_2 += `
 			<tr>
 				<td>${sprite}</td>
-				<td>${material}</td>
+				<td style="text-align: left;">${material}</td>
 				<td>${upgrade_materials[material]}</td>
 			</tr>
 		 `; 
@@ -384,6 +387,7 @@ function filterTable(filter){
 		return;
 	}
 	var filter_headers = ["", "None", "Fire" ,"Water", "Thunder", "Clear", "Ice", "Dragon", "Poison", "Paralyze"];
+	var elem_sts_filter_num = 10;
 	//----------------------------------------------------------------------------------------------------
      //-----WEAPON TYPE------------------------------------------------------------------------------------
      //----------------------------------------------------------------------------------------------------
@@ -397,10 +401,14 @@ function filterTable(filter){
 		case "SA": 
 			filter_headers = ["", "None", "Fire" ,"Water", "Thunder", "Clear", "Ice", "Dragon", "Poison", "Paralyze", "Power Phial", "Elemental Phial", "Exhaust Phial", "Poison Phial", "Paralysis Phial", "Dragon Phial"];
 			break;
+		case "SnS": 
+			filter_headers = ["", "None", "Fire" ,"Water", "Thunder", "Clear", "Ice", "Dragon", "Poison", "Paralyze", "Sleep"];
+			elem_sts_filter_num = 11;
+			break;
 	}
 	
 	if(filter != "Clear" & filter_headers.includes(filter)){
-		switch(filter_headers.indexOf(filter) < 10){
+		switch(filter_headers.indexOf(filter) < elem_sts_filter_num){
 			case true:
 				if(filters[0].includes(filter)){
 					var index = filters[0].indexOf(filter);
@@ -454,6 +462,9 @@ function init(){
 		case "SA":
 			SA_init();
 			break;
+		case "SnS":
+			SnS_init();
+			break;
 	}
 	filterTable();
 }
@@ -469,5 +480,8 @@ switch(window.location.hash.substring(1)){
 		break;
 	case "SA":
 		changeWeapon("SA");
+		break;
+	case "SnS":
+		changeWeapon("SnS");
 		break;
 }

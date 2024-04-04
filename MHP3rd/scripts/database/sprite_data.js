@@ -78,6 +78,9 @@ var sprite_data = {
 			"Baggi Hide","G.Baggi Hide","G.Baggi Hide+","King's Crest",
 			"G.Agnak Hide+"
 		],
+		"32, 16": [
+			"Baggi Scale","Baggi Scale+"
+		],
 		"32, 32": [
 			"Nutrients","Mega Nutrients","Cleanser","Monster Fluid",
 			"Vivid Fluid","Brilliant Fluid"
@@ -85,6 +88,9 @@ var sprite_data = {
 		"48, 16": [
 			"J.Barroth Ridge+","J.Barroth Scalp","J.Barroth Tail","G.Agnak Fin+",
 			"G.Agnak Tail","Dewy Pleura+"
+		],
+		"48, 64": [
+			"Sword Codex"
 		],
 		"64, 16": [
 			"G.Agnak Beak"
@@ -121,11 +127,20 @@ var sprite_data = {
 			"Bird Wyvern Fang","G.Jaggi Claw","G.Jaggi Claw+","P.Ludroth Claw+",
 			"Alatreon Talon","Brkn Skypiercer","Skypiercer"
 		],
+		"0, 80": [
+			"Alatreon Scute"
+		],
 		"16, 16": [
 			"Jaggi Hide","G.Jaggi Hide","G.Jaggi Hide+","Plum Spongy Hide"
 		],
+		"32, 16": [
+			"Jaggi Scale","Jaggi Scale+","P.Ludroth Scale+","Alatreon Plate"
+		],
 		"48, 16": [
 			"G.Jaggi Head","Venom Gland","Grim Venom Gland","Alatreon Tail"
+		],
+		"80, 0": [
+			"King's Frill","Alatreon Webbing"
 		],
 		"96, 0": [
 			"King Scarab"
@@ -183,7 +198,7 @@ var sprite_data = {
 			"S.Barioth Claw+"
 		],
 		"16, 16": [
-			"High-Qualty Pelt","Bullfango Pelt","G.Wroggi Hide","G.Wroggi Hide+",
+			"High-Qualty Pelt","Bullfango Pelt","Wroggi Hide", "G.Wroggi Hide","G.Wroggi Hide+",
 			"S.Barioth Pelt+"
 		],
 		"0, 80": [
@@ -211,6 +226,9 @@ var sprite_data = {
 		],		
 	},
 	"PAL_7": {
+		"0, 16": [
+			"Altaroth Jaw"
+		],
 		"16, 16": [
 			"Hydro Hide","Hydro Hide+"
 		],
@@ -336,6 +354,9 @@ var sprite_data = {
 		"80, 0": [
 			"Bnahabra Wing"
 		],
+		"80, 32": [
+			"Small Barrel"
+		],
 		"96, 0": [
 			"Flashbug","Thunderbug","Rare Scarab"
 		],
@@ -409,12 +430,21 @@ var sprite_data = {
 		"96, 0": [
 			"Bitterbug","Fulgurbug"
 		],
+		"96, 48": [
+			"Comrade Ticket","Detective Proof","Incomplete Plans"
+		],
 		"112, 16": [
 			"Azure Dragongem"
 		],
+		"128, 32": [
+			"Bird Wyvern Gem"
+		],
 		"144, 0": [
 			"Machalite Ore", "Rainbow Crystal"
-		]
+		],
+		"144, 32": [
+			"Sleep Sac","Coma Sac"
+		],
 	},
 	"PAL_13": {
 		"0, 16": [

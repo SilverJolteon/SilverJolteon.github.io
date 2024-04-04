@@ -221,6 +221,7 @@ body{
 	cursor: default;
 	vertical-align: bottom;
 	height: 16px;
+	text-align: center;
 }
 
 .overlay {

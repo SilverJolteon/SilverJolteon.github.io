@@ -1,4 +1,4 @@
-var SA_data ={
+var SA_data = {
   "Old Yukumo Switchaxe": {
     "Rarity": 1,
     "Attack": 50,
