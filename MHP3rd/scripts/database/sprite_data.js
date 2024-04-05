@@ -17,6 +17,9 @@ var sprite_data = {
 		"32, 16": [
 			"Humspun Conch","S.Rath Scale+","Ukanlos Scale"
 		],
+		"48, 0": [
+			"Sap Plant"
+		],
 		"48, 16": [
 			"Lagombi Ear","Lagombi Ear+","Lagombi Plastron","Lagom Plastron+",
 			"Fearsome Maw","S.Rathalos Tail","Barioth Spike","Barioth Tail",
@@ -28,6 +31,9 @@ var sprite_data = {
 		],
 		"80, 0": [
 			"Amatsu Patagium"
+		],
+		"96, 0": [
+			"Godbug"
 		],
 		"96, 48": [
 			"Pawprint Stamp","VE Silver Ticket","Famitsu P Ticket","W.Crow Feather",
@@ -130,6 +136,9 @@ var sprite_data = {
 		"0, 80": [
 			"Alatreon Scute"
 		],
+		"16, 0": [
+			"Toadstool","Exciteshroom"
+		],
 		"16, 16": [
 			"Jaggi Hide","G.Jaggi Hide","G.Jaggi Hide+","Plum Spongy Hide"
 		],
@@ -160,7 +169,7 @@ var sprite_data = {
 			"Rathian Shell", "Rathian Carapace", "Duramboros Shell", "Duram Carapace"
 		],
 		"16, 16": [
-			"Warm Pelt", "Slagtoth Hide", "Slagtoth Hide+", "Duram Mossplate", "Hard Mossplate"
+			"Warm Pelt", "Slagtoth Hide", "Slagtoth Hide+", "G.Narga Pelt+", "Duram Mossplate", "Hard Mossplate"
 		],
 		"32, 0": [
 			"Burst Arowana","Wanchovy"
@@ -197,12 +206,15 @@ var sprite_data = {
 			"Barroth Claw","Barroth Claw+","Amber Tusks","Amber Tusks+",
 			"S.Barioth Claw+"
 		],
+		"0, 80": [
+			"Barroth Shell","Barroth Carapace","S.Bari Carapace"
+		],
 		"16, 16": [
 			"High-Qualty Pelt","Bullfango Pelt","Wroggi Hide", "G.Wroggi Hide","G.Wroggi Hide+",
 			"S.Barioth Pelt+"
 		],
-		"0, 80": [
-			"Barroth Shell","Barroth Carapace","S.Bari Carapace"
+		"32, 16": [
+			"Wroggi Scale","Wroggi Scale+"
 		],
 		"48, 16": [
 			"Big Fin","Quality Fin","Bullfango Head","G.Wroggi Brace",

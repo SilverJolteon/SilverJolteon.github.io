@@ -14,6 +14,9 @@ function changeWeapon(type){
 	//-----WEAPON TYPE------------------------------------------------------------------------------------
 	//----------------------------------------------------------------------------------------------------
 	switch(WEAPON_TYPE){
+		case "DB":
+			DB_terminate();
+			break;
 		case "GL":
 			GL_terminate();
 			break;
@@ -394,6 +397,10 @@ function filterTable(filter){
      //-----WEAPON TYPE------------------------------------------------------------------------------------
      //----------------------------------------------------------------------------------------------------
 	switch(WEAPON_TYPE){
+		case "DB": 
+			filter_headers = ["", "None", "Fire" ,"Water", "Thunder", "Clear", "Ice", "Dragon", "Poison"];
+			elem_sts_filter_num = 9;
+			break;
 		case "GL": 
 			filter_headers = ["", "None", "Fire" ,"Water", "Thunder", "Clear", "Ice", "Dragon", "Poison", "Paralyze", "Normal", "Long", "Wide"];
 			break;
@@ -454,13 +461,15 @@ function init(){
 	//-----WEAPON TYPE------------------------------------------------------------------------------------
 	//----------------------------------------------------------------------------------------------------
 	switch(WEAPON_TYPE){
+		case "DB":
+			DB_init();
+			break;
 		case "GL":
 			GL_init();
 			break;
 		case "HH":
 			HH_init();
-			break;
-			
+			break;	
 		case "SA":
 			SA_init();
 			break;
@@ -473,7 +482,13 @@ function init(){
 
 displayNavmenu("database");
 init();
+//----------------------------------------------------------------------------------------------------
+//-----WEAPON TYPE------------------------------------------------------------------------------------
+//----------------------------------------------------------------------------------------------------
 switch(window.location.hash.substring(1)){
+	case "DB":
+		changeWeapon("DB");
+		break;
 	case "GL":
 		changeWeapon("GL");
 		break;

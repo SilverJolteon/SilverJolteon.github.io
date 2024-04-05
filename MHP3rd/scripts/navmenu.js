@@ -34,6 +34,7 @@ function displayNavmenu(page){
 		sidenav.innerHTML += `
 			</br>
 			<a href="database.html#SnS" onClick="changeWeapon('SnS')">Sword & Shield Database</a>
+			<a href="database.html#SnS" onClick="changeWeapon('DB')">Dual Blades Database</a>
 			<a href="database.html#HH" onClick="changeWeapon('HH')">Hunting Horn Database</a>
 			<a href="database.html#GL" onClick="changeWeapon('GL')">Gunlance Database</a>
 			<a href="database.html#SA" onClick="changeWeapon('SA')">Switch Axe Database</a>
@@ -44,6 +45,7 @@ function displayNavmenu(page){
 		sidenav.innerHTML += `
 			</br>
 			<a href="database.html#SnS">Sword & Shield Database</a>
+			<a href="database.html#DB">Dual Blades Database</a>
 			<a href="database.html#HH">Hunting Horn Database</a>
 			<a href="database.html#GL">Gunlance Database</a>
 			<a href="database.html#SA">Switch Axe Database</a>
