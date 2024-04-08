@@ -98,7 +98,7 @@ function showMoreInfo(event){
     var crafting_materials = weapon["Craft"];
     var upgrade_materials = weapon["Upgrade"];
     
-    var table = `<div class="mat-box"><table><thead><tr><th></th><th>Material Needed</th><th>Amt.</th></tr></thead><tbody>`;
+    var table = `<div class="mat-box"><table><thead><tr><th></th><th>Material</th><th>Amt.</th></tr></thead><tbody>`;
     var table_0 = document.createElement("table");
     var table_1 = table;
     var table_2 = table;
