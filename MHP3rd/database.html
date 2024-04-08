@@ -13,7 +13,7 @@
 <body>
 <div id="sidenav" class="sidenav"></div>
 <div id="navbar" class="navbar"></div>
-<div id="overlay" class="overlay"></div>
+<div id="overlay" class="overlay" onClick="hideInfo()"></div>
 <div id="root">
 	<div class="main">
 		<div class="filters">
@@ -42,7 +42,7 @@
 		</tbody>
 		</table>
 		</div>
-		<div class="weapon-table">
+		<div id="weapon_table" class="weapon-table">
 			<table id="data-table">
 			<thead>
 			    <tr>
@@ -100,6 +100,8 @@
 <script src="scripts/database/GL_scripts.js"></script>
 <script src="scripts/database/HH_data.js"></script>
 <script src="scripts/database/HH_scripts.js"></script>
+<script src="scripts/database/Lance_data.js"></script>
+<script src="scripts/database/Lance_scripts.js"></script>
 <script src="scripts/database/SA_data.js"></script>
 <script src="scripts/database/SA_scripts.js"></script>
 <script src="scripts/database/SnS_data.js"></script>

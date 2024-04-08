@@ -23,6 +23,9 @@ function changeWeapon(type){
 		case "HH":
 			HH_terminate();
 			break;
+		case "Lance":
+			Lance_terminate();
+			break;
 		case "SA":
 			SA_terminate();
 			break;
@@ -30,6 +33,8 @@ function changeWeapon(type){
 			SnS_terminate();
 			break;
 	}
+	document.getElementById("weapon_table").classList.remove("table-view-2row");
+	document.getElementById("weapon_table").classList.remove("table-view-3row");
 	WEAPON_TYPE = type;
 	init();
 	document.getElementById("sidenav").style.width = "0";
@@ -93,7 +98,7 @@ function showMoreInfo(event){
     var crafting_materials = weapon["Craft"];
     var upgrade_materials = weapon["Upgrade"];
     
-    var table = `<div class="mat-box"><table><thead><tr><th></th><th>Item</th><th>Qty</th></tr></thead><tbody>`;
+    var table = `<div class="mat-box"><table><thead><tr><th></th><th>Material Needed</th><th>Amt.</th></tr></thead><tbody>`;
     var table_0 = document.createElement("table");
     var table_1 = table;
     var table_2 = table;
@@ -387,10 +392,7 @@ function filterTable(filter){
 	document.getElementById("crafting_materials").innerHTML = "";
 	document.getElementById("upgrade_materials").innerHTML = "";
 	
-	if(filter == null){
-		sortTable();
-		return;
-	}
+
 	var filter_headers = ["", "None", "Fire" ,"Water", "Thunder", "Clear", "Ice", "Dragon", "Poison", "Paralyze"];
 	var elem_sts_filter_num = 10;
 	//----------------------------------------------------------------------------------------------------
@@ -400,12 +402,20 @@ function filterTable(filter){
 		case "DB": 
 			filter_headers = ["", "None", "Fire" ,"Water", "Thunder", "Clear", "Ice", "Dragon", "Poison"];
 			elem_sts_filter_num = 9;
+			console.log(document.getElementById("weapon_table"));
+			document.getElementById("weapon_table").classList.add("table-view-2row");
 			break;
 		case "GL": 
 			filter_headers = ["", "None", "Fire" ,"Water", "Thunder", "Clear", "Ice", "Dragon", "Poison", "Paralyze", "Normal", "Long", "Wide"];
+			document.getElementById("weapon_table").classList.add("table-view-3row");
 			break;
 		case "HH": 
 			filter_headers = ["", "None", "Fire" ,"Water", "Thunder", "Clear", "Ice", "Dragon", "Poison", "Paralyze", "W", "P", "R", "B", "G", "C", "Y", "O"];
+			break;
+		case "Lance": 
+			filter_headers = ["", "None", "Fire" ,"Water", "Thunder", "Clear", "Ice", "Dragon", "Poison", "Paralyze", "Sleep"];
+			elem_sts_filter_num = 11;
+			document.getElementById("weapon_table").classList.add("table-view-3row");
 			break;
 		case "SA": 
 			filter_headers = ["", "None", "Fire" ,"Water", "Thunder", "Clear", "Ice", "Dragon", "Poison", "Paralyze", "Power Phial", "Elemental Phial", "Exhaust Phial", "Poison Phial", "Paralysis Phial", "Dragon Phial"];
@@ -413,9 +423,13 @@ function filterTable(filter){
 		case "SnS": 
 			filter_headers = ["", "None", "Fire" ,"Water", "Thunder", "Clear", "Ice", "Dragon", "Poison", "Paralyze", "Sleep"];
 			elem_sts_filter_num = 11;
+			document.getElementById("weapon_table").classList.add("table-view-3row");
 			break;
 	}
-	
+	if(filter == null){
+		sortTable();
+		return;
+	}
 	if(filter != "Clear" & filter_headers.includes(filter)){
 		switch(filter_headers.indexOf(filter) < elem_sts_filter_num){
 			case true:
@@ -470,6 +484,9 @@ function init(){
 		case "HH":
 			HH_init();
 			break;	
+		case "Lance":
+			Lance_init();
+			break;	
 		case "SA":
 			SA_init();
 			break;
@@ -494,6 +511,9 @@ switch(window.location.hash.substring(1)){
 		break;
 	case "HH":
 		changeWeapon("HH");
+		break;
+	case "Lance":
+		changeWeapon("Lance");
 		break;
 	case "SA":
 		changeWeapon("SA");

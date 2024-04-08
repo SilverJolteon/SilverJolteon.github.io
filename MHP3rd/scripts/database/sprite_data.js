@@ -177,6 +177,9 @@ var sprite_data = {
 		"32, 16": [
 			"Rathian Scale", "Rathian Scale+", "Rathian Plate", "G.Narga Scale+"
 		],
+		"48, 0": [
+			"Herb","Ivy"
+		],
 		"48, 16": [
 			"Rathian Spike", "Rathian Spike+", "G.Narga Razor+", "Duramboros Hump",
 			"Duram Tailcase", "Duram Tailcase+"

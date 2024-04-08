@@ -25,6 +25,14 @@ body{
 	max-height: 60vh;
 }
 
+.table-view-2row{
+	max-height: calc(60vh + 78px);
+}
+
+.table-view-3row{
+	max-height: calc(60vh + 36px);
+}
+
 .weapon-table table{
 	border-spacing: 0px;
 	width: 100%;
@@ -242,8 +250,17 @@ body{
 	}
 
 	.weapon-table{
-		height: 50vh;
+		max-height: 50vh;
 	}
+	
+	.table-view-2row{
+		max-height: calc(50vh + 78px);
+	}
+
+	.table-view-3row{
+		max-height: calc(50vh + 36px);
+	}
+
 	.info-block{
 		top: unset;
 		left: unset;

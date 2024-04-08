@@ -1,6 +1,6 @@
-function SnS_init(){
-	data = SnS_data;
-	document.getElementById("navbar-title").innerHTML = "Sword & Shield Database";
+function Lance_init(){
+	data = Lance_data;
+	document.getElementById("navbar-title").innerHTML = "Lance Database";
 	var header = document.getElementById("unique-header");
 	header.innerHTML = "";
 	header.style.display = "none";
@@ -13,7 +13,7 @@ function SnS_init(){
 	filter_row.id = "filter_row";
 }
 
-function SnS_terminate(){
+function Lance_terminate(){
 	var filter_row = document.getElementById("filter_row");
 	filter_row.parentNode.removeChild(filter_row);
 }
