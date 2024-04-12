@@ -1582,7 +1582,7 @@ var GS_data = {
   },
   "Usurper's Storm": {
     "Rarity": 3,
-    "Attack": 50,
+    "Attack": 160,
     "Special": "Thunder 30",
     "Affinity": 0,
     "Slots": 1,
