@@ -515,7 +515,7 @@ var SnS_data = {
   },
   "Morpheus Knife": {
     "Rarity": 5,
-    "Attack": 50,
+    "Attack": 180,
     "Special": "Sleep 24",
     "Affinity": 0,
     "Slots": 2,
