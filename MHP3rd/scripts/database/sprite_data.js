@@ -124,6 +124,9 @@ var sprite_data = {
 		"96, 0": [
 			"Blossom Cricket"
 		],
+		"96, 48": [
+			"Negima! Contract","MonHan Club Form"
+		],
 		"144, 0": [
 			"Bathycite Ore","Fucium Ore"
 		],		
@@ -218,6 +221,9 @@ var sprite_data = {
 		],
 		"32, 16": [
 			"Wroggi Scale","Wroggi Scale+"
+		],
+		"32, 32": [
+			"Armorskin","Mega Armorskin","Psychoserum"
 		],
 		"48, 16": [
 			"Big Fin","Quality Fin","Bullfango Head","G.Wroggi Brace",

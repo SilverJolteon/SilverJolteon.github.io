@@ -31,10 +31,16 @@ function displayNavmenu(page){
 	else navbar.innerHTML += `<span onClick="openSidenav()" style="cursor: pointer">Kelbi Horn Reward Tables</span>`;
 	
 	if(page == "database"){
+		//<a href="database.html#LS" onClick="changeWeapon('LS')">Long Sword Database</a>
+		//<a href="database.html#Hammer" onClick="changeWeapon('Hammer')">Hammer Database</a>
+		
 		sidenav.innerHTML += `
 			</br>
+			<a href="database.html#GS" onClick="changeWeapon('GS')">Great Sword Database</a>
+			
 			<a href="database.html#SnS" onClick="changeWeapon('SnS')">Sword & Shield Database</a>
 			<a href="database.html#DB" onClick="changeWeapon('DB')">Dual Blades Database</a>
+			
 			<a href="database.html#HH" onClick="changeWeapon('HH')">Hunting Horn Database</a>
 			<a href="database.html#Lance" onClick="changeWeapon('Lance')">Lance Database</a>
 			<a href="database.html#GL" onClick="changeWeapon('GL')">Gunlance Database</a>
@@ -43,10 +49,16 @@ function displayNavmenu(page){
 		navbar.innerHTML += `<span id="navbar-title" onClick="openSidenav()" style="cursor: pointer"></span>`;
 	}
 	else{
+		//<a href="database.html#LS">Long Sword Database</a>
+		//<a href="database.html#Hammer">Hammer Database</a>
+		
 		sidenav.innerHTML += `
 			</br>
+			<a href="database.html#GS">Great Sword Database</a>
+			
 			<a href="database.html#SnS">Sword & Shield Database</a>
 			<a href="database.html#DB">Dual Blades Database</a>
+			
 			<a href="database.html#HH">Hunting Horn Database</a>
 			<a href="database.html#Lance">Lance Database</a>
 			<a href="database.html#GL">Gunlance Database</a>

@@ -1,4 +1,4 @@
-var WEAPON_TYPE = "HH";
+var WEAPON_TYPE = "GS";
 var data = null;
 var sorting = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]; 
 var filters = [[], []];
@@ -19,6 +19,9 @@ function changeWeapon(type){
 			break;
 		case "GL":
 			GL_terminate();
+			break;
+		case "GS":
+			GS_terminate();
 			break;
 		case "HH":
 			HH_terminate();
@@ -402,12 +405,16 @@ function filterTable(filter){
 		case "DB": 
 			filter_headers = ["", "None", "Fire" ,"Water", "Thunder", "Clear", "Ice", "Dragon", "Poison"];
 			elem_sts_filter_num = 9;
-			console.log(document.getElementById("weapon_table"));
 			document.getElementById("weapon_table").classList.add("table-view-2row");
 			break;
 		case "GL": 
 			filter_headers = ["", "None", "Fire" ,"Water", "Thunder", "Clear", "Ice", "Dragon", "Poison", "Paralyze", "Normal", "Long", "Wide"];
 			document.getElementById("weapon_table").classList.add("table-view-3row");
+			break;
+		case "GS": 
+			filter_headers = ["", "None", "Fire" ,"Water", "Thunder", "Clear", "Ice", "Dragon", "Poison"];
+			elem_sts_filter_num = 9;
+			document.getElementById("weapon_table").classList.add("table-view-2row");
 			break;
 		case "HH": 
 			filter_headers = ["", "None", "Fire" ,"Water", "Thunder", "Clear", "Ice", "Dragon", "Poison", "Paralyze", "W", "P", "R", "B", "G", "C", "Y", "O"];
@@ -481,12 +488,21 @@ function init(){
 		case "GL":
 			GL_init();
 			break;
+		case "GS":
+			GS_init();
+			break;
+		case "Hammer":
+			Hammer_init();
+			break;
 		case "HH":
 			HH_init();
 			break;	
 		case "Lance":
 			Lance_init();
-			break;	
+			break;
+		case "LS":
+			LS_init();
+			break;
 		case "SA":
 			SA_init();
 			break;
@@ -509,12 +525,21 @@ switch(window.location.hash.substring(1)){
 	case "GL":
 		changeWeapon("GL");
 		break;
+	case "GS":
+		changeWeapon("GS");
+		break;
+	//case "Hammer":
+		//changeWeapon("Hammer");
+		//break;
 	case "HH":
 		changeWeapon("HH");
 		break;
 	case "Lance":
 		changeWeapon("Lance");
 		break;
+	//case "LS":
+		//changeWeapon("LS");
+		//break;
 	case "SA":
 		changeWeapon("SA");
 		break;
