@@ -24,43 +24,16 @@ function displayNavmenu(page){
 	if(page != "damage-calculator") sidenav.innerHTML += `<a href="damage-calculator.html">Damage Calculator</a>`;
 	else navbar.innerHTML += `<span onClick="openSidenav()" style="cursor: pointer">Damage Calculator</span>`;
 	
+	if(page != "database") sidenav.innerHTML += `<a href="database.html">Weapon Database</a>`;
+	else navbar.innerHTML += `<span id="navbar-title" onClick="openSidenav()" style="cursor: pointer"></span>`;
+	
 	if(page != "charm-search") sidenav.innerHTML += `<a href="charm-search.html">Charm Table Search</a>`;
 	else navbar.innerHTML += `<span onClick="openSidenav()" style="cursor: pointer">Charm Table Search</span>`;
 	
 	if(page != "kelbi-horn") sidenav.innerHTML += `<a href="kelbi-horn.html">Kelbi Horn Reward Tables</a>`;
 	else navbar.innerHTML += `<span onClick="openSidenav()" style="cursor: pointer">Kelbi Horn Reward Tables</span>`;
 	
-	if(page == "database"){
-		sidenav.innerHTML += `
-			</br>
-			<a href="database.html#GS" onClick="changeWeapon('GS')">Great Sword Database</a>
-			<a href="database.html#LS" onClick="changeWeapon('LS')">Long Sword Database</a>
-			<a href="database.html#SnS" onClick="changeWeapon('SnS')">Sword & Shield Database</a>
-			<a href="database.html#DB" onClick="changeWeapon('DB')">Dual Blades Database</a>
-			<a href="database.html#Hammer" onClick="changeWeapon('Hammer')">Hammer Database</a>
-			<a href="database.html#HH" onClick="changeWeapon('HH')">Hunting Horn Database</a>
-			<a href="database.html#Lance" onClick="changeWeapon('Lance')">Lance Database</a>
-			<a href="database.html#GL" onClick="changeWeapon('GL')">Gunlance Database</a>
-			<a href="database.html#SA" onClick="changeWeapon('SA')">Switch Axe Database</a>
-		`;
-		navbar.innerHTML += `<span id="navbar-title" onClick="openSidenav()" style="cursor: pointer"></span>`;
-	}
-	else{
-		sidenav.innerHTML += `
-			</br>
-			<a href="database.html#GS">Great Sword Database</a>
-			<a href="database.html#LS">Long Sword Database</a>
-			<a href="database.html#SnS">Sword & Shield Database</a>
-			<a href="database.html#DB">Dual Blades Database</a>
-			<a href="database.html#Hammer">Hammer Database</a>
-			<a href="database.html#HH">Hunting Horn Database</a>
-			<a href="database.html#Lance">Lance Database</a>
-			<a href="database.html#GL">Gunlance Database</a>
-			<a href="database.html#SA">Switch Axe Database</a>
-			
-		`;
-		navbar.innerHTML += `<span id="navbar-title"></span>`;
-	}
+	
 	document.getElementById("footer").innerHTML = `
 		<div class="footer"><a href="https://twitter.com/SilverJolteon">© SilverJolteon</a></div>
 	`;

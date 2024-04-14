@@ -482,6 +482,7 @@ function filterTable(filter){
 }
 
 function init(){
+	var selection_list = ["GS", "LS", "SnS", "DB", "Hammer", "HH", "Lance", "GL", "SA"];
 	sorting = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]; 
 	fully_upgraded = 0;
 	rows_list = [];
@@ -519,6 +520,13 @@ function init(){
 			break;
 	}
 	filterTable();
+	
+	var selection = document.getElementById("selection").getElementsByTagName("td");
+	for(var i = 0; i < selection.length; i++){
+		if(selection_list[i] == WEAPON_TYPE) selection[i].classList.add("active-filter");
+		else selection[i].classList.remove("active-filter");
+	}
+	window.location.hash = WEAPON_TYPE;
 }
 
 displayNavmenu("database");
