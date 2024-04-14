@@ -260,15 +260,15 @@ body{
 	}
 
 	.weapon-table{
-		max-height: 50vh;
+		max-height: calc(50vh - 32px);
 	}
 	
 	.table-view-2row{
-		max-height: calc(50vh + 78px);
+		max-height: calc(50vh + 46px);
 	}
 
 	.table-view-3row{
-		max-height: calc(50vh + 36px);
+		max-height: calc(50vh + 10px);
 	}
 
 	.info-block{
