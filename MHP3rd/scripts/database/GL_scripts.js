@@ -9,7 +9,6 @@ function GL_filterShells(weapon){
 
 function GL_init(){
 	data = GL_data;
-	document.getElementById("navbar-title").innerHTML = "Gunlance Database";
 	var header = document.getElementById("unique-header");
 	header.innerHTML = `Shelling <i class="fa fa-fw fa-sort"></i>`;
 	header.style.display = "";

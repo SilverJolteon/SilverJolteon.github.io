@@ -46,7 +46,6 @@ function HH_filterNotes(weapon){
 
 function HH_init(){
 	data = HH_data;
-	document.getElementById("navbar-title").innerHTML = "Hunting Horn Database";
 	var header = document.getElementById("unique-header");
 	header.innerHTML = `Notes <i class="fa fa-fw fa-sort"></i>`;
 	header.style.display = "";

@@ -1,6 +1,5 @@
 function SnS_init(){
 	data = SnS_data;
-	document.getElementById("navbar-title").innerHTML = "Sword & Shield Database";
 	var header = document.getElementById("unique-header");
 	header.innerHTML = "";
 	header.style.display = "none";

@@ -1,6 +1,5 @@
 function Lance_init(){
 	data = Lance_data;
-	document.getElementById("navbar-title").innerHTML = "Lance Database";
 	var header = document.getElementById("unique-header");
 	header.innerHTML = "";
 	header.style.display = "none";

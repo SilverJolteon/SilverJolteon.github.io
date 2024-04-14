@@ -21,11 +21,12 @@ function displayNavmenu(page){
 		<span onClick="closeSidenav()">&times;</span>
 		<img class="logo" src="assets/logo.png">
 	`;
-	if(page != "damage-calculator") sidenav.innerHTML += `<a href="damage-calculator.html">Damage Calculator</a>`;
-	else navbar.innerHTML += `<span onClick="openSidenav()" style="cursor: pointer">Damage Calculator</span>`;
 	
 	if(page != "database") sidenav.innerHTML += `<a href="database.html">Weapon Database</a>`;
-	else navbar.innerHTML += `<span id="navbar-title" onClick="openSidenav()" style="cursor: pointer"></span>`;
+	else navbar.innerHTML += `<span onClick="openSidenav()" style="cursor: pointer">Weapon Database</span>`;
+	
+	if(page != "damage-calculator") sidenav.innerHTML += `<a href="damage-calculator.html">Damage Calculator</a>`;
+	else navbar.innerHTML += `<span onClick="openSidenav()" style="cursor: pointer">Damage Calculator</span>`;
 	
 	if(page != "charm-search") sidenav.innerHTML += `<a href="charm-search.html">Charm Table Search</a>`;
 	else navbar.innerHTML += `<span onClick="openSidenav()" style="cursor: pointer">Charm Table Search</span>`;
