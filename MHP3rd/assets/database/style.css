@@ -223,7 +223,7 @@ body{
 	width: auto;
 	z-index: 999;
 	cursor: default;
-	overflow-y: scroll;
+	overflow-y: auto;
 	scrollbar-gutter: stable;
 	max-height: 100%;
 }
@@ -265,11 +265,11 @@ body{
 	}
 
 	.info-block{
-		top: 0;
+		top: unset;
 		left: unset;
 		transform: unset;
 		width: 100%;
-		bottom: unset;
+		bottom: 0;
 	}
 	.sharpness-1{
 		margin-top: 11px;
