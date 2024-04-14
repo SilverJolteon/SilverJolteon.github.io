@@ -84,6 +84,9 @@ var sprite_data = {
 			"Baggi Hide","G.Baggi Hide","G.Baggi Hide+","King's Crest",
 			"G.Agnak Hide+"
 		],
+		"32, 0": [
+			"Rare Fish","Sleepyfish","Blue Cutthroat"
+		],
 		"32, 16": [
 			"Baggi Scale","Baggi Scale+"
 		],
@@ -103,6 +106,9 @@ var sprite_data = {
 		],
 		"80, 0": [
 			"Gargwa Feather"
+		],
+		"96, 48": [
+			"Hot Spring Tckt","Lrg Ancient Fang"
 		],
 		"112, 16": [
 			"Divine Dragongem"
@@ -238,6 +244,9 @@ var sprite_data = {
 		],
 		"96, 48": [
 			"Commendation","Commendation+","Magazine Ticket"
+		],
+		"128, 0": [
+			"Adamant Seed","Bumblepumpkin"
 		],
 		"128, 64": [
 			"Yukumo Wood+"
@@ -444,6 +453,9 @@ var sprite_data = {
 		"48, 16": [
 			"Arzuros Brace","Arzuros Brace+","S.Uragaan Maw","S.Uragaan Scute",
 			"Mohran Brace","Mohran Brace+"
+		],
+		"48, 64": [
+			"Organizer Guide","Longsword Codex"
 		],
 		"64, 16": [
 			"Avian Finebone"

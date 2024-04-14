@@ -71,13 +71,25 @@
 					<th colspan="2" id="close-info" class ="close" onClick="hideInfo()" style="border-bottom: 1px solid #C0C0C0">Info <span style="font-size: 20px">&times;</span></th>
 				</tr>
 				<tr>
+					<th colspan="2" id="weapon_title"></th>
+				</tr>
+				<tr>
+					<td colspan="2"><center><span id="weapon_preview"></span></center></td>
+				</tr>
+				<tr>
+					<td colspan="2" style="border-bottom: 1px solid #c0c0c0">
+						<input type="checkbox" id="play_animation" style="display: none">
+						<label for="play_animation" style="width: 24px; height: 24px; display: inline-block; cursor: pointer;" id="play_pause" class="fa fa-play"></label>
+					</td>
+				</tr>
+				<tr>
 					<th>Crafting Materials</th>
 					<th>Upgrade Materials</th>
 				</tr>
 				<tr>
-					<td> <div id="crafting_materials" class="info-table"></div></td>
+					<td style="border-bottom: 1px solid #c0c0c0"><div id="crafting_materials" class="info-table"></div></td>
 					
-					<td id="upgrade_materials" class="info-table"></td>
+					<td id="upgrade_materials" class="info-table" style="border-bottom: 1px solid #c0c0c0"></td>
 				</tr>
 				<tr>
 					<th colspan="2">Weapon Tree</th>
@@ -92,6 +104,8 @@
 	<a id="footer" class="footer-block"></div>
 </div>
 <script src="scripts/navmenu.js"></script>
+<script src="scripts/database/preview_data.js"></script>
+<script src="scripts/database/weapon_preview.js"></script>
 <script src="scripts/database/sprite_data.js"></script>
 <script src="scripts/database/songlist.js"></script>
 <script src="scripts/database/DB_data.js"></script>

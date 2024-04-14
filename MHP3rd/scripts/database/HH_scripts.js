@@ -30,6 +30,8 @@ function HH_showMoreInfo(event){
 		table += `<tr><td><span style="display: inline-block; text-align: left; width:44px; border: 1px;">${song}</span></td></div><td>${songs[e]}</td></tr>`;
 	}
 	table += "</tbody></table>";
+	document.getElementById("horn_melodies_header").innerHTML = `
+		<th colspan="2">Horn Melodies</br><img src="assets/database/notes/note_${notes[0]}.png"><img src="assets/database/notes/note_${notes[1]}.png"><img src="assets/database/notes/note_${notes[2]}.png"></th>`;
 	document.getElementById("horn_melodies").innerHTML = table;
 }
 

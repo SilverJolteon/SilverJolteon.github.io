@@ -101,7 +101,7 @@ function showMoreInfo(event){
     var crafting_materials = weapon["Craft"];
     var upgrade_materials = weapon["Upgrade"];
     
-    var table = `<div class="mat-box"><table><thead><tr><th></th><th>Material</th><th>Amt.</th></tr></thead><tbody>`;
+    var table = `<div class="mat-box"><table><thead><tr><th></th><th>Material</th><th>Qty</th></tr></thead><tbody>`;
     var table_0 = document.createElement("table");
     var table_1 = table;
     var table_2 = table;
@@ -160,6 +160,7 @@ function showMoreInfo(event){
     table_2 += "</tbody></table></div>";
     
     weapon_tree.appendChild(table_0);
+    weaponPreview();
     document.getElementById("materials-table").style.display = "";
     document.getElementById("overlay").style.display = "block";
     document.getElementById("crafting_materials").innerHTML = table_1;
@@ -172,6 +173,7 @@ function showMoreInfo(event){
 			HH_showMoreInfo(event);
 			break;
     }
+
     document.getElementById("weapon_tree").scrollIntoView({behavior: "smooth"});
 }
 
@@ -528,18 +530,18 @@ switch(window.location.hash.substring(1)){
 	case "GS":
 		changeWeapon("GS");
 		break;
-	//case "Hammer":
-		//changeWeapon("Hammer");
-		//break;
+	case "Hammer":
+		changeWeapon("Hammer");
+		break;
 	case "HH":
 		changeWeapon("HH");
 		break;
 	case "Lance":
 		changeWeapon("Lance");
 		break;
-	//case "LS":
-		//changeWeapon("LS");
-		//break;
+	case "LS":
+		changeWeapon("LS");
+		break;
 	case "SA":
 		changeWeapon("SA");
 		break;
