@@ -418,6 +418,9 @@ function filterTable(filter){
 			elem_sts_filter_num = 9;
 			document.getElementById("weapon_table").classList.add("table-view-2row");
 			break;
+		case "Hammer":
+			document.getElementById("weapon_table").classList.add("table-view-2row");
+			break;
 		case "HH": 
 			filter_headers = ["", "None", "Fire" ,"Water", "Thunder", "Clear", "Ice", "Dragon", "Poison", "Paralyze", "W", "P", "R", "B", "G", "C", "Y", "O"];
 			break;
@@ -425,6 +428,9 @@ function filterTable(filter){
 			filter_headers = ["", "None", "Fire" ,"Water", "Thunder", "Clear", "Ice", "Dragon", "Poison", "Paralyze", "Sleep"];
 			elem_sts_filter_num = 11;
 			document.getElementById("weapon_table").classList.add("table-view-3row");
+			break;
+		case "LS":
+			document.getElementById("weapon_table").classList.add("table-view-2row");
 			break;
 		case "SA": 
 			filter_headers = ["", "None", "Fire" ,"Water", "Thunder", "Clear", "Ice", "Dragon", "Poison", "Paralyze", "Power Phial", "Elemental Phial", "Exhaust Phial", "Poison Phial", "Paralysis Phial", "Dragon Phial"];
