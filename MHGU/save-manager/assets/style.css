@@ -25,6 +25,7 @@ body{
 	flex-direction: column;
 	justify-content: space-between;
 	height: 513px;
+	flex-wrap: wrap;
 }
 
 .save-table table{
@@ -53,6 +54,7 @@ body{
 	width: 360px;
 	background-image: url("data:image/svg+xml,%3Csvg%20height%3D%2745%27%20width%3D%27360%27%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%3E%3Cpolygon%20points%3D%270%2C0%20359%2C0%20359%2C8%20350%2C8%20350%2C18%20359%2C18%20359%2C26%20350%2C26%20350%2C36%20359%2C36%20359%2C44%200%2C44%200%2C36%209%2C36%209%2C26%200%2C26%200%2C18%209%2C18%209%2C8%200%2C8%27%20style%3D%27fill%3A%23027b76%27%2F%3E%3C/svg%3E");
 	background-repeat: no-repeat;
+	background-size: 100% 100%;
 }
 
 .slot-gender{
@@ -60,6 +62,7 @@ body{
 	height: 45px;
 	background-image: url("data:image/svg+xml,%0A%20%20%20%20%20%20%20%20%3Csvg%20height%3D%2245%22%20width%3D%22221%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%3Cpolygon%20points%3D%220%2C39%205%2C39%205%2C42%20206%2C42%20206%2C39%20211%2C39%20211%2C44%200%2C44%22%20style%3D%22fill%3A%235d5345%22%2F%3E%0A%20%20%20%20%20%20%20%20%3C%2Fsvg%3E%0A%20%20%20%20");
 	background-repeat: no-repeat;
+	background-size: 100% 100%;
 }
 
 .slot-hr{
@@ -67,6 +70,7 @@ body{
 	height: 45px;
 	background-image: url("data:image/svg+xml,%0A%20%20%20%20%20%20%20%20%3Csvg%20height%3D%2245%22%20width%3D%22221%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%3Cpolygon%20points%3D%220%2C39%205%2C39%205%2C42%20206%2C42%20206%2C39%20211%2C39%20211%2C44%200%2C44%22%20style%3D%22fill%3A%235d5345%22%2F%3E%0A%20%20%20%20%20%20%20%20%3C%2Fsvg%3E%0A%20%20%20%20");
 	background-repeat: no-repeat;
+	background-size: 100% 100%;
 }
 
 .slot-funds{
@@ -74,6 +78,7 @@ body{
 	height: 45px;
 	background-image: url("data:image/svg+xml,%0A%20%20%20%20%20%20%20%20%3Csvg%20height%3D%2245%22%20width%3D%22369%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%3Cpolygon%20points%3D%220%2C39%205%2C39%205%2C42%20354%2C42%20354%2C39%20359%2C39%20359%2C44%200%2C44%22%20style%3D%22fill%3A%235d5345%22%2F%3E%0A%20%20%20%20%20%20%20%20%3C%2Fsvg%3E%0A%20%20%20%20");
 	background-repeat: no-repeat;
+	background-size: 100% 100%;
 }
 
 .slot-time{
@@ -81,20 +86,26 @@ body{
 	height: 45px;
 	background-image: url("data:image/svg+xml,%0A%20%20%20%20%20%20%20%20%3Csvg%20height%3D%2245%22%20width%3D%22439%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%3Cpolygon%20points%3D%220%2C39%205%2C39%205%2C42%20424%2C42%20424%2C39%20429%2C39%20429%2C44%200%2C44%22%20style%3D%22fill%3A%235d5345%22%2F%3E%0A%20%20%20%20%20%20%20%20%3C%2Fsvg%3E%0A%20%20%20%20");
 	background-repeat: no-repeat;
+	background-size: 100% 100%;
 }
 
+.save-slot, .empty-slot{
+	flex: 1 1 auto;
+	margin: 5px;
+}
 
-.empty-slot{
+.empty-slot {
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	width: 814px;
 	height: 139px;
 	background-color: #615e4e;
 	color: #000000;
 	font-size: 32px;
 	border: 3px solid #180402;
 	border-radius: 15px;
-	background-image: url("data:image/svg+xml,%0A%20%20%20%20%20%20%20%20%3Csvg%20height%3D%22110%22%20width%3D%22599%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%3Cpolygon%20points%3D%22230%2C104%20235%2C104%20235%2C107%20584%2C107%20584%2C104%20589%2C104%20589%2C109%20230%2C109%22%20style%3D%22fill%3A%23000000%22%2F%3E%0A%20%20%20%20%20%20%20%20%3C%2Fsvg%3E%0A%20%20%20%20");
+	background-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%22230%20104%20359%205%22%20width%3D%22359%22%20height%3D%225%22%3E%3Cpolygon%20points%3D%22230%2C104%20235%2C104%20235%2C107%20584%2C107%20584%2C104%20589%2C104%20589%2C109%20230%2C109%22%20style%3D%22fill%3A%23000000%22%2F%3E%3C/svg%3E");
 	background-repeat: no-repeat;
+	background-position: center 104px;
+	background-size: auto;
 }
