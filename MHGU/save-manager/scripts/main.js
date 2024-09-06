@@ -141,7 +141,7 @@ function displayInfo(save){
 	save.save_slots.forEach((slot, index) => {
 		text += `<div>`;
 		if(slot.name){
-			text += `
+			text += `<div class="save-slot">
 				<table><tr>
 					<td class="slot-name">
 						${slot.name}
@@ -152,7 +152,7 @@ function displayInfo(save){
 					<td class="slot-funds"><span class="slot-title">Funds</span><span class="slot-text">${slot.funds}z</span></span>
 					<td colspan=2 class="slot-time"><span class="slot-title">Play Time</span><span class="slot-text">${slot.time}</span></span>
 				</tr></table>	
-			`;
+			</div>`;
 		}
 		else{
 			text += `<div class="empty-slot">(No Data)</div>`;
