@@ -21,10 +21,11 @@ body{
 }
 
 .save-table{
+	position: relative;
 	display: flex;
 	flex-direction: column;
 	justify-content: space-between;
-	height: 513px;
+	gap: 48px;
 	flex-wrap: wrap;
 }
 
@@ -91,14 +92,16 @@ body{
 
 .save-slot, .empty-slot{
 	flex: 1 1 auto;
-	margin: 5px;
+	margin: 0px;
 }
 
 .empty-slot {
+	position: relative;
 	display: flex;
 	align-items: center;
 	justify-content: center;
 	height: 139px;
+	min-width: 814px;
 	background-color: #615e4e;
 	color: #000000;
 	font-size: 32px;
@@ -108,4 +111,43 @@ body{
 	background-repeat: no-repeat;
 	background-position: center 104px;
 	background-size: auto;
+}
+
+.slot-actions {
+	position: absolute;
+	top: 146px;
+	left: 0px;
+	display: flex;
+	justify-content: flex-start;
+	gap: 10px; /* 10px spacing between buttons */
+}
+
+.save-slot button, .empty-slot button {
+    padding: 5px 10px;
+    font-size: 14px;
+    background-color: #027b76;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.save-slot button:hover, .empty-slot button:hover {
+    background-color: #026b66;
+}
+
+.empty-slot .import {
+    position: absolute;
+    top: 129px; /* Position near the bottom */
+    left: 0px;   /* Position near the left */
+}
+
+.save-slot button, .empty-slot button {
+    padding: 5px 10px;
+    font-size: 14px;
+    background-color: #027b76;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
 }

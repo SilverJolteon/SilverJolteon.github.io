@@ -37,9 +37,7 @@ class SaveFile{
 		}
 	}
 	
-	readSlots(){
-		var decoder = new TextDecoder("utf-8");
-		
+	init(){
 		var off = 0;
 		if(this.game == 1) off = 0x24;
 		this.slots = Array.from(this.data.subarray(0x04 + off, 0x07 + off));
@@ -48,41 +46,92 @@ class SaveFile{
 			new DataView(this.data.buffer.slice(0x14 + off, 0x18 + off)).getUint32(0, true),
 			new DataView(this.data.buffer.slice(0x18 + off, 0x1C + off)).getUint32(0, true)
 		];
-		
 		for(var slot = 0; slot < 3; slot++){
 			var slot_data = new SaveInfo(this.data.buffer.slice(this.slot_offsets[slot]+off, this.slot_offsets[slot] + off + SLOT_SIZE));
+			this.save_slots[slot] = slot_data;
+		}
+	}
+	
+	readSlots(){
+		var decoder = new TextDecoder("utf-8");		
+		
+		for(var slot = 0; slot < 3; slot++){
 			if(this.slots[slot]){
 				// Name
-				var name = decoder.decode(this.data.subarray(this.slot_offsets[slot] + off, this.slot_offsets[slot] + off + 0x20));
+				var name = decoder.decode(this.save_slots[slot].data.subarray(0, 0x20));
 				name = name.replace(/\0/g, '');
-				slot_data.name = name;
+				this.save_slots[slot].name = name;
 				
 				// Gender
 				var gender_offset = 0x0244;
 				var global_name_offset = 0x23B7D;
-				var gender = new DataView(this.data.buffer.slice(this.slot_offsets[slot] + off + gender_offset, this.slot_offsets[slot] + off + gender_offset + 1)).getUint8(0, true);
-				var global_name = decoder.decode(this.data.subarray(this.slot_offsets[slot] + off + global_name_offset, this.slot_offsets[slot] + off + global_name_offset + 0x20));
-				slot_data.gender = gender == 0 ? "♂" : "♀";
-				if(!global_name.includes(name)) slot_data.gender = "-";
+				var gender = new DataView(this.save_slots[slot].data.buffer.slice(gender_offset, gender_offset + 1)).getUint8(0, true);
+				var global_name = decoder.decode(this.save_slots[slot].data.subarray(this.global_name_offset, global_name_offset + 0x20));
+				this.save_slots[slot].gender = gender == 0 ? "♂" : "♀";
+				if(!global_name.includes(name)) this.save_slots[slot].gender = "-";
+				
 				
 				//HR
-				var HR = new DataView(this.data.buffer.slice(this.slot_offsets[slot] + off + 0x28, this.slot_offsets[slot] + off + 0x2A)).getUint16(0, true);
-				slot_data.HR = HR == 0 ? "---" : HR;
+				var HR = new DataView(this.save_slots[slot].data.buffer.slice(0x28, 0x2A)).getUint16(0, true);
+				this.save_slots[slot].HR = HR == 0 ? "---" : HR;
 				
 				//Funds
-				slot_data.funds = new DataView(this.data.buffer.slice(this.slot_offsets[slot] + off + 0x24, this.slot_offsets[slot] + off + 0x28)).getUint32(0, true);
+				this.save_slots[slot].funds = new DataView(this.save_slots[slot].data.buffer.slice(0x24, 0x28)).getUint32(0, true);
 				
 				// Play Time
-				var seconds = new DataView(this.data.buffer.slice(this.slot_offsets[slot] + off + 0x20, this.slot_offsets[slot] + off + 0x24)).getUint32(0, true);
+				var seconds = new DataView(this.save_slots[slot].data.buffer.slice(0x20, 0x24)).getUint32(0, true);
 				var hours = Math.floor(seconds / 3600);
 				seconds -= hours * 3600;
 				var minutes = Math.floor(seconds / 60);
 				seconds -= minutes * 60;
 				var time = hours.toString() + ':' + minutes.toString().padStart(2, '0') + ':' + seconds.toString().padStart(2, '0');
-				slot_data.time = time;
+				this.save_slots[slot].time = time;
+				
 			}
-			this.save_slots.push(slot_data);
 		}
+	}
+	
+	deleteSlot(slot){
+		console.log(slot);
+		this.save_slots[slot] = new SaveInfo(new Array(SLOT_SIZE).fill(0));;
+		this.slots[slot] = 0;
+		displayInfo(this);
+	}
+	
+	exportSlot(slot){
+		saveByteArray([this.save_slots[slot].data], `slot${slot}`);
+	}
+	
+	importSlot(slot) {
+	    var input = document.createElement('input');
+	    input.type = 'file';
+	    input.onchange = event => {
+		   var file = event.target.files[0];
+		   if (!file) return;
+
+		   var reader = new FileReader();
+		   reader.onload = e => {
+			  var importedData = new Uint8Array(e.target.result);
+
+			  // Ensure the imported data matches the expected slot size
+			  if (importedData.length !== SLOT_SIZE) {
+				 alert("Invalid save slot file size.");
+				 return;
+			  }
+
+			  // Replace the save slot with the imported data
+			  this.save_slots[slot] = new SaveInfo(importedData);
+			  this.slots[slot] = 1;
+			  this.readSlots();
+
+			  // Re-display the information with the updated slot
+			  displayInfo(save);  // Updated here to ensure the UI refreshes
+		   };
+
+		   reader.readAsArrayBuffer(file);
+	    };
+
+	    input.click();  // Trigger the file selection dialog
 	}
 	
 	download(){
@@ -130,38 +179,49 @@ var saveByteArray = (function (){
 }());
     
 
-function displayInfo(save){
-	
-	var DLC = document.getElementById("DLC");
-	DLC.innerHTML = `<button onclick="downloadDLC()" style="height: 32px;"><b>Download MHXX DLC (3DS)</b></button>`;
-	
-	var table = document.getElementById("saveTable");
-	var text = "";
-	
-	save.save_slots.forEach((slot, index) => {
-		text += `<div>`;
-		if(slot.name){
-			text += `<div class="save-slot">
-				<table><tr>
-					<td class="slot-name">
-						${slot.name}
-					</td>
-					<td class="slot-gender"><span class="slot-title">Gender</span><span class="slot-text">${slot.gender}</span></span>
-					<td class="slot-hr"><span class="slot-title">HR</span><span class="slot-text">${slot.HR}</span></span>
-				</tr><tr>
-					<td class="slot-funds"><span class="slot-title">Funds</span><span class="slot-text">${slot.funds}z</span></span>
-					<td colspan=2 class="slot-time"><span class="slot-title">Play Time</span><span class="slot-text">${slot.time}</span></span>
-				</tr></table>	
-			</div>`;
-		}
-		else{
-			text += `<div class="empty-slot">(No Data)</div>`;
-		}
-		
-		text += `</div>`;
-	});
-	
-	table.innerHTML = text;
+function displayInfo(save) {
+    var DLC = document.getElementById("DLC");
+    DLC.innerHTML = `<button onclick="downloadDLC()" style="height: 32px;"><b>Download MHXX DLC (3DS)</b></button>`;
+    
+    var table = document.getElementById("saveTable");
+    var text = "";
+    
+    save.save_slots.forEach((slot, index) => {
+        text += `<div class="save-table ${slot.name ? 'save-slot' : 'empty-slot'}">`;
+        if (slot.name) {
+            text += `<table><tr>
+                <td class="slot-name">${slot.name}</td>
+                <td class="slot-gender"><span class="slot-title">Gender</span><span class="slot-text">${slot.gender}</span></td>
+                <td class="slot-hr"><span class="slot-title">HR</span><span class="slot-text">${slot.HR}</span></td>
+            </tr><tr>
+                <td class="slot-funds"><span class="slot-title">Funds</span><span class="slot-text">${slot.funds}z</span></td>
+                <td colspan=2 class="slot-time"><span class="slot-title">Play Time</span><span class="slot-text">${slot.time}</span></td>
+            </tr></table>
+		  <div class="slot-actions">
+            <button onclick="deleteSlot(${index})">Delete</button>
+            <button onclick="exportSlot(${index})">Export</button>
+            <button onclick="importSlot(${index})">Import</button>
+		  </div>`;
+        } else {
+            text += `(No Data)<div class="import"><button onclick="importSlot(${index})">Import</button></div>`;
+        }
+        text += `</div>`;
+    });
+    
+    table.innerHTML = text;
+}
+
+
+function deleteSlot(slot){
+	save.deleteSlot(slot);
+}
+
+function exportSlot(slot){
+	save.exportSlot(slot);
+}
+
+function importSlot(slot){
+	save.importSlot(slot);
 }
 
 function downloadDLC(){
@@ -175,6 +235,7 @@ function readSave(event){
 	reader.onload = function(e){
 		save = new SaveFile(new Uint8Array(e.target.result));
 		save.detectGame();
+		save.init();
 		save.readSlots();
 		displayInfo(save);
 	};
