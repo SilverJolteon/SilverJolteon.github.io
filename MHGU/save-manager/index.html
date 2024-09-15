@@ -9,8 +9,12 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css">
 <link rel="stylesheet" href="assets/style.css">
+<link rel="stylesheet" href="assets/drag.css">
 </head>
 <body>
+
+<script src="scripts/main.js" defer></script>
+<script src="scripts/drag.js" defer></script>
 <center>
 <button onclick="loadSave()" style="height: 32px;"><b>Load SYSTEM</b></button>
 <span id = "DLC"></span>
@@ -18,11 +22,10 @@
 </center>
 
 <div class="main">
-<div id="saveTable" class="save-table"></div>
+<div id="saveTable" class="save-table list js-list"></div>
 </div>
-<script src="scripts/MHXX.js" defer></script>
-<script src="scripts/main.js" defer></script>
 </body>
+<script src="scripts/MHXX.js" defer></script>
 </html>
 
 

@@ -92,7 +92,6 @@ class SaveFile{
 	}
 	
 	deleteSlot(slot){
-		console.log(slot);
 		this.save_slots[slot] = new SaveInfo(new Array(SLOT_SIZE).fill(0));;
 		this.slots[slot] = 0;
 		displayInfo(this);
@@ -144,7 +143,6 @@ class SaveFile{
 			new DataView(CLEAN_MHXX_SAVE.buffer, 0x14, 0x18).getUint32(0, true),
 			new DataView(CLEAN_MHXX_SAVE.buffer, 0x18, 0x1C).getUint32(0, true)
 		];
-		console.log(dst_slot_offsets);
 		for(var i = 0; i < 3; i++){
 			CLEAN_MHXX_SAVE[4+i] = this.slots[i];
 		}
@@ -188,7 +186,7 @@ function displayInfo(save) {
     var text = "";
     
     save.save_slots.forEach((slot, index) => {
-        text += `<div class="save-table ${slot.name ? 'save-slot' : 'empty-slot'}">`;
+        text += `<div class="save-table ${slot.name ? 'save-slot' : 'empty-slot'} list__item is-idle js-item">`;
         if (slot.name) {
             text += `<table><tr>
                 <td class="slot-name">${slot.name}</td>
@@ -210,6 +208,7 @@ function displayInfo(save) {
     });
     
     table.innerHTML = text;
+    drag_setup();
 }
 
 
@@ -230,6 +229,13 @@ function downloadDLC(){
 }
 
 function readSave(event){
+	save = null;
+	var DLC = document.getElementById("DLC");
+	DLC.innerHTML = "";
+	
+	var table = document.getElementById("saveTable");
+	table.innerHTML = "";
+	
 	var file = event.target.files[0];
 	var reader = new FileReader();
 	

@@ -1,0 +1,16 @@
+.list__item {
+  user-select: none;
+  will-change: transform;
+  cursor: move; /* Make the entire item appear draggable */
+}
+
+.list__item.is-idle {
+  transition: 0.25s ease transform;
+  user-select: none;
+}
+
+.list__item.is-draggable {
+  cursor: move;
+  z-index: 10;
+  user-select: none;
+}
