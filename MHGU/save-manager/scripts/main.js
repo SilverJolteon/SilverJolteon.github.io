@@ -99,12 +99,13 @@ class SaveFile{
 	}
 	
 	exportSlot(slot){
-		saveByteArray([this.save_slots[slot].data], `slot${slot}`);
+		saveByteArray([this.save_slots[slot].data], `${this.save_slots[slot].name}.saveslot`);
 	}
 	
 	importSlot(slot) {
 	    var input = document.createElement('input');
 	    input.type = 'file';
+	    input.accept = ".saveslot";
 	    input.onchange = event => {
 		   var file = event.target.files[0];
 		   if (!file) return;
