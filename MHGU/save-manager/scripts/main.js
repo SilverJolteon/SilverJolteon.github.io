@@ -199,9 +199,9 @@ var saveByteArray = (function (){
 
 function displayInfo(save) {
     var DLC = document.getElementById("DLC");
-    DLC.innerHTML = `<button onclick="downloadSave(false)" style="height: 32px;"><b>Export SYSTEM For MHXX 3DS</b></button>`;
+    DLC.innerHTML = `<button onclick="downloadSave(false)" style="height: 32px;"><b>Export save for MHXX 3DS</b></button>`;
 	if(!new_save) DLC.innerHTML += `
-	<button onclick="downloadSave(true)" style="height: 32px;"><b>Export SYSTEM For MHXX 3DS (With All DLC)</b></button>`;
+	<button onclick="downloadSave(true)" style="height: 32px;"><b>Export save for MHXX 3DS (With All DLC)</b></button>`;
     
     var table = document.getElementById("saveTable");
     var text = "";
