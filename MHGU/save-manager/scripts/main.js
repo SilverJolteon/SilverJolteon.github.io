@@ -1,5 +1,6 @@
 var save = null;
 const SLOT_SIZE = 0x11D088;
+var new_save = false;
 
 class SaveInfo{
 	constructor(data){
@@ -134,7 +135,7 @@ class SaveFile{
 	    input.click();  // Trigger the file selection dialog
 	}
 	
-	download(){
+	download(with_dlc){
 		var off = 0;
 		if(this.game == 1) off = 0x24;
 		var src_slot_offsets = this.slot_offsets;
@@ -146,17 +147,35 @@ class SaveFile{
 		for(var i = 0; i < 3; i++){
 			CLEAN_MHXX_SAVE[4+i] = this.slots[i];
 		}
-		
-		var newData = new Uint8Array([
-			...CLEAN_MHXX_SAVE.slice(0, dst_slot_offsets[0]),
-			...this.save_slots[0].data,
-			...CLEAN_MHXX_SAVE.slice(dst_slot_offsets[0] + SLOT_SIZE, dst_slot_offsets[1]),
-			...this.save_slots[1].data,
-			...CLEAN_MHXX_SAVE.slice(dst_slot_offsets[1] + SLOT_SIZE, dst_slot_offsets[2]),
-			...this.save_slots[2].data,
-			...CLEAN_MHXX_SAVE.slice(dst_slot_offsets[2] + SLOT_SIZE)
-		]);
-		
+		var newData;
+		if(with_dlc){
+			for(var i = 0; i < 3; i++){
+				CLEAN_MHXX_SAVE[4+i] = this.slots[i];
+			}
+			newData = new Uint8Array([
+				...CLEAN_MHXX_SAVE.slice(0, dst_slot_offsets[0]),
+				...this.save_slots[0].data,
+				...CLEAN_MHXX_SAVE.slice(dst_slot_offsets[0] + SLOT_SIZE, dst_slot_offsets[1]),
+				...this.save_slots[1].data,
+				...CLEAN_MHXX_SAVE.slice(dst_slot_offsets[1] + SLOT_SIZE, dst_slot_offsets[2]),
+				...this.save_slots[2].data,
+				...CLEAN_MHXX_SAVE.slice(dst_slot_offsets[2] + SLOT_SIZE)
+			]);
+		}
+		else{
+			for(var i = 0; i < 3; i++){
+				this.data[4+i] = this.slots[i];
+			}
+			newData = new Uint8Array([
+				...this.data.slice(0, src_slot_offsets[0]),
+				...this.save_slots[0].data,
+				...this.data.slice(src_slot_offsets[0] + SLOT_SIZE, src_slot_offsets[1]),
+				...this.save_slots[1].data,
+				...this.data.slice(src_slot_offsets[1] + SLOT_SIZE, src_slot_offsets[2]),
+				...this.save_slots[2].data,
+				...this.data.slice(src_slot_offsets[2] + SLOT_SIZE)
+			]);
+		}
 		
 
 		saveByteArray([newData], "system");
@@ -180,7 +199,9 @@ var saveByteArray = (function (){
 
 function displayInfo(save) {
     var DLC = document.getElementById("DLC");
-    DLC.innerHTML = `<button onclick="downloadDLC()" style="height: 32px;"><b>Download MHXX DLC (3DS)</b></button>`;
+    DLC.innerHTML = `<button onclick="downloadSave(false)" style="height: 32px;"><b>Export SYSTEM For MHXX 3DS</b></button>`;
+	if(!new_save) DLC.innerHTML += `
+	<button onclick="downloadSave(true)" style="height: 32px;"><b>Export SYSTEM For MHXX 3DS (With All DLC)</b></button>`;
     
     var table = document.getElementById("saveTable");
     var text = "";
@@ -224,8 +245,17 @@ function importSlot(slot){
 	save.importSlot(slot);
 }
 
-function downloadDLC(){
-	save.download();
+function downloadSave(with_dlc){
+	save.download(with_dlc);
+}
+
+function newSave(){
+	new_save = true;
+	save = new SaveFile(CLEAN_MHXX_SAVE);
+	save.detectGame();
+	save.init();
+	save.readSlots();
+	displayInfo(save);
 }
 
 function readSave(event){
@@ -240,6 +270,7 @@ function readSave(event){
 	var reader = new FileReader();
 	
 	reader.onload = function(e){
+		new_save = false;
 		save = new SaveFile(new Uint8Array(e.target.result));
 		save.detectGame();
 		save.init();
