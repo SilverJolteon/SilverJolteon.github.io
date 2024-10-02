@@ -171,6 +171,14 @@ function dragEnd(e) {
   cleanup();
 }
 
+function arraysAreEqual(arr1, arr2) {
+  if (arr1.length !== arr2.length) return false;
+  for (let i = 0; i < arr1.length; i++) {
+    if (arr1[i] !== arr2[i]) return false;
+  }
+  return true;
+}
+
 function applyNewItemsOrder(e) {
   const reorderedItems = [];
   const reorderedSlots = [];
@@ -208,6 +216,9 @@ function applyNewItemsOrder(e) {
     listContainer.appendChild(item);
   });
 
+  // Check if there were any changes
+  const change = !arraysAreEqual(save.save_slots, reorderedSaveSlots);
+
   // Update the save.slots[] and save.save_slots[] arrays
   save.slots = reorderedSlots;
   save.save_slots = reorderedSaveSlots;
@@ -231,6 +242,8 @@ function applyNewItemsOrder(e) {
       unsetDraggableItem();
     });
   });
+
+  if (change) displayInfo(save);
 }
 
 

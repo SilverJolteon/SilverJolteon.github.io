@@ -135,23 +135,17 @@ class SaveFile{
 	    input.click();  // Trigger the file selection dialog
 	}
 	
-	download(with_dlc){
-		var off = 0;
-		if(this.game == 1) off = 0x24;
+	download(){
+		var save_type = document.getElementById("dropdown").selectedIndex;
 		var src_slot_offsets = this.slot_offsets;
-		var dst_slot_offsets = [
-			new DataView(CLEAN_MHXX_SAVE.buffer, 0x10, 0x14).getUint32(0, true),
-			new DataView(CLEAN_MHXX_SAVE.buffer, 0x14, 0x18).getUint32(0, true),
-			new DataView(CLEAN_MHXX_SAVE.buffer, 0x18, 0x1C).getUint32(0, true)
-		];
-		for(var i = 0; i < 3; i++){
-			CLEAN_MHXX_SAVE[4+i] = this.slots[i];
-		}
 		var newData;
-		if(with_dlc){
-			for(var i = 0; i < 3; i++){
-				CLEAN_MHXX_SAVE[4+i] = this.slots[i];
-			}
+		
+		if(save_type == 0){
+			var dst_slot_offsets = [
+				new DataView(CLEAN_MHXX_SAVE.buffer, 0x10, 0x14).getUint32(0, true),
+				new DataView(CLEAN_MHXX_SAVE.buffer, 0x14, 0x18).getUint32(0, true),
+				new DataView(CLEAN_MHXX_SAVE.buffer, 0x18, 0x1C).getUint32(0, true)
+			];
 			newData = new Uint8Array([
 				...CLEAN_MHXX_SAVE.slice(0, dst_slot_offsets[0]),
 				...this.save_slots[0].data,
@@ -161,23 +155,29 @@ class SaveFile{
 				...this.save_slots[2].data,
 				...CLEAN_MHXX_SAVE.slice(dst_slot_offsets[2] + SLOT_SIZE)
 			]);
-		}
-		else{
 			for(var i = 0; i < 3; i++){
-				this.data[4+i] = this.slots[i];
+				newData[0x04+i] = this.slots[i];
 			}
-			newData = new Uint8Array([
-				...this.data.slice(0, src_slot_offsets[0]),
-				...this.save_slots[0].data,
-				...this.data.slice(src_slot_offsets[0] + SLOT_SIZE, src_slot_offsets[1]),
-				...this.save_slots[1].data,
-				...this.data.slice(src_slot_offsets[1] + SLOT_SIZE, src_slot_offsets[2]),
-				...this.save_slots[2].data,
-				...this.data.slice(src_slot_offsets[2] + SLOT_SIZE)
-			]);
 		}
-		
-
+		else if(save_type == 1){
+			var dst_slot_offsets = [
+				new DataView(CLEAN_MHGU_SAVE.buffer, 0x34, 0x38).getUint32(0, true)+0x24,
+				new DataView(CLEAN_MHGU_SAVE.buffer, 0x38, 0x3C).getUint32(0, true)+0x24,
+				new DataView(CLEAN_MHGU_SAVE.buffer, 0x3C, 0x40).getUint32(0, true)+0x24
+			];
+			newData = new Uint8Array([
+				...CLEAN_MHGU_SAVE.slice(0, dst_slot_offsets[0]),
+				...this.save_slots[0].data,
+				...CLEAN_MHGU_SAVE.slice(dst_slot_offsets[0] + SLOT_SIZE, dst_slot_offsets[1]),
+				...this.save_slots[1].data,
+				...CLEAN_MHGU_SAVE.slice(dst_slot_offsets[1] + SLOT_SIZE, dst_slot_offsets[2]),
+				...this.save_slots[2].data,
+				...CLEAN_MHGU_SAVE.slice(dst_slot_offsets[2] + SLOT_SIZE)
+			]);
+			for(var i = 0; i < 3; i++){
+				newData[0x28+i] = this.slots[i];
+			}
+		}
 		saveByteArray([newData], "system");
 	}
 }
@@ -198,13 +198,18 @@ var saveByteArray = (function (){
     
 
 function displayInfo(save) {
-    var DLC = document.getElementById("DLC");
-    DLC.innerHTML = `<button onclick="downloadSave(false)" style="height: 32px;"><b>Export save for MHXX 3DS</b></button>`;
-	if(!new_save) DLC.innerHTML += `
-	<button onclick="downloadSave(true)" style="height: 32px;"><b>Export save for MHXX 3DS (With All DLC)</b></button>`;
-    
+    var DL = document.getElementById("DL");
+    //DLC.innerHTML = `<button onclick="downloadSave(0)" style="height: 32px;"><b>Export save for MHXX 3DS</b></button>`;
+	//if(!new_save) DLC.innerHTML += `
+	//<button onclick="downloadSave(1)" style="height: 32px;"><b>Export save for MHXX 3DS (With All DLC)</b></button>`;
+    var text = `<select id="dropdown">`;
+	text += `<option value=0>MHXX 3DS</option>`;
+	text += `<option value=1>MHGU Switch</option>`;
+	text += `</select><button onclick="downloadSave()">Download</button>`;
+	DL.innerHTML = text;
+	
     var table = document.getElementById("saveTable");
-    var text = "";
+    text = "";
     
     save.save_slots.forEach((slot, index) => {
         text += `<div class="save-table ${slot.name ? 'save-slot' : 'empty-slot'} list__item is-idle js-item">`;
@@ -245,8 +250,8 @@ function importSlot(slot){
 	save.importSlot(slot);
 }
 
-function downloadSave(with_dlc){
-	save.download(with_dlc);
+function downloadSave(save_type){
+	save.download(save_type);
 }
 
 function newSave(){
@@ -260,8 +265,8 @@ function newSave(){
 
 function readSave(event){
 	save = null;
-	var DLC = document.getElementById("DLC");
-	DLC.innerHTML = "";
+	var DL = document.getElementById("DL");
+	DL.innerHTML = "";
 	
 	var table = document.getElementById("saveTable");
 	table.innerHTML = "";
@@ -284,3 +289,5 @@ function readSave(event){
 function loadSave(){
 	document.getElementById("loadSave").click();
 }
+
+newSave();
