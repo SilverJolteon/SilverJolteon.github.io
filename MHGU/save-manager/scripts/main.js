@@ -16,7 +16,7 @@ class SaveInfo{
 class SaveFile{
 	constructor(data){
 		this.data = data;
-		this.game = -1;
+		this.game = 0;
 		this.slots = [0, 0, 0];
 		this.slot_offsets = [];
 		this.save_slots = [];
@@ -25,7 +25,6 @@ class SaveFile{
 	detectGame(){
 		const MHXX_SIZE = 0x481D88;
 		const MHGU_SIZE = 0x4EB8BC;
-		
 		switch(this.data.length){
 			case MHXX_SIZE:
 				this.game = 0;
@@ -34,8 +33,9 @@ class SaveFile{
 				this.game = 1;
 				break;
 			default:
-				this.game = -1;
+				return 1;
 		}
+		return 0;
 	}
 	
 	init(){
@@ -277,10 +277,13 @@ function readSave(event){
 	reader.onload = function(e){
 		new_save = false;
 		save = new SaveFile(new Uint8Array(e.target.result));
-		save.detectGame();
-		save.init();
-		save.readSlots();
-		displayInfo(save);
+		res = save.detectGame();
+		if(res) newSave();
+		else{
+			save.init();
+			save.readSlots();
+			displayInfo(save);
+		}
 	};
 	
 	reader.readAsArrayBuffer(file);
