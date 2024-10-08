@@ -18,8 +18,10 @@
 <script src="scripts/drag.js"></script>
 
 <center>
-<button onclick="newSave()" style="height: 32px;"><b>New save</b></button>
-<button onclick="loadSave()" style="height: 32px;"><b>Load save</b></button>
+<span class="menu">
+<button onclick="newSave()" style="height: 32px;">New save</button>
+<button onclick="loadSave()" style="height: 32px;">Load save</button>
+</span>
 <span id = "DL"></span>
 <input type="file" id="loadSave" style="display:none;" onchange="readSave(event)">
 </center>

@@ -202,10 +202,10 @@ function displayInfo(save) {
     //DLC.innerHTML = `<button onclick="downloadSave(0)" style="height: 32px;"><b>Export save for MHXX 3DS</b></button>`;
 	//if(!new_save) DLC.innerHTML += `
 	//<button onclick="downloadSave(1)" style="height: 32px;"><b>Export save for MHXX 3DS (With All DLC)</b></button>`;
-    var text = `<select id="dropdown">`;
+    var text = `<select class="dropdown" id="dropdown">`;
 	text += `<option value=0>MHXX 3DS</option>`;
 	text += `<option value=1>MHGU Switch</option>`;
-	text += `</select><button onclick="downloadSave()">Download (With DLC)</button>`;
+	text += `</select><span class="menu"><button onclick="downloadSave()">Download (With DLC)</button></span>`;
 	DL.innerHTML = text;
 	
     var table = document.getElementById("saveTable");

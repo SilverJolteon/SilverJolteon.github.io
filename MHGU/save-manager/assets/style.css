@@ -36,6 +36,10 @@ body{
 	color: #040400;
 	border: 3px solid #3a0902;
 	border-radius: 15px;
+	background-image: url(border.png);
+	background-repeat: no-repeat;
+	background-size: 100% 100%;
+	padding: 4px 17px;
 }
 
 .slot-title{
@@ -53,9 +57,15 @@ body{
 	text-align: center;
 	color: #d8e8e6;
 	width: 360px;
-	background-image: url("data:image/svg+xml,%3Csvg%20height%3D%2745%27%20width%3D%27360%27%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%3E%3Cpolygon%20points%3D%270%2C0%20359%2C0%20359%2C8%20350%2C8%20350%2C18%20359%2C18%20359%2C26%20350%2C26%20350%2C36%20359%2C36%20359%2C44%200%2C44%200%2C36%209%2C36%209%2C26%200%2C26%200%2C18%209%2C18%209%2C8%200%2C8%27%20style%3D%27fill%3A%23027b76%27%2F%3E%3C/svg%3E");
-	background-repeat: no-repeat;
-	background-size: 100% 100%;
+	font-weight: none;
+	background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 360 45'%3E %3Cpolygon points='18,2 18,17 11,10 11,9' fill='%23caae57'/%3E %3C/svg%3E"),
+	url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 360 45'%3E %3Cpolygon points='18,27 18,42 11,35 11,34' fill='%23caae57'/%3E %3C/svg%3E"),
+	url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 360 45'%3E %3Cpolygon points='341,2 348,9 348,10 341,17' fill='%23caae57'/%3E %3C/svg%3E"),
+	url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 360 45'%3E %3Cpolygon points='341,27 348,34 348,35 341,42' fill='%23caae57'/%3E %3C/svg%3E"),
+	url("data:image/svg+xml,%3Csvg%20height%3D%2745%27%20width%3D%27360%27%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%3E%3Cpolygon%20points%3D%270%2C0%20359%2C0%20359%2C8%20350%2C8%20350%2C18%20359%2C18%20359%2C26%20350%2C26%20350%2C36%20359%2C36%20359%2C44%200%2C44%200%2C36%209%2C36%209%2C26%200%2C26%200%2C18%209%2C18%209%2C8%200%2C8%27%20style%3D%27fill%3A%23027b76%27%2F%3E%3C/svg%3E");
+	
+	background-repeat: no-repeat, no repeat, no-repeat, no repeat;
+	background-size: 100% 100%, 100% 100%, 100% 100%, 100% 100%;
 }
 
 .slot-gender{
@@ -107,22 +117,23 @@ body{
 	font-size: 32px;
 	border: 3px solid #180402;
 	border-radius: 15px;
-	background-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%22230%20104%20359%205%22%20width%3D%22359%22%20height%3D%225%22%3E%3Cpolygon%20points%3D%22230%2C104%20235%2C104%20235%2C107%20584%2C107%20584%2C104%20589%2C104%20589%2C109%20230%2C109%22%20style%3D%22fill%3A%23000000%22%2F%3E%3C/svg%3E");
-	background-repeat: no-repeat;
-	background-position: center 104px;
-	background-size: auto;
+	background-image: url("border-no-slot.png"),
+	url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%22230%20104%20359%205%22%20width%3D%22359%22%20height%3D%225%22%3E%3Cpolygon%20points%3D%22230%2C104%20235%2C104%20235%2C107%20584%2C107%20584%2C104%20589%2C104%20589%2C109%20230%2C109%22%20style%3D%22fill%3A%23000000%22%2F%3E%3C/svg%3E");
+	background-repeat: no-repeat, no-repeat;
+	background-position: 100% 100%, center 104px;
+	background-size: 100% 100%, auto;
 }
 
 .slot-actions {
 	position: absolute;
-	top: 146px;
+	top: 154px;
 	left: 0px;
 	display: flex;
 	justify-content: flex-start;
 	gap: 10px; /* 10px spacing between buttons */
 }
 
-.save-slot button, .empty-slot button {
+.menu button, .save-slot button, .empty-slot button {
     padding: 5px 10px;
     font-size: 14px;
     background-color: #027b76;
@@ -130,6 +141,21 @@ body{
     border: none;
     border-radius: 5px;
     cursor: pointer;
+	font-weight: bold;
+	height: 32px;
+}
+
+.dropdown {
+    padding: 5px 10px;
+    font-size: 14px;
+    background-color: #027b76;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+	font-weight: bold;
+	margin-right: 5px;
+	height: 32px;
 }
 
 .save-slot button:hover, .empty-slot button:hover {
