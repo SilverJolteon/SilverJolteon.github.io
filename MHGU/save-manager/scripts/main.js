@@ -205,7 +205,7 @@ function displayInfo(save) {
     var text = `<select class="dropdown" id="dropdown">`;
 	text += `<option value=0>MHXX 3DS</option>`;
 	text += `<option value=1>MHGU Switch</option>`;
-	text += `</select><span class="menu"><button onclick="downloadSave()">Download (With DLC)</button></span>`;
+	text += `</select><span class="menu"><button onclick="downloadSave()">Export save (With DLC)</button></span>`;
 	DL.innerHTML = text;
 	
     var table = document.getElementById("saveTable");
