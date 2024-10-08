@@ -14,3 +14,17 @@
   z-index: 10;
   user-select: none;
 }
+
+.overlay{
+	position: absolute;
+	height: 147px;
+	width: 847px;
+	opacity: 0;
+	background-color: rgba(203, 144, 31, 0.25);
+	border: 4px solid #eea40f;
+	border-radius: 15px;
+}
+
+.js-item:hover .overlay{
+	opacity: 1;
+}
