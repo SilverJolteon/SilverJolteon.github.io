@@ -230,7 +230,7 @@ function displayInfo(save) {
         } else {
             text += `(No Data)<div class="import"><button onclick="importSlot(${index})">Import</button></div>`;
         }
-        text += `</div>`;
+        text += `<div class="overlay"></div></div>`;
     });
     
     table.innerHTML = text;
