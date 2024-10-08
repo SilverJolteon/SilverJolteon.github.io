@@ -164,8 +164,8 @@ body{
 
 .empty-slot .import {
     position: absolute;
-    top: 129px; /* Position near the bottom */
-    left: 0px;   /* Position near the left */
+    top: 139px; /* Position near the bottom */
+    left: -3px;   /* Position near the left */
 }
 
 .save-slot button, .empty-slot button {
