@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Elden Ring Class Calculator</title>
+<style>
+body{
+	color: rgb(228, 228, 228);
+	background-color: #2E2E2E;
+	font-family: Arial;
+	font-size: 14px;
+}
+
+.main{
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.optimal{
+	color: rgb(209, 187, 161);
+	height: 20px;
+	text-align: center;
+	border: 1px solid rgb(102, 102, 102);
+	background-color: rgb(34, 34, 34);
+	border-radius: 4px;
+	width: 120px;
+}
+
+.build{
+	color: rgb(209, 187, 161);
+	height: 24px;
+	border: 1px solid rgb(102, 102, 102);
+	background-color: rgb(34, 34, 34);
+	border-radius: 4px;
+}
+
+.reset{
+	cursor: pointer;
+	color: rgb(228, 228, 228);
+	margin-left: 7px;
+	position: relative;
+	top: 2px;
+}
+
+.header{
+	font-size: 10px;
+	text-align: center;
+}
+
+.base{
+	color: rgb(209, 187, 161);
+	height: 21px;
+	text-align: center;
+	border: 1px solid rgb(102, 102, 102);
+	background-color: rgb(34, 34, 34);
+	border-radius: 4px;
+	width: 42px;
+}
+
+.current{
+	font-weight: bold;
+	color: white;
+	height: 21px;
+	text-align: center;
+	border: 1px solid rgb(102, 102, 102);
+	background-color: rgb(34, 34, 34);
+	border-radius: 4px;
+	width: 42px;
+}
+
+.rankings{
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+</style>
+</head>
+<body>
+<div class="main">
+	<table style="margin-bottom: 20px">
+		<tr>
+			<td><b>Optimal Class: </b></td>
+			<td><input class="optimal" id="optimal" type="text" disabled="" readonly=""  value="Wretch"></td>
+			<td><select class="build" id="build" onchange="updateInfo()">
+				<option value="vanilla">Vanilla</option>
+				<option value="reforged_v1.2.5">Reforged v1.2.5</option>
+			</select></td>
+			<td><span class="reset" onclick="reset()"><svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 512 512" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M212.333 224.333H12c-6.627 0-12-5.373-12-12V12C0 5.373 5.373 0 12 0h48c6.627 0 12 5.373 12 12v78.112C117.773 39.279 184.26 7.47 258.175 8.007c136.906.994 246.448 111.623 246.157 248.532C504.041 393.258 393.12 504 256.333 504c-64.089 0-122.496-24.313-166.51-64.215-5.099-4.622-5.334-12.554-.467-17.42l33.967-33.967c4.474-4.474 11.662-4.717 16.401-.525C170.76 415.336 211.58 432 256.333 432c97.268 0 176-78.716 176-176 0-97.267-78.716-176-176-176-58.496 0-110.28 28.476-142.274 72.333h98.274c6.627 0 12 5.373 12 12v48c0 6.627-5.373 12-12 12z"></path></svg></span></td>
+		</tr>
+	</table>
+
+	<table>
+		<thead>
+		<tr>
+			<th width="105px"/>
+			<th class="header" width="50px">Base</th>
+			<th class="header" width="50px">Current</th>
+			<th width="20px"/>
+			<th>Class Rankings</th>
+		</tr>
+		</thead>
+		<tbody>
+		<tr>
+			<td>Level</td>
+			<td><input class="base" id="b_lvl" type="text" disabled="" readonly=""  value="1"></td>
+			<td><input class="base" id="c_lvl" type="text" disabled="" readonly=""  value="1" style="font-weight: bold"></td>
+			<td rowspan="20"/>
+			<td rowspan="20" style="vertical-align: top"><div id="rankings" class="rankings"></div></td>
+		</tr><tr>
+			<td>Vigor</td>
+			<td><input class="base" id="b_0" type="text" disabled="" readonly=""  value="10"></td>
+			<td><input class="current" id="c_0" type="text" maxlength="2" onchange="updateInfo()"></td>
+		</tr><tr>
+			<td>Mind</td>
+			<td><input class="base" id="b_1" type="text" disabled="" readonly=""  value="10"></td>
+			<td><input class="current" id="c_1" type="text" maxlength="2" onchange="updateInfo()"></td>
+		</tr><tr>
+			<td>Endurance</td>
+			<td><input class="base" id="b_2" type="text" disabled="" readonly=""  value="10"></td>
+			<td><input class="current" id="c_2" type="text" maxlength="2" onchange="updateInfo()"></td>
+		</tr><tr>
+			<td>Strength</td>
+			<td><input class="base" id="b_3" type="text" disabled="" readonly=""  value="10"></td>
+			<td><input class="current" id="c_3" type="text" maxlength="2" onchange="updateInfo()"></td>
+		</tr><tr>
+			<td>Dexterity</td>
+			<td><input class="base" id="b_4" type="text" disabled="" readonly=""  value="10"></td>
+			<td><input class="current" id="c_4" type="text" maxlength="2" onchange="updateInfo()"></td>
+		</tr><tr>
+			<td>Intelligence</td>
+			<td><input class="base" id="b_5" type="text" disabled="" readonly=""  value="10"></td>
+			<td><input class="current" id="c_5" type="text" maxlength="2" onchange="updateInfo()"></td>
+		</tr><tr>
+			<td>Faith</td>
+			<td><input class="base" id="b_6" type="text" disabled="" readonly=""  value="10"></td>
+			<td><input class="current" id="c_6" type="text" maxlength="2" onchange="updateInfo()"></td>
+		</tr><tr>
+			<td>Arcane</td>
+			<td><input class="base" id="b_7" type="text" disabled="" readonly=""  value="10"></td>
+			<td><input class="current" id="c_7" type="text" maxlength="2" onchange="updateInfo()"></td>
+		</tr>
+		<tr colspan=3 height="200px"/>
+		</tbody>
+	</table>
+</div>
+<script>
+var vanilla_data = {
+	"Hero": {
+		"Stats": [14, 9, 12, 16, 9, 7, 8, 11],
+		"Level": 0
+	},
+	"Bandit": {
+		"Stats": [10, 11, 10, 9, 13, 9, 8, 14],
+		"Level": 0
+	},
+	"Astrologer": {
+		"Stats": [9, 15, 9, 8, 12, 16, 7, 9],
+		"Level": 0
+	},
+	"Warrior": {
+		"Stats": [11, 12, 11, 10, 16, 10, 8, 9],
+		"Level": 0
+	},
+	"Prisoner": {
+		"Stats": [11, 12, 11, 11, 14, 14, 6, 9],
+		"Level": 0
+	},
+	"Confessor": {
+		"Stats": [10, 13, 10, 12, 12, 9, 14, 9],
+		"Level": 0
+	},
+	"Wretch": {
+		"Stats": [10, 10, 10, 10, 10, 10, 10, 10],
+		"Level": 0
+	},
+	"Vagabond": {
+		"Stats": [15, 10, 11, 14, 13, 9, 9, 7],
+		"Level": 0
+	},
+	"Prophet": {
+		"Stats": [10, 14, 8, 11, 10, 7, 16, 10],
+		"Level": 0
+	},
+	"Samurai": {
+		"Stats": [12, 11, 13, 12, 15, 9, 8, 8],
+		"Level": 0
+	}
+}
+
+var reforged_v1_2_5_data = {
+	"Vagabond": {
+		"Stats": [16, 10, 11, 14, 13, 9, 9, 7],
+		"Level": 0
+	},
+	"Warrior": {
+		"Stats": [13, 12, 11, 10, 16, 10, 8, 9],
+		"Level": 0
+	},
+	"Hero": {
+		"Stats": [15, 9, 13, 16, 10, 7, 8, 11],
+		"Level": 0
+	},
+	"Bandit": {
+		"Stats": [11, 11, 12, 10, 14, 9, 8, 14],
+		"Level": 0
+	},
+	"Astrologer": {
+		"Stats": [11, 16, 10, 8, 12, 16, 7, 9],
+		"Level": 0
+	},
+	"Prophet": {
+		"Stats": [11, 15, 9, 11, 10, 7, 16, 10],
+		"Level": 0
+	},
+	"Samurai": {
+		"Stats": [12, 11, 13, 12, 15, 9, 8, 9],
+		"Level": 0
+	},
+	"Prisoner": {
+		"Stats": [12, 12, 11, 11, 14, 14, 6, 9],
+		"Level": 0
+	},
+	"Confessor": {
+		"Stats": [10, 13, 10, 12, 12, 9, 14, 9],
+		"Level": 0
+	},
+	"Wretch": {
+		"Stats": [10, 10, 10, 10, 10, 10, 10, 10],
+		"Level": 0
+	},
+	"Perfumer": {
+		"Stats": [10, 12, 11, 9, 14, 10, 7, 16],
+		"Level": 0
+	},
+	"Scout": {
+		"Stats": [12, 12, 12, 11, 11, 10, 10, 11],
+		"Level": 0
+	},
+	"Gladiator": {
+		"Stats": [12, 9, 13, 14, 14, 9, 6, 12],
+		"Level": 0
+	},
+	"Guide": {
+		"Stats": [14, 15, 11, 9, 10, 9, 15, 6],
+		"Level": 0
+	}
+};
+
+function updateInfo(){
+	var build = document.getElementById("build").value;
+	var base_stats;
+	if(build === "vanilla") base_stats = vanilla_data;
+	else if(build === "reforged_v1.2.5") base_stats = reforged_v1_2_5_data;
+
+	var stats = Array(8).fill(0);
+	for(var i = 0; i < 8; i++){
+		stats[i] = Number(document.getElementById(`c_${i}`).value);
+	}
+	
+	var class_levels = [];
+	for(var key in base_stats){
+		base_stats[key]["Level"] = 0;
+		for(var i = 0; i < 8; i++){
+			base_stats[key]["Level"] += Math.max(stats[i], base_stats[key]["Stats"][i]);
+		}
+		base_stats[key]["Level"] -= 79;
+		class_levels.push(base_stats[key]["Level"]);
+	}
+
+	document.getElementById("c_lvl").value = Math.min(...class_levels);
+	var sorted_classes = Object.fromEntries(
+		Object.entries(base_stats).sort(([, a], [, b]) => a.Level - b.Level)
+	);
+	var optimal = Object.keys(sorted_classes)[0];
+	document.getElementById("optimal").value = optimal;
+	document.getElementById("b_lvl").value = sorted_classes[optimal]["Stats"].reduce((ps, a) => ps + a, 0) - 79;
+	for(var i = 0; i < 8; i++){
+		document.getElementById(`b_${i}`).value = sorted_classes[optimal]["Stats"][i];
+	}
+	
+	var rankings = `
+		<table>
+			<thead>
+				<tr>
+					<th style="font-size: 10px; text-align: left"><b>Class</b></th>
+					<th style="font-size: 10px; text-align: left"><b>Level</b></th>
+				</tr>
+			</thead>
+			<tbody>`;
+	for(var key in sorted_classes){
+		rankings += `
+			<tr>
+				<td style="font-size: 14px; width: 80px">${key}</td>
+				<td style="font-size: 14px; color: rgb(31, 147, 207)"><b>${sorted_classes[key]["Level"]}</b></td>
+			</tr>`;
+	}
+	rankings += "</tbody></table>";
+	document.getElementById("rankings").innerHTML = rankings;
+}
+
+function reset(){
+	for(var i = 0; i < 8; i++){
+		document.getElementById(`c_${i}`).value = "";
+	}
+	updateInfo();
+}
+
+reset();
+
+for(var i = 0; i < 8; i++){
+	const $input = document.querySelector(`#c_${i}`);
+	const REGEXP = /[0-9\/]+/;
+	$input.addEventListener("keypress", event => {
+	  if (!REGEXP.test(event.key)) {
+		event.preventDefault();
+	  }
+	});
+}
+</script>
+</body>
+</html>
