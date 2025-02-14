@@ -55,6 +55,7 @@ function drag_setup() {
  ***********************/
 
 function dragStart(e) {
+  if (e.target.closest('button')) return;
   draggableItem = e.target.closest('.js-item');
 
   if (!draggableItem) return;
