@@ -178,3 +178,23 @@ body{
     border-radius: 5px;
     cursor: pointer;
 }
+
+.footer{
+	display: flex;
+	align-items: center;
+	justify-content: center;
+    position: fixed;
+    bottom: 0;
+	left: 0;
+	width: 100%;
+	height: 32px;
+	color: #959396;
+	background-color: rgba(32, 32, 32, 0.7);
+	border-top: 1px solid #027b76;
+    font-size: 12px;
+}
+
+.footer a{
+	color: #959396;
+	text-decoration: none;
+}

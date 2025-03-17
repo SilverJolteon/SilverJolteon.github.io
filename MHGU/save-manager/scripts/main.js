@@ -294,3 +294,10 @@ function loadSave(){
 }
 
 newSave();
+
+window.addEventListener("load", () => {
+	var footer = document.getElementById("footer");
+	var now = new Date();
+	var year = now.getFullYear();
+	footer.innerHTML = `<a href="https://github.com/SilverJolteon/">&copy;2024-${year} SilverJolteon</a>`;
+});
