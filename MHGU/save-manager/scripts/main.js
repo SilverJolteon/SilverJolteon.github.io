@@ -1,4 +1,4 @@
-var VERSION = "v1.1.0";
+var VERSION = "v1.1.1";
 
 var save = null;
 const SLOT_SIZE = 0x11D088;
@@ -151,6 +151,7 @@ class SaveFile{
 				if(data[offset+13]){
 					charm[3] = skill_names[data[offset+13]-1];
 					charm[4] = data[offset+15];
+					if(charm[4] > 128) charm[4] -= 256;
 				}
 				charm_list.push(charm);
 			}
