@@ -1,4 +1,4 @@
-var VERSION = "v1.1.1";
+var VERSION = "v1.1.2";
 
 var save = null;
 const SLOT_SIZE = 0x11D088;
@@ -136,14 +136,15 @@ class SaveFile{
 		}
 	}
 	
-	exportCharms(slot){
+	exportCharms(slot, type){
 		var charm_list = [];
 		var data = this.save_slots[slot].data;
-		for(var i = 0; i < 1400; i++){
+		for(var i = 0; i < 2000; i++){
 			var charm = Array(5).fill("");
 			var offset = 36 * i + 0x62EE;
 			if(data[offset] == 0x6){
-				charm[0] = data[offset+16];
+				if(type == 0) charm[0] = data[offset+16];
+				else charm[0] = `,${data[offset+16]}`;
 				if(data[offset + 12]){
 					charm[1] = skill_names[data[offset+12]-1];
 					charm[2] = data[offset+14];
@@ -159,7 +160,8 @@ class SaveFile{
 		var output = `#Format: Slots,Skill1,Points1,Skill2,Points2\n`;
 		output += charm_list.map(row => row.join(",")).join("\n");
 		var utf8Encode = new TextEncoder();
-		saveByteArray([output], `mycharms.txt`);
+		if(type == 0) saveByteArray([output], `mycharms.txt`);
+		else saveByteArray([output], `CHARM.csv`);
 	}
 	
 	deleteSlot(slot){
@@ -293,6 +295,11 @@ function displayInfo(save) {
             <button onclick="deleteSlot(${index})">Delete</button>
             <button onclick="exportSlot(${index})">Export</button>
             <button onclick="importSlot(${index})">Import</button>
+			
+			<select id="charm-export" class="dropdown" style="margin-left: 310px; margin-right: -8px">
+				<option value=0>Athena's ASS</option>
+				<option value=1>mhxx.wiki-db.com</option>
+			</select>
 			<button onclick="exportCharms(${index})">Export Charms</button>
 		  </div>`;
         } else {
@@ -306,7 +313,8 @@ function displayInfo(save) {
 }
 
 function exportCharms(slot){
-	save.exportCharms(slot);
+	var type = document.getElementById("charm-export").value;
+	save.exportCharms(slot, type);
 }
 
 function deleteSlot(slot){
