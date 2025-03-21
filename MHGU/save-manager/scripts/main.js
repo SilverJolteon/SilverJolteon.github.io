@@ -1,3 +1,5 @@
+var VERSION = "v1.1.0";
+
 var save = null;
 const SLOT_SIZE = 0x11D088;
 var new_save = false;
@@ -367,5 +369,5 @@ window.addEventListener("load", () => {
 	var footer = document.getElementById("footer");
 	var now = new Date();
 	var year = now.getFullYear();
-	footer.innerHTML = `<a href="https://github.com/SilverJolteon/">&copy;2024-${year} SilverJolteon</a>`;
+	footer.innerHTML = `<a href="https://github.com/SilverJolteon/">&copy;2024-${year} SilverJolteon · ${VERSION}</a>`;
 });
