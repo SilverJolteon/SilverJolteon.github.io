@@ -254,7 +254,7 @@ var saveByteArray = (function (){
 	document.body.appendChild(a);
 	a.style = "display: none";
 	return function (data, name){
-	   var blob = new Blob(data, {type: "application/octet/stream"}),
+	   var blob = new Blob(data, {type: "application/octet-stream"}),
 		  url = window.URL.createObjectURL(blob);
 	   a.href = url;
 	   a.download = name;
