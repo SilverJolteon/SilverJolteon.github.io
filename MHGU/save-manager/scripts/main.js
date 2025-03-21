@@ -1,4 +1,4 @@
-var VERSION = "v1.1.2";
+var VERSION = "v1.1.3";
 
 var save = null;
 const SLOT_SIZE = 0x11D088;
@@ -157,7 +157,9 @@ class SaveFile{
 				charm_list.push(charm);
 			}
 		}
-		var output = `#Format: Slots,Skill1,Points1,Skill2,Points2\n`;
+		var output = "";
+		if(type == 0) output = `#Format: Slots,Skill1,Points1,Skill2,Points2\n`;
+		else output = `#Format:,Slots,Skill1,Points1,Skill2,Points2\n`;
 		output += charm_list.map(row => row.join(",")).join("\n");
 		var utf8Encode = new TextEncoder();
 		if(type == 0) saveByteArray([output], `mycharms.txt`);
