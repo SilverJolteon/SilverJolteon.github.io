@@ -296,7 +296,7 @@ function displayInfo(save) {
             <button onclick="exportSlot(${index})">Export</button>
             <button onclick="importSlot(${index})">Import</button>
 			
-			<select id="charm-export" class="dropdown" style="margin-left: 310px; margin-right: -8px">
+			<select id="${index}_charms" class="dropdown" style="margin-left: 310px; margin-right: -8px">
 				<option value=0>Athena's ASS</option>
 				<option value=1>mhxx.wiki-db.com</option>
 			</select>
@@ -313,7 +313,7 @@ function displayInfo(save) {
 }
 
 function exportCharms(slot){
-	var type = document.getElementById("charm-export").value;
+	var type = document.getElementById(`${slot}_charms`).value;
 	save.exportCharms(slot, type);
 }
 
