@@ -299,8 +299,8 @@ function displayInfo(save) {
             <button onclick="importSlot(${index})">Import</button>
 			
 			<select id="${index}_charms" class="dropdown" style="margin-left: 310px; margin-right: -8px">
-				<option value=0>Athena's ASS</option>
-				<option value=1>mhxx.wiki-db.com</option>
+				<option value=0>mycharms.txt</option>
+				<option value=1>CHARM.csv</option>
 			</select>
 			<button onclick="exportCharms(${index})">Export Charms</button>
 		  </div>`;
