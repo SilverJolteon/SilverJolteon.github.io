@@ -1,7 +1,7 @@
-var VERSION = "v1.2.1";
+var VERSION = "v1.2.0";
 
 var save = null;
-const SLOT_SIZE = 0x11E7C0;
+const SLOT_SIZE = 0x11D088;
 var new_save = false;
 var game_type = 0;
 
