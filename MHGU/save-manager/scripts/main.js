@@ -1,7 +1,7 @@
-var VERSION = "v1.2.0";
+var VERSION = "v1.3.0";
 
 var save = null;
-const SLOT_SIZE = 0x11D088;
+var SLOT_SIZE = 0x11D088;
 var new_save = false;
 var game_type = 0;
 
@@ -47,6 +47,50 @@ const skill_names = [
   "Reload Speed +1", "Reload Speed -1", "Reload Speed -2", "Reload Speed -3"
 ];
 
+const shoutout_defaults = [`Let's do this!`, `Thanks!`, `Nice work!`, `Sorry!`, `Don't sweat it!`, `Congratulations!`, `Missed!`, `Thanks for hunting!`, `I'll set a trap!`, `I'll try to mount it!`, `I'll place a bomb!`, `I'll do a strong attack!`, `Follow me!`, `I'll use a Hunter Art!`, `Let's capture this thing!`, `I'm abandoning the Quest.`, `I'll use a Voucher.`, `I'll change equipment.`, `Choose any Quest you like!`, `I'll choose a Quest.`, `We'll need drinks.`, `Wait a sec for me!`, `All set!`, `I'm outta here.`, `Let's do this!`, `Thanks!`, `Nice work!`, `Sorry!`, `Don't sweat it!`, `Congratulations!`, `Missed!`, `Thanks for hunting!`, `I'll set a trap!`, `I'll try to mount it!`, `I'll place a bomb!`, `I'll do a strong attack!`, `Follow me!`, `I'll use a Hunter Art!`, `Let's capture this thing!`, `I'm abandoning the Quest.`, `I'll use a Voucher.`, `I'll change equipment.`, `Choose any Quest you like!`, `I'll choose a Quest.`, `We'll need drinks.`, `Wait a sec for me!`, `All set!`, `I'm outta here.`, `Let's do this!`, `Thanks!`, `Nice work!`, `Sorry!`, `Don't sweat it!`, `Congratulations!`, `Missed!`, `Thanks for hunting!`, `I'll set a trap!`, `I'll try to mount it!`, `I'll place a bomb!`, `I'll do a strong attack!`, `Follow me!`, `I'll use a Hunter Art!`, `Let's capture this thing!`, `I'm abandoning the Quest.`, `I'll use a Voucher.`, `I'll change equipment.`, `Choose any Quest you like!`, `I'll choose a Quest.`, `We'll need drinks.`, `Wait a sec for me!`, `All set!`, `I'm outta here.`, `I mounted it!`, `I'll set a trap!`, `I set up us a bomb!`, `I'm in trouble!`, `It has me pinned!`, `Thanks for the help!`, `Hunter Art 1 activated!`, `Hunter Art 2 activated!`, `Hunter Art 3 activated!`, `I mounted it!`, `I'll set a trap!`, `I set up us a bomb!`, `I'm in trouble!`, `It has me pinned!`, `Thanks for the help!`, `Hunter Art 1 activated!`, `Hunter Art 2 activated!`, `Hunter Art 3 activated!`, `I mounted it!`, `I'll set a trap!`, `I set up us a bomb!`, `I'm in trouble!`, `It has me pinned!`, `Thanks for the help!`, `Hunter Art 1 activated!`, `Hunter Art 2 activated!`, `Hunter Art 3 activated!`];
+
+class Footer{
+	constructor(data){
+		this.data = new Uint8Array(data);
+		if(this.data.length == 0) this.data = new Uint8Array(0x283C);
+		this.shoutouts = this.getShoutouts();
+	};
+	
+	getShoutouts(){
+		var shoutouts = [];
+		var shoutout_size = this.data.length == 0x283C ? 0x68 : 0x3C;
+		
+		for(var i = 1; i < this.data.length-3; i += shoutout_size){
+			var shoutout = "";
+			for(var j = 0; j < shoutout_size; j++){
+				var b = this.data[i+j];
+				if(b != 0) shoutout += (String.fromCharCode(b));
+			}
+			if(shoutout.length == 0) shoutout = shoutout_defaults[shoutouts.length];
+			shoutouts.push(shoutout);
+		}
+		
+		return shoutouts;
+	}
+	
+	getFooter(save_type){
+		var footer_size = save_type == 2 ? 0x283C : 0x1738;
+		var shoutout_size = save_type == 2 ? 0x68 : 0x3C;
+		var footer = new Uint8Array(footer_size);
+		var offset = 0x01;
+		for(var i = 0; i < this.shoutouts.length; i++){
+			var shoutout = new Uint8Array(shoutout_size);
+			for(var j = 0; j < this.shoutouts[i].length && j < shoutout_size; j++){
+				shoutout[j] = this.shoutouts[i].charCodeAt(j);
+			}
+			footer.set(shoutout, offset);
+			offset += shoutout_size;
+		}
+
+		return footer;
+	}
+}
+
 class SaveInfo{
 	constructor(data){
 			this.data = new Uint8Array(data);
@@ -66,6 +110,7 @@ class SaveFile{
 		this.slots = [0, 0, 0];
 		this.slot_offsets = [];
 		this.save_slots = [];
+		this.footers = [];
 	}
 	
 	detectGame(){
@@ -102,9 +147,13 @@ class SaveFile{
 			new DataView(this.data.buffer.slice(0x14 + off, 0x18 + off)).getUint32(0, true),
 			new DataView(this.data.buffer.slice(0x18 + off, 0x1C + off)).getUint32(0, true)
 		];
+		var footer_size = (this.slot_offsets[1] - this.slot_offsets[0]) - SLOT_SIZE;
 		for(var slot = 0; slot < 3; slot++){
 			var slot_data = new SaveInfo(this.data.buffer.slice(this.slot_offsets[slot]+off, this.slot_offsets[slot] + off + SLOT_SIZE));
 			this.save_slots[slot] = slot_data;
+			
+			var footer_data = new Footer(this.data.buffer.slice(this.slot_offsets[slot] + off + SLOT_SIZE, this.slot_offsets[slot] + off + SLOT_SIZE + footer_size));
+			this.footers[slot] = footer_data;
 		}
 	}
 	
@@ -142,7 +191,6 @@ class SaveFile{
 				seconds -= minutes * 60;
 				var time = hours.toString() + ':' + minutes.toString().padStart(2, '0') + ':' + seconds.toString().padStart(2, '0');
 				this.save_slots[slot].time = time;
-				
 			}
 		}
 	}
@@ -184,7 +232,11 @@ class SaveFile{
 	}
 	
 	exportSlot(slot){
-		saveByteArray([this.save_slots[slot].data], `${this.save_slots[slot].name}.saveslot`);
+		var saveslot = new Uint8Array([
+			...this.save_slots[slot].data,
+			...this.footers[slot].getFooter(2)
+		]);
+		saveByteArray([saveslot], `${this.save_slots[slot].name}.saveslot`);
 	}
 	
 	importSlot(slot) {
@@ -199,13 +251,15 @@ class SaveFile{
 		   reader.onload = e => {
 			  var importedData = new Uint8Array(e.target.result);
 
-			  if(importedData.length !== SLOT_SIZE) {
+			  if(!(importedData.length == 0x11D088 || importedData.length == 0x11F8C4)){
 				 alert("Invalid save slot file size.");
 				 return;
 			  }
 
 			  this.save_slots[slot] = new SaveInfo(importedData);
+			  this.footers[slot] = new Footer(importedData.slice(SLOT_SIZE));
 			  this.slots[slot] = 1;
+			  
 			  this.readSlots();
 
 			  displayInfo(save);
@@ -214,71 +268,62 @@ class SaveFile{
 		   reader.readAsArrayBuffer(file);
 	    };
 
-	    input.click();  // Trigger the file selection dialog
+	    input.click();
 	}
 	
 	download(){
 		var save_type = document.getElementById("dropdown").selectedIndex;
 		var src_slot_offsets = this.slot_offsets;
+		var dst_slot_offsets = [];
 		var newData;
 		
 		if(save_type == 0){
-			var dst_slot_offsets = [
+			dst_slot_offsets = [
 				new DataView(CLEAN_MHXX_3DS_SAVE.buffer, 0x10, 0x14).getUint32(0, true),
 				new DataView(CLEAN_MHXX_3DS_SAVE.buffer, 0x14, 0x18).getUint32(0, true),
 				new DataView(CLEAN_MHXX_3DS_SAVE.buffer, 0x18, 0x1C).getUint32(0, true)
 			];
-			newData = new Uint8Array([
-				...CLEAN_MHXX_3DS_SAVE.slice(0, dst_slot_offsets[0]),
-				...this.save_slots[0].data,
-				...CLEAN_MHXX_3DS_SAVE.slice(dst_slot_offsets[0] + SLOT_SIZE, dst_slot_offsets[1]),
-				...this.save_slots[1].data,
-				...CLEAN_MHXX_3DS_SAVE.slice(dst_slot_offsets[1] + SLOT_SIZE, dst_slot_offsets[2]),
-				...this.save_slots[2].data,
-				...CLEAN_MHXX_3DS_SAVE.slice(dst_slot_offsets[2] + SLOT_SIZE)
-			]);
+			
+			newData = new Uint8Array(CLEAN_MHXX_3DS_SAVE);
+			
 			for(var i = 0; i < 3; i++){
 				newData[0x04+i] = this.slots[i];
 			}
 		}
 		else if(save_type == 1){
-			var dst_slot_offsets = [
+			dst_slot_offsets = [
 				new DataView(CLEAN_MHXX_SWITCH_SAVE.buffer, 0x34, 0x38).getUint32(0, true)+0x24,
 				new DataView(CLEAN_MHXX_SWITCH_SAVE.buffer, 0x38, 0x3C).getUint32(0, true)+0x24,
 				new DataView(CLEAN_MHXX_SWITCH_SAVE.buffer, 0x3C, 0x40).getUint32(0, true)+0x24
 			];
-			newData = new Uint8Array([
-				...CLEAN_MHXX_SWITCH_SAVE.slice(0, dst_slot_offsets[0]),
-				...this.save_slots[0].data,
-				...CLEAN_MHXX_SWITCH_SAVE.slice(dst_slot_offsets[0] + SLOT_SIZE, dst_slot_offsets[1]),
-				...this.save_slots[1].data,
-				...CLEAN_MHXX_SWITCH_SAVE.slice(dst_slot_offsets[1] + SLOT_SIZE, dst_slot_offsets[2]),
-				...this.save_slots[2].data,
-				...CLEAN_MHXX_SWITCH_SAVE.slice(dst_slot_offsets[2] + SLOT_SIZE)
-			]);
+			
+			newData = new Uint8Array(CLEAN_MHXX_SWITCH_SAVE);
+			
 			for(var i = 0; i < 3; i++){
 				newData[0x28+i] = this.slots[i];
 			}
 		}
 		else if(save_type == 2){
-			var dst_slot_offsets = [
+			dst_slot_offsets = [
 				new DataView(CLEAN_MHGU_SAVE.buffer, 0x34, 0x38).getUint32(0, true)+0x24,
 				new DataView(CLEAN_MHGU_SAVE.buffer, 0x38, 0x3C).getUint32(0, true)+0x24,
 				new DataView(CLEAN_MHGU_SAVE.buffer, 0x3C, 0x40).getUint32(0, true)+0x24
 			];
-			newData = new Uint8Array([
-				...CLEAN_MHGU_SAVE.slice(0, dst_slot_offsets[0]),
-				...this.save_slots[0].data,
-				...CLEAN_MHGU_SAVE.slice(dst_slot_offsets[0] + SLOT_SIZE, dst_slot_offsets[1]),
-				...this.save_slots[1].data,
-				...CLEAN_MHGU_SAVE.slice(dst_slot_offsets[1] + SLOT_SIZE, dst_slot_offsets[2]),
-				...this.save_slots[2].data,
-				...CLEAN_MHGU_SAVE.slice(dst_slot_offsets[2] + SLOT_SIZE)
-			]);
+			
+			newData = new Uint8Array(CLEAN_MHGU_SAVE);
+					
 			for(var i = 0; i < 3; i++){
 				newData[0x28+i] = this.slots[i];
 			}
 		}
+		
+		newData.set(this.save_slots[0].data, dst_slot_offsets[0]);
+		newData.set(this.footers[0].getFooter(save_type), dst_slot_offsets[0]+SLOT_SIZE);
+		newData.set(this.save_slots[1].data, dst_slot_offsets[1]);
+		newData.set(this.footers[1].getFooter(save_type), dst_slot_offsets[1]+SLOT_SIZE);
+		newData.set(this.save_slots[2].data, dst_slot_offsets[2]);
+		newData.set(this.footers[2].getFooter(save_type), dst_slot_offsets[2]+SLOT_SIZE);
+		
 		saveByteArray([newData], "system");
 	}
 }
