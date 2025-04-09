@@ -1,4 +1,4 @@
-var VERSION = "v1.3.0";
+var VERSION = "v1.3.1";
 
 var save = null;
 var SLOT_SIZE = 0x11D088;
@@ -6,45 +6,45 @@ var new_save = false;
 var game_type = 0;
 
 const skill_names = [
-  "Poison", "Paralysis", "Sleep", "Stun", "Hearing", "Wind Res", "Tremor Res", "Bind Res", "Heat Res", "Cold Res",
-  "ColdBlooded", "HotBlooded", "Anti-Theft", "Def Lock", "Frenzy Res", "Biology", "Bleeding", "Attack", "Defense",
-  "Health", "Fire Res", "Water Res", "Thunder Res", "Ice Res", "Dragon Res", "Blight Res", "Fire Atk", "Water Atk",
-  "Thunder Atk", "Ice Atk", "Dragon Atk", "Elemental", "Status", "Sharpener", "Handicraft", "Sharpness", "Fencing",
-  "Grinder", "Blunt", "Crit Draw", "Punish Draw", "Sheathing", "Sheathe Sharpen", "Bladescale", "Reload Spd",
-  "Recoil", "Precision", "Normal Up", "Pierce Up", "Pellet Up", "Heavy Up", "Normal S+", "Pierce S+", "Pellet S+",
-  "Crag S+", "Clust S+", "Poison C+", "Para C+", "Sleep C+", "Power C+", "Elem C+", "C.Range C+", "Exhaust C+",
-  "Blast C+", "Rapid Fire", "Dead Eye", "Loading", "Haphazard", "Ammo Saver", "Expert", "Tenderizer", "Chain Crit",
-  "Crit Status", "Crit Element", "Critical Up", "Negative Crit", "FastCharge", "Stamina", "Constitution",
-  "Stam Recov", "Distance Runner", "Evasion", "Evade Dist", "Bubble", "Guard", "Guard Up", "KO", "Stam Drain",
-  "Maestro", "Artillery", "Destroyer", "Bomb Boost", "Gloves Off", "Spirit", "Unscathed", "Chance", "Dragon Spirit",
-  "Potential", "Survivor", "Furor", "Crisis", "Guts", "Sense", "Team Player", "TeamLeader", "Mounting", "Vault",
-  "Insight", "Endurance", "Prolong SP", "Psychic", "Perception", "Ranger", "Transporter", "Protection",
-  "Hero Shield", "Rec Level", "Rec Speed", "Lasting Pwr", "Wide-Range", "Hunger", "Gluttony", "Eating", "Light Eater",
-  "Carnivore", "Mycology", "Botany", "Combo Rate", "Combo Plus", "Speed Setup", "Gathering", "Honey", "Charmer",
-  "Whim", "Fate", "Carving", "Capturer", "Bherna", "Kokoto", "Pokke", "Yukumo", "Soaratorium", "Flying Pub",
-  "Redhelm", "Snowbaron", "Stonefist", "Drilltusk", "Dreadqueen", "C.beard", "Silverwind", "Deadeye", "Dreadking",
-  "Thunderlord", "Grimclaw", "Hellblade", "Nightcloak", "Rustrazor", "Soulseer", "Boltreaver", "Elderfrost",
-  "Bloodbath", "Redhelm X", "Snowbaron X", "Stonefist X", "Drilltusk X", "Dreadqueen X", "Crystalbeard X",
-  "Silverwind X", "Deadeye X", "Dreadking X", "Thunderlord X", "Grimclaw X", "Hellblade X", "Nightcloak X",
-  "Rustrazor X", "Soulseer X", "Boltreaver X", "Elderfrost X", "Bloodbath X", "D. Fencing", "Edge Lore", "PowerEater",
-  "Mechanic", "Brawn", "Prayer", "Covert", "Edgemaster", "SteadyHand", "Status Res", "Fury", "Nimbleness", "Readiness",
-  "Resilience", "Brutality", "Stalwart", "Prudence", "Amplify", "Hoarding", "Avarice", "Anti-Kushala", "Anti-Chameleos",
-  "Anti-Teostra", "Secret Arts", "Talisman Boost", "Torso Up", "Negate Poison", "Double Poison", "Negate Paralysis",
-  "Double Paralysis", "Negate Sleep", "Double Sleep", "Negate Stun", "Halve Stun", "Double Stun", "HG Earplugs",
-  "Earplugs", "Windproof (Hi)", "Windproof (Lo)", "Tremor Res", "Negate Bind", "Heat Cancel", "Heat Surge",
-  "Cold Cancel", "Cold Surge", "Polar Hunter", "Tropic Hunter", "Anti-Theft", "Iron Skin", "Antivirus", "Bio Master",
-  "Bio Researcher", "Negate Bleeding", "Double Bleeding", "Attack Up (L)", "Attack Up (M)", "Attack Up (S)",
-  "Attack Down (S)", "Attack Down (M)", "Attack Down (L)", "Defense Up (L)", "Defense Up (M)", "Defense Up (S)",
-  "Defense Down (S)", "Defense Down (M)", "Defense Down (L)", "Health +50", "Health +20", "Health -10", "Health -30",
-  "Fire Res +20", "Fire Res +15", "Fire Res -20", "Water Res +20", "Water Res +15", "Water Res -20", "Thunder Res +20",
-  "Thunder Res +15", "Thunder Res -20", "Ice Res +20", "Ice Res +15", "Ice Res -20", "Dragon Res +20", "Dragon Res +15",
-  "Dragon Res -20", "Blightproof", "Fire Atk +2", "Fire Atk +1", "Fire Atk Down", "Water Atk +2", "Water Atk +1",
-  "Water Atk Down", "Thunder Atk +2", "Thunder Atk +1", "Thunder Atk Down", "Ice Atk +2", "Ice Atk +1", "Ice Atk Down",
-  "Dragon Atk +2", "Dragon Atk +1", "Dragon Atk Down", "Element Atk Up", "Element Atk Down", "Status Atk +2",
-  "Status Atk +1", "Status Atk Down", "Speed Sharpening", "Slow Sharpening", "Sharpness +2", "Sharpness +1",
-  "Razor Sharp", "Blunt Edge", "Mind's Eye", "Blind Eye", "Heavy Polish", "Bludgeoner", "Critical Draw",
-  "Punishing Draw", "Quick Sheath", "Challenge Sheath", "Bladescale Hone", "Reload Speed +3", "Reload Speed +2",
-  "Reload Speed +1", "Reload Speed -1", "Reload Speed -2", "Reload Speed -3"
+  `Poison`, `Paralysis`, `Sleep`, `Stun`, `Hearing`, `Wind Res`, `Tremor Res`, `Bind Res`, `Heat Res`, `Cold Res`,
+  `ColdBlooded`, `HotBlooded`, `Anti-Theft`, `Def Lock`, `Frenzy Res`, `Biology`, `Bleeding`, `Attack`, `Defense`,
+  `Health`, `Fire Res`, `Water Res`, `Thunder Res`, `Ice Res`, `Dragon Res`, `Blight Res`, `Fire Atk`, `Water Atk`,
+  `Thunder Atk`, `Ice Atk`, `Dragon Atk`, `Elemental`, `Status`, `Sharpener`, `Handicraft`, `Sharpness`, `Fencing`,
+  `Grinder`, `Blunt`, `Crit Draw`, `Punish Draw`, `Sheathing`, `Sheathe Sharpen`, `Bladescale`, `Reload Spd`,
+  `Recoil`, `Precision`, `Normal Up`, `Pierce Up`, `Pellet Up`, `Heavy Up`, `Normal S+`, `Pierce S+`, `Pellet S+`,
+  `Crag S+`, `Clust S+`, `Poison C+`, `Para C+`, `Sleep C+`, `Power C+`, `Elem C+`, `C.Range C+`, `Exhaust C+`,
+  `Blast C+`, `Rapid Fire`, `Dead Eye`, `Loading`, `Haphazard`, `Ammo Saver`, `Expert`, `Tenderizer`, `Chain Crit`,
+  `Crit Status`, `Crit Element`, `Critical Up`, `Negative Crit`, `FastCharge`, `Stamina`, `Constitution`,
+  `Stam Recov`, `Distance Runner`, `Evasion`, `Evade Dist`, `Bubble`, `Guard`, `Guard Up`, `KO`, `Stam Drain`,
+  `Maestro`, `Artillery`, `Destroyer`, `Bomb Boost`, `Gloves Off`, `Spirit`, `Unscathed`, `Chance`, `Dragon Spirit`,
+  `Potential`, `Survivor`, `Furor`, `Crisis`, `Guts`, `Sense`, `Team Player`, `TeamLeader`, `Mounting`, `Vault`,
+  `Insight`, `Endurance`, `Prolong SP`, `Psychic`, `Perception`, `Ranger`, `Transporter`, `Protection`,
+  `Hero Shield`, `Rec Level`, `Rec Speed`, `Lasting Pwr`, `Wide-Range`, `Hunger`, `Gluttony`, `Eating`, `Light Eater`,
+  `Carnivore`, `Mycology`, `Botany`, `Combo Rate`, `Combo Plus`, `Speed Setup`, `Gathering`, `Honey`, `Charmer`,
+  `Whim`, `Fate`, `Carving`, `Capturer`, `Bherna`, `Kokoto`, `Pokke`, `Yukumo`, `Soaratorium`, `Flying Pub`,
+  `Redhelm`, `Snowbaron`, `Stonefist`, `Drilltusk`, `Dreadqueen`, `C.beard`, `Silverwind`, `Deadeye`, `Dreadking`,
+  `Thunderlord`, `Grimclaw`, `Hellblade`, `Nightcloak`, `Rustrazor`, `Soulseer`, `Boltreaver`, `Elderfrost`,
+  `Bloodbath`, `Redhelm X`, `Snowbaron X`, `Stonefist X`, `Drilltusk X`, `Dreadqueen X`, `Crystalbeard X`,
+  `Silverwind X`, `Deadeye X`, `Dreadking X`, `Thunderlord X`, `Grimclaw X`, `Hellblade X`, `Nightcloak X`,
+  `Rustrazor X`, `Soulseer X`, `Boltreaver X`, `Elderfrost X`, `Bloodbath X`, `D. Fencing`, `Edge Lore`, `PowerEater`,
+  `Mechanic`, `Brawn`, `Prayer`, `Covert`, `Edgemaster`, `SteadyHand`, `Status Res`, `Fury`, `Nimbleness`, `Readiness`,
+  `Resilience`, `Brutality`, `Stalwart`, `Prudence`, `Amplify`, `Hoarding`, `Avarice`, `Anti-Kushala`, `Anti-Chameleos`,
+  `Anti-Teostra`, `Secret Arts`, `Talisman Boost`, `Torso Up`, `Negate Poison`, `Double Poison`, `Negate Paralysis`,
+  `Double Paralysis`, `Negate Sleep`, `Double Sleep`, `Negate Stun`, `Halve Stun`, `Double Stun`, `HG Earplugs`,
+  `Earplugs`, `Windproof (Hi)`, `Windproof (Lo)`, `Tremor Res`, `Negate Bind`, `Heat Cancel`, `Heat Surge`,
+  `Cold Cancel`, `Cold Surge`, `Polar Hunter`, `Tropic Hunter`, `Anti-Theft`, `Iron Skin`, `Antivirus`, `Bio Master`,
+  `Bio Researcher`, `Negate Bleeding`, `Double Bleeding`, `Attack Up (L)`, `Attack Up (M)`, `Attack Up (S)`,
+  `Attack Down (S)`, `Attack Down (M)`, `Attack Down (L)`, `Defense Up (L)`, `Defense Up (M)`, `Defense Up (S)`,
+  `Defense Down (S)`, `Defense Down (M)`, `Defense Down (L)`, `Health +50`, `Health +20`, `Health -10`, `Health -30`,
+  `Fire Res +20`, `Fire Res +15`, `Fire Res -20`, `Water Res +20`, `Water Res +15`, `Water Res -20`, `Thunder Res +20`,
+  `Thunder Res +15`, `Thunder Res -20`, `Ice Res +20`, `Ice Res +15`, `Ice Res -20`, `Dragon Res +20`, `Dragon Res +15`,
+  `Dragon Res -20`, `Blightproof`, `Fire Atk +2`, `Fire Atk +1`, `Fire Atk Down`, `Water Atk +2`, `Water Atk +1`,
+  `Water Atk Down`, `Thunder Atk +2`, `Thunder Atk +1`, `Thunder Atk Down`, `Ice Atk +2`, `Ice Atk +1`, `Ice Atk Down`,
+  `Dragon Atk +2`, `Dragon Atk +1`, `Dragon Atk Down`, `Element Atk Up`, `Element Atk Down`, `Status Atk +2`,
+  `Status Atk +1`, `Status Atk Down`, `Speed Sharpening`, `Slow Sharpening`, `Sharpness +2`, `Sharpness +1`,
+  `Razor Sharp`, `Blunt Edge`, `Mind's Eye`, `Blind Eye`, `Heavy Polish`, `Bludgeoner`, `Critical Draw`,
+  `Punishing Draw`, `Quick Sheath`, `Challenge Sheath`, `Bladescale Hone`, `Reload Speed +3`, `Reload Speed +2`,
+  `Reload Speed +1`, `Reload Speed -1`, `Reload Speed -2`, `Reload Speed -3`
 ];
 
 const shoutout_defaults = [`Let's do this!`, `Thanks!`, `Nice work!`, `Sorry!`, `Don't sweat it!`, `Congratulations!`, `Missed!`, `Thanks for hunting!`, `I'll set a trap!`, `I'll try to mount it!`, `I'll place a bomb!`, `I'll do a strong attack!`, `Follow me!`, `I'll use a Hunter Art!`, `Let's capture this thing!`, `I'm abandoning the Quest.`, `I'll use a Voucher.`, `I'll change equipment.`, `Choose any Quest you like!`, `I'll choose a Quest.`, `We'll need drinks.`, `Wait a sec for me!`, `All set!`, `I'm outta here.`, `Let's do this!`, `Thanks!`, `Nice work!`, `Sorry!`, `Don't sweat it!`, `Congratulations!`, `Missed!`, `Thanks for hunting!`, `I'll set a trap!`, `I'll try to mount it!`, `I'll place a bomb!`, `I'll do a strong attack!`, `Follow me!`, `I'll use a Hunter Art!`, `Let's capture this thing!`, `I'm abandoning the Quest.`, `I'll use a Voucher.`, `I'll change equipment.`, `Choose any Quest you like!`, `I'll choose a Quest.`, `We'll need drinks.`, `Wait a sec for me!`, `All set!`, `I'm outta here.`, `Let's do this!`, `Thanks!`, `Nice work!`, `Sorry!`, `Don't sweat it!`, `Congratulations!`, `Missed!`, `Thanks for hunting!`, `I'll set a trap!`, `I'll try to mount it!`, `I'll place a bomb!`, `I'll do a strong attack!`, `Follow me!`, `I'll use a Hunter Art!`, `Let's capture this thing!`, `I'm abandoning the Quest.`, `I'll use a Voucher.`, `I'll change equipment.`, `Choose any Quest you like!`, `I'll choose a Quest.`, `We'll need drinks.`, `Wait a sec for me!`, `All set!`, `I'm outta here.`, `I mounted it!`, `I'll set a trap!`, `I set up us a bomb!`, `I'm in trouble!`, `It has me pinned!`, `Thanks for the help!`, `Hunter Art 1 activated!`, `Hunter Art 2 activated!`, `Hunter Art 3 activated!`, `I mounted it!`, `I'll set a trap!`, `I set up us a bomb!`, `I'm in trouble!`, `It has me pinned!`, `Thanks for the help!`, `Hunter Art 1 activated!`, `Hunter Art 2 activated!`, `Hunter Art 3 activated!`, `I mounted it!`, `I'll set a trap!`, `I set up us a bomb!`, `I'm in trouble!`, `It has me pinned!`, `Thanks for the help!`, `Hunter Art 1 activated!`, `Hunter Art 2 activated!`, `Hunter Art 3 activated!`];
@@ -111,6 +111,7 @@ class SaveFile{
 		this.slot_offsets = [];
 		this.save_slots = [];
 		this.footers = [];
+		this.options =[0, 0, 0, 0]; // Brightness, Rumble, Disable 3D, Enable Circle Pad Pro
 	}
 	
 	detectGame(){
@@ -155,6 +156,11 @@ class SaveFile{
 			var footer_data = new Footer(this.data.buffer.slice(this.slot_offsets[slot] + off + SLOT_SIZE, this.slot_offsets[slot] + off + SLOT_SIZE + footer_size));
 			this.footers[slot] = footer_data;
 		}
+		
+		this.options[0] = new DataView(this.data.buffer.slice(0x28 + off, 0x29 + off)).getUint8(0, true);
+		this.options[1] = new DataView(this.data.buffer.slice(0x29 + off, 0x2A + off)).getUint8(0, true);
+		this.options[2] = new DataView(this.data.buffer.slice(0xB27E + off, 0xB27F + off)).getUint8(0, true);
+		this.options[3] = new DataView(this.data.buffer.slice(0xB27F + off, 0xB280 + off)).getUint8(0, true);
 	}
 	
 	readSlots(){
@@ -276,6 +282,7 @@ class SaveFile{
 		var src_slot_offsets = this.slot_offsets;
 		var dst_slot_offsets = [];
 		var newData;
+		var off = 0;
 		
 		if(save_type == 0){
 			dst_slot_offsets = [
@@ -285,10 +292,7 @@ class SaveFile{
 			];
 			
 			newData = new Uint8Array(CLEAN_MHXX_3DS_SAVE);
-			
-			for(var i = 0; i < 3; i++){
-				newData[0x04+i] = this.slots[i];
-			}
+			off = 0x00;
 		}
 		else if(save_type == 1){
 			dst_slot_offsets = [
@@ -298,10 +302,7 @@ class SaveFile{
 			];
 			
 			newData = new Uint8Array(CLEAN_MHXX_SWITCH_SAVE);
-			
-			for(var i = 0; i < 3; i++){
-				newData[0x28+i] = this.slots[i];
-			}
+			off = 0x24;
 		}
 		else if(save_type == 2){
 			dst_slot_offsets = [
@@ -311,10 +312,7 @@ class SaveFile{
 			];
 			
 			newData = new Uint8Array(CLEAN_MHGU_SAVE);
-					
-			for(var i = 0; i < 3; i++){
-				newData[0x28+i] = this.slots[i];
-			}
+			off = 0x24;
 		}
 		
 		newData.set(this.save_slots[0].data, dst_slot_offsets[0]);
@@ -323,6 +321,15 @@ class SaveFile{
 		newData.set(this.footers[1].getFooter(save_type), dst_slot_offsets[1]+SLOT_SIZE);
 		newData.set(this.save_slots[2].data, dst_slot_offsets[2]);
 		newData.set(this.footers[2].getFooter(save_type), dst_slot_offsets[2]+SLOT_SIZE);
+		
+		for(var i = 0; i < 3; i++){
+			newData[0x04 + off + i] = this.slots[i];
+		}
+		
+		newData[0x28 + off] = this.options[0];
+		newData[0x29 + off] = this.options[1];
+		newData[0xB27E + off] = this.options[2];
+		newData[0xB27F+ off] = this.options[3];
 		
 		saveByteArray([newData], "system");
 	}
@@ -357,6 +364,7 @@ function displayInfo(save) {
 	selected = game_type == 2 ? "selected" : "";
 	text += `<option value=2 ${selected}>MHGU Switch</option>`;
 	text += `</select><span class="menu"><button onclick="downloadSave()">Export save (With DLC)</button></span>`;
+	
 	DL.innerHTML = text;
 	
     var table = document.getElementById("saveTable");
