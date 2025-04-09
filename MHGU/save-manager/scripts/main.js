@@ -1,4 +1,4 @@
-var VERSION = "v1.3.1";
+var VERSION = "v1.3.2";
 
 var save = null;
 var SLOT_SIZE = 0x11D088;
@@ -326,8 +326,8 @@ class SaveFile{
 			newData[0x04 + off + i] = this.slots[i];
 		}
 		
-		newData[0x28 + off] = this.options[0];
-		newData[0x29 + off] = this.options[1];
+		newData[0x28 + off] = 0x18;
+		newData[0x29 + off] = 0x01;
 		newData[0xB27E + off] = this.options[2];
 		newData[0xB27F+ off] = this.options[3];
 		
