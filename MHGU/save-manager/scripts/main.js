@@ -357,14 +357,14 @@ function displayInfo(save) {
 	var selected = "";
 	
 	selected = game_type == 0 ? "selected" : "";
-	text += `<option value=0 ${selected}>MHXX 3DS</option>`;
+	text += `<option value=0 ${selected}>MHXX 3DS (JP)</option>`;
 	
 	selected = game_type == 1 ? "selected" : "";
-	text += `<option value=1 ${selected}>MHXX Switch</option>`;
+	text += `<option value=1 ${selected}>MHXX Switch (JP)</option>`;
 	
 	selected = game_type == 2 ? "selected" : "";
-	text += `<option value=2 ${selected}>MHGU Switch</option>`;
-	text += `</select><span class="menu"><button onclick="downloadSave()">Export save (With DLC)</button></span>`;
+	text += `<option value=2 ${selected}>MHGU Switch (EN)</option>`;
+	text += `</select><span class="menu"><button onclick="downloadSave()">Export save (Includes DLC)</button></span>`;
 	
 	DL.innerHTML = text;
 	
