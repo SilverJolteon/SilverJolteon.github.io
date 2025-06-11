@@ -258,7 +258,8 @@ class SaveFile{
 			  var importedData = new Uint8Array(e.target.result);
 
 			  if(!(importedData.length == 0x11D088 || importedData.length == 0x11F8C4)){
-				 alert("Invalid save slot file size.");
+				 if(importedData.length == 0x481D88 || importedData.length == 0x481DAC || importedData.length == 0x4EB8BC) readSave(event);
+				 else alert("Invalid save slot file size.");
 				 return;
 			  }
 
