@@ -134,7 +134,7 @@ body{
 	gap: 10px; /* 10px spacing between buttons */
 }
 
-.menu button, .save-slot button, .empty-slot button {
+.menu button, .save-slot button, .empty-slot button{
     padding: 5px 10px;
     font-size: 14px;
     background-color: #027b76;
@@ -177,6 +177,69 @@ body{
     border: none;
     border-radius: 5px;
     cursor: pointer;
+}
+
+.popup-window{
+	display: none;
+	position: fixed;
+	min-width: 848px;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	padding: 20px;
+	background-color: #2A2A2A;
+	border: 1px solid #c0c0c0;
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+	z-index: 9999;
+	border-radius: 15px;
+}
+
+.popup-window-overlay{
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0, 0, 0, 0.5);
+	z-index: 9998;
+	display: none;
+}
+
+.close-popup-button{
+	position: absolute;
+	top: 0px;
+	right: 10px;
+	cursor: pointer;
+	font-size: 20px;
+	color: #ffffff;
+}
+
+.close-popup-button:hover{
+	color: #c0c0c0;
+}
+
+.cat-window{
+	display: flex;
+	justify: center; 
+	align-items: center;
+	flex-direction: column;
+	justify-content: space-between;
+	gap: 10px;
+	flex-wrap: wrap;
+	font-size: 12px;
+	color: #ffffff;
+}
+
+.cat-window button{
+    padding: 5px 10px;
+    font-size: 12px;
+    background-color: #027b76;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+	font-weight: bold;
+	height: 24px;
 }
 
 .footer{

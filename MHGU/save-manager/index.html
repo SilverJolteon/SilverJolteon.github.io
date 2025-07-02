@@ -13,12 +13,14 @@
 <script src="scripts/MHXX_3DS.js"></script>
 <script src="scripts/MHXX_SWITCH.js"></script>
 <script src="scripts/MHGU.js"></script>
+<script src="scripts/DLC_CATS.js"></script>
 <script src="scripts/drag.js"></script>
 
 <center>
 <span class="menu">
 <button onclick="newSave()" style="height: 32px;">New save</button>
 <button onclick="loadSave()" style="height: 32px;">Load save</button>
+<button onclick="openWindow()" style="height: 32px;">DLC Palicos</button>
 </span>
 <span id = "DL"></span>
 <input type="file" id="loadSave" style="display:none;" onchange="readSave(event)">
@@ -26,6 +28,13 @@
 
 <div class="main">
 <div id="saveTable" class="save-table list js-list"></div>
+
+
+<div id="popup-window" class="popup-window">
+	<span class="close-popup-button" onclick="closeWindow()">&times;</span>
+	<div id="popup"></div>
+</div>
+<div id="popup-window-overlay" class="popup-window-overlay" onClick="closeWindow()"></div>
 </div>
 <div id="footer" class="footer"></div>
 <script src="scripts/main.js"></script>

@@ -1,9 +1,10 @@
-var VERSION = "v1.3.3";
+var VERSION = "v1.4.0";
 
 var save = null;
 var SLOT_SIZE = 0x11D088;
 var new_save = false;
 var game_type = 0;
+var cats = [...DLC_CAT_DEFAULTS];
 
 const skill_names = [
   `Poison`, `Paralysis`, `Sleep`, `Stun`, `Hearing`, `Wind Res`, `Tremor Res`, `Bind Res`, `Heat Res`, `Cold Res`,
@@ -111,7 +112,7 @@ class SaveFile{
 		this.slot_offsets = [];
 		this.save_slots = [];
 		this.footers = [];
-		this.options =[0, 0, 0, 0]; // Brightness, Rumble, Disable 3D, Enable Circle Pad Pro
+		this.options = [0, 0, 0, 0]; // Brightness, Rumble, Disable 3D, Enable Circle Pad Pro
 	}
 	
 	detectGame(){
@@ -161,6 +162,85 @@ class SaveFile{
 		this.options[1] = new DataView(this.data.buffer.slice(0x29 + off, 0x2A + off)).getUint8(0, true);
 		this.options[2] = new DataView(this.data.buffer.slice(0xB27E + off, 0xB27F + off)).getUint8(0, true);
 		this.options[3] = new DataView(this.data.buffer.slice(0xB27F + off, 0xB280 + off)).getUint8(0, true);
+	}
+	
+	manageCats(){
+		var popup = document.getElementById("popup");
+		popup.innerHTML = "";
+		var info = `<div class="cat-window"><span id="catcount"></span></br></br><table>`;
+		for(var row = 0; row < 10; row++){
+			info += "<tr>";
+			for(var col = 0; col < 6; col++){
+				var id = row * 6 + col;
+				var checked = cats.includes(id) ? "checked" : "";
+				info += `<td style="border: 1px solid grey; text-align: left">
+							<input type="checkbox" data-id="${id}" ${checked}>
+							<label for="cat_${id}"> ${DLC_CAT_NAMES[id]}</label>`;
+				if(DLC_CAT_SKILLS[id] === "") DLC_CAT_SKILLS[id] = "<i>None</i>";
+				info += `</br><span style="color: grey; font-size: 10px">${DLC_CAT_SKILLS[id]}</span>`;
+				var origin = "";
+				if(id < 2)       origin = `<span style="color: #93c47d; font-size: 10px">MH4U/MH4G Bonus</span>`;
+				else if(id < 24) origin = `<span style="color: #cc0000; font-size: 10px">MHGen/MHX DLC</span>`;
+				else if(id < 36) origin = `<span style="color: #ff9900; font-size: 10px">MHX DLC</span>`;
+				else if(id < 49) origin = `<span style="color: #3c78d8; font-size: 10px">MHXX DLC</span>`;
+				else if(id < 57) origin = `<span style="color: #76a5af; font-size: 10px">MHX Collab</span>`;
+				else if(id < 60) origin = `<span style="color: #9900ff; font-size: 10px">MHGU DLC</span>`;
+				if(origin) info += `</br>${origin}`;
+				info += "</td>";
+			}
+			info += "</tr>";
+		}
+		info += `</table>
+					<span>
+						<button id="deselect" style="margin-right: 10px">Uncheck all</button>
+						<button id="defaults" style="margin-right: 10px">Set to default</button>
+						<button id="save_cats">Save</button>
+					</span>
+				</div>`;
+		popup.innerHTML += info;
+		
+		const checkboxes = popup.querySelectorAll('input[type="checkbox"]');
+		
+		const updateCats = () => {
+			const checked = Array.from(checkboxes)
+				.filter(cb => cb.checked)
+				.map(cb => parseInt(cb.dataset.id));
+				
+			document.getElementById("catcount").innerHTML = `${checked.length} / 50 Palicos Selected`;
+			
+			checkboxes.forEach(cb => {
+				cb.disabled = !cb.checked && checked.length >= 50;
+			});
+		}
+
+		checkboxes.forEach(cb => {
+			cb.addEventListener("change", updateCats);
+		});
+		
+		
+		document.getElementById("defaults").addEventListener("click", () => {
+			checkboxes.forEach(cb => {
+			var id = parseInt(cb.dataset.id);
+				cb.checked = DLC_CAT_DEFAULTS.includes(id);
+			});
+		});
+		
+		document.getElementById("deselect").addEventListener("click", () => {
+			checkboxes.forEach(cb => cb.checked = false);
+			updateCats();
+		});
+		
+		document.getElementById("save_cats").addEventListener("click", () => {
+			cats = Array.from(checkboxes)
+				.filter(cb => cb.checked)
+				.map(cb => parseInt(cb.dataset.id));
+			closeWindow();
+		});
+		
+		updateCats();
+		
+		document.getElementById("popup-window-overlay").style.display = "block";
+		document.getElementById("popup-window").style.display = "block";
 	}
 	
 	readSlots(){
@@ -331,6 +411,14 @@ class SaveFile{
 		newData[0x29 + off] = 0x01;
 		newData[0xB27E + off] = this.options[2];
 		newData[0xB27F+ off] = this.options[3];
+		var cat_offset = 0x2A + off;
+		for(var i = 0; i < 50; i++){
+			for(var j = 0; j < 0x144; j++){
+				if(i < cats.length) newData[cat_offset + j] = DLC_CAT_DATA[cats[i]][j];
+				else newData[cat_offset + j] = 0;
+			}
+			cat_offset += 0x144;
+		}
 		
 		saveByteArray([newData], "system");
 	}
@@ -401,6 +489,15 @@ function displayInfo(save) {
     
     table.innerHTML = text;
     drag_setup();
+}
+
+function openWindow(){
+	save.manageCats();
+}
+
+function closeWindow(){
+	document.getElementById("popup-window-overlay").style.display = "none";
+	document.getElementById("popup-window").style.display = "none";
 }
 
 function exportCharms(slot){
