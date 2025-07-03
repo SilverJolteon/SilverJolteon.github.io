@@ -1,4 +1,4 @@
-var VERSION = "v1.4.0";
+var VERSION = "v1.4.1";
 
 var save = null;
 var SLOT_SIZE = 0x11D088;
