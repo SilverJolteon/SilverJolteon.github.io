@@ -223,6 +223,7 @@ class SaveFile{
 			var id = parseInt(cb.dataset.id);
 				cb.checked = DLC_CAT_DEFAULTS.includes(id);
 			});
+			updateCats();
 		});
 		
 		document.getElementById("deselect").addEventListener("click", () => {
