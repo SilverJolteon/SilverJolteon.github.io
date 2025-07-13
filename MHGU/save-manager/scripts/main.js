@@ -1,4 +1,4 @@
-var VERSION = "v1.4.1";
+var VERSION = "v1.4.2";
 
 var save = null;
 var SLOT_SIZE = 0x11D088;
@@ -206,7 +206,7 @@ class SaveFile{
 				.filter(cb => cb.checked)
 				.map(cb => parseInt(cb.dataset.id));
 				
-			document.getElementById("catcount").innerHTML = `${checked.length} / 50 Palicos Selected`;
+			document.getElementById("catcount").innerHTML = `${checked.length} / 50 Palicoes Selected`;
 			
 			checkboxes.forEach(cb => {
 				cb.disabled = !cb.checked && checked.length >= 50;
