@@ -1,0 +1,331 @@
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Freedom DX Online Config Editor</title>
+<link rel="icon" type="image/png" href="assets/favicon.ico">
+</head>
+<body>
+<style>
+html {
+  overflow-y: scroll;
+}   
+
+.header{
+	max-width: 90%;
+	cursor: pointer;
+	padding: 10px;
+	display: block;
+	margin-left: auto; 
+	margin-right: auto;
+}
+
+body{
+    font-family: system-ui, -apple-system, blinkmacsystemfont, "Segoe UI", roboto, "Helvetica Neue", arial, sans-serif, "Segoe UI Emoji";
+    font-size: 16px;
+    line-height: 1.5;
+    word-wrap: break-word;
+    background-color: #27262b;
+    color: #FFFFFF;
+}
+
+label{
+    font-family: system-ui, -apple-system, blinkmacsystemfont, "Segoe UI", roboto, "Helvetica Neue", arial, sans-serif, "Segoe UI Emoji";     
+    font-size: 20px;
+    line-height: 1.5;
+    word-wrap: break-word;
+    font-weight: bold;
+}
+
+h3{
+    font-family: system-ui, -apple-system, blinkmacsystemfont, "Segoe UI", roboto, "Helvetica Neue", arial, sans-serif, "Segoe UI Emoji";
+    font-size: 18px;
+    line-height: 1.5;
+    word-wrap: break-word;
+}
+
+p{
+    font-family: system-ui, -apple-system, blinkmacsystemfont, "Segoe UI", roboto, "Helvetica Neue", arial, sans-serif, "Segoe UI Emoji";
+    font-size: 16px;
+    line-height: 1.5;
+    word-wrap: break-word;
+}
+
+select, input{
+	float: right;
+	position: relative;
+}
+
+.outline{
+	color: #ffa8a8;
+	text-shadow: 0px 0px 2px black;
+	background-color: #27262b;
+	padding: 2px;
+	border-radius: 2px;
+}
+
+a{
+    text-decoration: underline;
+    color: #2f81f7;
+}
+
+code {
+    padding: 0.2em 0.15em;
+    font-weight: 400;
+    background-color: #31343f;
+    border: 1px solid #44434d;
+    border-radius: 4px;
+    font-family: "SFMono-Regular", menlo, consolas, monospace;
+    font-size: 0.75em;
+    line-height: 1.4;
+    box-sizing: border-box;
+    list-style: none;
+    color: #e6e1e8;
+    overflow-wrap: break-word;
+}
+
+pre{
+    background-color: #31343f;
+    border-radius: 15px;
+    font-size: 10px;
+}
+
+li{
+    font-family: system-ui, -apple-system, blinkmacsystemfont, "Segoe UI", roboto, "Helvetica Neue", arial, sans-serif, "Segoe UI Emoji";
+    font-size: 16px;
+    line-height: 1.5;
+    word-wrap: break-word;
+}
+
+table{
+    border-spacing: 4px;
+}
+
+td{
+    max-width: 1012px;
+    background-color: #4c4a54;
+    padding: 16px;
+    border-radius: 15px;
+}
+
+td:hover{
+    background-color: #5a5863;
+}
+
+button{
+    padding: 10px;
+    padding-top:5px;
+    font-family: system-ui, -apple-system, blinkmacsystemfont, "Segoe UI", roboto, "Helvetica Neue", arial, sans-serif, "Segoe UI Emoji";
+}
+
+button:hover{
+    cursor: pointer;
+}
+
+.footer{
+    color: #959396;
+    font-family: 'Rodin';
+    font-size: 12px;
+    text-align: center;
+    bottom: 12px;
+    left: 50%;
+    transform: translateX(-50%);
+    text-decoration: none;
+}
+</style>
+<script>
+    var CONFIG_VERSION = "1.1.0";
+    var CONFIG_SIZE = 0x30;
+    var CONFIG_DATA = new Int8Array([
+        0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 
+        0x00, 0x00, 0x00, 0x64, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 
+        0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
+    ]);
+
+    function checkFile(data, offset_start, offset_end, version) {
+        return version === String.fromCharCode.apply(null, data.slice(offset_start, offset_end+1));
+    }
+
+    function readConfig(event){
+        var file = event.target.files[0];
+        var reader = new FileReader();
+        
+        reader.onload = function(e){
+            var data = new Uint8Array(e.target.result);
+            
+            if(data.length === 0x30){
+                CONFIG_size = 0x30;
+                CONFIG_DATA = data;
+                showSettings();
+            }
+            else document.getElementById("error").style.display = "block";
+        };
+
+        reader.readAsArrayBuffer(file);
+        
+    }
+
+    function loadConfig(){
+        document.getElementById("loadConfig").click();
+    }
+
+    function generateConfig(){
+        showSettings();
+    }
+    
+    function toggleHidden(){
+        var old_settings = document.querySelectorAll(".old_settings")
+        var new_settings = document.querySelectorAll(".new_settings")
+
+		for(var i = 0; i < old_settings.length; i++) old_settings[i].style.display = "none";
+		for(var i = 0; i < new_settings.length; i++) new_settings[i].style.display = "table-cell";
+
+    }
+
+    function showSettings(){
+        document.getElementById("error").style.display = "none";
+
+		document.getElementById("HoldToGather").value = CONFIG_DATA[0x10].toString();
+		document.getElementById("TrueRaw").value = CONFIG_DATA[0x11].toString();
+		document.getElementById("LaoShanLung").value = CONFIG_DATA[0x12].toString();
+		document.getElementById("MapScale").value = CONFIG_DATA[0x13].toString();
+		toggleHidden();
+
+        document.getElementById("buttons").style.display = "none";
+        document.getElementById("settings").style.display = "block";
+    }
+    
+    var saveByteArray = (function (){
+        var a = document.createElement("a");
+        document.body.appendChild(a);
+        a.style = "display: none";
+        return function (data, name){
+           var blob = new Blob(data, {type: "octet/stream"}),
+              url = window.URL.createObjectURL(blob);
+           a.href = url;
+           a.download = name;
+           a.click();
+           window.URL.revokeObjectURL(url);
+        };
+    }());
+    
+    function saveConfig(){
+       saveByteArray([CONFIG_DATA], "CONFIG.BIN");
+    }
+    
+    function str2bytes(text){
+        return text.split('').map(char => char.charCodeAt(0));
+    }
+    
+    function updateConfig(){
+		CONFIG_DATA = new Int8Array([
+			0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x20, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 
+			0x00, 0x00, 0x00, 0x64, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 
+			0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
+		]);
+		toggleHidden();
+     
+		var version_data = str2bytes(CONFIG_VERSION);
+		for(var i = 0; i < version_data.length; i++) CONFIG_DATA[i] = version_data[i];
+		CONFIG_DATA[0x10] = parseInt(document.getElementById("HoldToGather").value);
+		CONFIG_DATA[0x11] = parseInt(document.getElementById("TrueRaw").value);
+		CONFIG_DATA[0x12] = parseInt(document.getElementById("LaoShanLung").value);
+		CONFIG_DATA[0x13] = parseInt(document.getElementById("MapScale").value);
+    }
+    
+    function init(){
+		document.getElementById("HoldToGather").value = 0;
+        document.getElementById("TrueRaw").value = 0;
+		document.getElementById("LaoShanLung").value = 0;
+        document.getElementById("MapScale").value = 100;
+        
+        document.getElementById("buttons").style.display = "block";
+        document.getElementById("settings").style.display = "none";
+    }
+    
+    window.onload = function(){
+        init();
+    }
+    
+</script>
+<img class="header" src="assets/FreedomDXTitle.png" onclick="init()">
+<center>
+
+<div id="buttons">
+<table><tr><td>
+<button onclick="loadConfig()" style="height: 32px;"><b>Load CONFIG.BIN</b></button>
+<button onclick="generateConfig()" style="height: 32px;"><b>New CONFIG.BIN</b></button>
+</td></tr></table>
+
+<input type="file" id="loadConfig" accept=".BIN" style="display:none;" onchange="readConfig(event)">
+</div>
+
+<div id="error" style="display:none;"><h3 style='color: red'>Not a valid CONFIG.BIN!</h3></div>
+
+<div id="settings" style="display:none;">
+
+<table><tr>
+
+<td>
+    <label>Hold to Gather</label>
+    <select onchange="updateConfig()" id="HoldToGather">
+        <option value="0" selected>Disable</option>
+        <option value="1">Enable</option>
+    </select>
+    <p>Allows you to simply press and hold the gather button when crouched.</p>
+	<p>By YuzucchiNyan</p>
+    <p><strong>Default is <code>Disable</code></strong></p>
+</td>
+
+</tr><tr>    
+
+<td>
+    <label>True Raw</label>
+    <select onchange="updateConfig()" id="TrueRaw">
+        <option value="0" selected>Disable</option>
+        <option value="1">Enable</option>
+    </select>
+    <p>Displays the non-bloated "true" raw attack value of weapons.</p>
+	<p>EUR version by YuzucchiNyan, ported to JPN and USA by SilverJolteon</p>
+    <p><strong>Default is <code>Disable</code></strong></p>
+</td>
+
+</tr><tr>
+
+<td>
+    <label>Early Kill Lao-Shan Lung</label>
+    <select onchange="updateConfig()" id="LaoShanLung">
+        <option value="0" selected>Disable</option>
+        <option value="1">Enable</option>
+    </select>
+    <p>Disables the HP threshold that prevents killing Lao-Shan Lung before reaching the final area.</p>
+	<p>Ported by SilverJolteon from IncognitoMan's FUC</p>
+    <p><strong>Default is <code>Disable</code></strong></p>
+</td>
+
+</tr><tr>
+
+<td>
+    <label>Minimap Scale</label>
+    <input type="number" id="MapScale" min="50" max="100" value="100" onchange="updateConfig()">%
+    <p>Sets the scale for the minimap.</p>
+	<p>Ported by SilverJolteon from IncognitoMan's FUC</p>
+    <p><strong>Default is <code>100</code></strong></p>
+</td>
+
+</tr><tr>
+
+<td><center><button onclick="saveConfig()" style="width: 100px; height: 32px;"><b>Save</b></button></center></td>
+
+</tr></table>
+
+</div>
+<a class="footer">&copy; </a>
+<a class="footer" target="_blank" href="https://github.com/SilverJolteon">SilverJolteon</a>
+<a class="footer">, </a>
+<a class="footer" target="_blank" href="https://github.com/IncognitoMan"> IncognitoMan</a>
+<a class="footer">, </a>
+<a class="footer" target="_blank" href="https://github.com/GReinoso96"> GReinoso96</a>
+</center>
+</body>
+</html>
