@@ -134,7 +134,7 @@ button:hover{
 }
 </style>
 <script>
-    var CONFIG_VERSION = "1.1.0";
+    var CONFIG_VERSION = "1.2.0";
     var CONFIG_SIZE = 0x30;
     var CONFIG_DATA = new Int8Array([
         0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 
@@ -172,15 +172,6 @@ button:hover{
     function generateConfig(){
         showSettings();
     }
-    
-    function toggleHidden(){
-        var old_settings = document.querySelectorAll(".old_settings")
-        var new_settings = document.querySelectorAll(".new_settings")
-
-		for(var i = 0; i < old_settings.length; i++) old_settings[i].style.display = "none";
-		for(var i = 0; i < new_settings.length; i++) new_settings[i].style.display = "table-cell";
-
-    }
 
     function showSettings(){
         document.getElementById("error").style.display = "none";
@@ -189,7 +180,7 @@ button:hover{
 		document.getElementById("TrueRaw").value = CONFIG_DATA[0x11].toString();
 		document.getElementById("LaoShanLung").value = CONFIG_DATA[0x12].toString();
 		document.getElementById("MapScale").value = CONFIG_DATA[0x13].toString();
-		toggleHidden();
+		document.getElementById("SnSDebuff").value = CONFIG_DATA[0x14].toString();
 
         document.getElementById("buttons").style.display = "none";
         document.getElementById("settings").style.display = "block";
@@ -223,7 +214,6 @@ button:hover{
 			0x00, 0x00, 0x00, 0x64, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 
 			0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
 		]);
-		toggleHidden();
      
 		var version_data = str2bytes(CONFIG_VERSION);
 		for(var i = 0; i < version_data.length; i++) CONFIG_DATA[i] = version_data[i];
@@ -231,6 +221,7 @@ button:hover{
 		CONFIG_DATA[0x11] = parseInt(document.getElementById("TrueRaw").value);
 		CONFIG_DATA[0x12] = parseInt(document.getElementById("LaoShanLung").value);
 		CONFIG_DATA[0x13] = parseInt(document.getElementById("MapScale").value);
+		CONFIG_DATA[0x14] = parseInt(document.getElementById("SnSDebuff").value);
     }
     
     function init(){
@@ -238,6 +229,7 @@ button:hover{
         document.getElementById("TrueRaw").value = 0;
 		document.getElementById("LaoShanLung").value = 0;
         document.getElementById("MapScale").value = 100;
+		document.getElementById("SnSDebuff").value = 0;
         
         document.getElementById("buttons").style.display = "block";
         document.getElementById("settings").style.display = "none";
@@ -274,6 +266,17 @@ button:hover{
     </select>
     <p>Allows you to simply press and hold the gather button when crouched.</p>
 	<p>By YuzucchiNyan</p>
+	<table style="border-spacing: 0">
+        <tr>
+            <th align="center" width="50%">
+                <a target="_blank" href="https://raw.githubusercontent.com/SilverJolteon/FreedomDX/refs/heads/main/assets/screenshots/HoldToGather.gif">
+				<img src="https://raw.githubusercontent.com/SilverJolteon/FreedomDX/refs/heads/main/assets/screenshots/HoldToGather.gif" width="95%">
+			</a></th>
+			<th align="center" width="50%"/th>
+        </tr><tr>
+            <th align="center">Enabled</th>
+        </tr>
+    </table>
     <p><strong>Default is <code>Disable</code></strong></p>
 </td>
 
@@ -287,6 +290,21 @@ button:hover{
     </select>
     <p>Displays the non-bloated "true" raw attack value of weapons.</p>
 	<p>EUR version by YuzucchiNyan, ported to JPN and USA by SilverJolteon</p>
+	<table style="border-spacing: 0">
+        <tr>
+            <th align="center" width="50%">
+                <a target="_blank" href="https://raw.githubusercontent.com/SilverJolteon/FreedomDX/refs/heads/main/assets/screenshots/TrueRaw-Enabled.png">
+				<img src="https://raw.githubusercontent.com/SilverJolteon/FreedomDX/refs/heads/main/assets/screenshots/TrueRaw-Enabled.png" width="95%">
+			</a></th>
+            <th align="center" width="50%">
+                <a target="_blank" href="https://raw.githubusercontent.com/SilverJolteon/FreedomDX/refs/heads/main/assets/screenshots/TrueRaw-Disabled.png">
+				<img src="https://raw.githubusercontent.com/SilverJolteon/FreedomDX/refs/heads/main/assets/screenshots/TrueRaw-Disabled.png" width="95%">
+			</a></th>
+        </tr><tr>
+            <th align="center">Enabled</th>
+			<th align="center">Disabled</th>
+        </tr>
+    </table>
     <p><strong>Default is <code>Disable</code></strong></p>
 </td>
 
@@ -308,9 +326,44 @@ button:hover{
 <td>
     <label>Minimap Scale</label>
     <input type="number" id="MapScale" min="50" max="100" value="100" onchange="updateConfig()">%
-    <p>Sets the scale for the minimap. Max values is 100%, min value is 50%.</p>
+    <p>Sets the scale for the minimap.</p>
 	<p>Ported by SilverJolteon from IncognitoMan's FUC</p>
+	<table style="border-spacing: 0">
+        <tr>
+            <th align="center" width="50%">
+                <a target="_blank" href="https://raw.githubusercontent.com/SilverJolteon/FreedomDX/refs/heads/main/assets/screenshots/MapScale-50.png">
+				<img src="https://raw.githubusercontent.com/SilverJolteon/FreedomDX/refs/heads/main/assets/screenshots/MapScale-50.png" width="95%">
+			</a></th>
+            <th align="center" width="50%">
+                <a target="_blank" href="https://raw.githubusercontent.com/SilverJolteon/FreedomDX/refs/heads/main/assets/screenshots/MapScale-75.png">
+				<img src="https://raw.githubusercontent.com/SilverJolteon/FreedomDX/refs/heads/main/assets/screenshots/MapScale-75.png" width="95%">
+			</a></th>
+		</tr><tr>
+			<th align="center">50%</th>
+            <th align="center">75%</th>
+		</tr><tr>
+            <th align="center" width="50%">
+                <a target="_blank" href="https://raw.githubusercontent.com/SilverJolteon/FreedomDX/refs/heads/main/assets/screenshots/MapScale-100.png">
+				<img src="https://raw.githubusercontent.com/SilverJolteon/FreedomDX/refs/heads/main/assets/screenshots/MapScale-100.png" width="95%">
+			</a></th>
+        </tr><tr>
+            <th align="center">100%</th>
+        </tr>
+    </table>
     <p><strong>Default is <code>100</code></strong></p>
+</td>
+
+</tr><tr>
+
+<td>
+    <label>Sword & Shield Debuff</label>
+    <select onchange="updateConfig()" id="SnSDebuff">
+        <option value="0" selected>Disable</option>
+        <option value="1">Enable</option>
+    </select>
+    <p>Changes Sword & Shield sharpness and damage from 1.5 to 1.2 to match MH Dos.</p>
+	<p>By YuzucchiNyan</p>
+    <p><strong>Default is <code>Disable</code></strong></p>
 </td>
 
 </tr><tr>
