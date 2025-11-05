@@ -134,7 +134,7 @@ button:hover{
 }
 </style>
 <script>
-    var CONFIG_VERSION = "1.3.0";
+    var CONFIG_VERSION = "1.5.0";
     var CONFIG_SIZE = 0x30;
     var CONFIG_DATA = new Int8Array([
         0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 
@@ -182,6 +182,8 @@ button:hover{
 		document.getElementById("MapScale").value = CONFIG_DATA[0x13].toString();
 		document.getElementById("SnSDebuff").value = CONFIG_DATA[0x14].toString();
 		document.getElementById("FileReplacer").value = CONFIG_DATA[0x15].toString();
+		document.getElementById("CatSkills").value = CONFIG_DATA[0x16].toString();
+		document.getElementById("DrinkBuff").value = CONFIG_DATA[0x17].toString();
 
         document.getElementById("buttons").style.display = "none";
         document.getElementById("settings").style.display = "block";
@@ -224,6 +226,8 @@ button:hover{
 		CONFIG_DATA[0x13] = parseInt(document.getElementById("MapScale").value);
 		CONFIG_DATA[0x14] = parseInt(document.getElementById("SnSDebuff").value);
 		CONFIG_DATA[0x15] = parseInt(document.getElementById("FileReplacer").value);
+		CONFIG_DATA[0x16] = parseInt(document.getElementById("CatSkills").value);
+		CONFIG_DATA[0x17] = parseInt(document.getElementById("DrinkBuff").value);
     }
     
     function init(){
@@ -384,6 +388,76 @@ button:hover{
 </td>
 
 </tr><tr>
+
+<td>
+    <label>Visible Felyne Skills</label>
+    <select onchange="updateConfig()" id="CatSkills">
+        <option value="0" selected>Disable</option>
+        <option value="1">Enable</option>
+    </select>
+    <p>Shows which skillsets each Felyne has.</p>
+	<table style="border-spacing: 0">
+        <tr>
+            <th align="center" width="50%">
+                <a target="_blank" href="https://raw.githubusercontent.com/SilverJolteon/FreedomDX/refs/heads/main/assets/screenshots/KCatSkills-Enabled.png">
+				<img src="https://raw.githubusercontent.com/SilverJolteon/FreedomDX/refs/heads/main/assets/screenshots/KCatSkills-Enabled.png" width="95%">
+			</a></th>
+            <th align="center" width="50%">
+                <a target="_blank" href="https://raw.githubusercontent.com/SilverJolteon/FreedomDX/refs/heads/main/assets/screenshots/KCatSkills-Disabled.png">
+				<img src="https://raw.githubusercontent.com/SilverJolteon/FreedomDX/refs/heads/main/assets/screenshots/KCatSkills-Disabled.png" width="95%">
+			</a></th>
+		</tr><tr>
+			<th align="center">Enabled</th>
+            <th align="center">Disabled</th>
+		</tr><tr>
+            <th align="center" width="50%">
+                <a target="_blank" href="https://raw.githubusercontent.com/SilverJolteon/FreedomDX/refs/heads/main/assets/screenshots/GCatSkills-Enabled.png">
+				<img src="https://raw.githubusercontent.com/SilverJolteon/FreedomDX/refs/heads/main/assets/screenshots/GCatSkills-Enabled.png" width="95%">
+			</a></th>
+			<th align="center" width="50%">
+                <a target="_blank" href="https://raw.githubusercontent.com/SilverJolteon/FreedomDX/refs/heads/main/assets/screenshots/GCatSkills-Disabled.png">
+				<img src="https://raw.githubusercontent.com/SilverJolteon/FreedomDX/refs/heads/main/assets/screenshots/GCatSkills-Disabled.png" width="95%">
+			</a></th>
+        </tr><tr>
+            <th align="center">Enabled</th>
+			<th align="center">Disabled</th>
+        </tr>
+    </table>
+	<p>By SilverJolteon</p>
+    <p><strong>Default is <code>Disable</code></strong></p>
+</td>
+
+</tr><tr>
+
+<td>
+    <label>Gathering Hall Drink Buff</label>
+    <select onchange="updateConfig()" id="DrinkBuff">
+        <option value="0" selected>Disable</option>
+        <option value="1">Enable</option>
+    </select>
+    <p>When enabled, can get a quick Health and Stamina boost without leaving the Gathering Hall, based on how many Felyne Chefs you have working in your kitchen.</p>
+	<p class="outline"><strong>Note:</strong> This does not provide any felyne food skills and you can <i>either</i> drink in hall for a quick boost <strong>OR</strong> eat in kitchen… not <strong>BOTH</strong>.<br><br>For the added food skill bonuses, eating in the kitchen directly is still required.</p>
+    <ul dir="auto">
+        <li>For each active chef in your kitchen:<br>Receive +10 max HP (max +50 at 5 chefs).</li>
+        <li>For 1-4 active chefs in your kitchen:<br>Receive +25 max Stamina (max +50 at 5 chefs).</li>
+    </ul>
+    <p>Press Circle to activate while sitting at the table.</p>
+	<p>Ported by SilverJolteon from IncognitoMan's FUC</p>
+	<table style="border-spacing: 0">
+        <tr>
+            <th align="center" width="50%">
+                <a target="_blank" href="https://raw.githubusercontent.com/SilverJolteon/FreedomDX/refs/heads/main/assets/screenshots/DrinkBuff.gif">
+				<img src="https://raw.githubusercontent.com/SilverJolteon/FreedomDX/refs/heads/main/assets/screenshots/DrinkBuff.gif" width="95%">
+			</a></th>
+			<th align="center" width="50%"/th>
+        </tr><tr>
+            <th align="center">Enabled</th>
+        </tr>
+    </table>
+    <p><strong>Default is <code>Disable</code></strong></p>
+</td>
+
+</tr><tr>    
 
 <td><center><button onclick="saveConfig()" style="width: 100px; height: 32px;"><b>Save</b></button></center></td>
 
