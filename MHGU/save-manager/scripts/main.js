@@ -1,4 +1,4 @@
-var VERSION = "v1.4.3";
+var VERSION = "v1.5.0";
 
 var save = null;
 var SLOT_SIZE = 0x11D088;
@@ -171,11 +171,20 @@ class SaveFile{
 		for(var row = 0; row < 10; row++){
 			info += "<tr>";
 			for(var col = 0; col < 6; col++){
-				var id = row * 6 + col;
-				var checked = cats.includes(id) ? "checked" : "";
-				info += `<td style="border: 1px solid grey; text-align: left">
-							<input type="checkbox" data-id="${id}" ${checked}>
-							<label for="cat_${id}"> ${DLC_CAT_NAMES[id]}</label>`;
+				var id = row * 6 + col;				
+				
+				var EN_checked = cats[id] == 1 ? "checked" : "";
+				var JP_checked = cats[id] == 2 ? "checked" : "";
+				info += `<td style="border: 1px solid grey; text-align: left">`;
+				if(EN_DLC_CAT_NAMES[id] != ""){
+					info += `<input type="checkbox" data-id="EN_${id}" ${EN_checked}>
+							<label for="cat_${id}"> ${EN_DLC_CAT_NAMES[id]}</label>`;
+				}
+				if(EN_DLC_CAT_NAMES[id] != "" && JP_DLC_CAT_NAMES[id] != "") info += "</br>";
+				if(JP_DLC_CAT_NAMES[id] != ""){
+					info += `<input type="checkbox" data-id="JP_${id}" ${JP_checked}>
+							<label for="cat_${id}"> ${JP_DLC_CAT_NAMES[id]}</label>`;
+				}
 				if(DLC_CAT_SKILLS[id] === "") DLC_CAT_SKILLS[id] = "<i>None</i>";
 				info += `</br><span style="color: grey; font-size: 10px">${DLC_CAT_SKILLS[id]}</span>`;
 				var origin = "";
@@ -192,6 +201,7 @@ class SaveFile{
 		}
 		info += `</table>
 					<span>
+						<button id="toggle_cat_lang" style="margin-right: 10px">Toggle EN&#8596;JP</button>
 						<button id="deselect" style="margin-right: 10px">Uncheck all</button>
 						<button id="defaults" style="margin-right: 10px">Set to default</button>
 						<button id="save_cats">Save</button>
@@ -204,8 +214,7 @@ class SaveFile{
 		const updateCats = () => {
 			const checked = Array.from(checkboxes)
 				.filter(cb => cb.checked)
-				.map(cb => parseInt(cb.dataset.id));
-				
+				.map(cb => cb.dataset.id);
 			document.getElementById("catcount").innerHTML = `${checked.length} / 50 Palicoes Selected`;
 			
 			checkboxes.forEach(cb => {
@@ -214,14 +223,27 @@ class SaveFile{
 		}
 
 		checkboxes.forEach(cb => {
-			cb.addEventListener("change", updateCats);
+			cb.addEventListener("change", (e) => {
+				var lang = cb.dataset.id.split("_")[0];
+				var id = parseInt(cb.dataset.id.split("_")[1]);
+				if(e.target.checked && lang == "EN"){
+					const cat = document.querySelector(`input[data-id="JP_${id}"]`);
+					if(cat) cat.checked = false;
+				}
+				else if(e.target.checked && lang == "JP"){
+					const cat = document.querySelector(`input[data-id="EN_${id}"]`);
+					if(cat) cat.checked = false;
+				}
+				updateCats();
+			});
 		});
 		
 		
 		document.getElementById("defaults").addEventListener("click", () => {
 			checkboxes.forEach(cb => {
-			var id = parseInt(cb.dataset.id);
-				cb.checked = DLC_CAT_DEFAULTS.includes(id);
+				var lang = cb.dataset.id.split("_")[0];
+				var id = parseInt(cb.dataset.id.split("_")[1]);
+				cb.checked = (lang == "EN" && DLC_CAT_DEFAULTS[id] == 1) || (lang == "JP" && DLC_CAT_DEFAULTS[id] == 2);
 			});
 			updateCats();
 		});
@@ -231,10 +253,37 @@ class SaveFile{
 			updateCats();
 		});
 		
+		document.getElementById("toggle_cat_lang").addEventListener("click", () => {
+			const checkedBoxes = Array.from(checkboxes).filter(cb => cb.checked);
+			checkedBoxes.forEach(cb => {
+				var lang = cb.dataset.id.split("_")[0];
+				var id = parseInt(cb.dataset.id.split("_")[1]);
+				if(lang == "EN"){
+					const cat = document.querySelector(`input[data-id="JP_${id}"]`);
+					if(cat){
+						cat.checked = true;
+						cb.checked = false;
+					}
+				}
+				else if(lang == "JP"){
+					const cat = document.querySelector(`input[data-id="EN_${id}"]`);
+					if(cat){
+						cat.checked = true;
+						cb.checked = false;
+					}
+				}
+			});
+			updateCats();
+		});
+		
 		document.getElementById("save_cats").addEventListener("click", () => {
-			cats = Array.from(checkboxes)
-				.filter(cb => cb.checked)
-				.map(cb => parseInt(cb.dataset.id));
+			for(let i = 0; i < cats.length; i++) cats[i] = 0;
+			checkboxes.forEach(cb => {
+				var lang = cb.dataset.id.split("_")[0];
+				var id = parseInt(cb.dataset.id.split("_")[1]);
+				if(cb.checked && lang == "EN") cats[id] = 1;
+				else if(cb.checked && lang == "JP") cats[id] = 2;
+			});
 			closeWindow();
 		});
 		
@@ -413,11 +462,29 @@ class SaveFile{
 		newData[0xB27E + off] = this.options[2];
 		newData[0xB27F+ off] = this.options[3];
 		var cat_offset = 0x2A + off;
-		for(var i = 0; i < 50; i++){
-			for(var j = 0; j < 0x144; j++){
-				if(i < cats.length) newData[cat_offset + j] = DLC_CAT_DATA[cats[i]][j];
-				else newData[cat_offset + j] = 0;
+		
+		function getPalicoData(data, id){
+			for(const cat of data){
+				if(cat[0x5F] == id) return cat;
 			}
+			return DLC_CAT_DATA_EMPTY;
+		}
+		
+		var cat_list = [];
+			
+		for(var i = 0; i < cats.length; i++){			
+			if(cats[i] > 0) cat_list.push([cats[i], DLC_CAT_ID_MAP[i]]);
+		}
+		
+		for(var i = 0; i < 50; i++){
+			var CAT = null;
+			if(i < cat_list.length && cat_list.length <= 50){
+				if(cat_list[i][0] == 1) CAT = getPalicoData(EN_DLC_CAT_DATA, cat_list[i][1]);
+				else if(cat_list[i][0] == 2) CAT = getPalicoData(JP_DLC_CAT_DATA, cat_list[i][1]);
+				else CAT = DLC_CAT_DATA_EMPTY;
+			}
+			else CAT = DLC_CAT_DATA_EMPTY;
+			for(var j = 0; j < 0x144; j++) newData[cat_offset + j] = CAT[j];
 			cat_offset += 0x144;
 		}
 		
