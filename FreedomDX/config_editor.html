@@ -157,7 +157,7 @@ button:hover{
 }
 </style>
 <script>
-    var CONFIG_VERSION = "1.6.0";
+    var CONFIG_VERSION = "1.6.5";
     var CONFIG_SIZE = 0x30;
     var CONFIG_DATA = new Int8Array([
         0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 
@@ -208,6 +208,7 @@ button:hover{
 		document.getElementById("CatSkills").value = CONFIG_DATA[0x16].toString();
 		document.getElementById("DrinkBuff").value = CONFIG_DATA[0x17].toString();
 		document.getElementById("DosBonuses").value = CONFIG_DATA[0x18].toString();
+		document.getElementById("SupplyBoxDelay").value = CONFIG_DATA[0x19].toString();
 
         document.getElementById("buttons").style.display = "none";
         document.getElementById("settings").style.display = "block";
@@ -253,6 +254,7 @@ button:hover{
 		CONFIG_DATA[0x16] = parseInt(document.getElementById("CatSkills").value);
 		CONFIG_DATA[0x17] = parseInt(document.getElementById("DrinkBuff").value);
 		CONFIG_DATA[0x18] = parseInt(document.getElementById("DosBonuses").value);
+		CONFIG_DATA[0x19] = parseInt(document.getElementById("SupplyBoxDelay").value);
     }
     
     function init(){
@@ -265,6 +267,7 @@ button:hover{
 		document.getElementById("CatSkills").value = 0;
 		document.getElementById("DrinkBuff").value = 0;
 		document.getElementById("DosBonuses").value = 0;
+		document.getElementById("SupplyBoxDelay").value = 0;
         
         document.getElementById("buttons").style.display = "block";
         document.getElementById("settings").style.display = "none";
@@ -653,6 +656,19 @@ button:hover{
 </td>
 
 </tr><tr> 
+
+<td>
+    <label>Supply Box Delay Fix</label>
+    <select onchange="updateConfig()" id="SupplyBoxDelay">
+        <option value="0" selected>Disable</option>
+        <option value="1">Enable</option>
+    </select>
+    <p>Changes the delay when collecting items from the quest supply box to be instant.</p>
+	<p>Ported by SilverJolteon from IncognitoMan's FUC</p>
+    <p><strong>Default is <code>Disable</code></strong></p>
+</td>
+
+</tr><tr>
 
 <td><center><button onclick="saveConfig()" style="width: 100px; height: 32px;"><b>Save</b></button></center></td>
 
