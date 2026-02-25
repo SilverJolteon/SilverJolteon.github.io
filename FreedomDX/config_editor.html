@@ -3,7 +3,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Freedom DX Online Config Editor</title>
-<link rel="icon" type="image/png" href="https://github.com/SilverJolteon/FreedomDX/raw/refs/heads/main/assets/favicon.ico">
+<link rel="icon" type="image/png" href="assets/favicon.ico">
 </head>
 <body>
 <style>
@@ -51,7 +51,7 @@ p{
     word-wrap: break-word;
 }
 
-select, input{
+select, input, output{
 	float: right;
 	position: relative;
 }
@@ -157,13 +157,61 @@ button:hover{
 }
 </style>
 <script>
-    var CONFIG_VERSION = "1.6.5";
+    var CONFIG_VERSION = "1.7.0";
     var CONFIG_SIZE = 0x30;
     var CONFIG_DATA = new Int8Array([
         0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 
-        0x00, 0x00, 0x00, 0x64, 0x00, 0x01, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 
+        0x00, 0x00, 0x00, 0x64, 0x00, 0x01, 0x00, 0x00, 0x00, 0x00, 0x5F, 0x03, 0x00, 0x00, 0x00, 0x00, 
         0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
     ]);
+	
+	function clamp(value, min, max){
+		return Math.min(Math.max(value, min), max);
+	}
+	
+	function bindSlider(id, min, max) {
+		const slider = document.getElementById(id);
+		const num = document.getElementById(id + "_n");
+
+		slider.addEventListener("input", function () {
+			num.value = slider.value;
+			if(id == "FOV") updateFOV(slider.value);
+			else if(id == "MapScale") updateMapScale(slider.value);
+		});
+
+		slider.addEventListener("change", function () {
+			updateConfig();
+		});
+
+		num.addEventListener("input", function () {
+			slider.value = num.value;
+			if(id == "FOV") updateFOV(num.value);
+			else if(id == "MapScale") updateMapScale(num.value);
+		});
+
+		num.addEventListener("change", function () {
+			let value = clamp(parseInt(num.value) || 0, min, max);
+			num.value = value;
+			slider.value = value;
+			if(id == "FOV") updateFOV(value);
+			else if(id == "MapScale") updateMapScale(value);
+			updateConfig();
+		});
+	}
+	
+	function updateFOV(value){
+		var frame;
+		if(value == 0) frame = 0
+		else frame = clamp(Math.ceil(value / 8), 0, 32);
+		document.getElementById("FOV-img").style.transform = `translateY(-${frame * 272}px)`;
+	}
+	
+	function updateMapScale(value){
+		var frame;
+		if(value == 0) frame = 0
+		else frame = clamp(Math.ceil(value / 5), 10, 20) - 10;
+		document.getElementById("MapScale-img").style.transform = `translateY(-${frame * 272}px)`;
+	}
 
     function checkFile(data, offset_start, offset_end, version) {
         return version === String.fromCharCode.apply(null, data.slice(offset_start, offset_end+1));
@@ -202,13 +250,16 @@ button:hover{
 		document.getElementById("HoldToGather").value = CONFIG_DATA[0x10].toString();
 		document.getElementById("TrueRaw").value = CONFIG_DATA[0x11].toString();
 		document.getElementById("LaoShanLung").value = CONFIG_DATA[0x12].toString();
-		document.getElementById("MapScale").value = CONFIG_DATA[0x13].toString();
+		document.getElementById("MapScale_n").value = CONFIG_DATA[0x13].toString();
 		document.getElementById("SnSDebuff").value = CONFIG_DATA[0x14].toString();
 		document.getElementById("FileReplacer").value = CONFIG_DATA[0x15].toString();
 		document.getElementById("CatSkills").value = CONFIG_DATA[0x16].toString();
 		document.getElementById("DrinkBuff").value = CONFIG_DATA[0x17].toString();
 		document.getElementById("DosBonuses").value = CONFIG_DATA[0x18].toString();
 		document.getElementById("SupplyBoxDelay").value = CONFIG_DATA[0x19].toString();
+		document.getElementById("FOV_n").value = CONFIG_DATA[0x1A].toString();
+		document.getElementById("CameraPos").value = CONFIG_DATA[0x1B].toString();
+		document.getElementById("Treshi").value = CONFIG_DATA[0x1C].toString();
 
         document.getElementById("buttons").style.display = "none";
         document.getElementById("settings").style.display = "block";
@@ -239,7 +290,7 @@ button:hover{
     function updateConfig(){
 		CONFIG_DATA = new Int8Array([
 			0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x20, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 
-			0x00, 0x00, 0x00, 0x64, 0x00, 0x01, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 
+			0x00, 0x00, 0x00, 0x64, 0x00, 0x01, 0x00, 0x00, 0x00, 0x00, 0x5F, 0x03, 0x00, 0x00, 0x00, 0x00, 
 			0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
 		]);
      
@@ -248,13 +299,16 @@ button:hover{
 		CONFIG_DATA[0x10] = parseInt(document.getElementById("HoldToGather").value);
 		CONFIG_DATA[0x11] = parseInt(document.getElementById("TrueRaw").value);
 		CONFIG_DATA[0x12] = parseInt(document.getElementById("LaoShanLung").value);
-		CONFIG_DATA[0x13] = parseInt(document.getElementById("MapScale").value);
+		CONFIG_DATA[0x13] = clamp(parseInt(document.getElementById("MapScale").value), 50, 100);
 		CONFIG_DATA[0x14] = parseInt(document.getElementById("SnSDebuff").value);
 		CONFIG_DATA[0x15] = parseInt(document.getElementById("FileReplacer").value);
 		CONFIG_DATA[0x16] = parseInt(document.getElementById("CatSkills").value);
 		CONFIG_DATA[0x17] = parseInt(document.getElementById("DrinkBuff").value);
 		CONFIG_DATA[0x18] = parseInt(document.getElementById("DosBonuses").value);
 		CONFIG_DATA[0x19] = parseInt(document.getElementById("SupplyBoxDelay").value);
+		CONFIG_DATA[0x1A] = clamp(parseInt(document.getElementById("FOV").value), 0, 255);
+		CONFIG_DATA[0x1B] = parseInt(document.getElementById("CameraPos").value);
+		CONFIG_DATA[0x1C] = parseInt(document.getElementById("Treshi").value);
     }
     
     function init(){
@@ -262,15 +316,25 @@ button:hover{
         document.getElementById("TrueRaw").value = 0;
 		document.getElementById("LaoShanLung").value = 0;
         document.getElementById("MapScale").value = 100;
+		document.getElementById("MapScale_n").value = 100;
+		updateMapScale(100);
 		document.getElementById("SnSDebuff").value = 0;
 		document.getElementById("FileReplacer").value = 1;
 		document.getElementById("CatSkills").value = 0;
 		document.getElementById("DrinkBuff").value = 0;
 		document.getElementById("DosBonuses").value = 0;
 		document.getElementById("SupplyBoxDelay").value = 0;
+		document.getElementById("FOV").value = 0x5F;
+		document.getElementById("FOV_n").value = 0x5F;
+		updateFOV(0x5F);
+		document.getElementById("CameraPos").value = 3;
+		document.getElementById("Treshi").value = 0;
         
         document.getElementById("buttons").style.display = "block";
         document.getElementById("settings").style.display = "none";
+		
+		bindSlider("MapScale", 50, 100);
+		bindSlider("FOV", 0, 255);
     }
 	
 	function toggleBonusTable(){
@@ -291,7 +355,7 @@ button:hover{
     }
     
 </script>
-<img class="header" src="https://raw.githubusercontent.com/SilverJolteon/FreedomDX/main/assets/FreedomDXTitle.png" onclick="init()">
+<img class="header" src="assets/FreedomDXTitle.png" onclick="init()">
 <center>
 
 <div id="buttons">
@@ -320,8 +384,8 @@ button:hover{
 	<table style="border-spacing: 0">
         <tr>
             <th align="center" width="50%">
-                <a target="_blank" href="https://raw.githubusercontent.com/SilverJolteon/FreedomDX/refs/heads/main/assets/screenshots/HoldToGather.gif">
-				<img src="https://raw.githubusercontent.com/SilverJolteon/FreedomDX/refs/heads/main/assets/screenshots/HoldToGather.gif" width="95%">
+                <a target="_blank" href="assets/HoldToGather.gif">
+				<img src="assets/HoldToGather.gif" width="95%">
 			</a></th>
 			<th align="center" width="50%"/th>
         </tr><tr>
@@ -344,12 +408,12 @@ button:hover{
 	<table style="border-spacing: 0">
         <tr>
             <th align="center" width="50%">
-                <a target="_blank" href="https://raw.githubusercontent.com/SilverJolteon/FreedomDX/refs/heads/main/assets/screenshots/TrueRaw-Enabled.png">
-				<img src="https://raw.githubusercontent.com/SilverJolteon/FreedomDX/refs/heads/main/assets/screenshots/TrueRaw-Enabled.png" width="95%">
+                <a target="_blank" href="assets/TrueRaw-Enabled.png">
+				<img src="assets/TrueRaw-Enabled.png" width="95%">
 			</a></th>
             <th align="center" width="50%">
-                <a target="_blank" href="https://raw.githubusercontent.com/SilverJolteon/FreedomDX/refs/heads/main/assets/screenshots/TrueRaw-Disabled.png">
-				<img src="https://raw.githubusercontent.com/SilverJolteon/FreedomDX/refs/heads/main/assets/screenshots/TrueRaw-Disabled.png" width="95%">
+                <a target="_blank" href="assets/TrueRaw-Disabled.png">
+				<img src="assets/TrueRaw-Disabled.png" width="95%">
 			</a></th>
         </tr><tr>
             <th align="center">Enabled</th>
@@ -375,30 +439,91 @@ button:hover{
 </tr><tr>
 
 <td>
-    <label>Minimap Scale</label>
-    <input type="number" id="MapScale" min="50" max="100" value="100" onchange="updateConfig()">
-    <p>Sets the scale for the minimap. <b>Must be between 50% and 100%.</b> Any values outside of the range will be ignored.</p>
+    <label>Field of View</label>
+	<input type="range" id="FOV" min="0" max="255" value="95">
+	<input type="number" id="FOV_n" min="0" max="255" value="95" style="width:70px;">
+    <p>Adjusts your field of vision. <b>Must be between 0 and 255.</b></p>
 	<p>Ported by SilverJolteon from IncognitoMan's FUC</p>
 	<table style="border-spacing: 0">
         <tr>
             <th align="center" width="50%">
-                <a target="_blank" href="https://raw.githubusercontent.com/SilverJolteon/FreedomDX/refs/heads/main/assets/screenshots/MapScale-50.png">
-				<img src="https://raw.githubusercontent.com/SilverJolteon/FreedomDX/refs/heads/main/assets/screenshots/MapScale-50.png" width="95%">
+                <div style="width: 480px; height: 272px; overflow: hidden; position: relative">
+					<img id="FOV-img" src="assets/FOV.png" style="position: absolute; top: 0; left: 0">
+				</div>
+			</th>
+			<th align="center" width="50%"/th>
+        </tr>
+    </table>
+    <p><strong>Default is <code>95</code></strong></p>
+</td>
+
+</tr><tr>
+
+<td>
+    <label>Starting Vertical Camera Position</label>
+    <select onchange="updateConfig()" id="CameraPos">
+		<option value="0">1 (Lowest)</option>
+		<option value="1">2</option>
+        <option value="2">3 (Middle)</option>
+        <option value="3" selected>4 (Default)</option>
+		<option value="4">5 (Highest)</option>
+    </select>
+    <p>Sets the starting vertical camera position when you embark on a quest.</p>
+	<p>Ported by SilverJolteon from IncognitoMan's FUC</p>
+	<table style="border-spacing: 0">
+        <tr>
+            <th align="center" width="50%">
+                <a target="_blank" href="assets/CameraPos-1.png">
+				<img src="assets/CameraPos-1.png" width="95%">
 			</a></th>
             <th align="center" width="50%">
-                <a target="_blank" href="https://raw.githubusercontent.com/SilverJolteon/FreedomDX/refs/heads/main/assets/screenshots/MapScale-75.png">
-				<img src="https://raw.githubusercontent.com/SilverJolteon/FreedomDX/refs/heads/main/assets/screenshots/MapScale-75.png" width="95%">
+                <a target="_blank" href="assets/CameraPos-2.png">
+				<img src="assets/CameraPos-2.png" width="95%">
 			</a></th>
 		</tr><tr>
-			<th align="center">50%</th>
-            <th align="center">75%</th>
+			<th align="center">1 (Lowest)</th>
+            <th align="center">2</th>
 		</tr><tr>
             <th align="center" width="50%">
-                <a target="_blank" href="https://raw.githubusercontent.com/SilverJolteon/FreedomDX/refs/heads/main/assets/screenshots/MapScale-100.png">
-				<img src="https://raw.githubusercontent.com/SilverJolteon/FreedomDX/refs/heads/main/assets/screenshots/MapScale-100.png" width="95%">
+                <a target="_blank" href="assets/CameraPos-3.png">
+				<img src="assets/CameraPos-3.png" width="95%">
+			</a></th>
+			<th align="center" width="50%">
+                <a target="_blank" href="assets/CameraPos-4.png">
+				<img src="assets/CameraPos-4.png" width="95%">
 			</a></th>
         </tr><tr>
-            <th align="center">100%</th>
+            <th align="center">3 (Middle)</th>
+			<th align="center">4 (Default)</th>
+        </tr>
+		</tr><tr>
+            <th align="center" width="50%">
+                <a target="_blank" href="assets/CameraPos-5.png">
+				<img src="assets/CameraPos-5.png" width="95%">
+			</a></th>
+        </tr><tr>
+            <th align="center">5 (Highest)</th>
+        </tr>
+    </table>
+    <p><strong>Default is <code>4 (Default)</code></strong></p>
+</td>
+
+</tr><tr>
+
+<td>
+    <label>Minimap Scale</label>
+	<input type="range" id="MapScale" min="50" max="100" value="100">
+	<input type="number" id="MapScale_n" min="50" max="100" value="100" style="width:70px;">%
+    <p>Sets the scale for the minimap. <b>Must be between 50% and 100%.</b></p>
+	<p>Ported by SilverJolteon from IncognitoMan's FUC</p>
+	<table style="border-spacing: 0">
+        <tr>
+            <th align="center" width="50%">
+                <div style="width: 480px; height: 272px; overflow: hidden; position: relative">
+					<img id="MapScale-img" src="assets/MapScale.png" style="position: absolute; top: 0; left: 0">
+				</div>
+			</th>
+			<th align="center" width="50%"/th>
         </tr>
     </table>
     <p><strong>Default is <code>100</code></strong></p>
@@ -444,24 +569,24 @@ button:hover{
 	<table style="border-spacing: 0">
         <tr>
             <th align="center" width="50%">
-                <a target="_blank" href="https://raw.githubusercontent.com/SilverJolteon/FreedomDX/refs/heads/main/assets/screenshots/KCatSkills-Enabled.png">
-				<img src="https://raw.githubusercontent.com/SilverJolteon/FreedomDX/refs/heads/main/assets/screenshots/KCatSkills-Enabled.png" width="95%">
+                <a target="_blank" href="assets/KCatSkills-Enabled.png">
+				<img src="assets/KCatSkills-Enabled.png" width="95%">
 			</a></th>
             <th align="center" width="50%">
-                <a target="_blank" href="https://raw.githubusercontent.com/SilverJolteon/FreedomDX/refs/heads/main/assets/screenshots/KCatSkills-Disabled.png">
-				<img src="https://raw.githubusercontent.com/SilverJolteon/FreedomDX/refs/heads/main/assets/screenshots/KCatSkills-Disabled.png" width="95%">
+                <a target="_blank" href="assets/KCatSkills-Disabled.png">
+				<img src="assets/KCatSkills-Disabled.png" width="95%">
 			</a></th>
 		</tr><tr>
 			<th align="center">Enabled</th>
             <th align="center">Disabled</th>
 		</tr><tr>
             <th align="center" width="50%">
-                <a target="_blank" href="https://raw.githubusercontent.com/SilverJolteon/FreedomDX/refs/heads/main/assets/screenshots/GCatSkills-Enabled.png">
-				<img src="https://raw.githubusercontent.com/SilverJolteon/FreedomDX/refs/heads/main/assets/screenshots/GCatSkills-Enabled.png" width="95%">
+                <a target="_blank" href="assets/GCatSkills-Enabled.png">
+				<img src="assets/GCatSkills-Enabled.png" width="95%">
 			</a></th>
 			<th align="center" width="50%">
-                <a target="_blank" href="https://raw.githubusercontent.com/SilverJolteon/FreedomDX/refs/heads/main/assets/screenshots/GCatSkills-Disabled.png">
-				<img src="https://raw.githubusercontent.com/SilverJolteon/FreedomDX/refs/heads/main/assets/screenshots/GCatSkills-Disabled.png" width="95%">
+                <a target="_blank" href="assets/GCatSkills-Disabled.png">
+				<img src="assets/GCatSkills-Disabled.png" width="95%">
 			</a></th>
         </tr><tr>
             <th align="center">Enabled</th>
@@ -489,8 +614,8 @@ button:hover{
 	<table style="border-spacing: 0">
         <tr>
             <th align="center" width="50%">
-                <a target="_blank" href="https://raw.githubusercontent.com/SilverJolteon/FreedomDX/refs/heads/main/assets/screenshots/DrinkBuff.gif">
-				<img src="https://raw.githubusercontent.com/SilverJolteon/FreedomDX/refs/heads/main/assets/screenshots/DrinkBuff.gif" width="95%">
+                <a target="_blank" href="assets/DrinkBuff.gif">
+				<img src="assets/DrinkBuff.gif" width="95%">
 			</a></th>
 			<th align="center" width="50%"/th>
         </tr><tr>
@@ -640,12 +765,12 @@ button:hover{
 	<table style="border-spacing: 0">
         <tr>
             <th align="center" width="50%">
-                <a target="_blank" href="https://github.com/SilverJolteon/FreedomDX/blob/main/assets/screenshots/Poogie%20-%20Blue%20Outfit.png?raw=true">
-				<img src="https://github.com/SilverJolteon/FreedomDX/blob/main/assets/screenshots/Poogie%20-%20Blue%20Outfit.png?raw=true" width="95%">
+                <a target="_blank" href="assets/Poogie - Blue Outfit.png">
+				<img src="assets/Poogie - Blue Outfit.png" width="95%">
 			</a></th>
             <th align="center" width="50%">
-                <a target="_blank" href="https://github.com/SilverJolteon/FreedomDX/blob/main/assets/screenshots/Poogie%20-%20Pink%20Outfit.png?raw=true">
-				<img src="https://github.com/SilverJolteon/FreedomDX/blob/main/assets/screenshots/Poogie%20-%20Pink%20Outfit.png?raw=true" width="95%">
+                <a target="_blank" href="assets/Poogie - Pink Outfit.png">
+				<img src="assets/Poogie - Pink Outfit.png" width="95%">
 			</a></th>
 		</tr><tr>
 			<th align="center">Enabled (With Blue Poogie Outfit)</th>
@@ -665,6 +790,19 @@ button:hover{
     </select>
     <p>Removes delay when taking items from supply box.</p>
 	<p>Ported by SilverJolteon from IncognitoMan's FUC</p>
+    <p><strong>Default is <code>Disable</code></strong></p>
+</td>
+
+</tr><tr>
+
+<td>
+    <label>Offline Treasure Quests</label>
+    <select onchange="updateConfig()" id="Treshi">
+        <option value="0" selected>Disable</option>
+        <option value="1">Enable</option>
+    </select>
+    <p>Allows going on treasure quests solo in the offline gathering hall.</p>
+	<p>By SilverJolteon with help from 8sm32K4D1K5f3E</p>
     <p><strong>Default is <code>Disable</code></strong></p>
 </td>
 
