@@ -280,7 +280,8 @@ button:hover{
     }());
     
     function saveConfig(){
-       saveByteArray([CONFIG_DATA], "CONFIG.BIN");
+		updateConfig();
+		saveByteArray([CONFIG_DATA], "CONFIG.BIN");
     }
     
     function str2bytes(text){
