@@ -304,12 +304,11 @@ class SaveFile{
 				this.save_slots[slot].name = name;
 				
 				// Gender
-				var gender_offset = 0x0244;
+				var gender_offset = 0x2A;
 				var global_name_offset = 0x23B7D;
 				var gender = new DataView(this.save_slots[slot].data.buffer.slice(gender_offset, gender_offset + 1)).getUint8(0, true);
 				var global_name = decoder.decode(this.save_slots[slot].data.subarray(global_name_offset, global_name_offset + 0x20));
-				this.save_slots[slot].gender = gender == 0 ? "♂" : "♀";
-				if(!global_name.includes(name)) this.save_slots[slot].gender = "-";
+				this.save_slots[slot].gender = gender == 0 ? "♂" : gender == 1 ? "♀" : "-";
 				
 				
 				//HR
