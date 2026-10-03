@@ -544,7 +544,7 @@ function displayInfo(save) {
 			
 			<select id="${index}_charms" class="dropdown" style="margin-left: 310px; margin-right: -8px">
 				<option value=0>Athena</option>
-				<option value=1>mhxx-wiki.db</option>
+				<option value=1>mhxx.wiki-db</option>
 			</select>
 			<button onclick="exportCharms(${index})">Export Charms</button>
 		  </div>`;
