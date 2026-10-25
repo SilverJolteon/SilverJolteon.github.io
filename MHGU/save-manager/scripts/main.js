@@ -1,4 +1,4 @@
-var VERSION = "v1.5.1";
+var VERSION = "v1.5.2";
 
 var save = null;
 var SLOT_SIZE = 0x11D088;
@@ -407,6 +407,29 @@ class SaveFile{
 	    input.click();
 	}
 	
+	dragAndDropSlot(file, slot){
+		var reader = new FileReader();
+		reader.onload = e => {
+			var importedData = new Uint8Array(e.target.result);
+
+			if(!(importedData.length == 0x11D088 || importedData.length == 0x11F8C4)){
+				if(importedData.length == 0x481D88 || importedData.length == 0x481DAC || importedData.length == 0x4EB8BC) readSave(file, true);
+				else alert("Invalid save slot file size.");
+				return;
+			}
+
+			this.save_slots[slot] = new SaveInfo(importedData);
+			this.footers[slot] = new Footer(importedData.slice(SLOT_SIZE));
+			this.slots[slot] = 1;
+
+			this.readSlots();
+
+			displayInfo(save);
+		};
+
+		reader.readAsArrayBuffer(file);
+	}
+	
 	download(){
 		var save_type = document.getElementById("dropdown").selectedIndex;
 		var src_slot_offsets = this.slot_offsets;
@@ -527,7 +550,7 @@ function displayInfo(save) {
     text = "";
     
     save.save_slots.forEach((slot, index) => {
-        text += `<div class="save-table ${slot.name ? 'save-slot' : 'empty-slot'} list__item is-idle js-item">`;
+        text += `<div id="slot-${index}" class="save-table ${slot.name ? 'save-slot' : 'empty-slot'} list__item is-idle js-item">`;
         if (slot.name) {
             text += `<table><tr>
                 <td class="slot-name">${slot.name}</td>
@@ -552,9 +575,23 @@ function displayInfo(save) {
             text += `(No Data)<div class="import"><button onclick="importSlot(${index})">Import</button></div>`;
         }
         text += `<div class="overlay"></div></div>`;
-    });
+    });	
     
     table.innerHTML = text;
+	
+	for(let i = 0; i < 3; i++){
+		var slotTable = document.getElementById(`slot-${i}`);
+		;['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
+			slotTable.addEventListener(eventName, (e) => {
+				e.preventDefault();
+				e.stopPropagation();
+			});
+		});
+		
+		slotTable.addEventListener('drop', (e) => {
+			save.dragAndDropSlot(e.dataTransfer.files[0], i);
+		});
+	}
     drag_setup();
 }
 
@@ -597,15 +634,16 @@ function newSave(){
 	displayInfo(save);
 }
 
-function readSave(event){
+function readSave(event, dropped=false){
 	save = null;
 	var DL = document.getElementById("DL");
 	DL.innerHTML = "";
 	
 	var table = document.getElementById("saveTable");
 	table.innerHTML = "";
-	
-	var file = event.target.files[0];
+	var file;
+	if(!dropped) file = event.target.files[0];
+	else file = event;
 	var reader = new FileReader();
 	
 	reader.onload = function(e){

@@ -1,4 +1,4 @@
-@font-face {
+@font-face{
     font-family: 'Rodin';
     src: url('SCE-PS3 Rodin LATIN Regular.otf');
 }    
@@ -106,7 +106,7 @@ body{
 	margin: 0px;
 }
 
-.empty-slot {
+.empty-slot{
 	position: relative;
 	display: flex;
 	align-items: center;
@@ -125,13 +125,13 @@ body{
 	background-size: 100% 100%, auto;
 }
 
-.slot-actions {
+.slot-actions{
 	position: absolute;
 	top: 154px;
 	left: 0px;
 	display: flex;
 	justify-content: flex-start;
-	gap: 10px; /* 10px spacing between buttons */
+	gap: 10px;
 }
 
 .menu button, .save-slot button, .empty-slot button{
@@ -146,7 +146,7 @@ body{
 	height: 32px;
 }
 
-.dropdown {
+.dropdown{
     padding: 5px 10px;
     font-size: 14px;
     background-color: #027b76;
@@ -159,17 +159,17 @@ body{
 	height: 32px;
 }
 
-.save-slot button:hover, .empty-slot button:hover {
+.save-slot button:hover, .empty-slot button:hover{
     background-color: #026b66;
 }
 
-.empty-slot .import {
+.empty-slot .import{
     position: absolute;
-    top: 139px; /* Position near the bottom */
-    left: -3px;   /* Position near the left */
+    top: 139px;
+    left: -3px;
 }
 
-.save-slot button, .empty-slot button {
+.save-slot button, .empty-slot button{
     padding: 5px 10px;
     font-size: 14px;
     background-color: #027b76;

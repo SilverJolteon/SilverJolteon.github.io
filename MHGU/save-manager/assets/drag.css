@@ -1,7 +1,7 @@
 .list__item {
   user-select: none;
   will-change: transform;
-  cursor: move; /* Make the entire item appear draggable */
+  cursor: move;
 }
 
 .list__item.is-idle {
