@@ -678,4 +678,7 @@ window.addEventListener("load", () => {
 			e.stopPropagation();
 		});
 	});
+	document.addEventListener('drop', (e) => {
+		readSave(e.dataTransfer.files[0], true);
+	});
 });
