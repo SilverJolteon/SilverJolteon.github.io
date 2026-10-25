@@ -672,4 +672,10 @@ window.addEventListener("load", () => {
 	var now = new Date();
 	var year = now.getFullYear();
 	footer.innerHTML = `<a href="https://github.com/SilverJolteon/">&copy;2024-${year} SilverJolteon · ${VERSION}</a>`;
+	;['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
+		document.addEventListener(eventName, (e) => {
+			e.preventDefault();
+			e.stopPropagation();
+		});
+	});
 });
