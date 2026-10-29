@@ -1,4 +1,4 @@
-var VERSION = "v1.5.2";
+var VERSION = "v1.6.0";
 
 var save = null;
 var SLOT_SIZE = 0x11D088;
@@ -100,6 +100,7 @@ class SaveInfo{
 			this.HR = 0;
 			this.funds = 0;
 			this.time = "";
+			this.dummy_instances = 0;
 	};
 };
 
@@ -326,6 +327,20 @@ class SaveFile{
 				seconds -= minutes * 60;
 				var time = hours.toString() + ':' + minutes.toString().padStart(2, '0') + ':' + seconds.toString().padStart(2, '0');
 				this.save_slots[slot].time = time;
+				
+				// DUMMY Instances
+				Object.keys(DUMMY_DATA).forEach(key => {
+					var flags = DUMMY_DATA[key]["Flags"];
+					for(let flag of flags){
+						var count = 0;
+						let check = this.save_slots[slot].data[flag[0]] & flag[1];
+						while(check){
+							count += check & 1;
+							check >>= 1;
+						}
+						this.save_slots[slot].dummy_instances += count;
+					}
+				});
 			}
 		}
 	}
@@ -374,7 +389,7 @@ class SaveFile{
 		saveByteArray([saveslot], `${this.save_slots[slot].name}.saveslot`);
 	}
 	
-	importSlot(slot) {
+	importSlot(slot){
 	    var input = document.createElement('input');
 	    input.type = 'file';
 	    input.accept = ".saveslot";
@@ -405,6 +420,24 @@ class SaveFile{
 	    };
 
 	    input.click();
+	}
+	
+	dedummifySlot(slot){
+		var conf = confirm("Warning: This will remove all instances of 'DUMMY' from the armory, guild card, and trader. Save slot data will be modified. Proceed?");
+		if(!conf) return;
+		
+		Object.keys(DUMMY_DATA).forEach(key => {
+			var flags = DUMMY_DATA[key]["Flags"];
+			for(let flag of flags){
+				this.save_slots[slot].data[flag[0]] &= ~flag[1];
+			}
+		});
+		var dummy_instances = this.save_slots[slot].dummy_instances;
+		if(dummy_instances > 1) alert(`Removed ${dummy_instances} instances of 'DUMMY'!`);
+		else if(dummy_instances == 1) alert(`Removed ${dummy_instances} instance of 'DUMMY'!`);
+		else alert("No instances of 'DUMMY' were found!");
+		this.save_slots[slot].dummy_instances = 0;
+		changeTitle();
 	}
 	
 	dragAndDropSlot(file, slot){
@@ -527,11 +560,21 @@ var saveByteArray = (function (){
 	   window.URL.revokeObjectURL(url);
 	};
 }());
-    
+
+function changeTitle(){
+	var game_type = document.getElementById('dropdown').value;
+	for(let i = 0; i < 3; i++){
+		var dedummify = document.getElementById(`dedummify-${i}`);
+		if(!dedummify) continue;
+		var dummy = getDUMMYInstances(i);
+		if(dummy && game_type == 2) dedummify.style.visibility = "visible";
+		else dedummify.style.visibility = "hidden";
+	}
+}    
 
 function displayInfo(save) {
     var DL = document.getElementById("DL");
-    var text = `<select class="dropdown" id="dropdown">`;
+    var text = `<select class="dropdown" id="dropdown" onchange="changeTitle()">`;
 	var selected = "";
 	
 	selected = game_type == 0 ? "selected" : "";
@@ -565,7 +608,8 @@ function displayInfo(save) {
             <button onclick="exportSlot(${index})">Export</button>
             <button onclick="importSlot(${index})">Import</button>
 			
-			<select id="${index}_charms" class="dropdown" style="margin-left: 310px; margin-right: -8px">
+			<button onclick="dedummifySlot(${index})" id="dedummify-${index}" style="margin-left: 215px; visibility: hidden">Remove DUMMY</button>
+			<select id="${index}_charms" class="dropdown" style="margin-right: -8px">
 				<option value=0>Athena</option>
 				<option value=1>mhxx.wiki-db</option>
 			</select>
@@ -579,7 +623,7 @@ function displayInfo(save) {
     
     table.innerHTML = text;
 	
-	for(let i = 0; i < 3; i++){
+	for(let i = 0; i < 3; i++){		
 		var slotTable = document.getElementById(`slot-${i}`);
 		;['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
 			slotTable.addEventListener(eventName, (e) => {
@@ -593,6 +637,7 @@ function displayInfo(save) {
 		});
 	}
     drag_setup();
+	changeTitle();
 }
 
 function openWindow(){
@@ -619,6 +664,14 @@ function exportSlot(slot){
 
 function importSlot(slot){
 	save.importSlot(slot);
+}
+
+function getDUMMYInstances(slot){
+	return save.save_slots[slot].dummy_instances;
+}
+
+function dedummifySlot(slot){
+	save.dedummifySlot(slot);
 }
 
 function downloadSave(save_type){
