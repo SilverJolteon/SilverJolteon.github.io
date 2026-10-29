@@ -423,7 +423,7 @@ class SaveFile{
 	}
 	
 	dedummifySlot(slot){
-		var conf = confirm("Warning: This will remove all instances of 'DUMMY' from the armory, guild card, and trader. Save slot data will be modified. Proceed?");
+		var conf = confirm("Warning: This will remove all instances of 'DUMMY' from the armory, guild card, and trader only. Items, weapons, and armor will remain untouched, but save slot data will be modified. Proceed?");
 		if(!conf) return;
 		
 		Object.keys(DUMMY_DATA).forEach(key => {
